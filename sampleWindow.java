@@ -30,7 +30,7 @@ public class SampleWindow extends JFrame
         // Override paintComponent to perform your own painting
         @Override
         public void paintComponent(Graphics g) {
-            super.paintComponent(g);     // paint parent's background
+            super.paintComponent(g);     // paint base background
             setBackground(Color.BLACK);  // set background color for this JPanel
             
             g.setColor(Color.WHITE);
