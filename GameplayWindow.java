@@ -5,7 +5,7 @@ import javax.swing.*;
 public class GameplayWindow extends JFrame
 {
     public static final int CANVAS_WIDTH  = 750;//Sets size of window
-    public static final int CANVAS_HEIGHT = 500;
+    public static final int CANVAS_HEIGHT = 450;
 
     private GameDisplay canvas;
     private String room;
@@ -15,8 +15,9 @@ public class GameplayWindow extends JFrame
     private int health;
     private int stamina;
     private int attack;
-    private int wdurability;
+    private int wDurability;
     private int roomHeight;
+    private String actionMessage = "";
 
     public void displayWindow(String playerName, String display, int level, int hP, int stam, int atk, int wD, int rHeight) {
         room = display;
@@ -25,7 +26,7 @@ public class GameplayWindow extends JFrame
         health = hP;
         stamina = stam;
         attack = atk;
-        wdurability = wD;
+        wDurability = wD;
         roomHeight = rHeight;
 
         canvas = new GameDisplay();    // Construct the drawing canvas
@@ -37,10 +38,23 @@ public class GameplayWindow extends JFrame
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
         pack();              // Either pack() the components; or setSize()
-        setTitle("PPP Dungeon Crawler");  //JFrame sets the title of outer frame
+        setTitle("\"Game Board\"");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
     }
-
+    
+    public void refreshWindow(String useMessage, String display, int level, int hP, int stam, int atk, int wD, int rHeight) {
+        actionMessage = useMessage;
+        room = display;
+        levelNum = level;
+        health = hP;
+        stamina = stam;
+        attack = atk;
+        wDurability = wD;
+        roomHeight = rHeight;
+        
+        canvas.repaint();
+    }
+    
     /*
      * centerStringX finds the x coordinate needed to center a String in the window.
      */
@@ -65,10 +79,10 @@ public class GameplayWindow extends JFrame
             g.setFont(new Font("Monospaced", Font.PLAIN, 24));
             String playerInfo = pName + " - Level " + levelNum;
             int x = centerStringX(playerInfo, CANVAS_WIDTH, g);
-            g.drawString(playerInfo, x, 20);
+            g.drawString(playerInfo, x, 30);
 
             g.setFont(new Font("Monospaced", Font.PLAIN, 24)); //Displays gameboard
-            int yCor = 50; //Starting Y coordinate
+            int yCor = 60; //Starting Y coordinate
             int inc = room.length()/roomHeight; //Size of each row chunk to be displayed
             x = centerStringX(room.substring(0,inc), CANVAS_WIDTH, g);
             for (int i = 1; i <= roomHeight; i++) {//Splits room into rows and displays them
@@ -79,6 +93,16 @@ public class GameplayWindow extends JFrame
                     yCor += 25;
                 }
             }
+            
+            g.setFont(new Font("Monospaced", Font.PLAIN, 14));
+            x = centerStringX(actionMessage, CANVAS_WIDTH, g);
+            g.drawString(actionMessage, x, CANVAS_HEIGHT - 60);
+            
+            g.setFont(new Font("Monospaced", Font.PLAIN, 20));
+            g.setColor(Color.YELLOW); //Displays important stats
+            String line1Vars = "HP:"+health+"  Stamina:"+stamina+"    Attack:"+attack+"   Weapon Strength:"+wDurability;
+            x = centerStringX(line1Vars, CANVAS_WIDTH, g);
+            g.drawString(line1Vars, x, CANVAS_HEIGHT - 20);
         }
     }
 }
