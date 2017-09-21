@@ -40,8 +40,23 @@ public class GameplayWindow extends JFrame
         pack();              // Either pack() the components; or setSize()
         setTitle("\"Game Board\"");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
+
+        addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent evt) {
+                    switch(evt.getKeyCode()) {
+                        case KeyEvent.VK_W:
+                        refreshWindow("You moved up!", "_______________ | . . @ . . . | # . . . . . . | | . . . . . $ | | . . . . . . | | . . . . . . | | . . . . . . | | . . . . . . | _______________ ", 2, 1, 1, 1, 1, roomHeight);
+                        break;
+                        case KeyEvent.VK_S:
+                        refreshWindow("You moved down!", "_______________ | . . . . . . | # . . . . . . | | . . @ . . $ | | . . . . . . | | . . . . . . | | . . . . . . | | . . . . . . | _______________ ", 1, 1, 1, 1, 3, roomHeight);
+                        repaint();
+                        break;
+                    }
+                }
+            });
     }
-    
+
     public void refreshWindow(String useMessage, String display, int level, int hP, int stam, int atk, int wD, int rHeight) {
         actionMessage = useMessage;
         room = display;
@@ -51,10 +66,10 @@ public class GameplayWindow extends JFrame
         attack = atk;
         wDurability = wD;
         roomHeight = rHeight;
-        
+
         canvas.repaint();
     }
-    
+
     /*
      * centerStringX finds the x coordinate needed to center a String in the window.
      */
@@ -93,11 +108,11 @@ public class GameplayWindow extends JFrame
                     yCor += 25;
                 }
             }
-            
+
             g.setFont(new Font("Monospaced", Font.PLAIN, 14));
             x = centerStringX(actionMessage, CANVAS_WIDTH, g);
             g.drawString(actionMessage, x, CANVAS_HEIGHT - 60);
-            
+
             g.setFont(new Font("Monospaced", Font.PLAIN, 20));
             g.setColor(Color.YELLOW); //Displays important stats
             String line1Vars = "HP:"+health+"  Stamina:"+stamina+"    Attack:"+attack+"   Weapon Strength:"+wDurability;
