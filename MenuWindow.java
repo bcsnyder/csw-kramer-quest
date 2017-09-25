@@ -24,8 +24,9 @@ public class MenuWindow extends JFrame
         buttonPane.add(tutorialButton);
         tutorialButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
+                    TutorialWindow tutorial = new TutorialWindow();
                     dispose();
-
+                    tutorial.displayTutorial();
                 }
             });
         JButton playButton = new JButton("Play Game ");
