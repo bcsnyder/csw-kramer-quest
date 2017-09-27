@@ -2,6 +2,15 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+<<<<<<< HEAD
+=======
+/**
+ * Write a description of class TutorialWindow here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+>>>>>>> 10db292d1d28293c66403aaa912b5b8285fb4a81
 public class TutorialWindow extends JFrame
 {
     public static final int CANVAS_WIDTH  = 800;//Sets size of window
@@ -10,16 +19,33 @@ public class TutorialWindow extends JFrame
     private MenuWindow menu = new MenuWindow();
     private String[] tutorial;
     private TutorialText canvas;
+<<<<<<< HEAD
     
     public JButton menuButton;
 
     public void displayWindow() {
+=======
+
+    public void displayTutorial() {
+>>>>>>> 10db292d1d28293c66403aaa912b5b8285fb4a81
         canvas = new TutorialText();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
         
         JPanel buttonPane = new JPanel(new FlowLayout());
+<<<<<<< HEAD
         menuButton = new JButton("Return to Menu ");
         buttonPane.add(menuButton);
+=======
+        JButton menuButton = new JButton("Return to Menu ");
+        buttonPane.add(menuButton);
+        menuButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    MenuWindow menu = new MenuWindow();
+                    dispose();
+                    menu.displayWindow();
+                }
+            });
+>>>>>>> 10db292d1d28293c66403aaa912b5b8285fb4a81
         
         // Set the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();
