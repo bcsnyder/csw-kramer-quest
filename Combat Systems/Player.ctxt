@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=y
+comment0.target=boolean\ ouchie(double)
+comment0.text=\n\ When\ called,\ this\ method\ will\ subtract\ the\ appropriate\ amount\ of\ health\ from\ the\ monster.\ \ If\ the\ monster\n\ is\ alive,\ it\ returns\ 1.\ \ If\ the\ monster\ is\ dead\ it\ returns\ 0\n\ \n
+numComments=1
