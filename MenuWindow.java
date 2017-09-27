@@ -14,30 +14,21 @@ public class MenuWindow extends JFrame
     private ImageFrame logo;
     private String imgLogoFilename = "images/logo.jpg";
     private BufferedImage imgLogo;
+    
+    public JButton tutorialButton;
+    public JButton playButton;
 
     public void displayWindow() {
         logo = new ImageFrame();
         logo.setPreferredSize(new Dimension(LOGO_WIDTH, LOGO_HEIGHT));
 
         JPanel buttonPane = new JPanel(new FlowLayout());
-        JButton tutorialButton = new JButton("Tutorial ");
+        tutorialButton = new JButton("Tutorial ");
         buttonPane.add(tutorialButton);
-        tutorialButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    dispose();
-
-                }
-            });
-        JButton playButton = new JButton("Play Game ");
+        
+        playButton = new JButton("Play Game ");
         buttonPane.add(playButton);
-        playButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    GameplayWindow gameWindow = new GameplayWindow();
-                    dispose();
-                    gameWindow.displayWindow("Player 1", "_______________ | . . . . . . | # . . @ . . . | | . . . . . $ | | . . . . . . | | . . . . . . | | . . . . . . | | . . . . . . | _______________ ", 0, 0, 0, 0, 0, 9);
-                }
-            });
-
+        
         try {
             imgLogo = ImageIO.read(new File("/Users/Ben/Desktop/School/SE/csw-kramer-quest/images/logo_ex.jpg"));
         } catch (IOException e) {}
