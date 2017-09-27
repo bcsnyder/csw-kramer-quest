@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
  */
 public class Monster
 {
+    String name = "Gremlin";
+    String symbol = "G";
     double health = 80;
     double atk = Integer.parseInt(JOptionPane.showInputDialog("Enemy's atk:"));
     private double def = 1;
@@ -26,5 +28,21 @@ public class Monster
         }else{
             return true;
         }
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public double getHP() {
+        return health;
+    }
+    
+    public String getSymbol() {
+        return symbol;
+    }
+    
+    public double getAttack() {
+        return atk;
     }
 }
