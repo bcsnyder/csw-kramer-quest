@@ -69,17 +69,17 @@ public class CombatWindow extends JFrame
     /*
      * centerStringX finds the x coordinate needed to center a String in the window.
      */
-    private int centerStringX(String text, int frameWidth, Graphics g) {
+    private int centerStringStartX(String text, int frameWidth, Graphics g) {
         FontMetrics fm = g.getFontMetrics();
         int textWidth = fm.stringWidth(text);
         int textX = frameWidth/2 - textWidth/2;
         return textX;
     }
 
-    private int inLineStringX(String text, int distFromLeft, Graphics g) {
+    private int centerStringEndX(String text, int frameWidth, Graphics g) {
         FontMetrics fm = g.getFontMetrics();
         int textWidth = fm.stringWidth(text);
-        int textX = distFromLeft + textWidth/2;
+        int textX = frameWidth/2 + textWidth/2;
         return textX;
     }
 
@@ -95,39 +95,36 @@ public class CombatWindow extends JFrame
 
             g.setColor(Color.WHITE);//Displays username and score
             g.setFont(new Font("Monospaced", Font.PLAIN, 24));
-            int x = centerStringX(pName, CANVAS_WIDTH/3, g);
+            int x = centerStringStartX(pName, CANVAS_WIDTH/3, g);
             g.drawString(pName, x, 30);
-            x = centerStringX(mName, CANVAS_WIDTH - CANVAS_WIDTH/3, g);
+            x = CANVAS_WIDTH - centerStringEndX(mName, CANVAS_WIDTH/3, g);
             g.drawString(mName, x, 30);
 
             g.setFont(new Font("Monospaced", Font.PLAIN, 28)); //Displays gameboard
-            x = centerStringX("@", CANVAS_WIDTH/3, g);
+            x = centerStringStartX("@", CANVAS_WIDTH/3, g);
             g.drawString("@", x, 60);
-            x = CANVAS_WIDTH - x;
+            x = CANVAS_WIDTH - centerStringEndX("@", CANVAS_WIDTH/3, g);
             g.drawString(mSym, x, 60);
 
             g.setFont(new Font("Monospaced", Font.PLAIN, 18));
             g.setColor(Color.YELLOW);
             String var = "HP:" + pHP;
-            x = inLineStringX(var, 30, g);
+            x = 30;
             g.drawString(var, x, 90);
             var = "Attack:" + pAttack;
-            x = inLineStringX(var, 30, g);
             g.drawString(var, x, 110);
             var = "Weapon Durability:" + pDur;
-            x = inLineStringX(var, 30, g);
             g.drawString(var, x, 130);
 
             g.setColor(Color.RED);
             var = "HP:" + mHP;
-            x = inLineStringX(var, CANVAS_WIDTH - 30, g);
+            x = CANVAS_WIDTH - 200;
             g.drawString(var, x, 90);
             var = "Attack:" + mAttack;
-            x = inLineStringX(var, CANVAS_WIDTH - 30, g);
             g.drawString(var, x, 110);
 
             g.setFont(new Font("Monospaced", Font.PLAIN, 14));
-            x = centerStringX(combatMessage, CANVAS_WIDTH, g);
+            x = centerStringStartX(combatMessage, CANVAS_WIDTH, g);
             g.drawString(combatMessage, x, CANVAS_HEIGHT/2);
         }
     }

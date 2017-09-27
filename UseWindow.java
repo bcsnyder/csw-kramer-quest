@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
@@ -31,7 +32,7 @@ public class UseWindow
         menu.playButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     closeMenu();
-                    game.displayWindow("Player 1", "_______________ | . . . . . . | # . . @ . . . | | . . . . . $ | | . . . . . . | | . . . . . . | | . . . . . . | | . . . . . . | _______________ ", 0, 0, 0, 0, 0, 9);
+                    showGame("Player 1", "_______________ | . . . . . . | # . . @ . . . | | . . . . . $ | | . . . . . . | | . . . . . . | | . . . . . . | | . . . . . . | _______________ ", 0, 0, 0, 0, 0, 9);
                 }
             });
     }
@@ -64,8 +65,9 @@ public class UseWindow
             });
     }
 
-    public void showGame(String playerName, String display, int level, int hP, int stam, int atk, int wD, int rHeight) {
+    public void showGame(String playerName, String display, int level, int hP, int stam, int atk, int wD, int rHeight) { 
         game.displayWindow(playerName, display, level, hP, stam, atk, wD, rHeight);
+        showCombat(playerName, new Monster(), hP, atk, wD);
     }
 
     public void refreshGame(String useMessage, String display, int level, int hP, int stam, int atk, int wD, int rHeight) {

@@ -40,21 +40,6 @@ public class GameplayWindow extends JFrame
         pack();              // Either pack() the components; or setSize()
         setTitle("\"Game Board\"");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
-
-        addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent evt) {
-                    switch(evt.getKeyCode()) {
-                        case KeyEvent.VK_W:
-                        refreshWindow("You moved up!", "_______________ | . . @ . . . | # . . . . . . | | . . . . . $ | | . . . . . . | | . . . . . . | | . . . . . . | | . . . . . . | _______________ ", 2, 1, 1, 1, 1, roomHeight);
-                        break;
-                        case KeyEvent.VK_S:
-                        refreshWindow("You moved down!", "_______________ | . . . . . . | # . . . . . . | | . . @ . . $ | | . . . . . . | | . . . . . . | | . . . . . . | | . . . . . . | _______________ ", 1, 1, 1, 1, 3, roomHeight);
-                        repaint();
-                        break;
-                    }
-                }
-            });
     }
 
     public void refreshWindow(String useMessage, String display, int level, int hP, int stam, int atk, int wD, int rHeight) {
