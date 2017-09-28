@@ -1,24 +1,28 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.ArrayList;
 
-public class TutorialWindow extends JFrame
+public class InventoryWindow extends JFrame
 {
     public static final int CANVAS_WIDTH  = 800;//Sets size of window
     public static final int CANVAS_HEIGHT = 500;
     
-    private String[] tutorial;
-    private TutorialText canvas;
+    private ArrayList<Item> inventory;
+    private InventoryDisplay canvas;
+    private ArrayList<String> inventoryText;
     
-    public JButton menuButton;
+    public JButton returnButton;
 
-    public void displayWindow() {
-        canvas = new TutorialText();    // Construct the drawing canvas
+    public void displayWindow(ArrayList<Item> inv) {
+        inventory = inv;
+        
+        canvas = new InventoryDisplay();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
         
         JPanel buttonPane = new JPanel(new FlowLayout());
-        menuButton = new JButton("Return to Menu ");
-        buttonPane.add(menuButton);
+        returnButton = new JButton("Return to Game ");
+        buttonPane.add(returnButton);
         
         // Set the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();
@@ -28,17 +32,18 @@ public class TutorialWindow extends JFrame
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
         pack();              // Either pack() the components; or setSize()
-        setTitle("Tutorial");  //JFrame sets the title of outer frame
+        setTitle("Inventory");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
     }
 
-    private void setTutorial() {
-        tutorial = new String[5];
-        tutorial[0] = "Hello player, welcome to the world of ____";
-        tutorial[1] = "You are stranded in a dark dungeon and must find the idol of ___ on the lowest floor";
-        tutorial[2] = "Along the way you will find treasure ($) and fight monsters (text characters)";
-        tutorial[3] = "blah";
-        tutorial[4] = "blah";
+    private void setInvTxt() {
+        inventoryText = new ArrayList<String>();
+        
+        for (int i = 0; i < inventory.size(); i++) {
+            String type = inventory.get(i).getType();
+            String name = inventory.get(i).getName();
+            inventoryText.add(type + ": " + name);
+        }
     }
 
     /*
@@ -54,7 +59,7 @@ public class TutorialWindow extends JFrame
     /*
      * Panel inside frame that holds drawn graphics
      */
-    private class TutorialText extends JPanel {
+    private class InventoryDisplay extends JPanel {
         // Override paintComponent to perform your own painting
         @Override
         public void paintComponent(Graphics g) {
@@ -62,12 +67,12 @@ public class TutorialWindow extends JFrame
             setBackground(Color.BLACK);  // set background color for this JPanel
 
             g.setColor(Color.WHITE);//Displays username and score
-            g.setFont(new Font("Monospaced", Font.PLAIN, 14));
-            setTutorial();
+            g.setFont(new Font("Monospaced", Font.PLAIN, 18));
+            setInvTxt();
             String txt;
             int x;
-            for (int i = 0; i < tutorial.length; i++) {
-                txt = tutorial[i];
+            for (int i = 0; i < inventoryText.size(); i++) {
+                txt = inventoryText.get(i);
                 x = centerStringX(txt, CANVAS_WIDTH, g);
                 g.drawString(txt, x, (30 + 25*i));
             }

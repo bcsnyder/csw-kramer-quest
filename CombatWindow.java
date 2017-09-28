@@ -4,8 +4,8 @@ import javax.swing.*;
 
 public class CombatWindow extends JFrame
 {
-    public static final int CANVAS_WIDTH  = 750;//Sets size of window
-    public static final int CANVAS_HEIGHT = 450;
+    public static final int CANVAS_WIDTH  = 700;//Sets size of window
+    public static final int CANVAS_HEIGHT = 400;
     
     public JButton runButton;
     public JButton attackButton;

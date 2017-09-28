@@ -8,7 +8,7 @@ public class GameplayWindow extends JFrame
     public static final int CANVAS_HEIGHT = 450;
 
     private GameDisplay canvas;
-    private String room;
+    public String room;
 
     private String pName;
     private int levelNum; //Most of these variables wont be listed here once they can be accessed from other objects
