@@ -2,6 +2,10 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+ * Displays game over window with debrief message and button
+ * to go back to menu. Yep, pretty simple.
+ */
 public class GameOverWindow extends JFrame
 {
     public static final int CANVAS_WIDTH  = 800;//Sets size of window
@@ -32,7 +36,12 @@ public class GameOverWindow extends JFrame
         setTitle("Game Over");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
     }
-
+    
+    /**
+     * creates debrief message with name and
+     * cause of death. Each element in the 
+     * array is another line of text.
+     */
     private void setDebrief(String name, String message) {
         debrief = new String[3];
         debrief[0] = "RIP " + name;
@@ -60,10 +69,11 @@ public class GameOverWindow extends JFrame
             super.paintComponent(g);     // paint base background
             setBackground(Color.BLACK);  // set background color for this JPanel
 
-            g.setColor(Color.WHITE);//Displays username and score
+            g.setColor(Color.WHITE);
             g.setFont(new Font("Monospaced", Font.PLAIN, 28));
             String txt;
             int x;
+            //Splits debrief message into separate lines of text and displays
             for (int i = 0; i < debrief.length; i++) {
                 txt = debrief[i];
                 x = centerStringX(txt, CANVAS_WIDTH, g);

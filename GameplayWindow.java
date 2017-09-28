@@ -2,6 +2,16 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+ * Displays a window with a demo components of the game inside
+ * including example stats, the user's name, and text graphics
+ * of an example room.
+ * 
+ * Interesting Variable Only Dictionary:
+ * room             String holding the ASCII text for the current room
+ * levelNum         What stage the player is on
+ * actionMessage    message displayed at bottom of screen to notify user
+ */
 public class GameplayWindow extends JFrame
 {
     public static final int CANVAS_WIDTH  = 750;//Sets size of window
@@ -9,16 +19,25 @@ public class GameplayWindow extends JFrame
 
     private GameDisplay canvas;
     public String room;
-
+    
+    /**
+     * All these are stats that are ideally accessed through other objects
+     * like a Player object or something
+     */
     private String pName;
-    private int levelNum; //Most of these variables wont be listed here once they can be accessed from other objects
+    private int levelNum; 
     private int health;
     private int stamina;
     private int attack;
     private int wDurability;
     private int roomHeight;
+    
     private String actionMessage = "";
-
+    
+    /**
+     * Sets variables based on what's passed in and sets up
+     * the window's components and layout. Pretty standard.
+     */
     public void displayWindow(String playerName, String display, int level, int hP, int stam, int atk, int wD, int rHeight) {
         room = display;
         pName = playerName;
@@ -41,7 +60,11 @@ public class GameplayWindow extends JFrame
         setTitle("\"Game Board\"");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
     }
-
+    
+    /**
+     * Simply updates variables with what's passed in and
+     * repaints the window. VOILA!
+     */
     public void refreshWindow(String useMessage, String display, int level, int hP, int stam, int atk, int wD, int rHeight) {
         actionMessage = useMessage;
         room = display;
@@ -66,16 +89,16 @@ public class GameplayWindow extends JFrame
     }
 
     /*
-     * Panel inside frame that holds drawn graphics
+     * Panel inside frame that holds game graphics
+     * and stats for user
      */
     private class GameDisplay extends JPanel {
-        // Override paintComponent to perform your own painting
         @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);     // paint base background
             setBackground(Color.BLACK);  // set background color for this JPanel
 
-            g.setColor(Color.WHITE);//Displays username and score
+            g.setColor(Color.WHITE);//Displays username and score at top of screen
             g.setFont(new Font("Monospaced", Font.PLAIN, 24));
             String playerInfo = pName + " - Level " + levelNum;
             int x = centerStringX(playerInfo, CANVAS_WIDTH, g);
@@ -93,13 +116,15 @@ public class GameplayWindow extends JFrame
                     yCor += 25;
                 }
             }
-
+            
+            //Shows desired action message to notify user about
+            //whatever just happened
             g.setFont(new Font("Monospaced", Font.PLAIN, 14));
             x = centerStringX(actionMessage, CANVAS_WIDTH, g);
             g.drawString(actionMessage, x, CANVAS_HEIGHT - 60);
 
             g.setFont(new Font("Monospaced", Font.PLAIN, 20));
-            g.setColor(Color.YELLOW); //Displays important stats
+            g.setColor(Color.YELLOW); //Displays important stats at bottom of screen
             String line1Vars = "HP:"+health+"  Stamina:"+stamina+"    Attack:"+attack+"   Weapon Strength:"+wDurability;
             x = centerStringX(line1Vars, CANVAS_WIDTH, g);
             g.drawString(line1Vars, x, CANVAS_HEIGHT - 20);

@@ -2,6 +2,16 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+ * Displays a tutorial window with demo text inside of it
+ * 
+ * Variable Dictionary:
+ * canvas           the subcomponent of the window holding the text
+ * tutorial         the tutorial text to display
+ * menuButton       button to go to menu window
+ * CANVAS_WIDTH     static width of canvas MUST BE IMAGE WIDTH (I think?)
+ * CANVAS_HEIGHT    static height of canvas MUST BE IMAGE height (I think?)
+ */
 public class TutorialWindow extends JFrame
 {
     public static final int CANVAS_WIDTH  = 800;//Sets size of window
@@ -11,7 +21,10 @@ public class TutorialWindow extends JFrame
     private TutorialText canvas;
     
     public JButton menuButton;
-
+    
+    /**
+     * Sets up tutorial window's components and shows them.
+     */
     public void displayWindow() {
         canvas = new TutorialText();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
@@ -31,7 +44,10 @@ public class TutorialWindow extends JFrame
         setTitle("Tutorial");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
     }
-
+    
+    /**
+     * Sets the text line by line for the tutorial as an array
+     */
     private void setTutorial() {
         tutorial = new String[5];
         tutorial[0] = "Hello player, welcome to the world of ____";
@@ -61,11 +77,12 @@ public class TutorialWindow extends JFrame
             super.paintComponent(g);     // paint base background
             setBackground(Color.BLACK);  // set background color for this JPanel
 
-            g.setColor(Color.WHITE);//Displays username and score
+            g.setColor(Color.WHITE);
             g.setFont(new Font("Monospaced", Font.PLAIN, 14));
             setTutorial();
             String txt;
             int x;
+            //Displays the tutorial text line by line, however long it is
             for (int i = 0; i < tutorial.length; i++) {
                 txt = tutorial[i];
                 x = centerStringX(txt, CANVAS_WIDTH, g);

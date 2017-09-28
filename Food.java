@@ -1,9 +1,7 @@
 
 /**
- * Write a description of class Food here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * A simple subclass of Item that is food. Used
+ * to display to user the inventory screen.
  */
 public class Food extends Item
 {
@@ -15,7 +13,7 @@ public class Food extends Item
     }
     
     /**
-     * 
+     * getter
      */
     public String getType()
     {

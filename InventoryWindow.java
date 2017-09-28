@@ -3,6 +3,12 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * LOL Im so tired of doing this documentation so here's yje giyst of it:
+ * inventory is an array of items
+ * inventoryText is that array as a string array so it can be displayed
+ * There's a button to go back to the game.
+ */
 public class InventoryWindow extends JFrame
 {
     public static final int CANVAS_WIDTH  = 800;//Sets size of window
@@ -35,10 +41,16 @@ public class InventoryWindow extends JFrame
         setTitle("Inventory");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
     }
-
+    
+    /**
+     * takes array of items and returns info about the
+     * items as a String so it can be displayed.
+     * Each element is a line of text.
+     */
     private void setInvTxt() {
         inventoryText = new ArrayList<String>();
         
+        //Gets info about items to show user including the type and name
         for (int i = 0; i < inventory.size(); i++) {
             String type = inventory.get(i).getType();
             String name = inventory.get(i).getName();
@@ -66,11 +78,13 @@ public class InventoryWindow extends JFrame
             super.paintComponent(g);     // paint base background
             setBackground(Color.BLACK);  // set background color for this JPanel
 
-            g.setColor(Color.WHITE);//Displays username and score
+            g.setColor(Color.WHITE);
             g.setFont(new Font("Monospaced", Font.PLAIN, 18));
             setInvTxt();
             String txt;
             int x;
+            //Basically splits up each element of String arraylist into a
+            //different line on the window
             for (int i = 0; i < inventoryText.size(); i++) {
                 txt = inventoryText.get(i);
                 x = centerStringX(txt, CANVAS_WIDTH, g);

@@ -4,14 +4,14 @@ import javax.swing.JOptionPane;
  * This class will have the ability to check whether its alive or not, a set amount of health, a set amount of
  * attack power, and a set amount of defense.  
  * -removed abstract
- * @author Dylan
+ * @author Dylan, Ben
  * @version 1.2
  */
 public class Monster
 {
     String name = "Gremlin";
     String symbol = "G";
-    int health = 80;
+    int health = 80; //NO need to have doubles
     int atk = Integer.parseInt(JOptionPane.showInputDialog("Enemy's atk:"));
     private double def = 1;
 

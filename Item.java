@@ -1,9 +1,6 @@
 
 /**
- * Abstract class Item - write a description of the class here
- * 
- * @author (your name here)
- * @version (version number or date here)
+ * Just an abstract class with basic info about itself. Only really an example.
  */
 public abstract class Item
 {
