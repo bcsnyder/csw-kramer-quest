@@ -54,6 +54,9 @@ public class SoundSystem implements LineListener {
          
     }
     void stop() {
+       /**
+     * Stops the looping file.
+     */
         audioClip.stop();
         
         
@@ -75,7 +78,9 @@ public class SoundSystem implements LineListener {
         }
  
     }
- 
+   /**
+     * Example of how to use the SoundSytem.
+     */
     //public static void main(String[] args) {
      //   String audioFilePath = "U:/Famitracker/Test/Class_fluidvolt-The_Gusts_of_Aeolus.wav";
     //    SoundSystem player = new SoundSystem();
