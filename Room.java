@@ -11,7 +11,7 @@ public class Room
         level = num;
         length = (int) (Math.random() * (max - min))+ min;
         width = (int) (Math.random() * (max - min)) + min;
-        numMonsters = (int) Math.floor(Math.random() * (20 - 6)) + 6;//Random number of monsters not too many
+        numMonsters = level * 2;
         map = new char[length][width];
     }
     
