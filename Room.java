@@ -11,7 +11,7 @@ public class Room
         level = num;
         length = (int) (Math.random() * (max - min))+ min;
         width = (int) (Math.random() * (max - min)) + min;
-        numMonsters = level * 2;
+        numMonsters = (int) Math.floor(Math.random() * (20 - 6)) + 6;//Random number of monsters not too many
         map = new char[length][width];
     }
     
@@ -91,9 +91,17 @@ public class Room
         map [yCoor][xCoor] = '#'; 
         
         /* Treasure */
-        int num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
-        int num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
-        map[num1][num2] = '$'; 
+        int num1=0;
+        int num2=0;
+        //goal of this is to make sure the treasure does not land on a monster
+        for (int counter = 1; counter == 1; counter ++){
+            num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
+            num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
+            if (map[num1][num2] == 'G'){
+                counter = 0; 
+            }
+        }   
+         map[num1][num2] = '$'; 
     }
 
 }

@@ -9,8 +9,8 @@ public class Stage
     public Stage(int num)
     {
         level = num;
-        min = (level * 2) + 6;
-        max = (level * 4) + 6;
+        min = 6; //can only be so small
+        max = 20; // can only be so big, needs to fit on screen
         numRooms = (level * 2) + 2;
         floor = new Room[numRooms];
     }
