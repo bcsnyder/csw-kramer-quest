@@ -16,6 +16,7 @@ import java.util.*;
  * inv              instance of inventory window
  * govr             instance of game over window
  * currentWindow    public String allowing to access current window status
+ * currentRoom      the String of the room the player is in
  */
 public class UseWindow
 {
@@ -27,6 +28,7 @@ public class UseWindow
     private GameOverWindow govr;
     
     public String currentWindow;
+    public String currentRoom;
     
     /**
      * Constructor method for UseWindow that intializes
@@ -121,6 +123,7 @@ public class UseWindow
      */
     public void showGame(String playerName, String display, int level, int hP, int stam, int atk, int wD, int rHeight) { 
         currentWindow = "game";
+        currentRoom = display;
         game.displayWindow(playerName, display, level, hP, stam, atk, wD, rHeight);
     }
     
@@ -219,6 +222,7 @@ public class UseWindow
      * Refreshes game screen with updated variables
      */
     public void refreshGame(String useMessage, String display, int level, int hP, int stam, int atk, int wD, int rHeight) {
+        currentRoom = display;
         game.refreshWindow(useMessage, display, level, hP, stam, atk, wD, rHeight);
     }
     
