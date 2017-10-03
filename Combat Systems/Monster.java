@@ -11,8 +11,8 @@ public class Monster
 {
     String name = "Gremlin";
     String symbol = "G";
-    double health = 80;
-    double atk = Integer.parseInt(JOptionPane.showInputDialog("Enemy's atk:"));
+    int health = 80;
+    int atk = Integer.parseInt(JOptionPane.showInputDialog("Enemy's atk:"));
     private double def = 1;
 
     /**
@@ -20,7 +20,7 @@ public class Monster
      * is alive, it returns 1.  If the monster is dead it returns 0
      * 
      */
-    public boolean ouchie(double y)
+    public int ouchie(int y)
     {
         health = health - y;
         if (health <= 0){
@@ -42,7 +42,7 @@ public class Monster
         return symbol;
     }
     
-    public double getAttack() {
+    public int getAttack() {
         return atk;
     }
 }
