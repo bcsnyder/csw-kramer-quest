@@ -19,14 +19,13 @@ public class SoundSystem implements LineListener {
      * Indicates if the file has finished playing.
      */
     boolean playCompleted;
-     
+    private Clip audioClip;
     /**
      * Play a given audio file.
      * @param audioFilePath Path of the file to be played.
      */
     void play(String audioFilePath) {
         File audioPath = new File(audioFilePath);
- 
         try {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioPath);
  
@@ -34,24 +33,13 @@ public class SoundSystem implements LineListener {
  
             DataLine.Info info = new DataLine.Info(Clip.class, format);
  
-            Clip audioClip = (Clip) AudioSystem.getLine(info);
+            audioClip = (Clip) AudioSystem.getLine(info);
  
             audioClip.addLineListener(this);
  
             audioClip.open(audioStream);
-             
-            audioClip.start();
-             
-            while (!playCompleted) {
-                // wait for the playback completes
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-            }
-             
-            audioClip.close();
+            audioClip.loop(Clip.LOOP_CONTINUOUSLY);
+            
              
         } catch (UnsupportedAudioFileException ex) {
             System.out.println("The specified audio file is not supported.");
@@ -64,6 +52,11 @@ public class SoundSystem implements LineListener {
             ex.printStackTrace();
         }
          
+    }
+    void stop() {
+        audioClip.stop();
+        
+        
     }
      
     /**
@@ -83,10 +76,11 @@ public class SoundSystem implements LineListener {
  
     }
  
-    public static void main(String[] args) {
-        String audioFilePath = "F:/Sounds/Splatoon Final Boss Theme.wav";
-        SoundSystem player = new SoundSystem();
-        player.play(audioFilePath);
+    //public static void main(String[] args) {
+     //   String audioFilePath = "U:/Famitracker/Test/Class_fluidvolt-The_Gusts_of_Aeolus.wav";
+    //    SoundSystem player = new SoundSystem();
+    //    player.play(audioFilePath);
+        
     }
  
 }
