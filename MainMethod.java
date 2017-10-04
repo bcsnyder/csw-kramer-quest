@@ -17,10 +17,10 @@ public class MainMethod
         int yPos = 1;
         
         while(startRoom.getTile(xPos, yPos) != '.') {
+            xPos += 1;
             while(startRoom.getTile(xPos, yPos) != '.') {
                 yPos += 1;
             }
-            xPos += 1;
         }
         
         p.setPos(xPos, yPos);
