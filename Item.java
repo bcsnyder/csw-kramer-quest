@@ -1,15 +1,12 @@
 
 /**
- * Just an abstract class with basic info about itself. Only really an example.
+ * Just an abstract class with basic info about the item it holds.
  */
 public abstract class Item
 {
     private String type;
     private String name;
 
-    /**
-     * 
-     */
     public String getType()
     {
         return type;

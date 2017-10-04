@@ -9,8 +9,8 @@ public class Stage
     public Stage(int num)
     {
         level = num;
-        min = 6; //can only be so small
-        max = 20; // can only be so big, needs to fit on screen
+        min = (level * 2) + 6;
+        max = (level * 4) + 6;
         numRooms = (level * 2) + 2;
         floor = new Room[numRooms];
     }
@@ -35,6 +35,10 @@ public class Stage
             output += floor[counter].toString() + "\n\n";
         }
         return output;
+    }
+    
+    public Room getRoom(int num) {
+        return floor[num];
     }
     
     //floor [0] = one;  

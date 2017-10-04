@@ -38,15 +38,15 @@ public class GameplayWindow extends JFrame
      * Sets variables based on what's passed in and sets up
      * the window's components and layout. Pretty standard.
      */
-    public void displayWindow(String playerName, String display, int level, int hP, int stam, int atk, int wD, int rHeight) {
-        room = display;
-        pName = playerName;
-        levelNum = level;//Sets variables (will be replaced by getters)
-        health = hP;
-        stamina = stam;
-        attack = atk;
-        wDurability = wD;
-        roomHeight = rHeight;
+    public void displayWindow(Player player, Room board) {
+        room = board.toString();
+        pName = player.getName();
+        levelNum = board.getLevel();//Sets variables (will be replaced by getters)
+        health = player.getHealth();
+        stamina = player.getStamina();
+        attack = player.getAttack();
+        wDurability = player.getDur();
+        roomHeight = board.getHeight();
 
         canvas = new GameDisplay();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
@@ -65,15 +65,16 @@ public class GameplayWindow extends JFrame
      * Simply updates variables with what's passed in and
      * repaints the window. VOILA!
      */
-    public void refreshWindow(String useMessage, String display, int level, int hP, int stam, int atk, int wD, int rHeight) {
+    public void refreshWindow(String useMessage, Player player, Room board) {
         actionMessage = useMessage;
-        room = display;
-        levelNum = level;
-        health = hP;
-        stamina = stam;
-        attack = atk;
-        wDurability = wD;
-        roomHeight = rHeight;
+        room = board.toString();
+        pName = player.getName();
+        levelNum = board.getLevel();//Sets variables (will be replaced by getters)
+        health = player.getHealth();
+        stamina = player.getStamina();
+        attack = player.getAttack();
+        wDurability = player.getDur();
+        roomHeight = board.getHeight();
 
         canvas.repaint();
     }
@@ -110,11 +111,7 @@ public class GameplayWindow extends JFrame
             x = centerStringX(room.substring(0,inc), CANVAS_WIDTH, g);
             for (int i = 1; i <= roomHeight; i++) {//Splits room into rows and displays them
                 g.drawString(room.substring((i-1)*inc,i*inc), x, yCor);
-                if (i == roomHeight - 1) {
-                    yCor += 6;
-                } else {
-                    yCor += 25;
-                }
+                yCor += 25;
             }
             
             //Shows desired action message to notify user about

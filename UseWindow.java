@@ -16,7 +16,7 @@ import java.util.*;
  * inv              instance of inventory window
  * govr             instance of game over window
  * currentWindow    public String allowing to access current window status
- * currentRoom      the String of the room the player is in
+ * room             room the player is in currently
  */
 public class UseWindow
 {
@@ -27,8 +27,11 @@ public class UseWindow
     private InventoryWindow inv;
     private GameOverWindow govr;
     
-    public String currentWindow;
-    public String currentRoom;
+    String currentWindow;
+    
+    Room room;
+    Monster monst;
+    Player user;
     
     /**
      * Constructor method for UseWindow that intializes
@@ -41,31 +44,11 @@ public class UseWindow
         comb = new CombatWindow();
         inv = new InventoryWindow();
         govr = new GameOverWindow();
-
-        exampleFunctionality();
-    }
-    
-    /**
-     * method used to test window components with demo/arbitrary
-     * variables. Currently displays a whole bunch of windows
-     * at once (menu, inventory, combat).
-     */
-    public void exampleFunctionality() {
-        showMenu();
-        showCombat("Player 1", new Monster(), 20, 5, 2);
-        showGameOver("Player 1", "Killed by stupidity.");
-        
-        //Creates example inventory of food items to display
-        ArrayList<Item> inven = new ArrayList<Item>();
-        inven.add(new Food("Bread"));
-        inven.add(new Food("Meat"));
-        inven.add(new Food("Cheese"));
-        showInventory(inven);
     }
     
     /**
      * Displays menu screen and controls what the menu's buttons
-     * do. SEE IMPORTANT MESSAGE BELOW!!!!
+     * do.
      */
     public void showMenu() {
         currentWindow = "menu";
@@ -81,13 +64,7 @@ public class UseWindow
         menu.playButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     closeMenu();
-                    /**
-                     * THIS BUTTON SHOWS THE GAME BUT IT USES
-                     * AN ABITRARY ROOM AND SET OF VARIABLES.
-                     * TO MAKE THE PROGRAM WORK ACTUAL VARIABLES
-                     * WILL HAVE TO BE PASSED IN!!!!!!!!!!!!
-                     */
-                    showGame("Player 1", "_______________ | . . . . . . | # . . @ . . . | | . . . . . $ | | . . . . . . | | . . . . . . | | . . . . . . | | . . . . . . | _______________ ", 1, 1, 1, 1, 1, 9);
+                    showGame();
                 }
             });
     }
@@ -110,9 +87,6 @@ public class UseWindow
     
     /**
      * Displays game screen with the parameters passed into it.
-     * MAY WANT TO SWICTH TO PASSING IN PLAYER OBJECT AND USING
-     * SETTERS AND GETTERS CONTAINED IN THAT OBJECT SO THAT 
-     * THE PARAMETER LIST ISN'T SO LONG
      * (only non obvious parameters listed)
      * 
      * @param display   the current room in string format
@@ -121,10 +95,9 @@ public class UseWindow
      * @param rHeight   height of the room so the string can be divided
      *                  into lines to print out separately.
      */
-    public void showGame(String playerName, String display, int level, int hP, int stam, int atk, int wD, int rHeight) { 
+    public void showGame() { 
         currentWindow = "game";
-        currentRoom = display;
-        game.displayWindow(playerName, display, level, hP, stam, atk, wD, rHeight);
+        game.displayWindow(user, room);
     }
     
     /**
@@ -140,20 +113,14 @@ public class UseWindow
      * @param pAtk      the player's attack
      * @param wD        weapon durability statistic
      */
-    public void showCombat(String playerName, Monster monster, int pHealth, int pAtk, int wD) {
+    public void showCombat(Player play, Monster monster) {
         currentWindow = "combat";
-        comb.displayWindow(playerName, monster, pHealth, pAtk, wD);
+        comb.displayWindow(play, monster);
 
         comb.runButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     closeCombat();
-                    /**
-                     * THIS BUTTON SHOWS THE GAME BUT IT USES
-                     * AN ABITRARY ROOM AND SET OF VARIABLES.
-                     * TO MAKE THE PROGRAM WORK ACTUAL VARIABLES
-                     * WILL HAVE TO BE PASSED IN!!!!!!!!!!!!
-                     */
-                    showGame(playerName, game.room, 0, pHealth, 0, pAtk, wD, 9);
+                    showGame();
                 }
             });
         
@@ -162,11 +129,12 @@ public class UseWindow
                 public void actionPerformed(ActionEvent evt) {
                     //Makes combat more exciting by adding random damage modifier
                     int bonus = (int)(Math.random()*5);
-                    monster.ouchie(pAtk + bonus);//damages monster
+                    int damage = user.getAttack() + bonus;
+                    monster.ouchie(damage);//damages monster
                     
                     //Sets feedback for user
-                    String message = "You attack, dealing " + (pAtk+bonus)+ " damage!";
-                    refreshCombat(message, playerName, monster, pHealth, pAtk, wD);
+                    String message = "You attack, dealing " + (damage)+ " damage!";
+                    refreshCombat(message);
                 }
             });
     }
@@ -175,9 +143,9 @@ public class UseWindow
      * Displays tutorial screen and controls what the return to menu button
      * does. Includes death message and player's name.
      */
-    public void showGameOver(String playerName, String deathMessage) {
+    public void showGameOver(String deathMessage) {
         currentWindow = "game over";
-        govr.displayWindow(playerName, deathMessage);
+        govr.displayWindow(user.getName(), deathMessage);
         
         govr.menuButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
@@ -200,13 +168,7 @@ public class UseWindow
         inv.returnButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     closeInventory();
-                    /**
-                     * THIS BUTTON SHOWS THE GAME BUT IT USES
-                     * AN ABITRARY ROOM AND SET OF VARIABLES.
-                     * TO MAKE THE PROGRAM WORK ACTUAL VARIABLES
-                     * WILL HAVE TO BE PASSED IN!!!!!!!!!!!!
-                     */
-                    showGame("Player 1", "_______________ | . . . . . . | # . . @ . . . | | . . . . . $ | | . . . . . . | | . . . . . . | | . . . . . . | | . . . . . . | _______________ ", 1, 1, 1, 1, 1, 9);
+                    showGame();
                 }
             });
     }
@@ -214,20 +176,19 @@ public class UseWindow
     /**
      * Refreshes combat screen with updated variables
      */
-    public void refreshCombat(String battleMessage, String playerName, Monster monster, int pHealth, int pAtk, int wD) {
-        comb.refreshWindow(battleMessage, playerName, monster, pHealth, pAtk, wD);
+    public void refreshCombat(String battleMessage) {
+        comb.refreshWindow(battleMessage, user, monst);
     }
     
     /**
      * Refreshes game screen with updated variables
      */
-    public void refreshGame(String useMessage, String display, int level, int hP, int stam, int atk, int wD, int rHeight) {
-        currentRoom = display;
-        game.refreshWindow(useMessage, display, level, hP, stam, atk, wD, rHeight);
+    public void refreshGame(String useMessage) {
+        game.refreshWindow(useMessage, user, room);
     }
     
-    /**ALL THESE METHODS JUST CLOSE WINDOWS! YAY! :)
-     * 
+    /**
+     * These methods close windows.
      */
     
     public void closeMenu() {
@@ -254,25 +215,15 @@ public class UseWindow
         inv.dispose();
     }
     
-    /**
-     * Takes in 2D array (the current room) and makes it into a string.
-     * 
-     * @param tiles         the current room in array form
-     * @return roomDisplay  the room in freshly concatenated string form
-     */
-    public String roomToString(String[][] tiles) {
-        String roomDisplay = "";
-
-        for (int y = 0; y < tiles.length; y++) {
-            for (int x = 0; x < tiles[0].length; x++) {
-                if (y == 0 || y == tiles.length - 1) {
-                    roomDisplay = tiles[y][x] + "_";
-                } else {
-                    roomDisplay = tiles[y][x] + " ";
-                }
-            }
-        }
-
-        return roomDisplay;
+    public void setRoom(Room loc) {
+        room = loc;
+    }
+    
+    public void setPlayer(Player play) {
+        user = play;
+    }
+    
+    public void setMonster(Monster enemy) {
+        monst = enemy;
     }
 }

@@ -1,16 +1,14 @@
 
-/**
- * A simple subclass of Item that is food. Used
- * to display to user the inventory screen.
- */
-public class Food extends Item
+public class Bread extends Food
 {
     private String type;
     private String name;
     private int staminaIncrease;
     
-    public Food() {
+    public Bread() {
         type = "Food";
+        name = "Bread";
+        staminaIncrease = 10;
     }
     
     public String getType()

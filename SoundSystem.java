@@ -19,13 +19,15 @@ public class SoundSystem implements LineListener {
      * Indicates if the file has finished playing.
      */
     boolean playCompleted;
-    private Clip audioClip;
+    String audioFilePath;
+     
     /**
      * Play a given audio file.
      * @param audioFilePath Path of the file to be played.
      */
-    void play(String audioFilePath) {
+    void play() {
         File audioPath = new File(audioFilePath);
+ 
         try {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioPath);
  
@@ -33,13 +35,24 @@ public class SoundSystem implements LineListener {
  
             DataLine.Info info = new DataLine.Info(Clip.class, format);
  
-            audioClip = (Clip) AudioSystem.getLine(info);
+            Clip audioClip = (Clip) AudioSystem.getLine(info);
  
             audioClip.addLineListener(this);
  
             audioClip.open(audioStream);
-            audioClip.loop(Clip.LOOP_CONTINUOUSLY);
-            
+             
+            audioClip.start();
+             
+            while (!playCompleted) {
+                // wait for the playback completes
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+             
+            audioClip.close();
              
         } catch (UnsupportedAudioFileException ex) {
             System.out.println("The specified audio file is not supported.");
@@ -53,14 +66,6 @@ public class SoundSystem implements LineListener {
         }
          
     }
-    void stop() {
-       /**
-     * Stops the looping file.
-     */
-        audioClip.stop();
-        
-        
-    }
      
     /**
      *  Marks the beginning and ending of the audio clip.
@@ -70,23 +75,17 @@ public class SoundSystem implements LineListener {
         LineEvent.Type type = event.getType();
          
         if (type == LineEvent.Type.START) {
-            System.out.println("Playback started.");
+            //System.out.println("Playback started.");
              
         } else if (type == LineEvent.Type.STOP) {
             playCompleted = true;
-            System.out.println("Playback completed.");
+            //System.out.println("Playback completed.");
         }
  
     }
-   /**
-     * Example of how to use the SoundSytem.
-     */
-    //public static void main(String[] args) {
-     //   String audioFilePath = "U:/Famitracker/Test/Class_fluidvolt-The_Gusts_of_Aeolus.wav";
-    //    SoundSystem player = new SoundSystem();
-    //    player.play(audioFilePath);
-        
+    
+    public void setPath(String filePath) {
+        audioFilePath = filePath;
     }
- 
 }
 

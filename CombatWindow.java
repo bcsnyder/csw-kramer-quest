@@ -42,15 +42,15 @@ public class CombatWindow extends JFrame
      *                  contains helpful variables the program gets from it
      *                  like health
      */
-    public void displayWindow(String playerName, Monster monster, int pHealth, int pAtk, int wD) {
-        pName = playerName;
+    public void displayWindow(Player play, Monster monster) {
+        pName = play.getName();
         mName = monster.getName();
         String combatMessage = "";
-        pHP = pHealth;
+        pHP = play.getHealth();
         mHP = monster.getHP();
-        pAttack = pAtk;
+        pAttack = play.getAttack();
         mAttack = monster.getAttack();
-        pDur = wD;
+        pDur = play.getDur();
         mSym = monster.getSymbol();
 
         canvas = new CombatDisplay();    // Construct the drawing canvas
@@ -78,14 +78,17 @@ public class CombatWindow extends JFrame
     /**
      * Updates variables based on what is passed in and then repaints the screen
      */
-    public void refreshWindow(String battleMessage, String playerName, Monster monster, int pHealth, int pAtk, int wD) {
+    public void refreshWindow(String battleMessage, Player play, Monster monster) {
         combatMessage = battleMessage;
-        pName = playerName;
+        pName = play.getName();
+        mName = monster.getName();
         String combatMessage = "";
-        pHP = pHealth;
+        pHP = play.getHealth();
         mHP = monster.getHP();
-        pAttack = pAtk;
-        pDur = wD;
+        pAttack = play.getAttack();
+        mAttack = monster.getAttack();
+        pDur = play.getDur();
+        mSym = monster.getSymbol();
 
         canvas.repaint();
     }

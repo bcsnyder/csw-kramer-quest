@@ -1,21 +1,18 @@
-import javax.swing.JOptionPane;
-/**
- * Abstract class Monster - This class holds all of the enemy types you might encounter during the game.  
- * This class will have the ability to check whether its alive or not, a set amount of health, a set amount of
- * attack power, and a set amount of defense.  
- * -removed abstract
- * @author Dylan, Ben
- * @version 1.2
- */
-public abstract class Monster
+
+public class Gremlin extends Monster
 {
     String name;
     String symbol;
     int health; //NO need to have doubles
     int atk;
+    int xPos;
+    int yPos;
 
-    public Monster() {
-        
+    public Gremlin() {
+        symbol = "G";
+        name = "Gremlin";
+        health = (int)(Math.random()*5 + 10);
+        atk = (int)(Math.random()*2 + 1);
     }
     
     /**
@@ -32,6 +29,19 @@ public abstract class Monster
         }else{
             return true;
         }
+    }
+    
+    public int getX() {
+        return xPos;
+    }
+    
+    public int getY() {
+        return yPos;
+    }
+    
+    public void setPos(int x, int y) {
+        xPos = x;
+        yPos = y;
     }
     
     public String getName() {
