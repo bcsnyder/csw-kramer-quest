@@ -41,7 +41,7 @@ public class SoundSystem implements LineListener {
  
             audioClip.open(audioStream);
              
-            audioClip.start();
+            audioClip.loop(Clip.LOOP_CONTINUOUSLY);
              
             while (!playCompleted) {
                 // wait for the playback completes
@@ -65,6 +65,9 @@ public class SoundSystem implements LineListener {
             ex.printStackTrace();
         }
          
+    }
+   void stop() {
+        audioClip.stop();       
     }
      
     /**
