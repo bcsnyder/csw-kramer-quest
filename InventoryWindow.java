@@ -20,7 +20,7 @@ public class InventoryWindow extends JFrame
     
     public JButton returnButton;
 
-    public void displayWindow(ArrayList<Item> inv) {
+    public void displayWindow(ArrayList<Item> inv, Player p, Room r) {
         inventory = inv;
         
         canvas = new InventoryDisplay();    // Construct the drawing canvas
@@ -29,13 +29,20 @@ public class InventoryWindow extends JFrame
         JPanel buttonPane = new JPanel(new FlowLayout());
         returnButton = new JButton("Return to Game ");
         buttonPane.add(returnButton);
+        returnButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    dispose();
+                    GameplayWindow gW = new GameplayWindow();
+                    gW.displayWindow(p, r);
+                }
+            });
         
         // Set the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
         cp.add(buttonPane, BorderLayout.SOUTH);
         cp.add(canvas, BorderLayout.CENTER);
-
+        
         setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
         pack();              // Either pack() the components; or setSize()
         setTitle("Inventory");  //JFrame sets the title of outer frame

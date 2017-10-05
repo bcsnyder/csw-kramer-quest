@@ -46,7 +46,7 @@ public abstract class Monster
         return symbol;
     }
     
-    public double getAttack() {
+    public int getAttack() {
         return atk;
     }
 }

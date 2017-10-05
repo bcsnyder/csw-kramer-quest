@@ -10,7 +10,7 @@ public class MainMethod
         Player p = new Player();
         p.setName(JOptionPane.showInputDialog("Enter your name."));
         p.setHealth(25);
-        p.setAttack(3);
+        p.setAttack(-9);
         p.setRoom(startRoom);
 
         int xPos = 1;

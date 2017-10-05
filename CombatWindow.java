@@ -32,6 +32,8 @@ public class CombatWindow extends JFrame
     private double mAttack;
     private int pDur;
     private String mSym;
+    private GameplayWindow gW = new GameplayWindow();
+    private GameOverWindow gOW = new GameOverWindow();
     
     /**
      * Sets all the variables needed to display combat and
@@ -42,7 +44,7 @@ public class CombatWindow extends JFrame
      *                  contains helpful variables the program gets from it
      *                  like health
      */
-    public void displayWindow(Player play, Monster monster) {
+    public void displayWindow(Player play, Monster monster, Room rm) {
         pName = play.getName();
         mName = monster.getName();
         String combatMessage = "";
@@ -60,9 +62,41 @@ public class CombatWindow extends JFrame
         JPanel buttonPane = new JPanel(new FlowLayout());
         attackButton = new JButton("Attack ");
         buttonPane.add(attackButton);
-        
+        attackButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    //Makes combat more exciting by adding random damage modifier
+                    int bonus = (int)(Math.random()*5);
+                    int damage = play.getAttack() + bonus;
+                    boolean survive = monster.ouchie(damage);//damages monster
+                    
+                    //Sets feedback for user
+                    String message = "You attack, dealing " + (damage)+ " damage";
+                    if (survive == true) {
+                        message = message + "!";
+                        refreshWindow(message, play, monster);
+                    } else {
+                        message = message + " and the monster is dead!";
+                        refreshWindow(message, play, monster);
+                        gW.displayWindow(play, rm);
+                        dispose();
+                    }
+                    
+                    play.setHealth(play.getHealth() - monster.getAttack());
+                    if (play.getHealth() <= 0) {
+                        gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
+                        dispose();
+                    }
+                    refreshWindow(message, play, monster);
+                }
+            });
         runButton = new JButton("Run Away ");
         buttonPane.add(runButton);
+        runButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    dispose();
+                    gW.displayWindow(play, rm);
+                }
+            });
         
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());

@@ -115,7 +115,7 @@ public class UseWindow
      */
     public void showCombat(Player play, Monster monster) {
         currentWindow = "combat";
-        comb.displayWindow(play, monster);
+        //comb.displayWindow(play, monster);
 
         comb.runButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
@@ -163,7 +163,7 @@ public class UseWindow
      */
     public void showInventory(ArrayList<Item> inventory) {
         currentWindow = "inventory";
-        inv.displayWindow(inventory);
+        //inv.displayWindow(inventory);
         
         inv.returnButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {

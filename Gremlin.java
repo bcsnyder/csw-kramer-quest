@@ -56,7 +56,7 @@ public class Gremlin extends Monster
         return symbol;
     }
     
-    public double getAttack() {
+    public int getAttack() {
         return atk;
     }
 }

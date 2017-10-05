@@ -18,6 +18,106 @@ public class Player
         inventory = new ArrayList<Item>();
     }
     
+    public int moveUp() {
+        int newY = y - 1;
+        
+        if(currRoom.getTile(x, newY) == '.') {
+            currRoom.removePlayer();
+            y = newY;
+            currRoom.addPlayer(x, y);
+            return 1;
+        } else if(currRoom.getTile(x, newY) == '$') {
+            currRoom.removePlayer();
+            y = newY;
+            currRoom.addPlayer(x, y);
+            return 3;
+        } else if(currRoom.getTile(x, newY) == '#') {
+            return 2;
+        } else if(currRoom.getTile(x, newY) == '-' || currRoom.getTile(x, newY) == '|') {
+            return 0;
+        } else {
+            currRoom.removePlayer();
+            y = newY;
+            currRoom.addPlayer(x, y);
+            return 4;
+        }
+    }
+    
+    public int moveDown() {
+        int newY = y + 1;
+        
+        if(currRoom.getTile(x, newY) == '.') {
+            currRoom.removePlayer();
+            y = newY;
+            currRoom.addPlayer(x, y);
+            return 1;
+        } else if(currRoom.getTile(x, newY) == '$') {
+            currRoom.removePlayer();
+            y = newY;
+            currRoom.addPlayer(x, y);
+            return 3;
+        } else if(currRoom.getTile(x, newY) == '#') {
+            return 2;
+        } else if(currRoom.getTile(x, newY) == '-' || currRoom.getTile(x, newY) == '|') {
+            return 0;
+        } else {
+            currRoom.removePlayer();
+            y = newY;
+            currRoom.addPlayer(x, y);
+            return 4;
+        }
+    }
+    
+    public int moveLeft() {
+        int newX = x - 1;
+        
+        if(currRoom.getTile(newX, y) == '.') {
+            currRoom.removePlayer();
+            x = newX;
+            currRoom.addPlayer(x, y);
+            return 1;
+        } else if(currRoom.getTile(newX, y) == '$') {
+            currRoom.removePlayer();
+            x = newX;
+            currRoom.addPlayer(x, y);
+            return 3;
+        } else if(currRoom.getTile(newX, y) == '#') {
+            return 2;
+        } else if(currRoom.getTile(newX, y) == '-' || currRoom.getTile(newX, y) == '|') {
+            return 0;
+        } else {
+            currRoom.removePlayer();
+            x = newX;
+            currRoom.addPlayer(x, y);
+            return 4;
+        }
+    }
+    
+    public int moveRight() {
+        int newX = x + 1;
+        
+        if(currRoom.getTile(newX, y) == '.') {
+            currRoom.removePlayer();
+            x = newX;
+            currRoom.addPlayer(x, y);
+            return 1;
+        } else if(currRoom.getTile(newX, y) == '$') {
+            currRoom.removePlayer();
+            x = newX;
+            currRoom.addPlayer(x, y);
+            return 3;
+        } else if(currRoom.getTile(newX, y) == '#') {
+            return 2;
+        } else if(currRoom.getTile(newX, y) == '-' || currRoom.getTile(newX, y) == '|') {
+            return 0;
+        } else {
+            currRoom.removePlayer();
+            x = newX;
+            currRoom.addPlayer(x, y);
+            return 4;
+        }
+    }
+    
     public int getHealth() {
         return health;
     }
@@ -44,6 +144,10 @@ public class Player
         return (attack + currentWeapon.getDamage());
     }
     
+    public void addItem(Item newItem) {
+        inventory.add(newItem);
+    }
+    
     public void setName(String pName) {
         name = pName;
     }
@@ -64,6 +168,10 @@ public class Player
         currRoom = loc;
     }
     
+    public Room getRoom() {
+        return currRoom;
+    }
+    
     public void setPos(int xPos, int yPos) {
         x = xPos;
         y = yPos;
@@ -71,5 +179,9 @@ public class Player
     
     public void setWeapon(Weapon w) {
         currentWeapon = w;
+    }
+    
+    public ArrayList getInventory() {
+        return inventory;
     }
 }

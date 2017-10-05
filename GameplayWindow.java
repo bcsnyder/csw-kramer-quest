@@ -19,7 +19,7 @@ public class GameplayWindow extends JFrame
 
     private GameDisplay canvas;
     public String room;
-    
+
     /**
      * All these are stats that are ideally accessed through other objects
      * like a Player object or something
@@ -31,9 +31,11 @@ public class GameplayWindow extends JFrame
     private int attack;
     private int wDurability;
     private int roomHeight;
-    
+    private Player play;
+    private Room space;
+
     private String actionMessage = "";
-    
+
     /**
      * Sets variables based on what's passed in and sets up
      * the window's components and layout. Pretty standard.
@@ -47,6 +49,8 @@ public class GameplayWindow extends JFrame
         attack = player.getAttack();
         wDurability = player.getDur();
         roomHeight = board.getHeight();
+        play = player;
+        space = board;
 
         canvas = new GameDisplay();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
@@ -59,8 +63,135 @@ public class GameplayWindow extends JFrame
         pack();              // Either pack() the components; or setSize()
         setTitle("\"Game Board\"");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
+
+        addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent evt) {
+                    switch(evt.getKeyCode()) {
+                        case KeyEvent.VK_W:
+                        int action = play.moveUp();
+                        do {
+                            if (action == 1) {
+                                space = play.getRoom();
+                                refreshWindow("You moved up!", play, space);
+                            } else if(action == 2) {
+                                space = new Room(1, 6, 10);
+                                space.fillDots();
+                                space.addPlayer(1,1);
+                                space.fillWalls();
+                                space.fillSymbols();
+                                play.setRoom(space);
+                                play.setPos(1,1);
+                                refreshWindow("You moved to a new room!", play, space);
+                            } else if(action == 3) {
+                                play.addItem(new Bread());
+                                refreshWindow("You got bread.", play, space);
+                            } else if(action == 4) {
+                                refreshWindow("You enter combat!", play, space);
+                                CombatWindow cW = new CombatWindow();
+                                cW.displayWindow(play, new Gremlin(), space);
+                                dispose();
+                            } else {
+                                action = play.moveUp();
+                                refreshWindow("You can't move there!", play, space);
+                            }
+                        } while (action < 0);
+                        repaint();
+                        break;
+                        case KeyEvent.VK_S:
+                        action = play.moveDown();
+                        do {
+                            if (action == 1) {
+                                space = play.getRoom();
+                                refreshWindow("You moved down!", play, space);
+                            } else if(action == 2) {
+                                space = new Room(1, 6, 10);
+                                space.fillDots();
+                                space.addPlayer(1,1);
+                                space.fillWalls();
+                                space.fillSymbols();
+                                play.setRoom(space);
+                                play.setPos(1,1);
+                                refreshWindow("You moved to a new room!", play, space);
+                            } else if(action == 3) {
+                                play.addItem(new Axe());
+                                refreshWindow("You got axe.", play, space);
+                            } else if(action == 4) {
+                                refreshWindow("You enter combat!", play, space);
+                                CombatWindow cW = new CombatWindow();
+                                cW.displayWindow(play, new Gremlin(), space);
+                                dispose();
+                            } else {
+                                action = play.moveDown();
+                                refreshWindow("You can't move there!", play, space);
+                            }
+                        } while (action < 0);
+                        repaint();
+                        break;
+                        case KeyEvent.VK_A:
+                        action = play.moveLeft();
+                        do {
+                            if (action == 1) {
+                                space = play.getRoom();
+                                refreshWindow("You moved left!", play, space);
+                            } else if(action == 2) {
+                                space = new Room(1, 6, 10);
+                                space.fillDots();
+                                space.addPlayer(1,1);
+                                space.fillWalls();
+                                space.fillSymbols();
+                                play.setRoom(space);
+                                play.setPos(1,1);
+                                refreshWindow("You moved to a new room!", play, space);
+                            } else if(action == 3) {
+                                play.addItem(new Bread());
+                                refreshWindow("You got bread.", play, space);
+                            } else if(action == 4) {
+                                refreshWindow("You enter combat!", play, space);
+                            } else {
+                                action = play.moveLeft();
+                                refreshWindow("You can't move there!", play, space);
+                            }
+                        } while (action < 0);
+                        repaint();
+                        break;
+                        case KeyEvent.VK_D:
+                        action = play.moveRight();
+                        do {
+                            if (action == 1) {
+                                space = play.getRoom();
+                                refreshWindow("You moved right!", play, space);
+                            } else if(action == 2) {
+                                space = new Room(1, 6, 10);
+                                space.fillDots();
+                                space.addPlayer(1,1);
+                                space.fillWalls();
+                                space.fillSymbols();
+                                play.setRoom(space);
+                                play.setPos(1,1);
+                                refreshWindow("You moved to a new room!", play, space);
+                            } else if(action == 3) {
+                                play.addItem(new Bread());
+                                refreshWindow("You got bread.", play, space);
+                            } else if(action == 4) {
+                                refreshWindow("You enter combat!", play, space);
+                            } else {
+                                action = play.moveRight();
+                                refreshWindow("You can't move there!", play, space);
+                            }
+                        } while (action < 0);
+                        repaint();
+                        break;
+                        case KeyEvent.VK_I:
+                        InventoryWindow iW = new InventoryWindow();
+                        iW.displayWindow(play.getInventory(), play, space);
+                        dispose();
+                        break;
+                    }
+                }
+            });
     }
-    
+
     /**
      * Simply updates variables with what's passed in and
      * repaints the window. VOILA!
@@ -113,7 +244,7 @@ public class GameplayWindow extends JFrame
                 g.drawString(room.substring((i-1)*inc,i*inc), x, yCor);
                 yCor += 25;
             }
-            
+
             //Shows desired action message to notify user about
             //whatever just happened
             g.setFont(new Font("Monospaced", Font.PLAIN, 14));

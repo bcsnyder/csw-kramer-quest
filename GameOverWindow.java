@@ -14,6 +14,7 @@ public class GameOverWindow extends JFrame
     private String[] debrief;
     private DebriefText canvas;
     
+    private MenuWindow mW = new MenuWindow();
     public JButton menuButton;
 
     public void displayWindow(String playerName, String deathMessage) {
@@ -24,7 +25,13 @@ public class GameOverWindow extends JFrame
         JPanel buttonPane = new JPanel(new FlowLayout());
         menuButton = new JButton("Return to Menu ");
         buttonPane.add(menuButton);
-        
+        menuButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    mW.displayWindow();
+                    dispose();
+                }
+            });
+            
         // Set the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());

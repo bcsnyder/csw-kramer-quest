@@ -38,6 +38,17 @@ public class Room
         map[y][x] = '@';
     }
     
+    public void removePlayer() {
+        for (int counter1 = 0; counter1 < length; counter1++) {
+            for (int counter2 = 0; counter2 < width; counter2++) {
+                if(map[counter1][counter2] == '@') {
+                    map[counter1][counter2] = '.';
+                    return;
+                }
+            }
+        }
+    }
+    
     public void fillWalls()
     {
         for (int counter1 = 0; counter1 < length; counter1++)
