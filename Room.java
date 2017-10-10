@@ -11,7 +11,18 @@ public class Room
         level = num;
         length = (int) (Math.random() * (max - min))+ min;
         width = (int) (Math.random() * (max - min)) + min;
-        numMonsters = level * 2;
+        //This allows the number of monsters to go up each level, only 10 levels but can add more
+        if (level <= 3){
+            max = 4;
+            min = 1;
+        } else if (level > 3 && level <= 6   ){
+            max = 6;
+            min = 1;
+        }else if (level > 6 && level <= 10){
+            max = 8;
+            min = 1;
+        }
+        numMonsters = (int) Math.floor(Math.random() * (max - min)) + min;
         map = new char[length][width];
     }
     
