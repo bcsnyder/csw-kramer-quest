@@ -197,6 +197,8 @@ public class CombatWindow extends JFrame
             g.setFont(new Font("Monospaced", Font.PLAIN, 14));
             x = centerStringStartX(combatMessage, CANVAS_WIDTH, g);
             g.drawString(combatMessage, x, CANVAS_HEIGHT/2);
+            
+            Thread.sleep(1500); //pause for 1.5 seconds
         }
     }
 }
