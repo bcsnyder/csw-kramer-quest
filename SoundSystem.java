@@ -20,7 +20,8 @@ public class SoundSystem implements LineListener {
      */
     boolean playCompleted;
     String audioFilePath;
-     
+   private Clip audioClip;
+ 
     /**
      * Play a given audio file.
      * @param audioFilePath Path of the file to be played.
@@ -35,25 +36,13 @@ public class SoundSystem implements LineListener {
  
             DataLine.Info info = new DataLine.Info(Clip.class, format);
  
-            Clip audioClip = (Clip) AudioSystem.getLine(info);
+            audioClip = (Clip) AudioSystem.getLine(info);
  
             audioClip.addLineListener(this);
  
             audioClip.open(audioStream);
-             
             audioClip.loop(Clip.LOOP_CONTINUOUSLY);
-             
-            while (!playCompleted) {
-                // wait for the playback completes
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-            }
-             
-            audioClip.close();
-             
+                   
         } catch (UnsupportedAudioFileException ex) {
             System.out.println("The specified audio file is not supported.");
             ex.printStackTrace();
