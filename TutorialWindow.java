@@ -17,10 +17,10 @@ public class TutorialWindow extends JFrame
     public static final int CANVAS_WIDTH  = 800;//Sets size of window
     public static final int CANVAS_HEIGHT = 500;
     
+    MenuWindow menuWind;
+    
     private String[] tutorial;
     private TutorialText canvas;
-    
-    public JButton menuButton;
     
     /**
      * Sets up tutorial window's components and shows them.
@@ -30,8 +30,15 @@ public class TutorialWindow extends JFrame
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
         
         JPanel buttonPane = new JPanel(new FlowLayout());
-        menuButton = new JButton("Return to Menu ");
+        JButton menuButton = new JButton("Return to Menu ");
         buttonPane.add(menuButton);
+        menuButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    menuWind = new MenuWindow();
+                    dispose();
+                    menuWind.displayWindow();
+                }
+            });
         
         // Set the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();

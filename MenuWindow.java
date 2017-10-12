@@ -13,8 +13,6 @@ import javax.imageio.ImageIO;
  * logo             the subcomponent of the window holding the image
  * imgLogoFilename  path to find image
  * imgLogo          where the actual loaded image is stored
- * tutorialButton   button to go to tutorial window
- * playButton       button to go to game window
  * LOGO_WIDTH       static width of logo MUST BE IMAGE WIDTH (I think?)
  * LOGO_HEIGHT      static height of logo MUST BE IMAGE height (I think?)
  */
@@ -22,13 +20,15 @@ public class MenuWindow extends JFrame
 {
     public static final int LOGO_WIDTH  = 500;
     public static final int LOGO_HEIGHT = 250;
-
+    
+    private GameplayWindow gameWind;
+    private TutorialWindow tutorialWind;
+    private Player newPlayer;
+    private Stage newStage;
+    
     private ImageFrame logo;
     private String imgLogoFilename = "images/logo.jpg";
     private BufferedImage imgLogo;
-    
-    public JButton tutorialButton;
-    public JButton playButton;
     
     /**
      * Basically finds and loads the image and sets up the components
@@ -38,14 +38,32 @@ public class MenuWindow extends JFrame
     public void displayWindow() {
         logo = new ImageFrame();//Creates subcomponent panel for image
         logo.setPreferredSize(new Dimension(LOGO_WIDTH, LOGO_HEIGHT));//Sets logo's size
-
+        
+        //Creates two buttons and decides their functionality
         JPanel buttonPane = new JPanel(new FlowLayout());
-        tutorialButton = new JButton("Tutorial ");
+        JButton tutorialButton = new JButton("Tutorial ");
         buttonPane.add(tutorialButton);
+        tutorialButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    tutorialWind = new TutorialWindow();
+                    dispose();
+                    tutorialWind.displayWindow();
+                }
+            });
         
-        playButton = new JButton("Play Game ");
+        JButton playButton = new JButton("Play Game ");
         buttonPane.add(playButton);
+        playButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    startUp();
+                    gameWind = new GameplayWindow();
+                    dispose();
+                    gameWind.displayWindow(newPlayer, newStage.getRoom(1));
+                }
+            });
         
+        playMusic();
+            
         //loads image
         try {
             imgLogo = ImageIO.read(new File("/Users/Ben/Desktop/School/SE/csw-kramer-quest/images/logo_ex.jpg"));
@@ -62,6 +80,47 @@ public class MenuWindow extends JFrame
         setTitle("Main Menu");
         pack();
         setVisible(true);
+    }
+    
+    /**
+     * Sets up the music player and begins playing the menu
+     * theme.
+     */
+    private void playMusic() {
+        SoundSystem player = new SoundSystem();
+        String audioFilePath = "Sound/Menu_Theme.wav";
+        player.setPath(audioFilePath);
+        player.play();
+    }
+    
+    private void startUp() {
+        newStage = new Stage(10);
+        Room currRoom = newStage.getRoom(1);
+        
+        newPlayer = new Player();
+        newPlayer.setName(JOptionPane.showInputDialog("Enter your name."));
+        newPlayer.setHealth(25);
+        newPlayer.setAttack(-9);
+        newPlayer.setRoom(currRoom);
+
+        int xPos = 1;
+        int yPos = 1;
+        
+        while(currRoom.getTile(xPos, yPos) != '.') {
+            while(currRoom.getTile(xPos, yPos) != '.') {
+                yPos += 1;
+            }
+            xPos += 1;
+        }
+        
+        newPlayer.setPos(xPos, yPos);
+        currRoom.addPlayer(xPos, yPos);
+        
+        newPlayer.setWeapon(new Axe());
+    }
+    
+    private void chooseClass() {
+        
     }
     
     /**

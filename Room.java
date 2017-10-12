@@ -1,6 +1,6 @@
 public class Room 
 {
-    int level;
+    int roomNumber;
     int length;
     int width;
     int numMonsters;
@@ -8,22 +8,28 @@ public class Room
     
     public Room (int num, int min, int max)
     {
-        level = num;
+        roomNumber = num;
         length = (int) (Math.random() * (max - min))+ min;
         width = (int) (Math.random() * (max - min)) + min;
         //This allows the number of monsters to go up each level, only 10 levels but can add more
-        if (level <= 3){
+        if (roomNumber <= 3){
             max = 4;
             min = 1;
-        } else if (level > 3 && level <= 6   ){
+        } else if (roomNumber > 3 && roomNumber <= 6   ){
             max = 6;
             min = 1;
-        }else if (level > 6 && level <= 10){
+        }else if (roomNumber > 6 && roomNumber <= 10){
             max = 8;
             min = 1;
         }
         numMonsters = (int) Math.floor(Math.random() * (max - min)) + min;
         map = new char[length][width];
+    }
+    
+    public void fill() {
+        fillDots();
+        fillWalls();
+        fillSymbols();
     }
     
     public String toString() {
@@ -122,7 +128,7 @@ public class Room
     }
     
     public int getLevel() {
-        return level;
+        return roomNumber;
     }
     
     public int getHeight() {

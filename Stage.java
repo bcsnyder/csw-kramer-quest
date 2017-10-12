@@ -1,28 +1,23 @@
 public class Stage 
 {
-    private int level;
-    private int min;
-    private int max;
-    private int numRooms;
+    private int size;
     private Room[] floor;
     
-    public Stage(int num)
+    public Stage(int numRooms)
     {
-        level = num;
-        min = (level * 2) + 6;
-        max = (level * 4) + 6;
-        numRooms = (level * 2) + 2;
+        size = numRooms;
         floor = new Room[numRooms];
+        makeRooms();
     }
     
     public void makeRooms() 
     {
-        for (int counter = 0; counter < numRooms; counter++)
+        for (int counter = 0; counter < size; counter++)
         {
-            Room add = new Room(level, min, max);
-            add.fillDots();
-            add.fillWalls();
-            add.fillSymbols();
+            int min = 7 + counter/2;
+            int max = 11 + counter/2;
+            Room add = new Room(counter, min, max);
+            add.fill();
             floor[counter] = add;
         }
     }
