@@ -19,7 +19,7 @@ public class InventoryWindow extends JFrame
     private ArrayList<String> inventoryText;
     
     public JButton returnButton;
-
+    int select = 0;
     public void displayWindow(ArrayList<Item> inv, Player p, Room r) {
         inventory = inv;
         
@@ -47,7 +47,28 @@ public class InventoryWindow extends JFrame
         pack();              // Either pack() the components; or setSize()
         setTitle("Inventory");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
+         addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent evt) {
+                    switch(evt.getKeyCode()) {
+                        case KeyEvent.VK_W:
+                        if (select > 0) {
+                            select = select - 1;
+                        } 
+                        canvas.repaint();
+                        break;
+                        case KeyEvent.VK_S:
+                        if (select < inventoryText.size() - 1) {
+                         select = select + 1;
+                        }
+                        canvas.repaint();
+                        break;
+    } 
+
+
     }
+  });
+}
     
     /**
      * takes array of items and returns info about the
@@ -79,7 +100,7 @@ public class InventoryWindow extends JFrame
      * Panel inside frame that holds drawn graphics
      */
     private class InventoryDisplay extends JPanel {
-        int select = 0;
+        
         // Override paintComponent to perform your own painting
         @Override
         public void paintComponent(Graphics g) {
@@ -95,7 +116,7 @@ public class InventoryWindow extends JFrame
             //different line on the window
             for (int i = 0; i < inventoryText.size(); i++) {
              if (i == select) {
-               txt = ">" + inventoryText.get(i);
+               txt = "> " + inventoryText.get(i);
              } else {
                 txt = inventoryText.get(i);
                 }
