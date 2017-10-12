@@ -79,6 +79,7 @@ public class InventoryWindow extends JFrame
      * Panel inside frame that holds drawn graphics
      */
     private class InventoryDisplay extends JPanel {
+        int select = 0;
         // Override paintComponent to perform your own painting
         @Override
         public void paintComponent(Graphics g) {
@@ -93,7 +94,11 @@ public class InventoryWindow extends JFrame
             //Basically splits up each element of String arraylist into a
             //different line on the window
             for (int i = 0; i < inventoryText.size(); i++) {
+             if (i == select) {
+               txt = ">" + inventoryText.get(i);
+             } else {
                 txt = inventoryText.get(i);
+                }
                 x = centerStringX(txt, CANVAS_WIDTH, g);
                 g.drawString(txt, x, (30 + 25*i));
             }
