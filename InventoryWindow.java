@@ -20,6 +20,7 @@ public class InventoryWindow extends JFrame
     
     public JButton returnButton;
     int select = 0;
+    private String actionMessage = "";
     public void displayWindow(ArrayList<Item> inv, Player p, Room r) {
         inventory = inv;
         
@@ -47,21 +48,41 @@ public class InventoryWindow extends JFrame
         pack();              // Either pack() the components; or setSize()
         setTitle("Inventory");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
+        setFocusable(true);
+        Player play = p;
          addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent evt) {
                     switch(evt.getKeyCode()) {
                         case KeyEvent.VK_W:
+                        
                         if (select > 0) {
                             select = select - 1;
                         } 
-                        canvas.repaint();
+                        repaint();
                         break;
                         case KeyEvent.VK_S:
                         if (select < inventoryText.size() - 1) {
                          select = select + 1;
                         }
-                        canvas.repaint();
+                        repaint();
+                        break;
+                        case KeyEvent.VK_ENTER:
+                        if (inventory.get(select)!=null) {
+                            if (inventory.get(select).getType().equals("Food")) {
+                                if (play.getStamina() >= 100) {
+                                    actionMessage = "You're already full!";
+                                } else {
+                                    play.setStamina(play.getStamina() + ((Food)inventory.get(select)).eat());
+                                    actionMessage = "You regained some stamina.";
+                                    inventory.remove(select);
+                                    if (play.getStamina() > 100) {
+                                    play.setStamina(100);
+                                  } 
+                                }
+                            }
+                        }
+                        repaint();
                         break;
     } 
 
@@ -115,14 +136,16 @@ public class InventoryWindow extends JFrame
             //Basically splits up each element of String arraylist into a
             //different line on the window
             for (int i = 0; i < inventoryText.size(); i++) {
-             if (i == select) {
+              if (i == select) {
                txt = "> " + inventoryText.get(i);
-             } else {
+               } else {
                 txt = inventoryText.get(i);
                 }
                 x = centerStringX(txt, CANVAS_WIDTH, g);
                 g.drawString(txt, x, (30 + 25*i));
-            }
+                x = centerStringX(actionMessage, CANVAS_WIDTH, g);
+                g.drawString(actionMessage, x, CANVAS_HEIGHT - 60);
+               }
         }
     }
 }
