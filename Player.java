@@ -126,6 +126,10 @@ public class Player
         return stamina;
     }
     
+    public void setStamina(int s) {
+        stamina = s;
+    }
+    
     public int getDur() {
         return currentWeapon.getDurability();
     }
