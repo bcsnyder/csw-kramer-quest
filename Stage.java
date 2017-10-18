@@ -18,9 +18,7 @@ public class Stage
             int min = 7 + counter/2;
             int max = 11 + counter/2;
             Room add = new Room(counter, min, max);
-            add.fillDots();
-            add.fillWalls();
-            add.fillSymbols();
+            add.fill();
             
             //This adds the back door so that the player can go through this door
             int height = add.getHeight();
