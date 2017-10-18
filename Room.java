@@ -1,10 +1,13 @@
 public class Room 
 {
-    int roomNumber;
-    int length;
-    int width;
-    int numMonsters;
-    char [][] map;
+    private int roomNumber;
+    private int length;
+    private int width;
+    private int numMonsters;
+    private char [][] map;
+    private int roomNum;
+    private int doorWall;
+    private int level; 
     
     public Room (int num, int min, int max)
     {
@@ -137,6 +140,25 @@ public class Room
     
     public char getTile(int x, int y) {
         return map[y][x];
+    }
+    public void addBackDoor (int w, int y, int x){
+        //This allows there to be a door back but i still have to add the ability to go back
+        int yCoor = y;
+        int xCoor = x; 
+        if (w == 1) {
+             xCoor = 0; 
+        }
+        if (w == 2) {
+             yCoor= width - 1;
+        }
+        if (w == 3) {
+             xCoor = length - 1;
+        }
+        if (w == 4) {
+             yCoor = 0; 
+        }
+        
+        map [xCoor][yCoor] = '#'; 
     }
 }
 
