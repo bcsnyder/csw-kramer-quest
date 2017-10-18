@@ -36,6 +36,10 @@ public class Stage
         return floor[num];
     }
     
+    public Room nextRoom (int roomNum){
+         return floor[roomNum];
+    }
+    
     //floor [0] = one;  
     //floor [1] = two;
     //floor [2] = three;
