@@ -47,21 +47,24 @@ public class InventoryWindow extends JFrame
         pack();              // Either pack() the components; or setSize()
         setTitle("Inventory");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
+        setFocusable(true);
+        
          addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent evt) {
                     switch(evt.getKeyCode()) {
                         case KeyEvent.VK_W:
+                        
                         if (select > 0) {
                             select = select - 1;
                         } 
-                        canvas.repaint();
+                        repaint();
                         break;
                         case KeyEvent.VK_S:
                         if (select < inventoryText.size() - 1) {
                          select = select + 1;
                         }
-                        canvas.repaint();
+                        repaint();
                         break;
     } 
 
