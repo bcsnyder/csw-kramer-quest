@@ -78,10 +78,15 @@ public class CombatWindow extends JFrame
                         message = message + " and the monster is dead!";
                         refreshWindow(message, play, monster);
                         gW.displayWindow(play, rm);
+                        delay(2);
                         dispose();
                     }
                     
-                    play.setHealth(play.getHealth() - monster.getAttack());
+                    delay(2);
+                    int mAttack = monster.getAttack();
+                    play.setHealth(play.getHealth() - mAttack);
+                    message = "The monster attacks you dealing " + mAttack + " damage.";
+                    refreshWindow(message, play, monster);
                     if (play.getHealth() <= 0) {
                         gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
                         dispose();
@@ -107,6 +112,18 @@ public class CombatWindow extends JFrame
         pack();              // Either pack() the components; or setSize()
         setTitle("Battle");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
+    }
+    
+    /**
+     * Pauses the program for a specified number of seconds
+     * @param time  desired pause time in seconds
+     */
+    private void delay(int time) {
+        int delay = time * 1000;
+        
+        try {
+                Thread.sleep(delay); //pause for 1.5 seconds
+            } catch (Exception e) {}
     }
     
     /**
@@ -197,8 +214,6 @@ public class CombatWindow extends JFrame
             g.setFont(new Font("Monospaced", Font.PLAIN, 14));
             x = centerStringStartX(combatMessage, CANVAS_WIDTH, g);
             g.drawString(combatMessage, x, CANVAS_HEIGHT/2);
-            
-            Thread.sleep(1500); //pause for 1.5 seconds
         }
     }
 }
