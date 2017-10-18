@@ -21,6 +21,10 @@ public class InventoryWindow extends JFrame
     public JButton returnButton;
     int select = 0;
     private String actionMessage = "";
+    private int health;
+    private int stamina;
+    private int attack;
+    private int weaponDur;
     public void displayWindow(ArrayList<Item> inv, Player p, Room r) {
         inventory = inv;
         
@@ -50,6 +54,10 @@ public class InventoryWindow extends JFrame
         setVisible(true);    //Displays window
         setFocusable(true);
         Player play = p;
+        health = play.getHealth();
+        stamina = play.getStamina();
+        attack = play.getAttack();
+        weaponDur = play.getDur();
          addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent evt) {
@@ -80,6 +88,10 @@ public class InventoryWindow extends JFrame
                                     play.setStamina(100);
                                   } 
                                 }
+                            }
+                            if (inventory.get(select).getType().equals("Weapon")) {
+                                play.setWeapon((Weapon)inventory.get(select));
+                                actionMessage = "You equipped the " +inventory.get(select).getName() +".";
                             }
                         }
                         repaint();
@@ -145,6 +157,12 @@ public class InventoryWindow extends JFrame
                 g.drawString(txt, x, (30 + 25*i));
                 x = centerStringX(actionMessage, CANVAS_WIDTH, g);
                 g.drawString(actionMessage, x, CANVAS_HEIGHT - 60);
+                
+                g.setFont(new Font("Monospaced", Font.PLAIN, 20));
+                g.setColor(Color.YELLOW); //Displays important stats at bottom of screen
+                String line1Vars = "HP:"+health +"  Stamina:"+stamina +"    Attack:"+attack +"   Weapon Strength:" +weaponDur;
+                x = centerStringX(line1Vars, CANVAS_WIDTH, g);
+                g.drawString(line1Vars, x, CANVAS_HEIGHT - 20);
                }
         }
     }
