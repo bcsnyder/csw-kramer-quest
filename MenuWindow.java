@@ -101,6 +101,7 @@ public class MenuWindow extends JFrame
         newPlayer.setName(JOptionPane.showInputDialog("Enter your name."));
         newPlayer.setHealth(25);
         newPlayer.setAttack(-9);
+        newPlayer.setStamina(20);
         newPlayer.setRoom(currRoom);
 
         int xPos = 1;
