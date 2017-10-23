@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
+import java.util.ArrayList;
 /**
  * Displays a window with a demo components of the game inside
  * including example stats, the user's name, and text graphics
@@ -31,9 +31,9 @@ public class GameplayWindow extends JFrame
     private int attack;
     private int wDurability;
     private int roomHeight;
-    private int roomNum
     private Player play;
     private Room space;
+    private ArrayList<Item> inventory;
 
     private String actionMessage = "";
 
@@ -76,15 +76,17 @@ public class GameplayWindow extends JFrame
                                 space = play.getRoom();
                                 refreshWindow("You moved up!", play, space);
                             } else if(action == 2) {
-                                roomNum = roomNum +1;
-                                space = stage.nextRoom(roomNum); //This runs through stage of premade rooms instead of make one
+                                space = new Room(1, 6, 10);
+                                space.fillDots();
                                 space.addPlayer(1,1);
+                                space.fillWalls();
+                                space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
                                 refreshWindow("You moved to a new room!", play, space);
                             } else if(action == 3) {
-                                play.addItem(new Bread());
-                                refreshWindow("You got bread.", play, space);
+                                play.addItem(randomItem());
+                                refreshWindow("You got an item.", play, space);
                             } else if(action == 4) {
                                 refreshWindow("You enter combat!", play, space);
                                 CombatWindow cW = new CombatWindow();
@@ -104,14 +106,16 @@ public class GameplayWindow extends JFrame
                                 space = play.getRoom();
                                 refreshWindow("You moved down!", play, space);
                             } else if(action == 2) {
-                                roomNum = roomNum +1;
-                                space = stage.nextRoom(roomNum);
+                                space = new Room(1, 6, 10);
+                                space.fillDots();
                                 space.addPlayer(1,1);
+                                space.fillWalls();
+                                space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
                                 refreshWindow("You moved to a new room!", play, space);
                             } else if(action == 3) {
-                                play.addItem(new Axe());
+                                play.addItem(randomItem());
                                 refreshWindow("You got axe.", play, space);
                             } else if(action == 4) {
                                 refreshWindow("You enter combat!", play, space);
@@ -132,14 +136,16 @@ public class GameplayWindow extends JFrame
                                 space = play.getRoom();
                                 refreshWindow("You moved left!", play, space);
                             } else if(action == 2) {
-                                roomNum = roomNum +1;
-                                space = stage.nextRoom(roomNum);
+                                space = new Room(1, 6, 10);
+                                space.fillDots();
                                 space.addPlayer(1,1);
+                                space.fillWalls();
+                                space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
                                 refreshWindow("You moved to a new room!", play, space);
                             } else if(action == 3) {
-                                play.addItem(new Bread());
+                                play.addItem(randomItem());
                                 refreshWindow("You got bread.", play, space);
                             } else if(action == 4) {
                                 refreshWindow("You enter combat!", play, space);
@@ -157,14 +163,16 @@ public class GameplayWindow extends JFrame
                                 space = play.getRoom();
                                 refreshWindow("You moved right!", play, space);
                             } else if(action == 2) {
-                                roomNum = roomNum +1;
-                                space = stage.nextRoom(roomNum);
+                                space = new Room(1, 6, 10);
+                                space.fillDots();
                                 space.addPlayer(1,1);
+                                space.fillWalls();
+                                space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
                                 refreshWindow("You moved to a new room!", play, space);
                             } else if(action == 3) {
-                                play.addItem(new Bread());
+                                play.addItem(randomItem());
                                 refreshWindow("You got bread.", play, space);
                             } else if(action == 4) {
                                 refreshWindow("You enter combat!", play, space);
@@ -183,6 +191,16 @@ public class GameplayWindow extends JFrame
                     }
                 }
             });
+    }
+    public Item randomItem() {
+        int value = (int) (Math.random() * 100 + 1);
+        if (value <= 80 && value >= 1) {
+            return new Bread();
+           } else if (value <= 100 && value >= 81) {
+           return new Axe();
+           } else {
+           return new Bread();    
+           }
     }
 
     /**
