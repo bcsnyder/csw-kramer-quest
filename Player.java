@@ -44,28 +44,27 @@ public class Player
     
     private int checkMove(int xCor, int yCor) {
         if (currRoom.getTile(xCor, yCor) == '.') {
-            currRoom.removePlayer();
-            x = xCor;
-            y = yCor;
-            currRoom.addPlayer(x, y);
+            validMove(xCor, yCor);
             return 1;
         } else if (currRoom.getTile(xCor, yCor) == '$') {
-            currRoom.removePlayer();
-            x = xCor;
-            y = yCor;
-            currRoom.addPlayer(x, y);
+            validMove(xCor, yCor);
             return 3;
         } else if (currRoom.getTile(xCor, yCor) == '#') {
             return 2;
         } else if (currRoom.getTile(xCor, yCor) == '-' || currRoom.getTile(xCor, yCor) == '|') {
             return 0;
         } else {
-            currRoom.removePlayer();
-            x = xCor;
-            y = yCor;
-            currRoom.addPlayer(x, y);
+            validMove(xCor, yCor);
             return 4;
         }
+    }
+    
+    private void validMove(int xPos, int yPos) {
+        currRoom.removePlayer();
+        x = xPos;
+        y = yPos;
+        currRoom.addPlayer(x, y);
+        stamina--;
     }
     
     public int getHealth() {
