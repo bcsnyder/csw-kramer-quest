@@ -21,98 +21,48 @@ public class Player
     public int moveUp() {
         int newY = y - 1;
         
-        if(currRoom.getTile(x, newY) == '.') {
-            currRoom.removePlayer();
-            y = newY;
-            currRoom.addPlayer(x, y);
-            return 1;
-        } else if(currRoom.getTile(x, newY) == '$') {
-            currRoom.removePlayer();
-            y = newY;
-            currRoom.addPlayer(x, y);
-            return 3;
-        } else if(currRoom.getTile(x, newY) == '#') {
-            return 2;
-        } else if(currRoom.getTile(x, newY) == '-' || currRoom.getTile(x, newY) == '|') {
-            return 0;
-        } else {
-            currRoom.removePlayer();
-            y = newY;
-            currRoom.addPlayer(x, y);
-            return 4;
-        }
+        return checkMove(x, newY);
     }
     
     public int moveDown() {
         int newY = y + 1;
         
-        if(currRoom.getTile(x, newY) == '.') {
-            currRoom.removePlayer();
-            y = newY;
-            currRoom.addPlayer(x, y);
-            return 1;
-        } else if(currRoom.getTile(x, newY) == '$') {
-            currRoom.removePlayer();
-            y = newY;
-            currRoom.addPlayer(x, y);
-            return 3;
-        } else if(currRoom.getTile(x, newY) == '#') {
-            return 2;
-        } else if(currRoom.getTile(x, newY) == '-' || currRoom.getTile(x, newY) == '|') {
-            return 0;
-        } else {
-            currRoom.removePlayer();
-            y = newY;
-            currRoom.addPlayer(x, y);
-            return 4;
-        }
+        return checkMove(x, newY);
     }
     
     public int moveLeft() {
         int newX = x - 1;
         
-        if(currRoom.getTile(newX, y) == '.') {
-            currRoom.removePlayer();
-            x = newX;
-            currRoom.addPlayer(x, y);
-            return 1;
-        } else if(currRoom.getTile(newX, y) == '$') {
-            currRoom.removePlayer();
-            x = newX;
-            currRoom.addPlayer(x, y);
-            return 3;
-        } else if(currRoom.getTile(newX, y) == '#') {
-            return 2;
-        } else if(currRoom.getTile(newX, y) == '-' || currRoom.getTile(newX, y) == '|') {
-            return 0;
-        } else {
-            currRoom.removePlayer();
-            x = newX;
-            currRoom.addPlayer(x, y);
-            return 4;
-        }
+        return checkMove(newX, y);
     }
     
     public int moveRight() {
         int newX = x + 1;
         
-        if(currRoom.getTile(newX, y) == '.') {
+        return checkMove(newX, y);
+    }
+    
+    private int checkMove(int xCor, int yCor) {
+        if (currRoom.getTile(xCor, yCor) == '.') {
             currRoom.removePlayer();
-            x = newX;
+            x = xCor;
+            y = yCor;
             currRoom.addPlayer(x, y);
             return 1;
-        } else if(currRoom.getTile(newX, y) == '$') {
+        } else if (currRoom.getTile(xCor, yCor) == '$') {
             currRoom.removePlayer();
-            x = newX;
+            x = xCor;
+            y = yCor;
             currRoom.addPlayer(x, y);
             return 3;
-        } else if(currRoom.getTile(newX, y) == '#') {
+        } else if (currRoom.getTile(xCor, yCor) == '#') {
             return 2;
-        } else if(currRoom.getTile(newX, y) == '-' || currRoom.getTile(newX, y) == '|') {
+        } else if (currRoom.getTile(xCor, yCor) == '-' || currRoom.getTile(xCor, yCor) == '|') {
             return 0;
         } else {
             currRoom.removePlayer();
-            x = newX;
+            x = xCor;
+            y = yCor;
             currRoom.addPlayer(x, y);
             return 4;
         }
