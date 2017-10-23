@@ -84,14 +84,17 @@ public class InventoryWindow extends JFrame
                                     play.setStamina(play.getStamina() + ((Food)inventory.get(select)).eat());
                                     actionMessage = "You regained some stamina.";
                                     inventory.remove(select);
+                                    stamina = play.getStamina();
                                     if (play.getStamina() > 100) {
                                     play.setStamina(100);
                                   } 
                                 }
-                            }
+                            } else
                             if (inventory.get(select).getType().equals("Weapon")) {
                                 play.setWeapon((Weapon)inventory.get(select));
                                 actionMessage = "You equipped the " +inventory.get(select).getName() +".";
+                                attack = play.getAttack();
+                                weaponDur = play.getDur();
                             }
                         }
                         repaint();
@@ -153,17 +156,17 @@ public class InventoryWindow extends JFrame
                } else {
                 txt = inventoryText.get(i);
                 }
-                x = centerStringX(txt, CANVAS_WIDTH, g);
-                g.drawString(txt, x, (30 + 25*i));
-                x = centerStringX(actionMessage, CANVAS_WIDTH, g);
-                g.drawString(actionMessage, x, CANVAS_HEIGHT - 60);
-                
-                g.setFont(new Font("Monospaced", Font.PLAIN, 20));
-                g.setColor(Color.YELLOW); //Displays important stats at bottom of screen
-                String line1Vars = "HP:"+health +"  Stamina:"+stamina +"    Attack:"+attack +"   Weapon Strength:" +weaponDur;
-                x = centerStringX(line1Vars, CANVAS_WIDTH, g);
-                g.drawString(line1Vars, x, CANVAS_HEIGHT - 20);
+              x = centerStringX(txt, CANVAS_WIDTH, g);
+              g.drawString(txt, x, (30 + 25*i));
                }
+              x = centerStringX(actionMessage, CANVAS_WIDTH, g);
+              g.drawString(actionMessage, x, CANVAS_HEIGHT - 60);
+                
+              g.setFont(new Font("Monospaced", Font.PLAIN, 20));
+              g.setColor(Color.YELLOW); //Displays important stats at bottom of screen
+              String line1Vars = "HP:"+health +"  Stamina:"+stamina +"    Attack:"+attack +"   Weapon Strength:" +weaponDur;
+              x = centerStringX(line1Vars, CANVAS_WIDTH, g);
+              g.drawString(line1Vars, x, CANVAS_HEIGHT - 20);
         }
     }
 }
