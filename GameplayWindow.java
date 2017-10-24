@@ -31,8 +31,9 @@ public class GameplayWindow extends JFrame
     private int attack;
     private int wDurability;
     private int roomHeight;
+    private int roomNum;
     private Player play;
-    private Room space;
+    private Stage space;
     private ArrayList<Item> inventory;
 
     private String actionMessage = "";
@@ -76,11 +77,9 @@ public class GameplayWindow extends JFrame
                                 space = play.getRoom();
                                 refreshWindow("You moved up!", play, space);
                             } else if(action == 2) {
-                                space = new Room(1, 6, 10);
-                                space.fillDots();
+                                roomNum = roomNum +1;
+                                space = stage.nextRoom(roomNum);//This runs through stage of premade rooms instead of make one
                                 space.addPlayer(1,1);
-                                space.fillWalls();
-                                space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
                                 refreshWindow("You moved to a new room!", play, space);
@@ -106,11 +105,9 @@ public class GameplayWindow extends JFrame
                                 space = play.getRoom();
                                 refreshWindow("You moved down!", play, space);
                             } else if(action == 2) {
-                                space = new Room(1, 6, 10);
-                                space.fillDots();
+                                roomNum = roomNum +1;
+                                space = stage.nextRoom(roomNum);
                                 space.addPlayer(1,1);
-                                space.fillWalls();
-                                space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
                                 refreshWindow("You moved to a new room!", play, space);
@@ -136,11 +133,9 @@ public class GameplayWindow extends JFrame
                                 space = play.getRoom();
                                 refreshWindow("You moved left!", play, space);
                             } else if(action == 2) {
-                                space = new Room(1, 6, 10);
-                                space.fillDots();
+                               roomNum = roomNum +1;
+                                space = stage.nextRoom(roomNum);
                                 space.addPlayer(1,1);
-                                space.fillWalls();
-                                space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
                                 refreshWindow("You moved to a new room!", play, space);
@@ -163,11 +158,9 @@ public class GameplayWindow extends JFrame
                                 space = play.getRoom();
                                 refreshWindow("You moved right!", play, space);
                             } else if(action == 2) {
-                                space = new Room(1, 6, 10);
-                                space.fillDots();
+                                roomNum = roomNum +1;
+                                space = stage.nextRoom(roomNum);
                                 space.addPlayer(1,1);
-                                space.fillWalls();
-                                space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
                                 refreshWindow("You moved to a new room!", play, space);
