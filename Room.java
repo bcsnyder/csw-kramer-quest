@@ -134,6 +134,10 @@ public class Room
         return roomNumber;
     }
     
+    public int getWidth() {
+        return width;
+    }
+    
     public int getHeight() {
         return length;
     }

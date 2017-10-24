@@ -47,7 +47,6 @@ public class Stage
         }
         
         }
-    }
    
     public String toString() 
     {

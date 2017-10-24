@@ -1,4 +1,4 @@
-public Interface Window
+public interface Window
 {
   
   public void displayWindow();

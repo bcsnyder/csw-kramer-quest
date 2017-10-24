@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=
+comment0.target=void\ displayWindow()
+comment0.text=\r\n\ Sets\ up\ tutorial\ window's\ components\ and\ shows\ them.\r\n
+comment1.params=evt
+comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment2.params=
+comment2.target=void\ setTutorial()
+comment2.text=\r\n\ Sets\ the\ text\ line\ by\ line\ for\ the\ tutorial\ as\ an\ array\r\n
+comment3.params=text\ frameWidth\ g
+comment3.target=int\ centerStringX(java.lang.String,\ int,\ java.awt.Graphics)
+comment3.text=\r\n\ centerStringX\ finds\ the\ x\ coordinate\ needed\ to\ center\ a\ String\ in\ the\ window.\r\n
+numComments=4
