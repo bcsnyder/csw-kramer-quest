@@ -31,9 +31,8 @@ public class GameplayWindow extends JFrame
     private int attack;
     private int wDurability;
     private int roomHeight;
-    private int roomNum;
     private Player play;
-    private Stage space;
+    private Room space;
     private ArrayList<Item> inventory;
 
     private String actionMessage = "";
@@ -53,6 +52,7 @@ public class GameplayWindow extends JFrame
         roomHeight = board.getHeight();
         play = player;
         space = board;
+        inventory = play.getInventory();
 
         canvas = new GameDisplay();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
@@ -77,15 +77,17 @@ public class GameplayWindow extends JFrame
                                 space = play.getRoom();
                                 refreshWindow("You moved up!", play, space);
                             } else if(action == 2) {
-                                roomNum = roomNum +1;
-                                space = stage.nextRoom(roomNum);//This runs through stage of premade rooms instead of make one
+                                space = new Room(1, 6, 10);
+                                space.fillDots();
                                 space.addPlayer(1,1);
+                                space.fillWalls();
+                                space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
                                 refreshWindow("You moved to a new room!", play, space);
                             } else if(action == 3) {
                                 play.addItem(randomItem());
-                                refreshWindow("You got an item.", play, space);
+                                refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space);
                             } else if(action == 4) {
                                 refreshWindow("You enter combat!", play, space);
                                 CombatWindow cW = new CombatWindow();
@@ -105,15 +107,17 @@ public class GameplayWindow extends JFrame
                                 space = play.getRoom();
                                 refreshWindow("You moved down!", play, space);
                             } else if(action == 2) {
-                                roomNum = roomNum +1;
-                                space = stage.nextRoom(roomNum);
+                                space = new Room(1, 6, 10);
+                                space.fillDots();
                                 space.addPlayer(1,1);
+                                space.fillWalls();
+                                space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
                                 refreshWindow("You moved to a new room!", play, space);
                             } else if(action == 3) {
                                 play.addItem(randomItem());
-                                refreshWindow("You got axe.", play, space);
+                                 refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space);
                             } else if(action == 4) {
                                 refreshWindow("You enter combat!", play, space);
                                 CombatWindow cW = new CombatWindow();
@@ -133,15 +137,17 @@ public class GameplayWindow extends JFrame
                                 space = play.getRoom();
                                 refreshWindow("You moved left!", play, space);
                             } else if(action == 2) {
-                               roomNum = roomNum +1;
-                                space = stage.nextRoom(roomNum);
+                                space = new Room(1, 6, 10);
+                                space.fillDots();
                                 space.addPlayer(1,1);
+                                space.fillWalls();
+                                space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
                                 refreshWindow("You moved to a new room!", play, space);
                             } else if(action == 3) {
                                 play.addItem(randomItem());
-                                refreshWindow("You got bread.", play, space);
+                                refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space);
                             } else if(action == 4) {
                                 refreshWindow("You enter combat!", play, space);
                             } else {
@@ -158,15 +164,17 @@ public class GameplayWindow extends JFrame
                                 space = play.getRoom();
                                 refreshWindow("You moved right!", play, space);
                             } else if(action == 2) {
-                                roomNum = roomNum +1;
-                                space = stage.nextRoom(roomNum);
+                                space = new Room(1, 6, 10);
+                                space.fillDots();
                                 space.addPlayer(1,1);
+                                space.fillWalls();
+                                space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
                                 refreshWindow("You moved to a new room!", play, space);
                             } else if(action == 3) {
                                 play.addItem(randomItem());
-                                refreshWindow("You got bread.", play, space);
+                                 refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space);
                             } else if(action == 4) {
                                 refreshWindow("You enter combat!", play, space);
                             } else {
