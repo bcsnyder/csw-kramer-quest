@@ -66,7 +66,7 @@ public class MenuWindow extends JFrame
             
         //loads image
         try {
-            imgLogo = ImageIO.read(new File("/Users/Ben/Desktop/School/SE/csw-kramer-quest/images/logo_ex.jpg"));
+            imgLogo = ImageIO.read(new File(imgLogoFilename));
         } catch (IOException e) {}
         
         //Sets up where all the components in the container go
