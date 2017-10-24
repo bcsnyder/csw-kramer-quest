@@ -16,6 +16,7 @@ public class Stage
         max = 20;//can only be soo big, it needs to fit on screen
         numRooms = (level * 2) + 2;
         floor = new Room[numRooms];
+        makeRooms();
     }
     
     public void makeRooms() 
