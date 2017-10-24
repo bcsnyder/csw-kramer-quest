@@ -27,7 +27,7 @@ public class MenuWindow extends JFrame
     private Stage newStage;
     
     private ImageFrame logo;
-    private String imgLogoFilename = "images/logo.jpg";
+    private String imgLogoFilename = "images/logo_ex.jpg";
     private BufferedImage imgLogo;
     
     /**
