@@ -31,10 +31,8 @@ public class GameplayWindow extends JFrame
     private int attack;
     private int wDurability;
     private int roomHeight;
-    private int roomNum;
     private Player play;
     private Room space;
-    private Stage stage;
     private ArrayList<Item> inventory;
 
     private String actionMessage = "";
@@ -44,16 +42,16 @@ public class GameplayWindow extends JFrame
      * the window's components and layout. Pretty standard.
      */
     public void displayWindow(Player player, Room board) {
-        space = stage.getRoom(roomNum);
         room = board.toString();
         pName = player.getName();
-        levelNum = space.getLevel();//Sets variables (will be replaced by getters)
+        levelNum = board.getLevel();//Sets variables (will be replaced by getters)
         health = player.getHealth();
         stamina = player.getStamina();
         attack = player.getAttack();
         wDurability = player.getDur();
-        roomHeight = space.getHeight();
+        roomHeight = board.getHeight();
         play = player;
+        space = board;
         inventory = play.getInventory();
 
         canvas = new GameDisplay();    // Construct the drawing canvas
