@@ -29,7 +29,7 @@ public class Stage
                 }else if (doorWallLast == 2 || doorWallLast == 4){
                     xCoor = (int) (Math.random () * (height - 2)) + 2;
                 }
-                add.addBackDoor (doorWallLast,yCoor, xCoor);
+                add.addBackDoor(doorWallLast,yCoor, xCoor);
             }
             System.out.println (doorWallLast);
             doorWallLast = add.returnDoorWall();

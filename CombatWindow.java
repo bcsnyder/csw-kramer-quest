@@ -45,7 +45,7 @@ public class CombatWindow extends JFrame
      *                  contains helpful variables the program gets from it
      *                  like health
      */
-    public void displayWindow(Player play, Monster monster, Stage stage) {
+    public void displayWindow(Player play, Monster monster, Room rm) {
         pName = play.getName();
         mName = monster.getName();
         String combatMessage = "";
@@ -65,7 +65,7 @@ public class CombatWindow extends JFrame
         buttonPane.add(attackButton);
         attackButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    battle(play, monster, stage.getRoom);
+                    battle(play, monster, rm);
                 }
             });
         runButton = new JButton("Run Away ");
