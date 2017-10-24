@@ -39,7 +39,8 @@ public class Stage
                 add.addBackDoor(doorWallLast,yCoor, xCoor);
             }
             
-            doorWallLast = add.returnDoorWall();
+            doorWallLast = 2;
+            //doorWallLast = add.returnDoorWall();
             if (doorWallLast == 1){
                 doorWallLast = 3;
             }else if (doorWallLast == 2){

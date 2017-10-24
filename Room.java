@@ -145,6 +145,7 @@ public class Room
     public char getTile(int x, int y) {
         return map[y][x];
     }
+    
     public void addBackDoor (int w, int y, int x){
         //This allows there to be a door back but i still have to add the ability to go back
         int yCoor = y;
