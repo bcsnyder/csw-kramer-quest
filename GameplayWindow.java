@@ -150,6 +150,9 @@ public class GameplayWindow extends JFrame
                                 refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space);
                             } else if(action == 4) {
                                 refreshWindow("You enter combat!", play, space);
+                                CombatWindow cW = new CombatWindow();
+                                cW.displayWindow(play, new Gremlin(), space);
+                                dispose();
                             } else {
                                 action = play.moveLeft();
                                 refreshWindow("You can't move there!", play, space);
@@ -177,6 +180,9 @@ public class GameplayWindow extends JFrame
                                  refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space);
                             } else if(action == 4) {
                                 refreshWindow("You enter combat!", play, space);
+                                CombatWindow cW = new CombatWindow();
+                                cW.displayWindow(play, new Gremlin(), space);
+                                dispose();
                             } else {
                                 action = play.moveRight();
                                 refreshWindow("You can't move there!", play, space);
