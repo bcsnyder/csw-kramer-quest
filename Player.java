@@ -126,6 +126,14 @@ public class Player
         inCombat = c;
     }
     
+    public boolean getCombat() {
+        return inCombat;
+    }
+    
+    public boolean getItemUse() {
+        return usedItem;
+    }
+    
      public void usedItem (boolean c) {
         usedItem = c;
     }
