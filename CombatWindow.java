@@ -36,7 +36,9 @@ public class CombatWindow extends JFrame
     private String mSym;
     private GameplayWindow gW = new GameplayWindow();
     private GameOverWindow gOW = new GameOverWindow();
-    
+    public void setMessage (String m) {
+        combatMessage = m;
+    }
     /**
      * Sets all the variables needed to display combat and
      * sets up the window with its display components including
@@ -56,6 +58,8 @@ public class CombatWindow extends JFrame
         mAttack = monster.getAttack();
         pDur = play.getDur();
         mSym = monster.getSymbol();
+        play.setCombat(true);
+        CombatWindow thisWindow = this;
 
         canvas = new CombatDisplay();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
@@ -112,6 +116,7 @@ public class CombatWindow extends JFrame
         setTitle("Battle");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
         setFocusable(true);
+       
         addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent evt) {
@@ -144,6 +149,7 @@ public class CombatWindow extends JFrame
                           } else {
                             message = message + " and the monster is dead!";
                             refreshWindow(message, play, monster);
+                            play.setCombat(false);
                            gW.displayWindow(play, rm);
                            dispose();
                         }
@@ -157,8 +163,14 @@ public class CombatWindow extends JFrame
                             
                         } else if (menuSelect == 3) {
                             dispose();
+                            play.setCombat(false);
                             gW.displayWindow(play, rm);
-                        }
+                        } else if (menuSelect == 1) {
+                            dispose();
+                            InventoryWindow iW = new InventoryWindow();
+                            iW.displayWindow(play.getInventory(), play, rm);
+                            iW.storeCombat(play, monster, rm);
+                        } 
                         repaint();
                         break;
       } 
