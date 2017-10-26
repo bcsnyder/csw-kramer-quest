@@ -25,6 +25,14 @@ public class InventoryWindow extends JFrame
     private int stamina;
     private int attack;
     private int weaponDur;
+    private Player savedPlayer;
+    private Monster savedMonster;
+    private Room savedRoom;
+ public void storeCombat (Player playCombat, Monster monsterCombat, Room rmCombat) {
+        savedPlayer = playCombat;
+        savedRoom = rmCombat;
+        savedMonster = monsterCombat;
+ }
     public void displayWindow(ArrayList<Item> inv, Player p, Room r) {
         inventory = inv;
         
@@ -36,9 +44,15 @@ public class InventoryWindow extends JFrame
         buttonPane.add(returnButton);
         returnButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
+                    if (p.getCombat() == true) {
+                    dispose();
+                    CombatWindow cW = new CombatWindow();
+                    cW.displayWindow(savedPlayer, savedMonster, savedRoom);
+                     } else {
                     dispose();
                     GameplayWindow gW = new GameplayWindow();
                     gW.displayWindow(p, r);
+                  }
                 }
             });
         
@@ -88,6 +102,17 @@ public class InventoryWindow extends JFrame
                                     if (play.getStamina() > 100) {
                                     play.setStamina(100);
                                   } 
+                                 if (p.getCombat() == true) {
+       
+                                       p.setHealth(play.getHealth() - savedMonster.getAttack());
+                                         if (play.getHealth() <= 0) {
+                                        gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
+                                        dispose();
+                                        CombatWindow cW = new CombatWindow();
+                                        cW.displayWindow(savedPlayer, savedMonster, savedRoom);
+                                        cW.setMessage(actionMessage);
+                                      } 
+                                     }
                                 }
                             } else
                             if (inventory.get(select).getType().equals("Weapon")) {
@@ -95,6 +120,19 @@ public class InventoryWindow extends JFrame
                                 actionMessage = "You equipped the " +inventory.get(select).getName() +".";
                                 attack = play.getAttack();
                                 weaponDur = play.getDur();
+                                if (p.getCombat() == true) {
+       
+                                       p.setHealth(play.getHealth() - savedMonster.getAttack());
+                                         if (play.getHealth() <= 0) {
+                                        gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
+                                        dispose();
+                                        CombatWindow cW = new CombatWindow();
+                                        cW.displayWindow(savedPlayer, savedMonster, savedRoom);
+                                        cW.setMessage(actionMessage);
+                                      } 
+                                     }
+                                 
+                                    }
                             }
                         }
                         repaint();
