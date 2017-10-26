@@ -75,7 +75,11 @@ public class GameplayWindow extends JFrame
                         do {
                             if (action == 1) {
                                 space = play.getRoom();
-                                refreshWindow("You moved up!", play, space);
+                                if (player.getStamina() < 10){
+                                    refreshWindow ("You moved up! Stamina low", play,space);  //Tells player that their stamina is low 
+                                }else {
+                                    refreshWindow("You moved up!", play, space);
+                                }
                             } else if(action == 2) {
                                 space = new Room(1, 6, 10);
                                 space.fillDots();
@@ -84,7 +88,11 @@ public class GameplayWindow extends JFrame
                                 space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
-                                refreshWindow("You moved to a new room!", play, space);
+                                if (player.getStamina() < 10){
+                                    refreshWindow ("You moved to a new room! Stamina low", play,space); //stamina low reminder  
+                                }else {
+                                    refreshWindow("You moved to a new room!", play, space);
+                                }
                             } else if(action == 3) {
                                 play.addItem(randomItem());
                                 refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space);
@@ -105,7 +113,11 @@ public class GameplayWindow extends JFrame
                         do {
                             if (action == 1) {
                                 space = play.getRoom();
-                                refreshWindow("You moved down!", play, space);
+                                if (player.getStamina() < 10){
+                                    refreshWindow ("You moved down! Stamina low", play,space);   
+                                }else {
+                                    refreshWindow("You moved down!", play, space);
+                                }
                             } else if(action == 2) {
                                 space = new Room(1, 6, 10);
                                 space.fillDots();
@@ -114,7 +126,11 @@ public class GameplayWindow extends JFrame
                                 space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
-                                refreshWindow("You moved to a new room!", play, space);
+                                if (player.getStamina() < 10){
+                                    refreshWindow ("You moved to a new room! Stamina low", play,space);   
+                                }else {
+                                    refreshWindow("You moved to a new room!", play, space);
+                                }
                             } else if(action == 3) {
                                 play.addItem(randomItem());
                                  refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space);
@@ -135,7 +151,11 @@ public class GameplayWindow extends JFrame
                         do {
                             if (action == 1) {
                                 space = play.getRoom();
-                                refreshWindow("You moved left!", play, space);
+                                if (player.getStamina() < 10){
+                                    refreshWindow ("You moved left! Stamina low", play,space);   
+                                }else {
+                                    refreshWindow("You moved left!", play, space);
+                                }
                             } else if(action == 2) {
                                 space = new Room(1, 6, 10);
                                 space.fillDots();
@@ -144,7 +164,11 @@ public class GameplayWindow extends JFrame
                                 space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
-                                refreshWindow("You moved to a new room!", play, space);
+                                if (player.getStamina() < 10){
+                                    refreshWindow ("You moved to a new room! Stamina low", play,space);   
+                                }else {
+                                    refreshWindow("You moved to a new room!", play, space);
+                                }
                             } else if(action == 3) {
                                 play.addItem(randomItem());
                                 refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space);
@@ -165,7 +189,11 @@ public class GameplayWindow extends JFrame
                         do {
                             if (action == 1) {
                                 space = play.getRoom();
-                                refreshWindow("You moved right!", play, space);
+                                if (player.getStamina() < 10){
+                                    refreshWindow ("You moved right! Stamina low", play,space);   
+                                }else {
+                                    refreshWindow("You moved right", play, space);
+                                }
                             } else if(action == 2) {
                                 space = new Room(1, 6, 10);
                                 space.fillDots();
@@ -174,7 +202,11 @@ public class GameplayWindow extends JFrame
                                 space.fillSymbols();
                                 play.setRoom(space);
                                 play.setPos(1,1);
-                                refreshWindow("You moved to a new room!", play, space);
+                                if (player.getStamina() < 10){
+                                    refreshWindow ("You moved to a new room! Stamina low", play,space);   
+                                }else {
+                                    refreshWindow("You moved to a new room!", play, space);
+                                }
                             } else if(action == 3) {
                                 play.addItem(randomItem());
                                  refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space);
