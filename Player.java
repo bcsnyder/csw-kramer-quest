@@ -6,6 +6,7 @@ public class Player
     private int health;
     private int stamina;
     private int attack;
+    private int var = 0; //just a thing
     private GameOverWindow gOW = new GameOverWindow();
     
     private ArrayList<Item> inventory;
