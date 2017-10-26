@@ -100,9 +100,10 @@ public class MenuWindow extends JFrame
         newPlayer = new Player();
         newPlayer.setName(JOptionPane.showInputDialog("Enter your name."));
         newPlayer.setHealth(25);
-        newPlayer.setAttack(-9);
+        newPlayer.setAttack(2);
         newPlayer.setStamina(100);
         newPlayer.setRoom(currRoom);
+        newPlayer.setCombat(false);
 
         int xPos = 1;
         int yPos = 1;
@@ -116,8 +117,6 @@ public class MenuWindow extends JFrame
         
         newPlayer.setPos(xPos, yPos);
         currRoom.addPlayer(xPos, yPos);
-        
-        newPlayer.setWeapon(new Axe());
     }
     
     private void chooseClass() {
