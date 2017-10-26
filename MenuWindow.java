@@ -104,6 +104,7 @@ public class MenuWindow extends JFrame
         newPlayer.setStamina(100);
         newPlayer.setRoom(currRoom);
         newPlayer.setCombat(false);
+        newPlayer.usedItem(false);
 
         int xPos = 1;
         int yPos = 1;
