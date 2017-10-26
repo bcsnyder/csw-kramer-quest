@@ -66,6 +66,15 @@ public class Player
         y = yPos;
         currRoom.addPlayer(x, y);
         stamina--;
+        //checks stamina and lowers the health if stamina is too low
+        if (stamina <= 0){ 
+            var++;
+            stamina = 0; 
+            if (var == 7){
+                var = 0;
+                health--;
+            }
+        }
     }
     
     public int getHealth() {
