@@ -13,6 +13,7 @@ public class Player
     private Room currRoom;
     private int x;
     private int y;
+    private boolean inCombat;
     
     public Player() {
         inventory = new ArrayList<Item>();
@@ -119,6 +120,10 @@ public class Player
     
     public void setRoom(Room loc) {
         currRoom = loc;
+    }
+    
+    public void setCombat (boolean c) {
+    inCombat = c;
     }
     
     public Room getRoom() {
