@@ -6,6 +6,7 @@ public class Player
     private int health;
     private int stamina;
     private int attack;
+    private GameOverWindow gOW = new GameOverWindow();
     
     private ArrayList<Item> inventory;
     private Weapon currentWeapon;
@@ -66,6 +67,10 @@ public class Player
         y = yPos;
         currRoom.addPlayer(x, y);
         stamina--;
+        //checks to see if health if 0, if it is they die of starvation
+        if (health == 0){
+            gOW.displayWindow(name, "died of starvation");
+        }
         //checks stamina and lowers the health if stamina is too low
         if (stamina <= 0){ 
             var++;
