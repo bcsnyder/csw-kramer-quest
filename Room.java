@@ -101,7 +101,7 @@ public class Room
         int xCoor = 0;      
         int yCoor = 0;
         int rand1 = (int) (Math.random() * 4) + 1; 
-        
+        doorWall = rand1; 
         if (rand1 == 1 || rand1 == 3)
         {
              xCoor = (int) (Math.random () * (width - 2)) + 1;
@@ -144,6 +144,10 @@ public class Room
     
     public char getTile(int x, int y) {
         return map[y][x];
+    }
+     
+    public int returnDoorWall(){
+        return doorWall;
     }
     
     public void addBackDoor (int w, int y, int x){
