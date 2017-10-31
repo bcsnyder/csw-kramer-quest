@@ -57,7 +57,6 @@ public class Player
         } else if (currRoom.getTile(xCor, yCor) == '-' || currRoom.getTile(xCor, yCor) == '|') {
             return 0;
         } else if (currRoom.getTile(xCor, yCor) == '^') {
-            validMove(xCor, yCor);
             return 5;
         } else {
             validMove(xCor, yCor);

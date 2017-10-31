@@ -113,6 +113,8 @@ public class GameplayWindow extends JFrame
                     refreshWindow("You moved "+direction+".", play, space, levelNum);
                 }
             } else if(action == 2) {
+                board.removePlayer();
+                space.setRoom(board, levelNum);
                 levelNum++;
                 board = space.getRoom(levelNum);
                 board.addPlayer(1,1);
@@ -135,6 +137,8 @@ public class GameplayWindow extends JFrame
                 cW.displayWindow(play, new Gremlin(), space, levelNum);
                 dispose();
             } else if(action == 5) {
+                board.removePlayer();
+                space.setRoom(board, levelNum);    
                 levelNum--;
                 board = space.getRoom(levelNum);
                 board.addPlayer(1,1);
@@ -147,7 +151,6 @@ public class GameplayWindow extends JFrame
                     refreshWindow("You moved back a room!", play, space, levelNum);
                 }
             } else {
-                action = play.moveRight();
                 refreshWindow("You can't move there!", play, space, levelNum);
             }
         } while (action < 0);
@@ -229,7 +232,7 @@ public class GameplayWindow extends JFrame
 
             g.setFont(new Font("Monospaced", Font.PLAIN, 20));
             g.setColor(Color.YELLOW); //Displays important stats at bottom of screen
-            String line1Vars = "HP:"+health+"  Stamina:"+stamina+"    Attack:"+attack+"   Weapon Strength:"+wDurability;
+            String line1Vars = "HP:"+health+"  Stamina:"+stamina+"    Attack:"+attack+"   Weapon Integrity:"+wDurability;
             x = centerStringX(line1Vars, CANVAS_WIDTH, g);
             g.drawString(line1Vars, x, CANVAS_HEIGHT - 20);
         }

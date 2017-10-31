@@ -114,9 +114,7 @@ public class InventoryWindow extends JFrame
                                             GameOverWindow gOW = new GameOverWindow();
                                             gOW.displayWindow(play.getName(), "Killed by " + savedMonster.getName());
                                             dispose();
-                                            CombatWindow cW = new CombatWindow();
-                                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
-                                            cW.setMessage(actionMessage);
+                                            
                                         } 
                                     }
                                 }
@@ -133,9 +131,6 @@ public class InventoryWindow extends JFrame
                                         GameOverWindow gOW = new GameOverWindow();
                                         gOW.displayWindow(play.getName(), "Killed by " + savedMonster.getName());
                                         dispose();
-                                        CombatWindow cW = new CombatWindow();
-                                        cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
-                                        cW.setMessage(actionMessage);
                                     } 
                                 }
 
@@ -208,7 +203,7 @@ public class InventoryWindow extends JFrame
 
             g.setFont(new Font("Monospaced", Font.PLAIN, 20));
             g.setColor(Color.YELLOW); //Displays important stats at bottom of screen
-            String line1Vars = "HP:"+health +"  Stamina:"+stamina +"    Attack:"+attack +"   Weapon Strength:" +weaponDur;
+            String line1Vars = "HP:"+health +"  Stamina:"+stamina +"    Attack:"+attack +"   Weapon Integrity:" +weaponDur;
             x = centerStringX(line1Vars, CANVAS_WIDTH, g);
             g.drawString(line1Vars, x, CANVAS_HEIGHT - 20);
         }

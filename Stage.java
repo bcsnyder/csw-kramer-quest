@@ -13,7 +13,7 @@ public class Stage
     {
         level = num;
         min = 6; //can only be so small 
-        max = 20;//can only be soo big, it needs to fit on screen
+        max = 12;//can only be soo big, it needs to fit on screen
         numRooms = (level * 2) + 2;
         floor = new Room[numRooms];
         makeRooms();
