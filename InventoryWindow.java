@@ -29,6 +29,7 @@ public class InventoryWindow extends JFrame
     private Monster savedMonster;
     private Stage savedStage;
     private int savedRoomPosition;
+    private String wName;
     
     public void storeCombat (Player playCombat, Monster monsterCombat, Stage stCombat, int numCombat) {
         savedPlayer = playCombat;
@@ -76,6 +77,7 @@ public class InventoryWindow extends JFrame
         stamina = play.getStamina();
         attack = play.getAttack();
         weaponDur = play.getDur();
+        wName = play.weaponName();
         addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent evt) {
@@ -203,7 +205,7 @@ public class InventoryWindow extends JFrame
 
             g.setFont(new Font("Monospaced", Font.PLAIN, 20));
             g.setColor(Color.YELLOW); //Displays important stats at bottom of screen
-            String line1Vars = "HP:"+health +"  Stamina:"+stamina +"    Attack:"+attack +"   Weapon Integrity:" +weaponDur;
+            String line1Vars = "HP:"+health +"  Stamina:"+stamina +"    Attack:"+attack +"   Weapon:"+wName+"   Weapon Integrity:" +weaponDur;
             x = centerStringX(line1Vars, CANVAS_WIDTH, g);
             g.drawString(line1Vars, x, CANVAS_HEIGHT - 20);
         }

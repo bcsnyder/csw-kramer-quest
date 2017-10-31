@@ -33,4 +33,8 @@ public class Axe extends Weapon
     public int getDurability() {
         return durability;
     }
+    
+    public void decreaseDurability() {
+        durability = durability - 1;
+    }
 }

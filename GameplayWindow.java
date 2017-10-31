@@ -27,6 +27,7 @@ public class GameplayWindow extends JFrame
     private int attack;
     private int wDurability;
     private int roomHeight;
+    private String wName;
     private Player play;
     private Stage space;
     private Room board;
@@ -49,6 +50,7 @@ public class GameplayWindow extends JFrame
         stamina = player.getStamina();
         attack = player.getAttack();
         wDurability = player.getDur();
+        wName=player.weaponName();
         roomHeight = board.getHeight();
         inventory = play.getInventory();
 
@@ -238,7 +240,7 @@ public class GameplayWindow extends JFrame
 
             g.setFont(new Font("Monospaced", Font.PLAIN, 20));
             g.setColor(Color.YELLOW); //Displays important stats at bottom of screen
-            String line1Vars = "HP:"+health+"  Stamina:"+stamina+"    Attack:"+attack+"   Weapon Integrity:"+wDurability;
+            String line1Vars = "HP:"+health+"  Stamina:"+stamina+"    Attack:"+attack+"   Weapon:"+wName+"   Weapon Integrity:"+wDurability;
             x = centerStringX(line1Vars, CANVAS_WIDTH, g);
             g.drawString(line1Vars, x, CANVAS_HEIGHT - 20);
         }

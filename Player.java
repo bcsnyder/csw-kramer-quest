@@ -99,8 +99,9 @@ public class Player
     
     public int attack() {
         int damage = attack + currentWeapon.attack();
-        
+        currentWeapon.decreaseDurability();
         if (currentWeapon.getDurability() <= 0) {
+            inventory.remove(inventory.indexOf(currentWeapon));
             currentWeapon = new Fists();
         }
         
@@ -166,5 +167,9 @@ public class Player
     
     public ArrayList getInventory() {
         return inventory;
+    }
+    
+     public String weaponName() {
+        return currentWeapon.getName();
     }
 }
