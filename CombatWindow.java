@@ -104,7 +104,10 @@ public class CombatWindow extends JFrame
             gW.refreshWindow(message1, play, rm);
             dispose();
         }
-
+        refreshWindow(message1, "", play, monster);
+        canvas.repaint();
+        delay(1.5);
+        
         int mAttack = monster.getAttack();
         play.setHealth(play.getHealth() - mAttack);
         String message2 = "The monster attacks you dealing " + mAttack + " damage.";
@@ -119,8 +122,8 @@ public class CombatWindow extends JFrame
      * Pauses the program for a specified number of seconds
      * @param time  desired pause time in seconds
      */
-    private void delay(int time) {
-        int delay = time * 1000;
+    private void delay(double time) {
+        int delay = (int)(time * 1000);
 
         try {
             Thread.sleep(delay); //pause for 1.5 seconds
@@ -218,7 +221,6 @@ public class CombatWindow extends JFrame
             g.drawString(combatMessage1, x, CANVAS_HEIGHT/2);
             x = centerStringStartX(combatMessage2, CANVAS_WIDTH, g);
             g.drawString(combatMessage2, x, CANVAS_HEIGHT/2 + 25);
-            
         }
     }
 }
