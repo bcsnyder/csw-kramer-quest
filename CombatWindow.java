@@ -123,7 +123,7 @@ public class CombatWindow extends JFrame
                             } 
                             refreshWindow(message, play, monster);
 
-                        } else if (menuSelect == 3) {
+                        } else if (menuSelect == 3) {                            
                             dispose();
                             play.setCombat(false);
                             gW.displayWindow(play, st, num);
@@ -144,8 +144,8 @@ public class CombatWindow extends JFrame
          * @param time  desired pause time in seconds
          */
     }
-	
-	private void delay(double time) {
+
+    private void delay(double time) {
         int delay = (int)(time * 1000);
     }
 
