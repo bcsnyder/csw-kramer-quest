@@ -32,4 +32,8 @@ public class Fists extends Weapon
     public int getDurability() {
         return durability;
     }
+    
+    public void decreaseDurability() {
+        durability = durability - 0;
+    }
 }
