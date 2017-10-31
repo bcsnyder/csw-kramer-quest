@@ -172,4 +172,8 @@ public class Player
     public ArrayList getInventory() {
         return inventory;
     }
+    
+     public String weaponName() {
+        return currentWeapon.getName();
+    }
 }
