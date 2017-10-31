@@ -71,6 +71,10 @@ public class Stage
         return floor[num];
     }
     
+    public void setRoom(Room newRoom, int num) {
+        floor[num] = newRoom;
+    }
+    
     public Room nextRoom (int roomNum){
          return floor[roomNum];
     }

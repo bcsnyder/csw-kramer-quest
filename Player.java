@@ -6,6 +6,8 @@ public class Player
     private int health;
     private int stamina;
     private int attack;
+    private int var = 0; //just a thing
+    private GameOverWindow gOW = new GameOverWindow();
     
     private ArrayList<Item> inventory;
     private Weapon currentWeapon;
@@ -13,7 +15,8 @@ public class Player
     private Room currRoom;
     private int x;
     private int y;
-    
+    private boolean inCombat;
+    private boolean usedItem;
     public Player() {
         inventory = new ArrayList<Item>();
     }
@@ -53,6 +56,9 @@ public class Player
             return 2;
         } else if (currRoom.getTile(xCor, yCor) == '-' || currRoom.getTile(xCor, yCor) == '|') {
             return 0;
+        } else if (currRoom.getTile(xCor, yCor) == '^') {
+            validMove(xCor, yCor);
+            return 5;
         } else {
             validMove(xCor, yCor);
             return 4;
@@ -65,6 +71,19 @@ public class Player
         y = yPos;
         currRoom.addPlayer(x, y);
         stamina--;
+        //checks to see if health if 0, if it is they die of starvation
+        if (health == 0){
+            gOW.displayWindow(name, "died of starvation");
+        }
+        //checks stamina and lowers the health if stamina is too low
+        if (stamina <= 0){ 
+            var++;
+            stamina = 0; 
+            if (var == 7){
+                var = 0;
+                health--;
+            }
+        }
     }
     
     public int getHealth() {
@@ -119,6 +138,22 @@ public class Player
     
     public void setRoom(Room loc) {
         currRoom = loc;
+    }
+    
+    public void setCombat (boolean c) {
+        inCombat = c;
+    }
+    
+    public boolean getCombat() {
+        return inCombat;
+    }
+    
+    public boolean getItemUse() {
+        return usedItem;
+    }
+    
+     public void usedItem (boolean c) {
+        usedItem = c;
     }
     
     public Room getRoom() {

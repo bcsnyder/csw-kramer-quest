@@ -25,16 +25,21 @@ public class CombatWindow extends JFrame
 
     private String pName;
     private String mName;
-    private String combatMessage1 = "";
-    private String combatMessage2 = "";
+    private String combatMessage = "";
+    private String menuString =">Attack          Items          Magic          Flee";
     private int pHP;
     private double mHP;
     private int pAttack;
     private double mAttack;
     private int pDur;
+    int menuSelect = 0;
     private String mSym;
     private GameplayWindow gW = new GameplayWindow();
     private GameOverWindow gOW = new GameOverWindow();
+
+    public void setMessage (String m) {
+        combatMessage = m;
+    }
 
     /**
      * Sets all the variables needed to display combat and
@@ -45,7 +50,7 @@ public class CombatWindow extends JFrame
      *                  contains helpful variables the program gets from it
      *                  like health
      */
-    public void displayWindow(Player play, Monster monster, Room rm) {
+    public void displayWindow(Player play, Monster monster, Stage st, int num) {
         pName = play.getName();
         mName = monster.getName();
         String combatMessage = "";
@@ -55,89 +60,103 @@ public class CombatWindow extends JFrame
         mAttack = monster.getAttack();
         pDur = play.getDur();
         mSym = monster.getSymbol();
+        play.setCombat(true);
+        CombatWindow thisWindow = this;
 
         canvas = new CombatDisplay();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
-
-        //Buttons to attack or run away set up here
-        JPanel buttonPane = new JPanel(new FlowLayout());
-        attackButton = new JButton("Attack ");
-        buttonPane.add(attackButton);
-        attackButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    battle(play, monster, rm);
-                }
-            });
-        runButton = new JButton("Run Away ");
-        buttonPane.add(runButton);
-        runButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    dispose();
-                    gW.displayWindow(play, rm);
-                }
-            });
+        //Creates menu system
+        String menuString = ">Attack          Items          Magic          Flee";
 
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
-        cp.add(buttonPane, BorderLayout.SOUTH);
+        // cp.add(buttonPane, BorderLayout.SOUTH);
         cp.add(canvas, BorderLayout.CENTER);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
         pack();              // Either pack() the components; or setSize()
         setTitle("Battle");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
+        setFocusable(true);
+
+        addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent evt) {
+                    switch(evt.getKeyCode()) {
+                        case KeyEvent.VK_A:
+
+                        if (menuSelect > 0) {
+                            menuSelect = menuSelect - 1;
+                        } 
+                        repaint();
+                        break;
+                        case KeyEvent.VK_D:
+                        if (menuSelect < 3) {
+                            menuSelect = menuSelect + 1;
+                        }
+                        repaint();
+                        break;
+                        case KeyEvent.VK_ENTER:
+                        if (menuSelect == 0) {
+                            //Makes combat more exciting by adding random damage modifier
+                            int bonus = (int)(Math.random()*5);
+                            int damage = play.getAttack() + bonus;
+                            boolean survive = monster.ouchie(damage);//damages monster
+
+                            //Sets feedback for user
+                            String message = "You attack, dealing " + (damage)+ " damage";
+                            if (survive == true) {
+                                message = message + "!";
+                                refreshWindow(message, play, monster);
+                            } else {
+                                message = message + " and the monster is dead!";
+                                refreshWindow(message, play, monster);
+                                play.setCombat(false);
+                                gW.displayWindow(play, st, num);
+                                dispose();
+                            }
+
+                            play.setHealth(play.getHealth() - monster.getAttack());
+                            if (play.getHealth() <= 0) {
+                                gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
+                                dispose();
+                            } 
+                            refreshWindow(message, play, monster);
+
+                        } else if (menuSelect == 3) {
+                            dispose();
+                            play.setCombat(false);
+                            gW.displayWindow(play, st, num);
+                        } else if (menuSelect == 1) {
+                            dispose();
+                            InventoryWindow iW = new InventoryWindow();
+                            iW.displayWindow(play.getInventory(), play, st, num);
+                            iW.storeCombat(play, monster, st, num);
+                        } 
+                        repaint();
+                        break;
+                    } 
+                }
+            });
+
+        /**
+         * Pauses the program for a specified number of seconds
+         * @param time  desired pause time in seconds
+         */
     }
-
-    public void battle(Player play, Monster monster, Room rm) {
-        //Makes combat more exciting by adding random damage modifier
-        int bonus = (int)(Math.random()*5);
-        int damage = play.getAttack() + bonus;
-        boolean survive = monster.ouchie(damage);//damages monster
-
-        //Sets feedback for user
-        String message1 = "You attack, dealing " + (damage)+ " damage";
-        if (survive == true) {
-            message1 = message1 + "!";
-        } else {
-            message1 = "You killed the " + monster.getName() + "!";
-            gW.displayWindow(play, rm);
-            gW.refreshWindow(message1, play, rm);
-            dispose();
-        }
-        refreshWindow(message1, "", play, monster);
-        canvas.repaint();
-        delay(1.5);
-        
-        int mAttack = monster.getAttack();
-        play.setHealth(play.getHealth() - mAttack);
-        String message2 = "The monster attacks you dealing " + mAttack + " damage.";
-        if (play.getHealth() <= 0) {
-            gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
-            dispose();
-        }
-        refreshWindow(message1, message2, play, monster);
-    }
-
-    /**
-     * Pauses the program for a specified number of seconds
-     * @param time  desired pause time in seconds
-     */
-    private void delay(double time) {
+	
+	private void delay(double time) {
         int delay = (int)(time * 1000);
-
-        try {
-            Thread.sleep(delay); //pause for 1.5 seconds
-        } catch (Exception e) {}
     }
 
     /**
      * Updates variables based on what is passed in and then repaints the screen
      */
-    public void refreshWindow(String message1, String message2, Player play, Monster monster) {
-        combatMessage1 = message1;
-        combatMessage2 = message2;
+    public void refreshWindow(String battleMessage, Player play, Monster monster) {
+        combatMessage = battleMessage;
         pName = play.getName();
         mName = monster.getName();
+        String combatMessage = "";
         pHP = play.getHealth();
         mHP = monster.getHP();
         pAttack = play.getAttack();
@@ -215,12 +234,25 @@ public class CombatWindow extends JFrame
             g.drawString(var, x, 110);
 
             //Shows info message to user about what just happened
+            g.setFont(new Font("Monospaced", Font.PLAIN, 14));
+            x = centerStringStartX(combatMessage, CANVAS_WIDTH, g);
+            g.drawString(combatMessage, x, CANVAS_HEIGHT/2);
+
+            //draws list of actions
             g.setColor(Color.WHITE);
-            g.setFont(new Font("Monospaced", Font.PLAIN, 18));
-            x = centerStringStartX(combatMessage1, CANVAS_WIDTH, g);
-            g.drawString(combatMessage1, x, CANVAS_HEIGHT/2);
-            x = centerStringStartX(combatMessage2, CANVAS_WIDTH, g);
-            g.drawString(combatMessage2, x, CANVAS_HEIGHT/2 + 25);
+            g.setFont(new Font("Monospaced", Font.PLAIN, 20));
+            if (menuSelect == 0) {
+                menuString = ">Attack          Items          Magic          Flee";
+            } else if (menuSelect == 1) {
+                menuString = " Attack         >Items          Magic          Flee";
+            } else if (menuSelect == 2){
+                menuString = " Attack          Items         >Magic          Flee";
+            } else if (menuSelect == 3) {
+                menuString = " Attack          Items          Magic         >Flee";
+            }
+            x = centerStringStartX(menuString, CANVAS_WIDTH, g);
+            g.drawString(menuString, x, 250);
         }
     }
 }
+
