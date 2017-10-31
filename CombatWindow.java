@@ -100,7 +100,7 @@ public class CombatWindow extends JFrame
                         if (menuSelect == 0) {
                             //Makes combat more exciting by adding random damage modifier
                             int bonus = (int)(Math.random()*5);
-                            int damage = play.getAttack() + bonus;
+                            int damage = play.attack() + bonus;
                             boolean survive = monster.ouchie(damage);//damages monster
 
                             //Sets feedback for user
