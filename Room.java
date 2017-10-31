@@ -121,7 +121,7 @@ public class Room
         if (rand1 == 4) {
              xCoor = 0; 
         }
- 
+        
         map [yCoor][xCoor] = '#'; 
         
         /* Treasure */

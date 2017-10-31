@@ -103,6 +103,12 @@ public class GameplayWindow extends JFrame
             action = play.moveRight();
         }
 
+        if (play.getHealth() == 0){
+            GameOverWindow gOW  = new GameOverWindow();        
+            dispose();
+            gOW.displayWindow(play.getName(), "Died of starvation");
+        }
+
         do {
             if (action == 1) {
                 board = play.getRoom();

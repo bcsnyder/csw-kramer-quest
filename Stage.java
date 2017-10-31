@@ -34,10 +34,10 @@ public class Stage
             if (counter != 0){
                 if (doorWallLast == 1 || doorWallLast == 3){
                     yCoor = (int) (Math.random () * (width - 2)) + 2;
-                }else if (doorWallLast == 2 || doorWallLast == 4){
+                } else if (doorWallLast == 2 || doorWallLast == 4){
                     xCoor = (int) (Math.random () * (height - 2)) + 2;
                 }
-                add.addBackDoor(doorWallLast,yCoor, xCoor);
+                add.addBackDoor(doorWallLast, yCoor, xCoor);
             }
             
             doorWallLast = 2;
