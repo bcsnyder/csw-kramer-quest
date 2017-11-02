@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=inv\ p\ s
+comment0.target=void\ displayWindow(java.util.ArrayList,\ Player,\ Stage)
+comment1.params=evt
+comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment2.params=evt
+comment2.target=void\ keyPressed(java.awt.event.KeyEvent)
+comment3.params=
+comment3.target=void\ setInvTxt()
+comment3.text=\r\n\ takes\ array\ of\ items\ and\ returns\ info\ about\ the\r\n\ items\ as\ a\ String\ so\ it\ can\ be\ displayed.\r\n\ Each\ element\ is\ a\ line\ of\ text.\r\n
+comment4.params=text\ frameWidth\ g
+comment4.target=int\ centerStringX(java.lang.String,\ int,\ java.awt.Graphics)
+comment4.text=\r\n\ centerStringX\ finds\ the\ x\ coordinate\ needed\ to\ center\ a\ String\ in\ the\ window.\r\n
+numComments=5

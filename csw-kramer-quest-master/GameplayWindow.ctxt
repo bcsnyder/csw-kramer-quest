@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=player\ board
+comment0.target=void\ displayWindow(Player,\ Stage)
+comment0.text=\r\n\ Sets\ variables\ based\ on\ what's\ passed\ in\ and\ sets\ up\r\n\ the\ window's\ components\ and\ layout.\ Pretty\ standard.\r\n
+comment1.params=evt
+comment1.target=void\ keyPressed(java.awt.event.KeyEvent)
+comment2.params=direction
+comment2.target=void\ moveAction(java.lang.String)
+comment2.text=\r\n\ Takes\ in\ a\ string\ holding\ the\ desired\ move\ direction\ and\ then\ finds\ the\ result\r\n\ of\ the\ move\ and\ carries\ out\ any\ actions\ associated\ with\ that\ move.\r\n\ \r\n\ @param\ direction\ desired\ move\ direction\ in\ string\ format\ "up,"\ "down,"\ "left,"\ or\ "right."\r\n
+comment3.params=
+comment3.target=Item\ randomItem()
+comment4.params=useMessage\ player\ board
+comment4.target=void\ refreshWindow(java.lang.String,\ Player,\ Stage)
+comment4.text=\r\n\ Simply\ updates\ variables\ with\ what's\ passed\ in\ and\r\n\ repaints\ the\ window.\ VOILA\!\r\n
+comment5.params=text\ frameWidth\ g
+comment5.target=int\ centerStringX(java.lang.String,\ int,\ java.awt.Graphics)
+comment5.text=\r\n\ centerStringX\ finds\ the\ x\ coordinate\ needed\ to\ center\ a\ String\ in\ the\ window.\r\n
+numComments=6
