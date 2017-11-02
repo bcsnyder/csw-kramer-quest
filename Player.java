@@ -6,6 +6,8 @@ public class Player
     private int health;
     private int stamina;
     private int attack;
+    private int var = 0; //just a thing
+    private GameOverWindow gOW = new GameOverWindow();
     
     private ArrayList<Item> inventory;
     private Weapon currentWeapon;
@@ -54,9 +56,13 @@ public class Player
             return 2;
         } else if (currRoom.getTile(xCor, yCor) == '-' || currRoom.getTile(xCor, yCor) == '|') {
             return 0;
-        } else {
+        } else if (currRoom.getTile(xCor, yCor) == '^') {
+            return 5;
+        } else if (currRoom.getTile(xCor, yCor) == 'G') {
             validMove(xCor, yCor);
             return 4;
+        } else {
+            return 6;
         }
     }
     
@@ -66,6 +72,15 @@ public class Player
         y = yPos;
         currRoom.addPlayer(x, y);
         stamina--;
+        //checks stamina and lowers the health if stamina is too low
+        if (stamina <= 0){ 
+            var++;
+            stamina = 0; 
+            if (var == 7){
+                var = 0;
+                health--;
+            }
+        }
     }
     
     public int getHealth() {
@@ -86,8 +101,8 @@ public class Player
     
     public int attack() {
         int damage = attack + currentWeapon.attack();
-        
         if (currentWeapon.getDurability() <= 0) {
+            inventory.remove(inventory.indexOf(currentWeapon));
             currentWeapon = new Fists();
         }
         
@@ -126,6 +141,14 @@ public class Player
         inCombat = c;
     }
     
+    public boolean getCombat() {
+        return inCombat;
+    }
+    
+    public boolean getItemUse() {
+        return usedItem;
+    }
+    
      public void usedItem (boolean c) {
         usedItem = c;
     }
@@ -145,5 +168,9 @@ public class Player
     
     public ArrayList getInventory() {
         return inventory;
+    }
+    
+     public String weaponName() {
+        return currentWeapon.getName();
     }
 }

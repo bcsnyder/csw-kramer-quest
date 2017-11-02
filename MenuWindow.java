@@ -58,7 +58,7 @@ public class MenuWindow extends JFrame
                     startUp();
                     gameWind = new GameplayWindow();
                     dispose();
-                    gameWind.displayWindow(newPlayer, newStage.getRoom(1));
+                    gameWind.displayWindow(newPlayer, newStage, 1);
                 }
             });
         
@@ -104,6 +104,8 @@ public class MenuWindow extends JFrame
         newPlayer.setStamina(100);
         newPlayer.setRoom(currRoom);
         newPlayer.setCombat(false);
+        newPlayer.usedItem(false);
+        newPlayer.setWeapon(new Fists());
 
         int xPos = 1;
         int yPos = 1;

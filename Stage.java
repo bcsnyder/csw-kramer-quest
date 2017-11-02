@@ -13,7 +13,7 @@ public class Stage
     {
         level = num;
         min = 6; //can only be so small 
-        max = 20;//can only be soo big, it needs to fit on screen
+        max = 12;//can only be soo big, it needs to fit on screen
         numRooms = (level * 2) + 2;
         floor = new Room[numRooms];
         makeRooms();
@@ -34,10 +34,10 @@ public class Stage
             if (counter != 0){
                 if (doorWallLast == 1 || doorWallLast == 3){
                     yCoor = (int) (Math.random () * (width - 2)) + 2;
-                }else if (doorWallLast == 2 || doorWallLast == 4){
+                } else if (doorWallLast == 2 || doorWallLast == 4){
                     xCoor = (int) (Math.random () * (height - 2)) + 2;
                 }
-                add.addBackDoor(doorWallLast,yCoor, xCoor);
+                add.addBackDoor(doorWallLast, yCoor, xCoor);
             }
             
             doorWallLast = 2;
@@ -69,6 +69,10 @@ public class Stage
     
      public Room getRoom(int num) {
         return floor[num];
+    }
+    
+    public void setRoom(Room newRoom, int num) {
+        floor[num] = newRoom;
     }
     
     public Room nextRoom (int roomNum){
