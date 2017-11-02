@@ -44,7 +44,7 @@ public class InventoryWindow extends JFrame
         canvas = new InventoryDisplay();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
-        JPanel buttonPane = new JPanel(new FlowLayout());
+ /**       JPanel buttonPane = new JPanel(new FlowLayout());
         returnButton = new JButton("Return to Game ");
         buttonPane.add(returnButton);
         returnButton.addActionListener(new ActionListener() {
@@ -59,7 +59,7 @@ public class InventoryWindow extends JFrame
                         gW.displayWindow(p, s, n);
                     }
                 }
-            });
+            }); */
 
         // Set the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();
@@ -94,6 +94,17 @@ public class InventoryWindow extends JFrame
                             select = select + 1;
                         }
                         repaint();
+                        break;
+                        case KeyEvent.VK_ESCAPE:
+                        if (p.getCombat() == true) {
+                          dispose();
+                          CombatWindow cW = new CombatWindow();
+                          cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
+                        } else {
+                          dispose();
+                          GameplayWindow gW = new GameplayWindow();
+                          gW.displayWindow(p, s, n);
+                        }
                         break;
                         case KeyEvent.VK_ENTER:
                         if (inventory.get(select)!=null) {
