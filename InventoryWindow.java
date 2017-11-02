@@ -116,8 +116,12 @@ public class InventoryWindow extends JFrame
                                             GameOverWindow gOW = new GameOverWindow();
                                             gOW.displayWindow(play.getName(), "Killed by " + savedMonster.getName());
                                             dispose();
-                                            
-                                        } 
+                                        } else {
+                                            dispose();
+                                            CombatWindow cW = new CombatWindow();
+                                            cW.setMessage(actionMessage);
+                                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
+                                    }
                                     }
                                 }
                             } else
@@ -133,7 +137,12 @@ public class InventoryWindow extends JFrame
                                         GameOverWindow gOW = new GameOverWindow();
                                         gOW.displayWindow(play.getName(), "Killed by " + savedMonster.getName());
                                         dispose();
-                                    } 
+                                    } else {
+                                            dispose();
+                                            CombatWindow cW = new CombatWindow();
+                                            cW.setMessage(actionMessage);
+                                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
+                                    }
                                 }
 
                             }
