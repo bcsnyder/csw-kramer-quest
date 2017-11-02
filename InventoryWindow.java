@@ -64,7 +64,7 @@ public class InventoryWindow extends JFrame
         // Set the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
-        cp.add(buttonPane, BorderLayout.SOUTH);
+  //      cp.add(buttonPane, BorderLayout.SOUTH);
         cp.add(canvas, BorderLayout.CENTER);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
