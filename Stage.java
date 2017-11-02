@@ -32,26 +32,28 @@ public class Stage
             int height = add.getHeight();
             int width = add.getWidth();
             if (counter != 0){
+                
                 if (doorWallLast == 1 || doorWallLast == 3){
                     yCoor = (int) (Math.random () * (width - 2)) + 2;
                 } else if (doorWallLast == 2 || doorWallLast == 4){
                     xCoor = (int) (Math.random () * (height - 2)) + 2;
                 }
+                
+                 if (doorWallLast == 1){
+                     doorWallLast = 3;
+                }else if (doorWallLast == 2){
+                    doorWallLast = 4;
+                }else if (doorWallLast == 3){
+                    doorWallLast = 1;
+                }else if (doorWallLast == 4){
+                    doorWallLast = 2;
+                }
+                
                 add.addBackDoor(doorWallLast, yCoor, xCoor);
             }
             
-            doorWallLast = 2;
-            //doorWallLast = add.returnDoorWall();
-            if (doorWallLast == 1){
-                doorWallLast = 3;
-            }else if (doorWallLast == 2){
-                doorWallLast = 4;
-            }else if (doorWallLast == 3){
-                doorWallLast = 1;
-            }else if (doorWallLast == 4){
-                doorWallLast = 2;
-            }
-            
+           
+            doorWallLast = add.returnDoorWall();
             floor[counter] = add;
         }
         
