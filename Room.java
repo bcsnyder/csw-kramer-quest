@@ -167,10 +167,8 @@ public class Room
              yCoor = 0; 
         }
         
-        if (w == 1 || w == 3){
             map [xCoor][yCoor] = '^';
-        } else if (w == 2 || w == 4){
-            map [xCoor][yCoor] = '^'; 
+        
         }
     }
 }
