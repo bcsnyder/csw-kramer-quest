@@ -73,6 +73,7 @@ public class CombatWindow extends JFrame
         pack();
         setVisible(true);    //Displays window
         setFocusable(true);
+        setLocationRelativeTo(null);     //Puts the JFrame in the middle of the screen @Francis
 
         addKeyListener(new KeyAdapter() {
                 @Override

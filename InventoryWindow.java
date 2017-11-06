@@ -54,6 +54,7 @@ public class InventoryWindow extends JFrame
         pack();              // Either pack() the components; or setSize()
         setTitle("Inventory");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
+        setLocationRelativeTo(null);     //Puts the JFrame in the middle of the screen @Francis
         setFocusable(true);
         Player play = p;
         health = play.getHealth();

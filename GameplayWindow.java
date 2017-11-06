@@ -65,6 +65,7 @@ public class GameplayWindow extends JFrame
         setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
         pack();              // Either pack() the components; or setSize()
         setVisible(true);    //Displays window
+        setLocationRelativeTo(null);     //Puts the JFrame in the middle of the screen @Francis
 
         addKeyListener(new KeyAdapter() {
                 @Override
