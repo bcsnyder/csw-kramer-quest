@@ -30,7 +30,7 @@ public class InventoryWindow extends JFrame
     private Stage savedStage;
     private int savedRoomPosition;
     private String wName;
-    
+
     public void storeCombat (Player playCombat, Monster monsterCombat, Stage stCombat, int numCombat) {
         savedPlayer = playCombat;
         savedStage = stCombat;
@@ -44,27 +44,27 @@ public class InventoryWindow extends JFrame
         canvas = new InventoryDisplay();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
- /**       JPanel buttonPane = new JPanel(new FlowLayout());
+        /**       JPanel buttonPane = new JPanel(new FlowLayout());
         returnButton = new JButton("Return to Game ");
         buttonPane.add(returnButton);
         returnButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    if (p.getCombat() == true) {
-                        dispose();
-                        CombatWindow cW = new CombatWindow();
-                        cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
-                    } else {
-                        dispose();
-                        GameplayWindow gW = new GameplayWindow();
-                        gW.displayWindow(p, s, n);
-                    }
-                }
-            }); */
+        public void actionPerformed(ActionEvent evt) {
+        if (p.getCombat() == true) {
+        dispose();
+        CombatWindow cW = new CombatWindow();
+        cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
+        } else {
+        dispose();
+        GameplayWindow gW = new GameplayWindow();
+        gW.displayWindow(p, s, n);
+        }
+        }
+        }); */
 
         // Set the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
-  //      cp.add(buttonPane, BorderLayout.SOUTH);
+        //      cp.add(buttonPane, BorderLayout.SOUTH);
         cp.add(canvas, BorderLayout.CENTER);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
@@ -97,13 +97,13 @@ public class InventoryWindow extends JFrame
                         break;
                         case KeyEvent.VK_ESCAPE:
                         if (p.getCombat() == true) {
-                          dispose();
-                          CombatWindow cW = new CombatWindow();
-                          cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
+                            dispose();
+                            CombatWindow cW = new CombatWindow();
+                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
                         } else {
-                          dispose();
-                          GameplayWindow gW = new GameplayWindow();
-                          gW.displayWindow(p, s, n);
+                            dispose();
+                            GameplayWindow gW = new GameplayWindow();
+                            gW.displayWindow(p, s, n);
                         }
                         break;
                         case KeyEvent.VK_ENTER:
@@ -132,7 +132,7 @@ public class InventoryWindow extends JFrame
                                             CombatWindow cW = new CombatWindow();
                                             cW.setMessage(actionMessage);
                                             cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
-                                    }
+                                        }
                                     }
                                 }
                             } else
@@ -149,10 +149,10 @@ public class InventoryWindow extends JFrame
                                         gOW.displayWindow(play.getName(), "Killed by " + savedMonster.getName());
                                         dispose();
                                     } else {
-                                            dispose();
-                                            CombatWindow cW = new CombatWindow();
-                                            cW.setMessage(actionMessage);
-                                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
+                                        dispose();
+                                        CombatWindow cW = new CombatWindow();
+                                        cW.setMessage(actionMessage);
+                                        cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
                                     }
                                 }
 
@@ -176,11 +176,16 @@ public class InventoryWindow extends JFrame
         inventoryText = new ArrayList<String>();
 
         //Gets info about items to show user including the type and name
-        for (int i = 0; i < inventory.size(); i++) {
-            String type = inventory.get(i).getType();
-            String name = inventory.get(i).getName();
-            inventoryText.add(type + ": " + name);
+        if (inventory.size() == 0){
+            inventoryText.add("No Items...");
+        } else {
+            for (int i = 0; i < inventory.size(); i++) {
+                String type = inventory.get(i).getType();
+                String name = inventory.get(i).getName();
+                inventoryText.add(type + ": " + name);
+            }
         }
+
     }
 
     /*
