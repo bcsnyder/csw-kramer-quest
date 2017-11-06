@@ -1,12 +1,18 @@
-------------------------------------------------------------------------
-This is the project README file. Here, you should describe your project.
-Tell the reader (someone who does not know anything about this project)
-all he/she needs to know. The comments should usually include at least:
-------------------------------------------------------------------------
+-------------------------------------------------------------------
+This is the Kramer Quest README file. In this game you have to 
+navigate through a rogue-like maze, colelcting bread and defeating 
+monsters as you go. 
+-------------------------------------------------------------------
 
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
+PROJECT TITLE: Kramer Quest
+PURPOSE OF PROJECT: Project for Software Engineering
+VERSION or DATE: 
 HOW TO START THIS PROJECT:
-AUTHORS:
+AUTHORS: Christopher Chen, Dylan Flogaus, Emily Oldham, Ben Snyder, and Arushi Tayal
 USER INSTRUCTIONS:
+  w- move up
+  a- move left
+  s- move down
+  d- move right
+  i- inventory
+  enter- select
