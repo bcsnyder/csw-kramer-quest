@@ -145,11 +145,6 @@ public class CombatWindow extends JFrame
                     } 
                 }
             });
-
-        /**
-         * Pauses the program for a specified number of seconds
-         * @param time  desired pause time in seconds
-         */
     }
 
     /**

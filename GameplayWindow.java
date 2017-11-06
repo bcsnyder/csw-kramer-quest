@@ -193,6 +193,7 @@ public class GameplayWindow extends JFrame
         wDurability = player.getDur();
         roomHeight = board.getHeight();
         inventory = play.getInventory();
+        actionMessage = useMessage;
 
         canvas.repaint();
     }
