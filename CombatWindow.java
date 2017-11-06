@@ -15,12 +15,9 @@ import javax.swing.*;
  */
 public class CombatWindow extends JFrame
 {
-    public static final int CANVAS_WIDTH  = 1280;//Sets size of window
-    public static final int CANVAS_HEIGHT = 715;
-
-    public JButton runButton;//Buttons to run away or attackn enemy
-    public JButton attackButton;
-
+    public static final int CANVAS_WIDTH  = 700;//Sets size of window
+    public static final int CANVAS_HEIGHT = 600;
+    
     private CombatDisplay canvas;//Subcomponent where graphics displayed
 
     private String pName;
@@ -69,13 +66,11 @@ public class CombatWindow extends JFrame
         String menuString = ">Attack          Items          Magic          Flee";
 
         Container cp = getContentPane();
-        cp.setLayout(new BorderLayout());
-        // cp.add(buttonPane, BorderLayout.SOUTH);
-        cp.add(canvas, BorderLayout.CENTER);
-
-        setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
-        pack();              // Either pack() the components; or setSize()
+        cp.add(canvas);
+        
         setUndecorated(true);  //JFrame sets the title of outer frame
+        setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
+        pack();
         setVisible(true);    //Displays window
         setFocusable(true);
 
