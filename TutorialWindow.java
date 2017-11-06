@@ -16,19 +16,19 @@ public class TutorialWindow extends JFrame
 {
     public static final int CANVAS_WIDTH  = 800;//Sets size of window
     public static final int CANVAS_HEIGHT = 500;
-    
+
     MenuWindow menuWind;
-    
+
     private String[] tutorial;
     private TutorialText canvas;
-    
+
     /**
      * Sets up tutorial window's components and shows them.
      */
     public void displayWindow() {
         canvas = new TutorialText();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
-        
+
         JPanel buttonPane = new JPanel(new FlowLayout());
         JButton menuButton = new JButton("Return to Menu ");
         buttonPane.add(menuButton);
@@ -39,7 +39,7 @@ public class TutorialWindow extends JFrame
                     menuWind.displayWindow();
                 }
             });
-        
+
         // Set the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
@@ -50,8 +50,9 @@ public class TutorialWindow extends JFrame
         pack();              // Either pack() the components; or setSize()
         setTitle("Tutorial");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
+        setLocationRelativeTo(null);     //Puts the JFrame in the middle of the screen @Francis
     }
-    
+
     /**
      * Sets the text line by line for the tutorial as an array
      */

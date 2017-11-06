@@ -65,6 +65,7 @@ public class GameplayWindow extends JFrame
         pack();              // Either pack() the components; or setSize()
         setTitle("\"Game Board\"");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
+        setLocationRelativeTo(null);     //Puts the JFrame in the middle of the screen @Francis
 
         addKeyListener(new KeyAdapter() {
                 @Override

@@ -78,6 +78,7 @@ public class CombatWindow extends JFrame
         setUndecorated(true);  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
         setFocusable(true);
+        setLocationRelativeTo(null);     //Puts the JFrame in the middle of the screen @Francis
 
         addKeyListener(new KeyAdapter() {
                 @Override

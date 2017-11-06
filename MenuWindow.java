@@ -80,6 +80,7 @@ public class MenuWindow extends JFrame
         setTitle("Main Menu");
         pack();
         setVisible(true);
+        setLocationRelativeTo(null);     //Puts the JFrame in the middle of the screen @Francis
     }
     
     /**
