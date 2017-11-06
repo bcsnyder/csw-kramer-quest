@@ -15,8 +15,8 @@ import javax.swing.*;
  */
 public class CombatWindow extends JFrame
 {
-    public static final int CANVAS_WIDTH  = 700;//Sets size of window
-    public static final int CANVAS_HEIGHT = 400;
+    public static final int CANVAS_WIDTH  = 1280;//Sets size of window
+    public static final int CANVAS_HEIGHT = 715;
 
     public JButton runButton;//Buttons to run away or attackn enemy
     public JButton attackButton;
@@ -26,7 +26,7 @@ public class CombatWindow extends JFrame
     private String pName;
     private String mName;
     private String combatMessage = "";
-    private String menuString =">Attack          Items          Magic          Flee";
+    private String menuString;
     private int pHP;
     private double mHP;
     private int pAttack;
@@ -75,7 +75,7 @@ public class CombatWindow extends JFrame
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
         pack();              // Either pack() the components; or setSize()
-        setTitle("Battle");  //JFrame sets the title of outer frame
+        setUndecorated(true);  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
         setFocusable(true);
 
@@ -91,7 +91,7 @@ public class CombatWindow extends JFrame
                         repaint();
                         break;
                         case KeyEvent.VK_D:
-                        if (menuSelect < 3) {
+                        if (menuSelect < 3 && menuSelect != -1) {
                             menuSelect = menuSelect + 1;
                         }
                         repaint();
@@ -115,14 +115,6 @@ public class CombatWindow extends JFrame
                                 gW.displayWindow(play, st, num);
                                 dispose();
                             }
-
-                            play.setHealth(play.getHealth() - monster.getAttack());
-                            if (play.getHealth() <= 0) {
-                                gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
-                                dispose();
-                            } 
-                            refreshWindow(message, play, monster);
-
                         } else if (menuSelect == 3) {                            
                             dispose();
                             play.setCombat(false);
@@ -132,7 +124,22 @@ public class CombatWindow extends JFrame
                             InventoryWindow iW = new InventoryWindow();
                             iW.displayWindow(play.getInventory(), play, st, num);
                             iW.storeCombat(play, monster, st, num);
-                        } 
+                        } else if (menuSelect == -1) {
+                            play.setHealth(play.getHealth() - monster.getAttack());
+                            String message = "The monster attacks and deals you "+monster.getAttack()+" damage!";
+                            refreshWindow(message, play, monster);
+                            
+                            if (play.getHealth() <= 0) {
+                                gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
+                                dispose();
+                            } 
+                            refreshWindow(message, play, monster);
+                        }
+                        if (menuSelect == -1) {
+                            menuSelect = 0;
+                        } else {
+                            menuSelect = -1;
+                        }
                         repaint();
                         break;
                     } 
@@ -143,10 +150,6 @@ public class CombatWindow extends JFrame
          * Pauses the program for a specified number of seconds
          * @param time  desired pause time in seconds
          */
-    }
-
-    private void delay(double time) {
-        int delay = (int)(time * 1000);
     }
 
     /**
@@ -249,10 +252,11 @@ public class CombatWindow extends JFrame
                 menuString = " Attack          Items         >Magic          Flee";
             } else if (menuSelect == 3) {
                 menuString = " Attack          Items          Magic         >Flee";
+            } else if (menuSelect == -1) {
+                menuString = ">Next Turn";
             }
             x = centerStringStartX(menuString, CANVAS_WIDTH, g);
             g.drawString(menuString, x, 250);
         }
     }
 }
-

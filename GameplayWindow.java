@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class GameplayWindow extends JFrame
 {
-    public static final int CANVAS_WIDTH  = 750;//Sets size of window
-    public static final int CANVAS_HEIGHT = 600;
+    public static final int CANVAS_WIDTH  = 1280;//Sets size of window
+    public static final int CANVAS_HEIGHT = 700;
 
     private GameDisplay canvas;
     public String room;
@@ -61,9 +61,9 @@ public class GameplayWindow extends JFrame
         Container cp = getContentPane();
         cp.add(canvas);
 
+        setTitle("Game Name");
         setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
         pack();              // Either pack() the components; or setSize()
-        setTitle("\"Game Board\"");  //JFrame sets the title of outer frame
         setVisible(true);    //Displays window
 
         addKeyListener(new KeyAdapter() {
