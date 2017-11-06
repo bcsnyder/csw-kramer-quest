@@ -68,7 +68,7 @@ public class CombatWindow extends JFrame
         Container cp = getContentPane();
         cp.add(canvas);
         
-        setUndecorated(true);  //JFrame sets the title of outer frame
+        setTitle("Combat");  //JFrame sets the title of outer frame
         setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
         pack();
         setVisible(true);    //Displays window
