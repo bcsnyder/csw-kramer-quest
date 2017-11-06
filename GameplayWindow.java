@@ -50,7 +50,7 @@ public class GameplayWindow extends JFrame
         stamina = player.getStamina();
         attack = player.getAttack();
         wDurability = player.getDur();
-        wName=player.weaponName();
+        wName = player.weaponName();
         roomHeight = board.getHeight();
         inventory = play.getInventory();
 
@@ -193,7 +193,6 @@ public class GameplayWindow extends JFrame
         wDurability = player.getDur();
         roomHeight = board.getHeight();
         inventory = play.getInventory();
-        actionMessage = useMessage;
 
         canvas.repaint();
     }
