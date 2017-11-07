@@ -32,6 +32,8 @@ public class GameplayWindow extends JFrame
     private Stage space;
     private Room board;
     private ArrayList<Item> inventory;
+    private int turnPhase = 0;
+    private String menuString;
 
     private String actionMessage = "";
 
@@ -54,6 +56,8 @@ public class GameplayWindow extends JFrame
         roomHeight = board.getHeight();
         inventory = play.getInventory();
 
+        String menuString = "";
+
         canvas = new GameDisplay();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
@@ -72,21 +76,38 @@ public class GameplayWindow extends JFrame
                 public void keyPressed(KeyEvent evt) {
                     switch(evt.getKeyCode()) {
                         case KeyEvent.VK_W:
-                        move("up");
+                        if (turnPhase == 0) {
+                            move("up");
+                        }
                         break;
                         case KeyEvent.VK_S:
-                        move("down");
+                        if (turnPhase == 0) {
+                            move("down");
+                        }
                         break;
                         case KeyEvent.VK_A:
-                        move("left");
+                        if (turnPhase == 0) {
+                            move("left");
+                        }
                         break;
                         case KeyEvent.VK_D:
-                        move("right");
+                        if (turnPhase == 0) {
+                            move("right");
+                        }
                         break;
                         case KeyEvent.VK_I:
-                        InventoryWindow iW = new InventoryWindow();
-                        iW.displayWindow(play.getInventory(), play, space, levelNum);
-                        dispose();
+                        if (turnPhase == 0) {
+                            InventoryWindow iW = new InventoryWindow();
+                            iW.displayWindow(play.getInventory(), play, space, levelNum);
+                            dispose();
+                        }
+                        break;
+                        case KeyEvent.VK_ENTER:
+                        if (turnPhase == 1) {
+                            //Monster move
+                            turnPhase = 0;
+                            repaint();
+                        }
                         break;
                     }
                 }
@@ -117,10 +138,12 @@ public class GameplayWindow extends JFrame
                 board = play.getRoom();
                 space.setRoom(board, levelNum);
                 if (play.getStamina() < 10){
-                    refreshWindow ("You moved right! Stamina low", play, space, levelNum);   
+                    refreshWindow ("You moved "+direction+"! Stamina low", play, space, levelNum);   
                 }else {
                     refreshWindow("You moved "+direction+".", play, space, levelNum);
                 }
+
+                turnPhase = 1;
             } else if(action == 2) {
                 board.removePlayer();
                 space.setRoom(board, levelNum);
@@ -140,6 +163,8 @@ public class GameplayWindow extends JFrame
                 space.setRoom(board, levelNum);                
                 play.addItem(randomItem());
                 refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space, levelNum);
+
+                turnPhase = 1;
             } else if(action == 0) {
                 refreshWindow("You can't move there!", play, space, levelNum);
             } else if(action == 4) {
@@ -252,6 +277,17 @@ public class GameplayWindow extends JFrame
             String line1Vars = "HP:"+health+"  Stamina:"+stamina+"    Attack:"+attack+"   Weapon:"+wName+"   Weapon Integrity:"+wDurability;
             x = centerStringX(line1Vars, CANVAS_WIDTH, g);
             g.drawString(line1Vars, x, CANVAS_HEIGHT - 20);
+
+            //draws list of actions
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Monospaced", Font.PLAIN, 20));
+            if (turnPhase == 0) {
+                menuString = "";
+            } else if (turnPhase == 1) {
+                menuString = ">Next Turn";
+            }
+            x = centerStringX(menuString, CANVAS_WIDTH, g);
+            g.drawString(menuString, x, 500);
         }
     }
 }
