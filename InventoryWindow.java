@@ -123,9 +123,9 @@ public class InventoryWindow extends JFrame
                             if (inventory.get(select).getType().equals("Weapon")) {
                                 play.setWeapon((Weapon)inventory.get(select));
                                 actionMessage = "You equipped the " +inventory.get(select).getName() +".";
-                                inventory.remove(select);
                                 attack = play.getAttack();
                                 weaponDur = play.getDur();
+                                wName = play.weaponName();
                                 if (p.getCombat() == true) {
 
                                     p.setHealth(play.getHealth() - savedMonster.getAttack());
