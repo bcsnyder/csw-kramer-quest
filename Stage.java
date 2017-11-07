@@ -23,7 +23,7 @@ public class Stage
     {
         for (int counter = 0; counter < numRooms; counter++)
         {
-            Room add = new Room(level, min, max);
+            Room add = new Room(counter, min, max);
             add.fillDots();
             add.fillWalls();
             add.fillSymbols();

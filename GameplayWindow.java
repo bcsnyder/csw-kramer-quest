@@ -140,12 +140,9 @@ public class GameplayWindow extends JFrame
                 space.setRoom(board, levelNum);                
                 play.addItem(randomItem());
                 refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space, levelNum);
+            } else if(action == 0) {
+                refreshWindow("You can't move there!", play, space, levelNum);
             } else if(action == 4) {
-                refreshWindow("You enter combat!", play, space, levelNum);
-                CombatWindow cW = new CombatWindow();
-                cW.displayWindow(play, new Gremlin(), space, levelNum);
-                dispose();
-            } else if(action == 5) {
                 board.removePlayer();
                 space.setRoom(board, levelNum);    
                 levelNum--;
@@ -160,7 +157,17 @@ public class GameplayWindow extends JFrame
                     refreshWindow("You moved back a room!", play, space, levelNum);
                 }
             } else {
-                refreshWindow("You can't move there!", play, space, levelNum);
+                Monster[] possibleMonsters = new Monster[5];//Creates an array of all the possible enemy types
+                possibleMonsters[0] = new Gremlin();
+                possibleMonsters[1] = new Skeleton();
+                possibleMonsters[2] = new Troll();
+                possibleMonsters[3] = new Dragon();
+                possibleMonsters[4] = new Changeling(play);
+                Monster enemy = possibleMonsters[action - 5];//Selects the monster based on what tile the user hit
+                refreshWindow("You enter combat!", play, space, levelNum);
+                CombatWindow cW = new CombatWindow();
+                cW.displayWindow(play, enemy, space, levelNum);
+                dispose();
             }
         } while (action < 0);
         repaint();

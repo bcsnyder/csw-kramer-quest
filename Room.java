@@ -16,14 +16,14 @@ public class Room
         width = (int) (Math.random() * (max - min)) + min;
         //This allows the number of monsters to go up each level, only 10 levels but can add more
         if (roomNumber <= 3){
+            max = 2;
+            min = 1;
+        } else if (roomNumber > 3 && roomNumber <= 10){
             max = 4;
             min = 1;
-        } else if (roomNumber > 3 && roomNumber <= 6   ){
-            max = 6;
-            min = 1;
-        }else if (roomNumber > 6 && roomNumber <= 10){
-            max = 8;
-            min = 1;
+        }else if (roomNumber > 10 && roomNumber <= 21){
+            max = 5;
+            min = 2;
         }
         numMonsters = (int) Math.floor(Math.random() * (max - min)) + min;
         map = new char[length][width];
@@ -94,7 +94,18 @@ public class Room
         {
             int num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
             int num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
-            map[num1][num2] = 'G'; //check if placing on top of a monster
+            
+            int minMonsterDifficulty = 0;
+            int maxMonsterDifficulty = 4;
+            if (roomNumber < 10) {
+                maxMonsterDifficulty = 1;
+            } else {
+                minMonsterDifficulty = 2;
+            }
+            
+            int monsterType = maxMonsterDifficulty - (int)(Math.random() * (maxMonsterDifficulty - minMonsterDifficulty + 1));
+            char[] allMonsterTypes = setPossibleMonsters();
+            map[num1][num2] = allMonsterTypes[monsterType]; //check if placing on top of a monster
         }
         
         /* Door */
@@ -128,6 +139,17 @@ public class Room
         int num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
         int num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
         map[num1][num2] = '$'; 
+    }
+    
+    private char[] setPossibleMonsters() {
+        char[] possibleMonsters = new char[5];
+        possibleMonsters[0] = 'G';
+        possibleMonsters[1] = 'S';
+        possibleMonsters[2] = 'T';
+        possibleMonsters[3] = 'D';
+        possibleMonsters[4] = '?';
+        
+        return possibleMonsters;
     }
     
     public int getLevel() {

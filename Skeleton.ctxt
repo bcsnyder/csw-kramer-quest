@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Skeleton()
+comment1.params=y
+comment1.target=boolean\ ouchie(int)
+comment1.text=\r\n\ When\ called,\ this\ method\ will\ subtract\ the\ appropriate\ amount\ of\ health\ from\ the\ monster.\ \ If\ the\ monster\r\n\ is\ alive,\ it\ returns\ true.\ \ If\ the\ monster\ is\ dead\ it\ returns\ false.\r\n\ \r\n
+comment2.params=
+comment2.target=java.lang.String\ getName()
+comment3.params=
+comment3.target=int\ getHP()
+comment4.params=
+comment4.target=java.lang.String\ getSymbol()
+comment5.params=
+comment5.target=int\ getAttack()
+numComments=6
