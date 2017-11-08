@@ -18,6 +18,7 @@ public class Player implements Tileable
     private int y;
     private boolean inCombat;
     private boolean usedItem;
+    boolean cheatMode = false;
     public Player() {
         inventory = new ArrayList<Item>();
         symbol = '@';
@@ -188,5 +189,9 @@ public class Player implements Tileable
 
     public String weaponName() {
         return currentWeapon.getName();
+    }
+    
+    public void enableCheats() {
+        cheatMode = true;
     }
 }

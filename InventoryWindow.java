@@ -30,7 +30,9 @@ public class InventoryWindow extends JFrame
     private Stage savedStage;
     private int savedRoomPosition;
     private String wName;
-
+    int baseCode[] = new int [] {1,1,2,2,3,4,3,4,5,6};
+    int inputCode [] = new int [] {0,0,0,0,0,0,0,0,0,0};
+    int currInput = 0;
     public void storeCombat (Player playCombat, Monster monsterCombat, Stage stCombat, int numCombat) {
         savedPlayer = playCombat;
         savedStage = stCombat;
@@ -144,6 +146,59 @@ public class InventoryWindow extends JFrame
                             }
                         }
 
+                        repaint();
+                        break;
+                        case KeyEvent.VK_UP:
+                        if (currInput < 10) {
+                         inputCode [currInput] = 1;
+                         currInput++;
+                        } 
+                        break;
+                        case KeyEvent.VK_DOWN:
+                        if (currInput < 10) {
+                         inputCode [currInput] = 2;
+                         currInput++;
+                        } 
+                        break;
+                        case KeyEvent.VK_LEFT:
+                        if (currInput < 10) {
+                         inputCode [currInput] = 3;
+                         currInput++;
+                        } 
+                        break;
+                        case KeyEvent.VK_RIGHT:
+                        if (currInput < 10) {
+                         inputCode [currInput] = 4;
+                         currInput++;
+                        } 
+                        break;
+                        case KeyEvent.VK_B:
+                        if (currInput < 10) {
+                         inputCode [currInput] = 5;
+                         currInput++;
+                        } 
+                        break;
+                        case KeyEvent.VK_A:
+                        if (currInput < 10) {
+                         inputCode [currInput] = 6;
+                         currInput++;
+                        } 
+                        break;
+                        case KeyEvent.VK_SHIFT:
+                        for (int i = 0; i < 10; i++) {
+                            if (inputCode [i] != baseCode [i]) {
+                                break;
+                            } else if (i == 9) {
+                                play.enableCheats();
+                                actionMessage = "Cheats enabled.";
+                            }
+                        }
+                        repaint();
+                        break;
+                        default: 
+                        for (int i = 0; i < 10; i++) {
+                            inputCode [i] = 0;
+                        }
                         repaint();
                         break;
                     }
