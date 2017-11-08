@@ -1,6 +1,5 @@
 public class Stage 
 {
-    private int level;
     private int min;
     private int max;
     private int numRooms;
@@ -11,10 +10,9 @@ public class Stage
     
     public Stage(int num)
     {
-        level = num;
+        numRooms = num;
         min = 6; //can only be so small 
         max = 12;//can only be soo big, it needs to fit on screen
-        numRooms = (level * 2) + 2;
         floor = new Room[numRooms];
         makeRooms();
     }
