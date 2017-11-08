@@ -1,12 +1,12 @@
 #BlueJ class context
 comment0.params=m
 comment0.target=void\ setMessage(java.lang.String)
-comment1.params=play\ monster\ st\ num
+comment1.params=player\ monster\ st\ num
 comment1.target=void\ displayWindow(Player,\ Monster,\ Stage,\ int)
 comment1.text=\r\n\ Sets\ all\ the\ variables\ needed\ to\ display\ combat\ and\r\n\ sets\ up\ the\ window\ with\ its\ display\ components\ including\r\n\ two\ buttons.\r\n\ \r\n\ @param\ monster\ \ \ the\ monster\ instance\ the\ player\ is\ fighting\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ contains\ helpful\ variables\ the\ program\ gets\ from\ it\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ like\ health\r\n
 comment2.params=evt
 comment2.target=void\ keyPressed(java.awt.event.KeyEvent)
-comment3.params=battleMessage\ play\ monster
+comment3.params=battleMessage\ player\ monster
 comment3.target=void\ refreshWindow(java.lang.String,\ Player,\ Monster)
 comment3.text=\r\n\ Updates\ variables\ based\ on\ what\ is\ passed\ in\ and\ then\ repaints\ the\ screen\r\n
 comment4.params=text\ frameWidth\ g

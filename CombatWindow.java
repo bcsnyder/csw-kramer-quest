@@ -19,7 +19,8 @@ public class CombatWindow extends JFrame
     public static final int CANVAS_HEIGHT = 600;
     
     private CombatDisplay canvas;//Subcomponent where graphics displayed
-
+    
+    private Player play;
     private String pName;
     private String mName;
     private String combatMessage = "";
@@ -47,15 +48,16 @@ public class CombatWindow extends JFrame
      *                  contains helpful variables the program gets from it
      *                  like health
      */
-    public void displayWindow(Player play, Monster monster, Stage st, int num) {
-        pName = play.getName();
+    public void displayWindow(Player player, Monster monster, Stage st, int num) {
+        play = player;
+        pName = player.getName();
         mName = monster.getName();
         String combatMessage = "";
-        pHP = play.getHealth();
+        pHP = player.getHealth();
         mHP = monster.getHP();
-        pAttack = play.getAttack();
+        pAttack = player.getAttack();
         mAttack = monster.getAttack();
-        pDur = play.getDur();
+        pDur = player.getDur();
         mSym = monster.getSymbol();
         play.setCombat(true);
         CombatWindow thisWindow = this;
@@ -146,16 +148,17 @@ public class CombatWindow extends JFrame
     /**
      * Updates variables based on what is passed in and then repaints the screen
      */
-    public void refreshWindow(String battleMessage, Player play, Monster monster) {
+    public void refreshWindow(String battleMessage, Player player, Monster monster) {
+        play = player;
         combatMessage = battleMessage;
-        pName = play.getName();
+        pName = player.getName();
         mName = monster.getName();
         String combatMessage = "";
-        pHP = play.getHealth();
+        pHP = player.getHealth();
         mHP = monster.getHP();
-        pAttack = play.getAttack();
+        pAttack = player.getAttack();
         mAttack = monster.getAttack();
-        pDur = play.getDur();
+        pDur = player.getDur();
         mSym = monster.getSymbol();
 
         canvas.repaint();
@@ -216,8 +219,10 @@ public class CombatWindow extends JFrame
             g.drawString(var, x, 90);
             var = "Attack:" + pAttack;
             g.drawString(var, x, 110);
-            var = "Weapon Durability:" + pDur;
+            var = "Weapon: " + play.weaponName();
             g.drawString(var, x, 130);
+            var = "Weapon Durability:" + pDur;
+            g.drawString(var, x, 150);
 
             //Displays monster stats in red under monster name and symbol
             g.setColor(Color.RED);

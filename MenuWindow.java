@@ -95,7 +95,7 @@ public class MenuWindow extends JFrame
     }
     
     private void startUp() {
-        newStage = new Stage(10);
+        newStage = new Stage(20);
         Room currRoom = newStage.getRoom(1);
         
         newPlayer = new Player();
