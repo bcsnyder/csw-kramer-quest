@@ -10,7 +10,7 @@ public class Room
     private int level; 
     private int bYcoor = 0; //holds the variables for the back doors y coor
     private int bXcoor = 0; //holds the variables for the back doors x coor
-    
+
     public Room (int num, int min, int max)
     {
         roomNumber = num;
@@ -30,13 +30,13 @@ public class Room
         numMonsters = (int) Math.floor(Math.random() * (max - min)) + min;
         map = new Tileable[length][width];
     }
-    
+
     public void fill() {
         fillDots();
         fillWalls();
         fillSymbols();
     }
-    
+
     public String toString() {
         String output = "";
         for (int counter1 = 0; counter1 < length; counter1++)
@@ -48,18 +48,18 @@ public class Room
         }
         return output;
     }
-   
+
     public void fillDots()
     {
         for (int counter1 = 0; counter1 < length; counter1++)
             for (int counter2 = 0; counter2 < width; counter2++)
                 map[counter1][counter2] = new Empty();
     }
-    
+
     public void addPlayer(int x, int y, Player p) {
         map[y][x] = p;
     }
-    
+
     public Player removePlayer() {
         for (int counter1 = 0; counter1 < length; counter1++) {
             for (int counter2 = 0; counter2 < width; counter2++) {
@@ -72,25 +72,25 @@ public class Room
         }
         return null;
     }
-    
+
     public void fillWalls()
     {
         for (int counter1 = 0; counter1 < length; counter1++)
         {
             for (int counter2 = 0; counter2 < width; counter2++)
             {
-               if (counter1 == 0 || counter1 == length - 1)
-               {  
-                   map[counter1][counter2] = new Wall(true);
-               }
-               else if (counter2 == 0 || counter2 == width - 1)
-               {
-                   map[counter1][counter2] = new Wall(false);
-               }
+                if (counter1 == 0 || counter1 == length - 1)
+                {  
+                    map[counter1][counter2] = new Wall(true);
+                }
+                else if (counter2 == 0 || counter2 == width - 1)
+                {
+                    map[counter1][counter2] = new Wall(false);
+                }
             }
         }
     }
-    
+
     public void fillSymbols()
     {
         /* Monster */
@@ -98,18 +98,18 @@ public class Room
         {
             int num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
             int num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
-            
+
             int monsterType = 0;
             if (roomNumber < 10) {
                 monsterType = (int)(Math.random() * 2);
             } else {
                 monsterType = (int)(Math.random() * 2);
             }
-            
+
             Monster[] allMonsterTypes = setPossibleMonsters();
             map[num1][num2] = allMonsterTypes[monsterType]; //check if placing on top of a monster
         }
-        
+
         /* Door */
         int xCoor = 0;      
         int yCoor = 0;
@@ -117,32 +117,32 @@ public class Room
         doorWall = rand1; 
         if (rand1 == 1 || rand1 == 3)
         {
-             xCoor = (int) (Math.random () * (width - 2) + 1);
+            xCoor = (int) (Math.random () * (width - 2) + 1);
         }
         if (rand1 == 2 || rand1 == 4) {
-             yCoor = (int) (Math.random () * (length - 2) + 1);
+            yCoor = (int) (Math.random () * (length - 2) + 1);
         }
         if (rand1 == 1) {
-             yCoor = 0; 
+            yCoor = 0; 
         }
         if (rand1 == 2) {
-             xCoor= width - 1;
+            xCoor= width - 1;
         }
         if (rand1 == 3) {
-             yCoor = length - 1;
+            yCoor = length - 1;
         }
         if (rand1 == 4) {
-             xCoor = 0; 
+            xCoor = 0; 
         }
-        
+
         map [yCoor][xCoor] = new DoorForward(); 
-        
+
         /* Treasure */
         int num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
         int num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
         map[num1][num2] = new Bread(); 
     }
-    
+
     private Monster[] setPossibleMonsters() {
         Monster[] possibleMonsters = new Monster[5];
         possibleMonsters[0] = new Gremlin();
@@ -150,77 +150,75 @@ public class Room
         possibleMonsters[2] = new Troll();
         possibleMonsters[3] = new Dragon();
         possibleMonsters[4] = new Changeling();
-        
+
         return possibleMonsters;
     }
-    
+
     public int getLevel() {
         return roomNumber;
     }
-    
+
     public int getWidth() {
         return width;
     }
-    
+
     public int getHeight() {
         return length;
     }
-    
+
     public char getTile(int x, int y) {
         return map[y][x].getSymbol();
     }
-     
+
     public int returnDoorWall(){
         return doorWall;
     }
-    
+
     public void addBackDoor (int w, int y, int x){
         //This allows there to be a door back but i still have to add the ability to go back
         int yCoor = y;
         int xCoor = x; 
         if (w == 1) {
-             xCoor = 0; 
+            xCoor = 0; 
         }
         if (w == 2) {
-             yCoor= width - 1;
+            yCoor= width - 1;
         }
         if (w == 3) {
-             xCoor = length - 1;
+            xCoor = length - 1;
         }
         if (w == 4) {
-             yCoor = 0; 
+            yCoor = 0; 
         }
-        
-<<<<<<< HEAD
-            map [xCoor][yCoor] = new DoorBackward();
-=======
-            map [xCoor][yCoor] = '^';
-            if (w == 1) {
-             xCoor = 1;
-             yCoor = y;
+
+        map [xCoor][yCoor] = new DoorBackward();
+        if (w == 1) {
+            xCoor = 1;
+            yCoor = y;
         }
         if (w == 2) {
-             yCoor = yCoor - 1;
-             xCoor = x;
+            yCoor = yCoor - 1;
+            xCoor = x;
         }
         if (w == 3) {
-             xCoor = xCoor - 1;
-             yCoor = y;
+            xCoor = xCoor - 1;
+            yCoor = y;
         }
         if (w == 4) {
-             yCoor = 1; 
-             xCoor = x; 
+            yCoor = 1; 
+            xCoor = x; 
         }
         bXcoor = yCoor;
         bYcoor = xCoor;//I dont know why this is backwards. But it is
->>>>>>> a4bbb7752b1c1ae7a58fb0e90eb5f06bdf14165c
-        
-        }
-     public int returnPositionX (){
+
+    }
+
+    public int returnPositionX (){
         return bXcoor;
     }
+
     public int returnPositionY(){
         return bYcoor; 
     }
-    }
+}
 
