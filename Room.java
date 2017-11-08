@@ -8,6 +8,8 @@ public class Room
     private int roomNum;
     private int doorWall;
     private int level; 
+    private int bYcoor = 0; //holds the variables for the back doors y coor
+    private int bXcoor = 0; //holds the variables for the back doors x coor
     
     public Room (int num, int min, int max)
     {
@@ -189,7 +191,36 @@ public class Room
              yCoor = 0; 
         }
         
+<<<<<<< HEAD
             map [xCoor][yCoor] = new DoorBackward();
+=======
+            map [xCoor][yCoor] = '^';
+            if (w == 1) {
+             xCoor = 1;
+             yCoor = y;
+        }
+        if (w == 2) {
+             yCoor = yCoor - 1;
+             xCoor = x;
+        }
+        if (w == 3) {
+             xCoor = xCoor - 1;
+             yCoor = y;
+        }
+        if (w == 4) {
+             yCoor = 1; 
+             xCoor = x; 
+        }
+        bXcoor = yCoor;
+        bYcoor = xCoor;//I dont know why this is backwards. But it is
+>>>>>>> a4bbb7752b1c1ae7a58fb0e90eb5f06bdf14165c
         
         }
+     public int returnPositionX (){
+        return bXcoor;
     }
+    public int returnPositionY(){
+        return bYcoor; 
+    }
+    }
+
