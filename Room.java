@@ -95,15 +95,13 @@ public class Room
             int num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
             int num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
             
-            int minMonsterDifficulty = 0;
-            int maxMonsterDifficulty = 4;
+            int monsterType = 0;
             if (roomNumber < 10) {
-                maxMonsterDifficulty = 1;
+                monsterType = (int)(Math.random() * 2);
             } else {
-                minMonsterDifficulty = 2;
+                monsterType = (int)(Math.random() * 2);
             }
             
-            int monsterType = maxMonsterDifficulty - (int)(Math.random() * (maxMonsterDifficulty - minMonsterDifficulty + 1));
             char[] allMonsterTypes = setPossibleMonsters();
             map[num1][num2] = allMonsterTypes[monsterType]; //check if placing on top of a monster
         }
