@@ -17,6 +17,7 @@ public class Player
     private int y;
     private boolean inCombat;
     private boolean usedItem;
+    boolean cheatMode = false;
     public Player() {
         inventory = new ArrayList<Item>();
     }
@@ -182,5 +183,9 @@ public class Player
 
     public String weaponName() {
         return currentWeapon.getName();
+    }
+    
+    public void enableCheats() {
+        cheatMode = true;
     }
 }
