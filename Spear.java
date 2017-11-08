@@ -1,6 +1,7 @@
 
 public class Spear extends Weapon
 {
+    private char symbol;
     private String type;
     private String name;
     private int damage;
@@ -11,6 +12,7 @@ public class Spear extends Weapon
        name = "Spear";
        damage = 5;
        durability = 5;
+       symbol = '$';
     }
     
     public String getType() {
@@ -32,5 +34,9 @@ public class Spear extends Weapon
     
     public int getDurability() {
         return durability;
+    }
+    
+    public char getSymbol() {
+        return symbol;
     }
 }

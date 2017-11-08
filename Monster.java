@@ -7,10 +7,10 @@ import javax.swing.JOptionPane;
  * @author Dylan, Ben
  * @version 1.2
  */
-public abstract class Monster
+public abstract class Monster implements Tileable
 {
     String name;
-    String symbol;
+    char symbol;
     int health; //NO need to have doubles
     int atk;
 
@@ -42,7 +42,7 @@ public abstract class Monster
         return health;
     }
     
-    public String getSymbol() {
+    public char getSymbol() {
         return symbol;
     }
     

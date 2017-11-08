@@ -11,4 +11,6 @@ comment4.params=
 comment4.target=int\ getDamage()
 comment5.params=
 comment5.target=int\ getDurability()
-numComments=6
+comment6.params=
+comment6.target=char\ getSymbol()
+numComments=7

@@ -137,7 +137,7 @@ public class GameplayWindow extends JFrame
                 space.setRoom(board, levelNum);
                 levelNum++;
                 board = space.getRoom(levelNum);
-                board.addPlayer(1,1);
+                board.addPlayer(1,1, play);
                 space.setRoom(board, levelNum);
                 play.setRoom(board);
                 play.setPos(1,1);
@@ -160,7 +160,7 @@ public class GameplayWindow extends JFrame
                 space.setRoom(board, levelNum);    
                 levelNum--;
                 board = space.getRoom(levelNum);
-                board.addPlayer(1,1);
+                board.addPlayer(1,1, play);
                 space.setRoom(board, levelNum);
                 play.setRoom(board);
                 play.setPos(1,1);
@@ -175,7 +175,7 @@ public class GameplayWindow extends JFrame
                 possibleMonsters[1] = new Skeleton();
                 possibleMonsters[2] = new Troll();
                 possibleMonsters[3] = new Dragon();
-                possibleMonsters[4] = new Changeling(play);
+                possibleMonsters[4] = new Changeling();
                 Monster enemy = possibleMonsters[action - 5];//Selects the monster based on what tile the user hit
                 refreshWindow("You enter combat!", play, space, levelNum);
                 CombatWindow cW = new CombatWindow();

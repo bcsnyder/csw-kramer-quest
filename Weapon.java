@@ -1,6 +1,7 @@
 
 public class Weapon extends Item
 {
+    private char symbol;
     private String type;
     private String name;
     private int damage;
@@ -8,6 +9,7 @@ public class Weapon extends Item
     
     public Weapon() {
        type = "Weapon";
+       symbol = '$';
     }
     
     public String getType() {

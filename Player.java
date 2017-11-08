@@ -1,8 +1,9 @@
 import java.util.*;
 
-public class Player
+public class Player implements Tileable
 {
     private String name;
+    private char symbol;
     private int health;
     private int stamina;
     private int attack;
@@ -19,8 +20,13 @@ public class Player
     private boolean usedItem;
     public Player() {
         inventory = new ArrayList<Item>();
+        symbol = '@';
     }
-
+    
+    public char getSymbol() {
+        return symbol;
+    }
+    
     public int moveUp() {
         int newY = y - 1;
 
@@ -77,10 +83,10 @@ public class Player
     }
 
     private void validMove(int xPos, int yPos) {
-        currRoom.removePlayer();
+        Player play = currRoom.removePlayer();
         x = xPos;
         y = yPos;
-        currRoom.addPlayer(x, y);
+        currRoom.addPlayer(x, y, play);
         stamina--;
         //checks stamina and lowers the health if stamina is too low
         if (stamina <= 0){ 

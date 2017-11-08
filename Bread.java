@@ -1,6 +1,7 @@
 
 public class Bread extends Food
 {
+    private char symbol;
     private String type;
     private String name;
     private int staminaIncrease;
@@ -9,6 +10,7 @@ public class Bread extends Food
         type = "Food";
         name = "Bread";
         staminaIncrease = 10;
+        symbol = '$';
     }
     
     public String getType()
@@ -23,5 +25,9 @@ public class Bread extends Food
     
     public int eat() {
         return staminaIncrease;
+    }
+    
+    public char getSymbol() {
+        return symbol;
     }
 }

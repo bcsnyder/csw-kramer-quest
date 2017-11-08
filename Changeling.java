@@ -1,15 +1,15 @@
-public class Changeling extends Monster
+public class Changeling extends Monster implements Tileable
 {
     String name;
-    String symbol;
+    char symbol;
     int health; //NO need to have doubles
     int atk;
 
-    public Changeling(Player p) {
-        symbol = "?";
+    public Changeling() {
+        symbol = '?';
         name = "Changeling";
-        health = (int)(Math.random()*5 + p.getHealth());
-        atk = (int)(Math.random()*2 + p.getAttack());
+        health = (int)(Math.random()*101);
+        atk = (int)(Math.random()*31);
     }
     
     /**
@@ -36,7 +36,7 @@ public class Changeling extends Monster
         return health;
     }
     
-    public String getSymbol() {
+    public char getSymbol() {
         return symbol;
     }
     

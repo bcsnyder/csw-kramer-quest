@@ -1,13 +1,13 @@
 
-public class Skeleton extends Monster
+public class Skeleton extends Monster implements Tileable
 {
     String name;
-    String symbol;
+    char symbol;
     int health; //NO need to have doubles
     int atk;
 
     public Skeleton() {
-        symbol = "S";
+        symbol = 'S';
         name = "Skeleton";
         health = (int)(Math.random()*3 + 8);
         atk = (int)(Math.random()*2 + 8);
@@ -37,7 +37,7 @@ public class Skeleton extends Monster
         return health;
     }
     
-    public String getSymbol() {
+    public char getSymbol() {
         return symbol;
     }
     

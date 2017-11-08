@@ -7,4 +7,6 @@ comment2.params=
 comment2.target=java.lang.String\ getName()
 comment3.params=
 comment3.target=int\ eat()
-numComments=4
+comment4.params=
+comment4.target=char\ getSymbol()
+numComments=5

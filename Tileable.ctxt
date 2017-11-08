@@ -1,4 +1,4 @@
 #BlueJ class context
 comment0.params=
-comment0.target=void\ displayWindow()
+comment0.target=char\ getSymbol()
 numComments=1

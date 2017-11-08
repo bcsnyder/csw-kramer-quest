@@ -4,7 +4,7 @@ public class Room
     private int length;
     private int width;
     private int numMonsters;
-    private char [][] map;
+    private Tileable [][] map;
     private int roomNum;
     private int doorWall;
     private int level; 
@@ -26,7 +26,7 @@ public class Room
             min = 2;
         }
         numMonsters = (int) Math.floor(Math.random() * (max - min)) + min;
-        map = new char[length][width];
+        map = new Tileable[length][width];
     }
     
     public void fill() {
@@ -41,7 +41,7 @@ public class Room
         {
             for (int counter2 = 0; counter2 < width; counter2++)
             {
-                output += " " + map[counter1][counter2] + " ";
+                output += " " + map[counter1][counter2].getSymbol() + " ";
             }
         }
         return output;
@@ -51,22 +51,24 @@ public class Room
     {
         for (int counter1 = 0; counter1 < length; counter1++)
             for (int counter2 = 0; counter2 < width; counter2++)
-                map[counter1][counter2] = '.';
+                map[counter1][counter2] = new Empty();
     }
     
-    public void addPlayer(int x, int y) {
-        map[y][x] = '@';
+    public void addPlayer(int x, int y, Player p) {
+        map[y][x] = p;
     }
     
-    public void removePlayer() {
+    public Player removePlayer() {
         for (int counter1 = 0; counter1 < length; counter1++) {
             for (int counter2 = 0; counter2 < width; counter2++) {
-                if(map[counter1][counter2] == '@') {
-                    map[counter1][counter2] = '.';
-                    return;
+                if(map[counter1][counter2].getSymbol() == '@') {
+                    Player removedPlayer = (Player)map[counter1][counter2];
+                    map[counter1][counter2] = new Empty();
+                    return removedPlayer;
                 }
             }
         }
+        return null;
     }
     
     public void fillWalls()
@@ -77,11 +79,11 @@ public class Room
             {
                if (counter1 == 0 || counter1 == length - 1)
                {  
-                   map[counter1][counter2] = '-';
+                   map[counter1][counter2] = new Wall(true);
                }
                else if (counter2 == 0 || counter2 == width - 1)
                {
-                   map[counter1][counter2] = '|';
+                   map[counter1][counter2] = new Wall(false);
                }
             }
         }
@@ -102,7 +104,7 @@ public class Room
                 monsterType = (int)(Math.random() * 2);
             }
             
-            char[] allMonsterTypes = setPossibleMonsters();
+            Monster[] allMonsterTypes = setPossibleMonsters();
             map[num1][num2] = allMonsterTypes[monsterType]; //check if placing on top of a monster
         }
         
@@ -113,10 +115,10 @@ public class Room
         doorWall = rand1; 
         if (rand1 == 1 || rand1 == 3)
         {
-             xCoor = (int) (Math.random () * (width - 2)) + 1;
+             xCoor = (int) (Math.random () * (width - 2) + 1);
         }
         if (rand1 == 2 || rand1 == 4) {
-             yCoor = (int) (Math.random () * (length - 2)) + 1;
+             yCoor = (int) (Math.random () * (length - 2) + 1);
         }
         if (rand1 == 1) {
              yCoor = 0; 
@@ -131,21 +133,21 @@ public class Room
              xCoor = 0; 
         }
         
-        map [yCoor][xCoor] = '#'; 
+        map [yCoor][xCoor] = new DoorForward(); 
         
         /* Treasure */
         int num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
         int num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
-        map[num1][num2] = '$'; 
+        map[num1][num2] = new Bread(); 
     }
     
-    private char[] setPossibleMonsters() {
-        char[] possibleMonsters = new char[5];
-        possibleMonsters[0] = 'G';
-        possibleMonsters[1] = 'S';
-        possibleMonsters[2] = 'T';
-        possibleMonsters[3] = 'D';
-        possibleMonsters[4] = '?';
+    private Monster[] setPossibleMonsters() {
+        Monster[] possibleMonsters = new Monster[5];
+        possibleMonsters[0] = new Gremlin();
+        possibleMonsters[1] = new Skeleton();
+        possibleMonsters[2] = new Troll();
+        possibleMonsters[3] = new Dragon();
+        possibleMonsters[4] = new Changeling();
         
         return possibleMonsters;
     }
@@ -163,7 +165,7 @@ public class Room
     }
     
     public char getTile(int x, int y) {
-        return map[y][x];
+        return map[y][x].getSymbol();
     }
      
     public int returnDoorWall(){
@@ -187,7 +189,7 @@ public class Room
              yCoor = 0; 
         }
         
-            map [xCoor][yCoor] = '^';
+            map [xCoor][yCoor] = new DoorBackward();
         
         }
     }

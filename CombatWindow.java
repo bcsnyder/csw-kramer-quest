@@ -31,7 +31,7 @@ public class CombatWindow extends JFrame
     private double mAttack;
     private int pDur;
     int menuSelect = 0;
-    private String mSym;
+    private char mSym;
     private GameplayWindow gW = new GameplayWindow();
     private GameOverWindow gOW = new GameOverWindow();
 
@@ -209,7 +209,7 @@ public class CombatWindow extends JFrame
             x = centerStringStartX("@", CANVAS_WIDTH/3, g);//Displays them symmetrically across from player
             g.drawString("@", x, 60);
             x = CANVAS_WIDTH - centerStringEndX("@", CANVAS_WIDTH/3, g);
-            g.drawString(mSym, x, 60);
+            g.drawString(mSym+"", x, 60);
 
             //Displays user stats in yellow under user name and symbol
             g.setFont(new Font("Monospaced", Font.PLAIN, 18));

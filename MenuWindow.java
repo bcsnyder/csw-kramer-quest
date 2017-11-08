@@ -119,7 +119,7 @@ public class MenuWindow extends JFrame
         }
         
         newPlayer.setPos(xPos, yPos);
-        currRoom.addPlayer(xPos, yPos);
+        currRoom.addPlayer(xPos, yPos, newPlayer);
     }
     
     private void chooseClass() {

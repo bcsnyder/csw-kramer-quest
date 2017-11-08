@@ -1,13 +1,13 @@
 
-public class Dragon extends Monster
+public class Dragon extends Monster implements Tileable
 {
     String name;
-    String symbol;
+    char symbol;
     int health; //NO need to have doubles
     int atk;
 
     public Dragon() {
-        symbol = "D";
+        symbol = 'D';
         name = "Dragon";
         health = (int)(Math.random()*5 + 45);
         atk = (int)(Math.random()*2 + 15);
@@ -37,7 +37,7 @@ public class Dragon extends Monster
         return health;
     }
     
-    public String getSymbol() {
+    public char getSymbol() {
         return symbol;
     }
     

@@ -1,13 +1,13 @@
 
-public class Troll extends Monster
+public class Troll extends Monster implements Tileable
 {
     String name;
-    String symbol;
+    char symbol;
     int health; //NO need to have doubles
     int atk;
 
     public Troll() {
-        symbol = "T";
+        symbol = 'T';
         name = "Troll";
         health = (int)(Math.random()*5 + 25);
         atk = (int)(Math.random()*2 + 7);
@@ -37,7 +37,7 @@ public class Troll extends Monster
         return health;
     }
     
-    public String getSymbol() {
+    public char getSymbol() {
         return symbol;
     }
     

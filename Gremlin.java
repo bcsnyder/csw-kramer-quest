@@ -1,15 +1,15 @@
 
-public class Gremlin extends Monster
+public class Gremlin extends Monster implements Tileable
 {
     String name;
-    String symbol;
+    char symbol;
     int health; //NO need to have doubles
     int atk;
     int xPos;
     int yPos;
 
     public Gremlin() {
-        symbol = "G";
+        symbol = 'G';
         name = "Gremlin";
         health = (int)(Math.random()*5 + 10);
         atk = (int)(Math.random()*2 + 1);
@@ -52,7 +52,7 @@ public class Gremlin extends Monster
         return health;
     }
     
-    public String getSymbol() {
+    public char getSymbol() {
         return symbol;
     }
     
