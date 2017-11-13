@@ -101,11 +101,10 @@ public class InventoryWindow extends JFrame
                                     play.setStamina(play.getStamina() + ((Food)inventory.get(select)).eat());
                                     actionMessage = "You regained some stamina.";
                                     inventory.remove(select);
-                                    stamina = play.getStamina();
                                     if (play.getStamina() > 100) {
                                         play.setStamina(100);
                                     } 
-
+                                    stamina = play.getStamina();
                                     if (p.getCombat() == true) {
 
                                         p.setHealth(play.getHealth() - savedMonster.getAttack());
@@ -152,11 +151,10 @@ public class InventoryWindow extends JFrame
                                     play.setHealth(play.getHealth() + ((HealingItem)inventory.get(select)).use());
                                     actionMessage = "You regained some health.";
                                     inventory.remove(select);
-                                    health = play.getHealth();
                                     if (play.getHealth() > 25) {
                                         play.setHealth(25);
                                     } 
-
+                                    health = play.getHealth();
                                     if (p.getCombat() == true) {
 
                                         p.setHealth(play.getHealth() - savedMonster.getAttack());
