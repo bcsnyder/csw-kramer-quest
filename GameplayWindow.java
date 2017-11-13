@@ -139,7 +139,7 @@ public class GameplayWindow extends JFrame
                 board = space.getRoom(levelNum);
                 int x = board.returnPositionX();
                 int y = board.returnPositionY();
-                board.addPlayer(1,1, play);
+                board.addPlayer(x,y, play);
                 space.setRoom(board, levelNum);
                 play.setRoom(board);
                 play.setPos(x,y);
