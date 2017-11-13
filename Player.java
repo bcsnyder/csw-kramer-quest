@@ -194,4 +194,7 @@ public class Player implements Tileable
     public void enableCheats() {
         cheatMode = true;
     }
+    public boolean cheatCheck() {
+        return cheatMode;
+    }
 }
