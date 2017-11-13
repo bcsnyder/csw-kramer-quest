@@ -144,7 +144,35 @@ public class InventoryWindow extends JFrame
                                 }
 
                             }
-                        }
+                        } else 
+                        if (inventory.get(select).getType().equals("HealingItem")) {
+                                if (play.getHealth() >= 25) {
+                                    actionMessage = "You're at full health!";
+                                } else {
+                                    play.setHealth(play.getHealth() + ((HealingItem)inventory.get(select)).use());
+                                    actionMessage = "You regained some stamina.";
+                                    inventory.remove(select);
+                                    health = play.getHealth();
+                                    if (play.getHealth() > 25) {
+                                        play.setHealth(25);
+                                    } 
+
+                                    if (p.getCombat() == true) {
+
+                                        p.setHealth(play.getHealth() - savedMonster.getAttack());
+                                        if (play.getHealth() <= 0) {
+                                            GameOverWindow gOW = new GameOverWindow();
+                                            gOW.displayWindow(play.getName(), "Killed by " + savedMonster.getName());
+                                            dispose();
+                                        } else {
+                                            dispose();
+                                            CombatWindow cW = new CombatWindow();
+                                            cW.setMessage(actionMessage);
+                                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
+                                        }
+                                    }
+                                }
+                            }
 
                         repaint();
                         break;
