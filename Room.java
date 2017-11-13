@@ -178,6 +178,16 @@ public class Room
         //This allows there to be a door back but i still have to add the ability to go back
         int yCoor = y;
         int xCoor = x; 
+        if (x == 0){
+            x++;
+        }else if (x == length){
+            x--;
+        }
+        if (y == 0){
+            y++;
+        }else if ( y == width){
+            y --;
+        }
         if (w == 1) {
             xCoor = 0; 
         }

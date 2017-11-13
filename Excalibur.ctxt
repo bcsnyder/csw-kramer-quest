@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Excalibur()
+comment1.params=
+comment1.target=java.lang.String\ getType()
+comment2.params=
+comment2.target=java.lang.String\ getName()
+comment3.params=
+comment3.target=int\ attack()
+comment4.params=
+comment4.target=int\ getDamage()
+comment5.params=
+comment5.target=int\ getDurability()
+numComments=6
