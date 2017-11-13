@@ -144,13 +144,13 @@ public class InventoryWindow extends JFrame
                                 }
 
                             }
-                        } else 
-                        if (inventory.get(select).getType().equals("HealingItem")) {
+                            else 
+                              if (inventory.get(select).getType().equals("HealingItem")) {
                                 if (play.getHealth() >= 25) {
                                     actionMessage = "You're at full health!";
                                 } else {
                                     play.setHealth(play.getHealth() + ((HealingItem)inventory.get(select)).use());
-                                    actionMessage = "You regained some stamina.";
+                                    actionMessage = "You regained some health.";
                                     inventory.remove(select);
                                     health = play.getHealth();
                                     if (play.getHealth() > 25) {
@@ -173,6 +173,7 @@ public class InventoryWindow extends JFrame
                                     }
                                 }
                             }
+                        } 
 
                         repaint();
                         break;
