@@ -223,6 +223,27 @@ public class InventoryWindow extends JFrame
                         }
                         repaint();
                         break;
+                          case KeyEvent.VK_NUMPAD1:
+                        if (play.cheatCheck() == true) {
+                            play.addItem(new Excalibur());
+                            actionMessage = "Spawned item id: Excalibur.";
+                        }
+                        repaint();
+                        break;
+                         case KeyEvent.VK_NUMPAD2:
+                         if (play.cheatCheck() == true) {
+                            play.addItem(new Ambrosia());
+                            actionMessage = "Spawned item id: Ambrosia.";
+                        }
+                        repaint();
+                        break;
+                         case KeyEvent.VK_NUMPAD3:
+                         if (play.cheatCheck() == true) {
+                            play.addItem(new HeartCanister());
+                            actionMessage = "Spawned item id: HeartCanister.";
+                        }
+                        repaint();
+                        break;
                         default: 
                         for (int i = 0; i < 10; i++) {
                             inputCode [i] = 0;
