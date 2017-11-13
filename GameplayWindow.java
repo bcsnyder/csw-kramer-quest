@@ -240,7 +240,7 @@ public class GameplayWindow extends JFrame
 
             g.setColor(Color.WHITE);//Displays username and score at top of screen
             g.setFont(new Font("Monospaced", Font.PLAIN, 24));
-            String playerInfo = play.getName() + " - Level " + levelNum;
+            String playerInfo = play.getName() + " - Level " + (levelNum + 1);
             int x = centerStringX(playerInfo, CANVAS_WIDTH, g);
             g.drawString(playerInfo, x, 30);
 
