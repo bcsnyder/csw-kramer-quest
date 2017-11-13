@@ -18,8 +18,8 @@ import javax.imageio.ImageIO;
  */
 public class MenuWindow extends JFrame
 {
-    public static final int LOGO_WIDTH  = 500;
-    public static final int LOGO_HEIGHT = 250;
+    public static final int LOGO_WIDTH  = 779;
+    public static final int LOGO_HEIGHT = 447;
 
     private GameplayWindow gameWind;
     private TutorialWindow tutorialWind;
@@ -27,7 +27,7 @@ public class MenuWindow extends JFrame
     private Stage newStage;
 
     private ImageFrame logo;
-    private String imgLogoFilename = "images/logo_ex.jpg";
+    private String imgLogoFilename = "images/logo_ex.png";
     private BufferedImage imgLogo;
 
     /**
