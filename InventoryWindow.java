@@ -243,6 +243,11 @@ public class InventoryWindow extends JFrame
                         }
                         repaint();
                         break;
+                          case KeyEvent.VK_BACK_SPACE:
+                        actionMessage = "Threw out " +inventory.get(select).getName() +".";
+                        inventory.remove(select);
+                        repaint();
+                        break;
                         default: 
                         for (int i = 0; i < 10; i++) {
                             inputCode [i] = 0;
