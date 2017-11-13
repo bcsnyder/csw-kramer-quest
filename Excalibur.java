@@ -9,7 +9,7 @@ public class Excalibur extends Weapon
     public Excalibur() {
        type = "Weapon";
        name = "Excalibur";
-       damage = 999;
+       damage = 997;
        durability = 999;
     }
     
