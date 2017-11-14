@@ -84,10 +84,10 @@ public class Player implements Tileable
     }
 
     private void validMove(int xPos, int yPos) {
-        Player play = currRoom.removePlayer();
+        Player play = (Player)currRoom.removeTile(x,y);
         x = xPos;
         y = yPos;
-        currRoom.addPlayer(x, y, play);
+        currRoom.addTile(x, y, play);
         stamina--;
         //checks stamina and lowers the health if stamina is too low
         if (stamina <= 0){ 

@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class InventoryWindow extends JFrame
 {
-    public static final int CANVAS_WIDTH  = 800;//Sets size of window
+    public static final int CANVAS_WIDTH  = 900;//Sets size of window
     public static final int CANVAS_HEIGHT = 500;
 
     private ArrayList<Item> inventory;

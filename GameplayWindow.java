@@ -73,6 +73,8 @@ public class GameplayWindow extends JFrame
                             move("down");
                         }
                         break;
+                        case KeyEvent.VK_Q:
+                        break;
                         case KeyEvent.VK_A:
                         if (turnPhase == 0) {
                             move("left");
@@ -92,9 +94,44 @@ public class GameplayWindow extends JFrame
                         break;
                         case KeyEvent.VK_ENTER:
                         if (turnPhase == 1) {
+                            ArrayList<Monster> countedMonsters = new ArrayList<Monster>();
                             //Monster move
+                            for(int xCounter = 1; xCounter < board.getWidth() - 1; xCounter++) {
+                                for(int yCounter = 1; yCounter < board.getHeight() - 1; yCounter++) {
+                                    char c = board.getTile(xCounter, yCounter);
+
+                                    if (c != '.' && c != '$' && c!= '@') {
+                                        Monster m = (Monster)board.returnTileObject(xCounter, yCounter);
+
+                                        if (!m.getMoved()) {
+                                            countedMonsters.add(m);
+                                            Room newBoard = m.chooseMove(board);
+                                            if (newBoard == null) {
+                                                refreshWindow("You enter combat!", play, space, levelNum);
+                                                CombatWindow cW = new CombatWindow();
+                                                cW.displayWindow(play, m, space, levelNum);
+                                                dispose();
+                                            } else {
+                                                space.setRoom(newBoard, levelNum);
+                                                play.setRoom(newBoard);
+                                                refreshWindow("The monsters moved", play, space, levelNum);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            for (int monsterCount = 0; monsterCount < countedMonsters.size(); monsterCount++) {
+                                Monster m = countedMonsters.get(monsterCount);
+                                int xLocation = m.getX();
+                                int yLocation = m.getY();
+                                m.setMoved(false);
+                                board.addTile(xLocation,yLocation,m);
+                                space.setRoom(board, levelNum);
+                                play.setRoom(board);
+                            }
+
                             turnPhase = 0;
-                            repaint();
                         }
                         break;
                     }
@@ -139,7 +176,7 @@ public class GameplayWindow extends JFrame
                 board = space.getRoom(levelNum);
                 int x = board.returnPositionX();
                 int y = board.returnPositionY();
-                board.addPlayer(x,y, play);
+                board.addTile(x,y, play);
                 space.setRoom(board, levelNum);
                 play.setRoom(board);
                 play.setPos(x,y);
@@ -162,7 +199,7 @@ public class GameplayWindow extends JFrame
                 space.setRoom(board, levelNum);    
                 levelNum--;
                 board = space.getRoom(levelNum);
-                board.addPlayer(1,1, play);
+                board.addTile(1,1, play);
                 space.setRoom(board, levelNum);
                 play.setRoom(board);
                 play.setPos(1,1);

@@ -62,7 +62,7 @@ public class MenuWindow extends JFrame
                 }
             });
 
-        playMusic();
+        //playMusic();
 
         //loads image
         try {
@@ -119,7 +119,7 @@ public class MenuWindow extends JFrame
         }
 
         newPlayer.setPos(xPos, yPos);
-        currRoom.addPlayer(xPos, yPos, newPlayer);
+        currRoom.addTile(xPos, yPos, newPlayer);
         newPlayer.setRoom(currRoom);
     }
 

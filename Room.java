@@ -56,10 +56,16 @@ public class Room
                 map[counter1][counter2] = new Empty();
     }
 
-    public void addPlayer(int x, int y, Player p) {
-        map[y][x] = p;
+    public void addTile(int x, int y, Tileable t) {
+        map[y][x] = t;
     }
 
+    public Tileable removeTile(int x, int y) {
+        Tileable deletedTile = map[y][x];
+        map[y][x] = new Empty();
+        return deletedTile;
+    }
+    
     public Player removePlayer() {
         for (int counter1 = 0; counter1 < length; counter1++) {
             for (int counter2 = 0; counter2 < width; counter2++) {
@@ -107,7 +113,9 @@ public class Room
             }
 
             Monster[] allMonsterTypes = setPossibleMonsters();
-            map[num1][num2] = allMonsterTypes[monsterType]; //check if placing on top of a monster
+            Monster newMonster = allMonsterTypes[monsterType];
+            newMonster.setPos(num2, num1);
+            map[num1][num2] = newMonster; //check if placing on top of a monster
         }
 
         /* Door */
@@ -169,7 +177,11 @@ public class Room
     public char getTile(int x, int y) {
         return map[y][x].getSymbol();
     }
-
+    
+    public Tileable returnTileObject(int x, int y) {
+        return map[y][x];
+    }
+    
     public int returnDoorWall(){
         return doorWall;
     }

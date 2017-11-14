@@ -13,6 +13,9 @@ public abstract class Monster implements Tileable
     char symbol;
     int health; //NO need to have doubles
     int atk;
+    int x;
+    int y;
+    boolean moved;
 
     public Monster() {
         
@@ -32,6 +35,31 @@ public abstract class Monster implements Tileable
         }else{
             return true;
         }
+    }
+    
+    public int getX() {
+        return x;
+    }
+    
+    public int getY() {
+        return y;
+    }
+    
+    public boolean getMoved() {
+        return moved;
+    }
+    
+    public void setMoved(boolean hasMoved) {
+        moved = hasMoved;
+    }
+    
+    public Room chooseMove(Room tiles) {
+        return tiles;
+    }
+    
+    public void setPos(int xPos, int yPos) {
+        x = xPos;
+        y = yPos;
     }
     
     public String getName() {
