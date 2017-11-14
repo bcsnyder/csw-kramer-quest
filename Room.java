@@ -109,7 +109,7 @@ public class Room
             if (roomNumber < 10) {
                 monsterType = (int)(Math.random() * 2);
             } else {
-                monsterType = (int)(Math.random() * 2);
+                monsterType = 2 + (int)(Math.random() * 2);
             }
 
             Monster[] allMonsterTypes = setPossibleMonsters();
