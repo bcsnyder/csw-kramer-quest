@@ -7,7 +7,7 @@ public class Stage
     private int xCoor = 0;      
     private int yCoor = 0;
     private int doorWallLast = 0; 
-    
+
     public Stage(int num)
     {
         numRooms = num;
@@ -16,7 +16,7 @@ public class Stage
         floor = new Room[numRooms];
         makeRooms();
     }
-    
+
     public void makeRooms() 
     {
         for (int counter = 0; counter < numRooms; counter++)
@@ -25,20 +25,22 @@ public class Stage
             add.fillDots();
             add.fillWalls();
             add.fillSymbols();
-            
+
             //This adds the back door so that the player can go through this 
             int height = add.getHeight();
             int width = add.getWidth();
             if (counter != 0){
-                
-                if (doorWallLast == 1 || doorWallLast == 3){
-                    yCoor = (int) (Math.random () * (width - 2)) + 1;
-                } else if (doorWallLast == 2 || doorWallLast == 4){
-                    xCoor = (int) (Math.random () * (height - 2)) + 1;
-                }
-                
-                 if (doorWallLast == 1){
-                     doorWallLast = 3;
+
+                do {
+                    if (doorWallLast == 1 || doorWallLast == 3){
+                        yCoor = (int) (Math.random () * (width - 2)) + 1;
+                    } else if (doorWallLast == 2 || doorWallLast == 4){
+                        xCoor = (int) (Math.random () * (height - 2)) + 1;
+                    }
+                } while (add.getTile(xCoor,yCoor) == '#');
+
+                if (doorWallLast == 1){
+                    doorWallLast = 3;
                 }else if (doorWallLast == 2){
                     doorWallLast = 4;
                 }else if (doorWallLast == 3){
@@ -46,17 +48,16 @@ public class Stage
                 }else if (doorWallLast == 4){
                     doorWallLast = 2;
                 }
-                
+
                 add.addBackDoor(doorWallLast, yCoor, xCoor);
             }
-            
-           
+
             doorWallLast = add.returnDoorWall();
             floor[counter] = add;
         }
-        
+
     }
-   
+
     public String toString() 
     {
         String output = "";
@@ -66,19 +67,19 @@ public class Stage
         }
         return output;
     }
-    
-     public Room getRoom(int num) {
+
+    public Room getRoom(int num) {
         return floor[num];
     }
-    
+
     public void setRoom(Room newRoom, int num) {
         floor[num] = newRoom;
     }
-    
+
     public Room nextRoom (int roomNum){
-         return floor[roomNum];
+        return floor[roomNum];
     }
-     
+
     //floor [0] = one;  
     //floor [1] = two;
     //floor [2] = three;
