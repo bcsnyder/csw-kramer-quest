@@ -32,6 +32,9 @@ public class Stage
             if (counter != 0){
 
                 do {
+                    xCoor = 0;      
+                    yCoor = 0;
+                    
                     if (doorWallLast == 1 || doorWallLast == 3){
                         yCoor = (int) (Math.random () * (width - 2)) + 1;
                     } else if (doorWallLast == 2 || doorWallLast == 4){

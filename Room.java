@@ -65,7 +65,7 @@ public class Room
         map[y][x] = new Empty();
         return deletedTile;
     }
-    
+
     public Player removePlayer() {
         for (int counter1 = 0; counter1 < length; counter1++) {
             for (int counter2 = 0; counter2 < width; counter2++) {
@@ -102,8 +102,12 @@ public class Room
         /* Monster */
         for (int counter = 0; counter < numMonsters; counter++)
         {
-            int num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
-            int num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
+            int num1;
+            int num2;
+            do {
+                num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
+                num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
+            } while (map[num1][num2].getSymbol() != '.');
 
             int monsterType = 0;
             if (roomNumber < 10) {
@@ -146,8 +150,13 @@ public class Room
         map [yCoor][xCoor] = new DoorForward(); 
 
         /* Treasure */
-        int num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
-        int num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
+        int num1;
+        int num2;
+        do {
+            num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
+            num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
+        } while (map[num1][num2].getSymbol() != '.');
+
         map[num1][num2] = new Bread(); 
     }
 
@@ -177,11 +186,11 @@ public class Room
     public char getTile(int x, int y) {
         return map[y][x].getSymbol();
     }
-    
+
     public Tileable returnTileObject(int x, int y) {
         return map[y][x];
     }
-    
+
     public int returnDoorWall(){
         return doorWall;
     }
