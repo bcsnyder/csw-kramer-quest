@@ -36,9 +36,9 @@ public class Stage
                     yCoor = 0;
                     
                     if (doorWallLast == 1 || doorWallLast == 3){
-                        yCoor = (int) (Math.random () * (width - 2)) + 1;
+                        xCoor = (int) (Math.random() * (width - 2)) + 1;
                     } else if (doorWallLast == 2 || doorWallLast == 4){
-                        xCoor = (int) (Math.random () * (height - 2)) + 1;
+                        yCoor = (int) (Math.random() * (height - 2)) + 1;
                     }
                 } while (add.getTile(xCoor,yCoor) == '#');
 
@@ -52,7 +52,7 @@ public class Stage
                     doorWallLast = 2;
                 }
 
-                add.addBackDoor(doorWallLast, yCoor, xCoor);
+                add.addBackDoor(doorWallLast, xCoor, yCoor);
             }
 
             doorWallLast = add.returnDoorWall();

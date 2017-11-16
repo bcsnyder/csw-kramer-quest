@@ -195,52 +195,42 @@ public class Room
         return doorWall;
     }
 
-    public void addBackDoor (int w, int y, int x){
+    public void addBackDoor (int w, int x, int y){
         //This allows there to be a door back but i still have to add the ability to go back
         int yCoor = y;
-        int xCoor = x; 
-        if (x == 0){
-            x++;
-        }else if (x == length){
-            x--;
-        }
-        if (y == 0){
-            y++;
-        }else if ( y == width){
-            y --;
-        }
+        int xCoor = x;
         if (w == 1) {
-            xCoor = 0; 
-        }
-        if (w == 2) {
-            yCoor= width - 1;
-        }
-        if (w == 3) {
-            xCoor = length - 1;
-        }
-        if (w == 4) {
             yCoor = 0; 
         }
-
-        map [xCoor][yCoor] = new DoorBackward();
-        if (w == 1) {
-            xCoor = 1;
-            yCoor = y;
-        }
         if (w == 2) {
-            yCoor = yCoor - 1;
-            xCoor = x;
+            xCoor = width - 1;
         }
         if (w == 3) {
-            xCoor = xCoor - 1;
-            yCoor = y;
+            yCoor = length - 1;
         }
         if (w == 4) {
-            yCoor = 1; 
-            xCoor = x; 
+            xCoor = 0; 
         }
-        bXcoor = yCoor;
-        bYcoor = xCoor;//I dont know why this is backwards. But it is
+
+        map [yCoor][xCoor] = new DoorBackward();
+        if (w == 1) {
+            xCoor = x;
+            yCoor++;
+        }
+        if (w == 2) {
+            yCoor = y;
+            xCoor--;
+        }
+        if (w == 3) {
+            xCoor = x;
+            yCoor--;
+        }
+        if (w == 4) {
+            yCoor = y; 
+            xCoor++; 
+        }
+        bXcoor = xCoor;
+        bYcoor = yCoor;//I dont know why this is backwards. But it is
 
     }
 
