@@ -223,10 +223,12 @@ public class GameplayWindow extends JFrame
                 space.setRoom(board, levelNum);    
                 levelNum--;
                 board = space.getRoom(levelNum);
-                board.addTile(1,1, play);
+                int x = board.returnPositionX2();
+                int y = board.returnPositionY2();
+                board.addTile(x,y, play);
                 space.setRoom(board, levelNum);
                 play.setRoom(board);
-                play.setPos(1,1);
+                play.setPos(x,y);
                 if (play.getStamina() < 10){
                     refreshWindow ("You moved back a room! Stamina low", play, space, levelNum);   
                 }else {
