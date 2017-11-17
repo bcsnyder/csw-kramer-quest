@@ -248,17 +248,40 @@ public class GameplayWindow extends JFrame
 
     public Item randomItem() {
         int value = (int) (Math.random() * 100 + 1);
-        if (value <= 60 && value >= 1) {
+        if (value <= 40 && value >= 1) {
             return new Bread();
-        } else if (value <= 90 && value >= 61) {
-            return new Spear();
-        } else if (value <= 100 && value >= 91) {
-            return new Axe();
+        } else if (value <= 70 && value >= 41) {
+            return new Potion();
+        } else if (value <= 100 && value >= 71) {
+            int weaponType = 0;
+            if (levelNum < 2) {
+                weaponType = 0;
+            } else if (levelNum >= 2 && levelNum < 8){
+                weaponType = (int)(Math.random() * 2);
+            } else if (levelNum  >= 8 && levelNum < 12) {
+                weaponType = (int)(Math.random() * 2) + 1;
+            } else if (levelNum >= 12 && levelNum < 17) {
+                weaponType = (int)(Math.random() * 2)+ 2;
+            } else if (levelNum  >= 17 && levelNum < 20) {
+                weaponType = 3;
+            }
+            if (weaponType == 0) {
+                return new Spear();
+            } else if (weaponType == 1) {
+                return new Axe();
+            } else if (weaponType == 2) {
+                return new Sword();
+            } else if (weaponType == 3) {
+                play.addItem(new Musket());
+                play.addItem(new Musket());
+                return new Musket();
+            } else {
+                return new Axe();
+            }
         } else {
             return new Bread();    
         }
     }
-
     /**
      * Simply updates variables with what's passed in and
      * repaints the window. VOILA!
