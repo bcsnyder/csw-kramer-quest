@@ -111,10 +111,16 @@ public class Room
             } while (map[num1][num2].getSymbol() != '.');
 
             int monsterType = 0;
-            if (roomNumber < 10) {
+            if (roomNumber < 2) {
+                monsterType = 0;
+            } else if ( roomNumber >= 2 && roomNumber < 8){
                 monsterType = (int)(Math.random() * 2);
-            } else {
-                monsterType = 2 + (int)(Math.random() * 2);
+            } else if ( roomNumber >= 8 && roomNumber < 12) {
+                monsterType = (int)(Math.random() * 2) + 1;
+            } else if ( roomNumber >= 12 && roomNumber < 17) {
+                monsterType = (int)(Math.random() * 2)+ 2;
+            } else if ( roomNumber >= 17 && roomNumber < 21) {
+                monsterType = 3;
             }
 
             Monster[] allMonsterTypes = setPossibleMonsters();
