@@ -28,6 +28,7 @@ public class GameplayWindow extends JFrame
     private ArrayList<Item> inventory;
     private int turnPhase = 0;
     private String menuString;
+    private int menuSelection;
 
     private String actionMessage = "";
 
@@ -45,6 +46,10 @@ public class GameplayWindow extends JFrame
         inventory = play.getInventory();
 
         String menuString = "";
+        if (player.getName().equals("Wefwef")) {
+            turnPhase = 2;
+            menuSelection = 0;
+        }
 
         canvas = new GameDisplay();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
@@ -78,11 +83,21 @@ public class GameplayWindow extends JFrame
                         case KeyEvent.VK_A:
                         if (turnPhase == 0) {
                             move("left");
+                        } else if (turnPhase == 2) {
+                            if (menuSelection > 0) {
+                                menuSelection--;
+                                refreshWindow("", play, space, levelNum);
+                            }
                         }
                         break;
                         case KeyEvent.VK_D:
                         if (turnPhase == 0) {
                             move("right");
+                        } else if (turnPhase == 2) {
+                            if (menuSelection < 1) {
+                                menuSelection++;
+                                refreshWindow("", play, space, levelNum);
+                            }
                         }
                         break;
                         case KeyEvent.VK_I:
@@ -132,6 +147,15 @@ public class GameplayWindow extends JFrame
                             }
 
                             turnPhase = 0;
+                        } else if (turnPhase == 2) {
+                            if (menuSelection == 0) {
+                                turnPhase = 0;
+                                refreshWindow("", play, space, levelNum);
+                            } else if (menuSelection == 1) {
+                                turnPhase = 0;
+                                play.setName(JOptionPane.showInputDialog("Enter your name!"));
+                                refreshWindow("", play, space, levelNum);
+                            }
                         }
                         break;
                     }
@@ -309,6 +333,12 @@ public class GameplayWindow extends JFrame
                 menuString = "";
             } else if (turnPhase == 1) {
                 menuString = ">Next Turn";
+            } else if (turnPhase == 2) {
+                if (menuSelection == 0) {
+                    menuString = ">Use default name       Create custom name";
+                } else if (menuSelection == 1) {
+                    menuString = " Use default name      >Create custom name";
+                }
             }
             x = centerStringX(menuString, CANVAS_WIDTH, g);
             g.drawString(menuString, x, 500);
