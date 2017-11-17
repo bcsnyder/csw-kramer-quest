@@ -10,7 +10,8 @@ public class Room
     private int level; 
     private int bYcoor = 0; //holds the variables for the back doors y coor
     private int bXcoor = 0; //holds the variables for the back doors x coor
-
+    private int BackPosX = 0; //basically same thing as bycoor just for other door
+    private int BackPosY = 0;
     public Room (int num, int min, int max)
     {
         roomNumber = num;
@@ -148,6 +149,25 @@ public class Room
         }
 
         map [yCoor][xCoor] = new DoorForward(); 
+        //Makes position for the forwards door when you go back. 
+        if (rand1 == 1) {
+             yCoor = 1; 
+             xCoor = xCoor;
+        }
+        if (rand1 == 2) {
+             xCoor= width - 2;
+             yCoor = yCoor;
+        }
+        if (rand1 == 3) {
+             yCoor = length - 2;
+             xCoor = xCoor;
+        }
+        if (rand1 == 4) {
+             xCoor = 1; 
+             yCoor = yCoor;
+        }
+        BackPosX = xCoor;
+        BackPosY = yCoor;
 
         /* Treasure */
         int num1;
@@ -240,6 +260,12 @@ public class Room
 
     public int returnPositionY(){
         return bYcoor; 
+    }
+    public int returnPositionX2(){
+        return BackPosX;
+    }
+    public int returnPositionY2(){
+        return BackPosY; 
     }
 }
 
