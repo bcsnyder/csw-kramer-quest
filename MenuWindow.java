@@ -99,7 +99,7 @@ public class MenuWindow extends JFrame
         Room currRoom = newStage.getRoom(0);
 
         newPlayer = new Player();
-        newPlayer.setName("Wefwef");
+        newPlayer.setName("Unnamed");
         newPlayer.setHealth(25);
         newPlayer.setAttack(2);
         newPlayer.setStamina(100);

@@ -46,7 +46,7 @@ public class GameplayWindow extends JFrame
         inventory = play.getInventory();
 
         String menuString = "";
-        if (player.getName().equals("Wefwef")) {
+        if (player.getName().equals("Unnamed")) {
             turnPhase = 2;
             menuSelection = 0;
         }
@@ -150,6 +150,7 @@ public class GameplayWindow extends JFrame
                         } else if (turnPhase == 2) {
                             if (menuSelection == 0) {
                                 turnPhase = 0;
+                                play.setName("Wefwef");
                                 refreshWindow("", play, space, levelNum);
                             } else if (menuSelection == 1) {
                                 turnPhase = 0;
@@ -164,7 +165,7 @@ public class GameplayWindow extends JFrame
     }
 
     private void move(String direction) {
-        int action = 0;
+        Tileable action = new Empty();
 
         if (direction.equals("up")) {
             action = play.moveUp();
@@ -183,7 +184,7 @@ public class GameplayWindow extends JFrame
         }
 
         do {
-            if (action == 1) {
+            if (action.getCategory().equals("Empty")) {
                 board = play.getRoom();
                 space.setRoom(board, levelNum);
                 if (play.getStamina() < 10){
@@ -193,7 +194,7 @@ public class GameplayWindow extends JFrame
                 }
 
                 turnPhase = 1;
-            } else if(action == 2) {
+            } else if(action.getCategory().equals("Door Forward")) {
                 board.removePlayer();
                 space.setRoom(board, levelNum);
                 levelNum++;
@@ -209,16 +210,16 @@ public class GameplayWindow extends JFrame
                 }else {
                     refreshWindow("You moved to a new room!", play, space, levelNum);
                 }
-            } else if(action == 3) {
+            } else if(action.getCategory().equals("Item")) {
                 board = play.getRoom();
                 space.setRoom(board, levelNum);                
-                play.addItem(randomItem());
+                play.addItem((Item)action);
                 refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space, levelNum);
 
                 turnPhase = 1;
-            } else if(action == 0) {
+            } else if(action.getCategory().equals("Wall")) {
                 refreshWindow("You can't move there!", play, space, levelNum);
-            } else if(action == 4) {
+            } else if(action.getCategory().equals("Door Back")) {
                 board.removePlayer();
                 space.setRoom(board, levelNum);    
                 levelNum--;
@@ -235,19 +236,13 @@ public class GameplayWindow extends JFrame
                     refreshWindow("You moved back a room!", play, space, levelNum);
                 }
             } else {
-                Monster[] possibleMonsters = new Monster[5];//Creates an array of all the possible enemy types
-                possibleMonsters[0] = new Gremlin();
-                possibleMonsters[1] = new Skeleton();
-                possibleMonsters[2] = new Troll();
-                possibleMonsters[3] = new Dragon();
-                possibleMonsters[4] = new Changeling();
-                Monster enemy = possibleMonsters[action - 5];//Selects the monster based on what tile the user hit
+                Monster enemy = (Monster)action;//Selects the monster based on what tile the user hit
                 refreshWindow("You enter combat!", play, space, levelNum);
                 CombatWindow cW = new CombatWindow();
                 cW.displayWindow(play, enemy, space, levelNum);
                 dispose();
             }
-        } while (action < 0);
+        } while (action.getCategory().equals("Wall"));
         repaint();
     }
 

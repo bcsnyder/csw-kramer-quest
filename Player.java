@@ -34,58 +34,41 @@ public class Player implements Tileable
         return symbol;
     }
     
-    public int moveUp() {
+    public Tileable moveUp() {
         int newY = y - 1;
 
         return checkMove(x, newY);
     }
 
-    public int moveDown() {
+    public Tileable moveDown() {
         int newY = y + 1;
 
         return checkMove(x, newY);
     }
 
-    public int moveLeft() {
+    public Tileable moveLeft() {
         int newX = x - 1;
 
         return checkMove(newX, y);
     }
 
-    public int moveRight() {
+    public Tileable moveRight() {
         int newX = x + 1;
 
         return checkMove(newX, y);
     }
 
-    private int checkMove(int xCor, int yCor) {
-        if (currRoom.getTile(xCor, yCor) == '.') {
+    private Tileable checkMove(int xCor, int yCor) {
+        if (currRoom.returnTileObject(xCor, yCor).getCategory().equals("Empty")) {
+            Tileable empty = currRoom.returnTileObject(xCor, yCor);
             validMove(xCor, yCor);
-            return 1;
-        } else if (currRoom.getTile(xCor, yCor) == '$') {
+            return empty;
+        } else if (currRoom.returnTileObject(xCor, yCor).getCategory().equals("Item")) {
+            Tileable itemFound = currRoom.returnTileObject(xCor, yCor);
             validMove(xCor, yCor);
-            return 3;
-        } else if (currRoom.getTile(xCor, yCor) == '#') {
-            return 2;
-        } else if (currRoom.getTile(xCor, yCor) == '^') {
-            return 4;
-        } else if (currRoom.getTile(xCor, yCor) == 'G') {
-            validMove(xCor, yCor);
-            return 5;
-        } else if (currRoom.getTile(xCor, yCor) == 'S') {
-            validMove(xCor, yCor);
-            return 6;
-        } else if (currRoom.getTile(xCor, yCor) == 'T') {
-            validMove(xCor, yCor);
-            return 7;
-        } else if (currRoom.getTile(xCor, yCor) == 'D') {
-            validMove(xCor, yCor);
-            return 8;
-        } else if (currRoom.getTile(xCor, yCor) == '?') {
-            validMove(xCor, yCor);
-            return 9;
+            return itemFound;
         } else {
-            return 0;
+            return currRoom.returnTileObject(xCor, yCor);
         }
     }
 

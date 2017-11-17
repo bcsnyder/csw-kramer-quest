@@ -110,6 +110,7 @@ public class CombatWindow extends JFrame
                                 message = message + " and the monster is dead!";
                                 refreshWindow(message, play, monster);
                                 play.setCombat(false);
+                                st.getRoom(num).removeTile(monster.getX(),monster.getY());
                                 gW.displayWindow(play, st, num);
                                 dispose();
                             }
