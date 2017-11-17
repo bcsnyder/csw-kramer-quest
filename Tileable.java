@@ -12,5 +12,5 @@ public interface Tileable
     
     public char getSymbol();
     
-    //public String getCategory();
+    public String getCategory();
 }

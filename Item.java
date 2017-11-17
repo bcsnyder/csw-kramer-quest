@@ -14,6 +14,10 @@ public abstract class Item implements Tileable
         return type;
     }
     
+    public String getCategory() {
+        return category;
+    }
+    
     public String getName()
     {
         return name;

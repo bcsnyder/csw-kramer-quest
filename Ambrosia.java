@@ -12,6 +12,10 @@ public class Ambrosia extends Food
         staminaIncrease = 100;
     }
     
+    public String getCategory() {
+        return category;
+    }
+    
     public String getType()
     {
         return type;

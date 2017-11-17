@@ -9,6 +9,10 @@ public class DoorForward implements Tileable
         category = "Door Forward";
     }
     
+    public String getCategory() {
+        return category;
+    }
+    
     public char getSymbol() {
         return symbol;
     }

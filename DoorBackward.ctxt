@@ -2,5 +2,7 @@
 comment0.params=
 comment0.target=DoorBackward()
 comment1.params=
-comment1.target=char\ getSymbol()
-numComments=2
+comment1.target=java.lang.String\ getCategory()
+comment2.params=
+comment2.target=char\ getSymbol()
+numComments=3

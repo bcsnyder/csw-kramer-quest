@@ -15,6 +15,10 @@ public class Bread extends Food
         symbol = '$';
     }
     
+    public String getCategory() {
+        return category;
+    }
+    
     public String getType()
     {
         return type;

@@ -16,6 +16,10 @@ public class Food extends Item
         symbol = '$';
     }
 
+    public String getCategory() {
+        return category;
+    }
+    
     public String getType()
     {
         return type;

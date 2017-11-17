@@ -18,6 +18,10 @@ public class Gremlin extends Monster implements Tileable
         atk = (int)(Math.random()*2 + 1);
     }
 
+    public String getCategory() {
+        return category;
+    }
+    
     /**
      * When called, this method will subtract the appropriate amount of health from the monster.  If the monster
      * is alive, it returns true.  If the monster is dead it returns false.

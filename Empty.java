@@ -8,6 +8,10 @@ public class Empty implements Tileable
         category = "Empty";
     }
     
+    public String getCategory() {
+        return category;
+    }
+    
     public char getSymbol() {
         return symbol;
     }

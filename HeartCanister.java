@@ -13,6 +13,10 @@ public class HeartCanister extends HealingItem
         healthIncrease = 25;
     }
     
+    public String getCategory() {
+        return category;
+    }
+    
     public String getType()
     {
         return type;

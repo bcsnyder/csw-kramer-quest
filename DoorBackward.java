@@ -8,6 +8,10 @@ public class DoorBackward implements Tileable
         category = "Door Back";
     }
     
+    public String getCategory() {
+        return category;
+    }
+    
     public char getSymbol() {
         return symbol;
     }

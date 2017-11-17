@@ -2,9 +2,11 @@
 comment0.params=
 comment0.target=HeartCanister()
 comment1.params=
-comment1.target=java.lang.String\ getType()
+comment1.target=java.lang.String\ getCategory()
 comment2.params=
-comment2.target=java.lang.String\ getName()
+comment2.target=java.lang.String\ getType()
 comment3.params=
-comment3.target=int\ use()
-numComments=4
+comment3.target=java.lang.String\ getName()
+comment4.params=
+comment4.target=int\ use()
+numComments=5

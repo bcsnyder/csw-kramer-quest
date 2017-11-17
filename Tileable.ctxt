@@ -1,4 +1,6 @@
 #BlueJ class context
 comment0.params=
 comment0.target=char\ getSymbol()
-numComments=1
+comment1.params=
+comment1.target=java.lang.String\ getCategory()
+numComments=2

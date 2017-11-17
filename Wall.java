@@ -12,6 +12,10 @@ public class Wall implements Tileable
         category = "Wall";
     }
     
+    public String getCategory() {
+        return category;
+    }
+    
     public char getSymbol() {
         return symbol;
     }
