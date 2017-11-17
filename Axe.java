@@ -6,9 +6,11 @@ public class Axe extends Weapon
     private String name;
     private int damage;
     private int durability;
+    String category;
     
     public Axe() {
        type = "Weapon";
+       category = "Item";
        name = "Axe";
        damage = 10;
        durability = 3;

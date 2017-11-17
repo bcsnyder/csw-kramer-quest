@@ -5,9 +5,11 @@ public class Excalibur extends Weapon
     private String name;
     private int damage;
     private int durability;
+    private String category;
     
     public Excalibur() {
        type = "Weapon";
+       category = "Item";
        name = "Excalibur";
        damage = 997;
        durability = 999;

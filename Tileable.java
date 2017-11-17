@@ -8,6 +8,9 @@
 public interface Tileable
 {
     char symbol = 'a';
+    String category = "";
     
     public char getSymbol();
+    
+    //public String getCategory();
 }

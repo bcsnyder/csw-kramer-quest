@@ -6,10 +6,12 @@ public class Dragon extends Monster implements Tileable
     int health; //NO need to have doubles
     int atk;
     private boolean moved;
+    String category;
 
     public Dragon() {
         symbol = 'D';
         name = "Dragon";
+        category = "Monster";
         health = (int)(Math.random()*5 + 45);
         atk = (int)(Math.random()*2 + 15);
     }

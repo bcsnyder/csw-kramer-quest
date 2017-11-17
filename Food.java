@@ -9,6 +9,7 @@ public class Food extends Item
     private String type;
     private String name;
     private int staminaIncrease;
+    String category;
 
     public Food() {
         type = "Food";

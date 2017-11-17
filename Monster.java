@@ -16,6 +16,7 @@ public abstract class Monster implements Tileable
     int x;
     int y;
     boolean moved;
+    String category;
 
     public Monster() {
         

@@ -6,9 +6,11 @@ public class Spear extends Weapon
     private String name;
     private int damage;
     private int durability;
+    String category;
     
     public Spear() {
        type = "Weapon";
+       category = "Item";
        name = "Spear";
        damage = 5;
        durability = 5;

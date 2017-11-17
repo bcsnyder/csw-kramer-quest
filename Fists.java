@@ -5,9 +5,11 @@ public class Fists extends Weapon
     private String name;
     private int damage;
     private int durability;
+    String category;
     
     public Fists() {
        type = "Weapon";
+       category = "Item";
        name = "Fists";
        damage = 0;
        durability = 1;

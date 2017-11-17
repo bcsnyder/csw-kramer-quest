@@ -4,6 +4,7 @@ public class Ambrosia extends Food
     private String type;
     private String name;
     private int staminaIncrease;
+    private String category;
     
     public Ambrosia() {
         type = "Food";

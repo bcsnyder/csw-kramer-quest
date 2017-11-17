@@ -6,10 +6,12 @@ public class Skeleton extends Monster implements Tileable
     int health; //NO need to have doubles
     int atk;
     private boolean moved;
+    String category;
 
     public Skeleton() {
         symbol = 'S';
         name = "Skeleton";
+        category = "Monster";
         health = (int)(Math.random()*3 + 8);
         atk = (int)(Math.random()*2 + 8);
     }

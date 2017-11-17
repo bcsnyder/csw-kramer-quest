@@ -7,6 +7,7 @@ public abstract class Item implements Tileable
     private char symbol;
     private String type;
     private String name;
+    String category;
 
     public String getType()
     {

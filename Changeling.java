@@ -6,10 +6,12 @@ public class Changeling extends Monster implements Tileable
     int health; //NO need to have doubles
     int atk;
     private boolean moved;
+    String category;
 
     public Changeling() {
         symbol = '?';
         name = "Changeling";
+        category = "Monster";
         health = (int)(Math.random()*101);
         atk = (int)(Math.random()*31);
     }

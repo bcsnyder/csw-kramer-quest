@@ -7,6 +7,7 @@ public class Player implements Tileable
     private int health;
     private int stamina;
     private int attack;
+    String category;
     private int var = 0; //just a thing
     private GameOverWindow gOW = new GameOverWindow();
 
@@ -22,6 +23,11 @@ public class Player implements Tileable
     public Player() {
         inventory = new ArrayList<Item>();
         symbol = '@';
+        category = "Player";
+    }
+    
+    public String getCategory() {
+        return category;
     }
     
     public char getSymbol() {

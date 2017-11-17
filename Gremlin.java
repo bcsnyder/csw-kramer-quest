@@ -8,10 +8,12 @@ public class Gremlin extends Monster implements Tileable
     private int x;
     private int y;
     private boolean moved;
+    String category;
 
     public Gremlin() {
         symbol = 'G';
         name = "Gremlin";
+        category = "Monster";
         health = (int)(Math.random()*5 + 10);
         atk = (int)(Math.random()*2 + 1);
     }

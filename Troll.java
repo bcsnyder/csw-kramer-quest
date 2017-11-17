@@ -6,10 +6,12 @@ public class Troll extends Monster implements Tileable
     int health; //NO need to have doubles
     int atk;
     private boolean moved;
+    String category;
 
     public Troll() {
         symbol = 'T';
         name = "Troll";
+        category = "Monster";
         health = (int)(Math.random()*5 + 25);
         atk = (int)(Math.random()*2 + 7);
     }

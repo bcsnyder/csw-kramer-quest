@@ -7,10 +7,16 @@ public class HealingItem extends Item
 {
     private String type;
     private String name;
+    String category;
     private int healthIncrease;
     
     public HealingItem() {
         type = "HealingItem";
+        category = "Item";
+    }
+    
+    public String getCategory() {
+        return category;
     }
     
     public String getType()

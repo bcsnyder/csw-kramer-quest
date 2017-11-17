@@ -1,6 +1,7 @@
 public class Wall implements Tileable
 {
     char symbol;
+    String category;
     
     public Wall(boolean locatedAtTop) {
         if (locatedAtTop == true) {
@@ -8,6 +9,7 @@ public class Wall implements Tileable
         } else {
             symbol = '|';
         }
+        category = "Wall";
     }
     
     public char getSymbol() {

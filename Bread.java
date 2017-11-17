@@ -5,9 +5,11 @@ public class Bread extends Food
     private String type;
     private String name;
     private int staminaIncrease;
+    String category;
     
     public Bread() {
         type = "Food";
+        category = "Item";
         name = "Bread";
         staminaIncrease = 10;
         symbol = '$';

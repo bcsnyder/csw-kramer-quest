@@ -6,6 +6,7 @@ public class Weapon extends Item
     private String name;
     private int damage;
     private int durability;
+    String category;
     
     public Weapon() {
        type = "Weapon";
