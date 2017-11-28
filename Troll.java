@@ -7,7 +7,7 @@ public class Troll extends Monster implements Tileable
     int atk;
     private boolean moved;
     String category;
-
+    int exp = 6;
     public Troll() {
         symbol = 'T';
         name = "Troll";
@@ -110,5 +110,9 @@ public class Troll extends Monster implements Tileable
 
     public int getAttack() {
         return atk;
+    }
+    
+    public int getExp() {
+        return exp;
     }
 }
