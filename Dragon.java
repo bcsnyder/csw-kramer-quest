@@ -7,7 +7,7 @@ public class Dragon extends Monster implements Tileable
     int atk;
     private boolean moved;
     String category;
-
+    int exp = 10;
     public Dragon() {
         symbol = 'D';
         name = "Dragon";
@@ -110,5 +110,9 @@ public class Dragon extends Monster implements Tileable
 
     public int getAttack() {
         return atk;
+    }
+    
+    public int getExp() {
+        return exp;
     }
 }

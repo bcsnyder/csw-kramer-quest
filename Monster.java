@@ -17,7 +17,7 @@ public abstract class Monster implements Tileable
     int y;
     boolean moved;
     String category;
-
+    int exp;
     public Monster() {
         
     }
@@ -77,5 +77,9 @@ public abstract class Monster implements Tileable
     
     public int getAttack() {
         return atk;
+    }
+    
+    public int getExp() {
+        return exp;
     }
 }

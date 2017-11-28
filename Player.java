@@ -20,6 +20,7 @@ public class Player implements Tileable
     private boolean inCombat;
     private boolean usedItem;
     boolean cheatMode = false;
+    private int maxHealth;
     
     public Player() {
         inventory = new ArrayList<Item>();
@@ -195,5 +196,17 @@ public class Player implements Tileable
     
     public int getY() {
         return y;
+    }
+    
+     public void maxHealthAdd(int x) {
+        maxHealth = maxHealth + x;
+    }
+    
+    public void setMaxHealth(int x) {
+        maxHealth = x;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
     }
 }
