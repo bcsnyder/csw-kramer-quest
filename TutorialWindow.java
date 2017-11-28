@@ -71,7 +71,7 @@ public class TutorialWindow extends JFrame
     }
 
     /**
-     * centerStringX finds the x coordinate needed to center a String in the window.
+     * Finds the x coordinate needed to center a String in the window.
      */
     private int centerStringX(String text, int frameWidth, Graphics g) {
         FontMetrics fm = g.getFontMetrics();
