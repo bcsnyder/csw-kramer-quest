@@ -9,10 +9,12 @@ public class HealingItem extends Item
     private String name;
     String category;
     private int healthIncrease;
+    private char symbol;
     
     public HealingItem() {
         type = "HealingItem";
         category = "Item";
+        symbol = '$';
     }
     
     public String getCategory() {
