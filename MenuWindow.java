@@ -13,11 +13,10 @@ import javax.imageio.ImageIO;
  * logo             the subcomponent of the window holding the image
  * imgLogoFilename  path to find image
  * imgLogo          where the actual loaded image is stored
- * LOGO_WIDTH       static width of logo MUST BE IMAGE WIDTH (I think?)
- * LOGO_HEIGHT      static height of logo MUST BE IMAGE height (I think?)
+ * LOGO_WIDTH       static width of logo MUST BE IMAGE WIDTH
+ * LOGO_HEIGHT      static height of logo MUST BE IMAGE HEIGHT
  */
-public class MenuWindow extends JFrame
-{
+public class MenuWindow extends JFrame {
     public static final int LOGO_WIDTH  = 779;
     public static final int LOGO_HEIGHT = 447;
 
@@ -44,27 +43,25 @@ public class MenuWindow extends JFrame
         JButton tutorialButton = new JButton("Tutorial ");
         buttonPane.add(tutorialButton);
         tutorialButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    tutorialWind = new TutorialWindow();
-                    dispose();
-                    tutorialWind.displayWindow();
-                }
-            });
+            public void actionPerformed(ActionEvent evt) {
+                tutorialWind = new TutorialWindow();
+                dispose();
+                tutorialWind.displayWindow();
+            }
+        });
 
         JButton playButton = new JButton("Play Game ");
         buttonPane.add(playButton);
         playButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    startUp();
-                    gameWind = new GameplayWindow();
-                    dispose();
-                    gameWind.displayWindow(newPlayer, newStage, 0);
-                }
-            });
+            public void actionPerformed(ActionEvent evt) {
+                startUp();
+                gameWind = new GameplayWindow();
+                dispose();
+                gameWind.displayWindow(newPlayer, newStage, 0);
+            }
+        });
 
-        //playMusic();
-
-        //loads image
+        //Loads image
         try {
             imgLogo = ImageIO.read(new File(imgLogoFilename));
         } catch (IOException e) {}
@@ -75,12 +72,12 @@ public class MenuWindow extends JFrame
         cp.add(buttonPane, BorderLayout.SOUTH);
         cp.add(logo, BorderLayout.CENTER);
 
-        //sets basic info about the window and shows it
+        //ets basic info about the window and shows it
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Main Menu");
         pack();
         setVisible(true);
-        setLocationRelativeTo(null);     //Puts the JFrame in the middle of the screen @Francis
+        setLocationRelativeTo(null); //Puts the JFrame in the middle of the screen @Francis
     }
 
     /**
@@ -113,9 +110,7 @@ public class MenuWindow extends JFrame
         int yPos = 1;
 
         while(currRoom.getTile(xPos, yPos) != '.') {
-            while(currRoom.getTile(xPos, yPos) != '.') {
-                yPos += 1;
-            }
+            yPos += 1;
             xPos += 1;
         }
 
@@ -124,6 +119,7 @@ public class MenuWindow extends JFrame
         newPlayer.setRoom(currRoom);
     }
 
+    //What is this method for?
     private void chooseClass() {
 
     }

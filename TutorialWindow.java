@@ -14,7 +14,8 @@ import javax.swing.*;
  */
 public class TutorialWindow extends JFrame
 {
-    public static final int CANVAS_WIDTH  = 800;//Sets size of window
+    //Sets size of window
+    public static final int CANVAS_WIDTH  = 800;
     public static final int CANVAS_HEIGHT = 500;
 
     MenuWindow menuWind;
@@ -26,31 +27,32 @@ public class TutorialWindow extends JFrame
      * Sets up tutorial window's components and shows them.
      */
     public void displayWindow() {
-        canvas = new TutorialText();    // Construct the drawing canvas
+        //Constructs the drawing canvas
+        canvas = new TutorialText();    
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
         JPanel buttonPane = new JPanel(new FlowLayout());
         JButton menuButton = new JButton("Return to Menu ");
         buttonPane.add(menuButton);
         menuButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    menuWind = new MenuWindow();
-                    dispose();
-                    menuWind.displayWindow();
-                }
-            });
+            public void actionPerformed(ActionEvent evt) {
+                menuWind = new MenuWindow();
+                dispose();
+                menuWind.displayWindow();
+            }
+        });
 
-        // Set the Drawing JPanel as the JFrame's content-pane
+        //Sets the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
         cp.add(buttonPane, BorderLayout.SOUTH);
         cp.add(canvas, BorderLayout.CENTER);
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
-        pack();              // Either pack() the components; or setSize()
-        setTitle("Tutorial");  //JFrame sets the title of outer frame
-        setVisible(true);    //Displays window
-        setLocationRelativeTo(null);     //Puts the JFrame in the middle of the screen @Francis
+        setDefaultCloseOperation(EXIT_ON_CLOSE); //Handles the CLOSE button
+        pack(); //Either pack() the components or setSize()
+        setTitle("Tutorial"); //JFrame sets the title of outer frame
+        setVisible(true); //Displays window
+        setLocationRelativeTo(null); //Puts the JFrame in the middle of the screen @Francis
     }
 
     /**
@@ -68,8 +70,8 @@ public class TutorialWindow extends JFrame
         tutorial[7] = "Fighting monsters will increase your maximum health and potions will heal you.";
     }
 
-    /*
-     * centerStringX finds the x coordinate needed to center a String in the window.
+    /**
+     * Finds the x coordinate needed to center a String in the window.
      */
     private int centerStringX(String text, int frameWidth, Graphics g) {
         FontMetrics fm = g.getFontMetrics();
@@ -78,21 +80,22 @@ public class TutorialWindow extends JFrame
         return textX;
     }
 
-    /*
+    /**
      * Panel inside frame that holds drawn graphics
      */
     private class TutorialText extends JPanel {
-        // Override paintComponent to perform your own painting
+        //Overrides paintComponent to perform your own painting
         @Override
         public void paintComponent(Graphics g) {
-            super.paintComponent(g);     // paint base background
-            setBackground(Color.BLACK);  // set background color for this JPanel
+            super.paintComponent(g); //Paints base background
+            setBackground(Color.BLACK); //Sets background color for this JPanel
 
             g.setColor(Color.WHITE);
             g.setFont(new Font("Monospaced", Font.PLAIN, 14));
             setTutorial();
             String txt;
             int x;
+            
             //Displays the tutorial text line by line, however long it is
             for (int i = 0; i < tutorial.length; i++) {
                 txt = tutorial[i];
