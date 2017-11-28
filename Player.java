@@ -20,6 +20,7 @@ public class Player implements Tileable
     private boolean inCombat;
     private boolean usedItem;
     boolean cheatMode = false;
+    
     public Player() {
         inventory = new ArrayList<Item>();
         symbol = '@';
@@ -162,7 +163,7 @@ public class Player implements Tileable
     public Room getRoom() {
         return currRoom;
     }
-
+    
     public void setPos(int xPos, int yPos) {
         x = xPos;
         y = yPos;
@@ -183,7 +184,16 @@ public class Player implements Tileable
     public void enableCheats() {
         cheatMode = true;
     }
+    
     public boolean cheatCheck() {
         return cheatMode;
+    }
+    
+    public int getX() {
+        return x;
+    }
+    
+    public int getY() {
+        return y;
     }
 }

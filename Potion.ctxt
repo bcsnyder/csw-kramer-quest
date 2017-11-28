@@ -9,4 +9,6 @@ comment3.params=
 comment3.target=java.lang.String\ getName()
 comment4.params=
 comment4.target=int\ use()
-numComments=5
+comment5.params=
+comment5.target=char\ getSymbol()
+numComments=6

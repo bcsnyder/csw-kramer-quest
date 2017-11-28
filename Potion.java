@@ -32,4 +32,8 @@ public class Potion extends HealingItem
     public int use() {
         return healthIncrease;
     }
+    
+    public char getSymbol() {
+        return symbol;
+    }
 }

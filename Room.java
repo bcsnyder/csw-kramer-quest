@@ -100,9 +100,36 @@ public class Room
 
     public void fillSymbols()
     {
-        /* Monster */
-        for (int counter = 0; counter < numMonsters; counter++)
-        {
+        if (roomNumber != 19) {/* Monster */
+            for (int counter = 0; counter < numMonsters; counter++)
+            {
+                int num1;
+                int num2;
+                do {
+                    num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
+                    num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
+                } while (map[num1][num2].getSymbol() != '.');
+
+                int monsterType = 0;
+                if (roomNumber < 2) {
+                    monsterType = 0;
+                } else if ( roomNumber >= 2 && roomNumber < 8){
+                    monsterType = (int)(Math.random() * 2);
+                } else if ( roomNumber >= 8 && roomNumber < 12) {
+                    monsterType = (int)(Math.random() * 2) + 1;
+                } else if ( roomNumber >= 12 && roomNumber < 17) {
+                    monsterType = (int)(Math.random() * 2)+ 2;
+                } else if ( roomNumber >= 17 && roomNumber < 21) {
+                    monsterType = 3;
+                }
+
+                Monster[] allMonsterTypes = setPossibleMonsters();
+                Monster newMonster = allMonsterTypes[monsterType];
+                newMonster.setPos(num2, num1);
+                map[num1][num2] = newMonster; //check if placing on top of a monster
+            }
+
+            /* Treasure */
             int num1;
             int num2;
             do {
@@ -110,23 +137,19 @@ public class Room
                 num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
             } while (map[num1][num2].getSymbol() != '.');
 
-            int monsterType = 0;
-            if (roomNumber < 2) {
-                monsterType = 0;
-            } else if ( roomNumber >= 2 && roomNumber < 8){
-                monsterType = (int)(Math.random() * 2);
-            } else if ( roomNumber >= 8 && roomNumber < 12) {
-                monsterType = (int)(Math.random() * 2) + 1;
-            } else if ( roomNumber >= 12 && roomNumber < 17) {
-                monsterType = (int)(Math.random() * 2)+ 2;
-            } else if ( roomNumber >= 17 && roomNumber < 21) {
-                monsterType = 3;
-            }
+            map[num1][num2] = randomItem(); 
+        } else {
+            int num1;
+            int num2;
 
-            Monster[] allMonsterTypes = setPossibleMonsters();
-            Monster newMonster = allMonsterTypes[monsterType];
+            do {
+                num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
+                num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
+            } while (map[num1][num2].getSymbol() != '.');
+
+            Monster newMonster = new Boss();
             newMonster.setPos(num2, num1);
-            map[num1][num2] = newMonster; //check if placing on top of a monster
+            map[num1][num2] = newMonster;
         }
 
         /* Door */
@@ -157,33 +180,23 @@ public class Room
         map [yCoor][xCoor] = new DoorForward(); 
         //Makes position for the forwards door when you go back. 
         if (rand1 == 1) {
-             yCoor = 1; 
-             xCoor = xCoor;
+            yCoor = 1; 
+            xCoor = xCoor;
         }
         if (rand1 == 2) {
-             xCoor= width - 2;
-             yCoor = yCoor;
+            xCoor= width - 2;
+            yCoor = yCoor;
         }
         if (rand1 == 3) {
-             yCoor = length - 2;
-             xCoor = xCoor;
+            yCoor = length - 2;
+            xCoor = xCoor;
         }
         if (rand1 == 4) {
-             xCoor = 1; 
-             yCoor = yCoor;
+            xCoor = 1; 
+            yCoor = yCoor;
         }
         BackPosX = xCoor;
         BackPosY = yCoor;
-
-        /* Treasure */
-        int num1;
-        int num2;
-        do {
-            num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
-            num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
-        } while (map[num1][num2].getSymbol() != '.');
-
-        map[num1][num2] = randomItem(); 
     }
 
     private Monster[] setPossibleMonsters() {
@@ -196,8 +209,6 @@ public class Room
 
         return possibleMonsters;
     }
-    
-    
 
     public int getLevel() {
         return roomNumber;
@@ -269,14 +280,16 @@ public class Room
     public int returnPositionY(){
         return bYcoor; 
     }
+
     public int returnPositionX2(){
         return BackPosX;
     }
+
     public int returnPositionY2(){
         return BackPosY; 
     }
-    
-     public Item randomItem() {
+
+    public Item randomItem() {
         int value = (int) (Math.random() * 100 + 1);
         if (value <= 40 && value >= 1) {
             return new Bread();

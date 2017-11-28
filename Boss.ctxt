@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Boss()
+comment1.params=
+comment1.target=java.lang.String\ getCategory()
+comment2.params=y
+comment2.target=boolean\ ouchie(int)
+comment2.text=\r\n\ When\ called,\ this\ method\ will\ subtract\ the\ appropriate\ amount\ of\ health\ from\ the\ monster.\ \ If\ the\ monster\r\n\ is\ alive,\ it\ returns\ true.\ \ If\ the\ monster\ is\ dead\ it\ returns\ false.\r\n\ \r\n
+comment3.params=
+comment3.target=boolean\ getMoved()
+comment4.params=hasMoved
+comment4.target=void\ setMoved(boolean)
+comment5.params=tiles
+comment5.target=Room\ chooseMove(Room)
+comment6.params=
+comment6.target=java.lang.String\ getName()
+comment7.params=
+comment7.target=int\ getHP()
+comment8.params=
+comment8.target=char\ getSymbol()
+comment9.params=
+comment9.target=int\ getAttack()
+numComments=10

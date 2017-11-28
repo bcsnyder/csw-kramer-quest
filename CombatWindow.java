@@ -17,9 +17,9 @@ public class CombatWindow extends JFrame
 {
     public static final int CANVAS_WIDTH  = 700;//Sets size of window
     public static final int CANVAS_HEIGHT = 600;
-    
+
     private CombatDisplay canvas;//Subcomponent where graphics displayed
-    
+
     private Player play;
     private String pName;
     private String mName;
@@ -69,7 +69,7 @@ public class CombatWindow extends JFrame
 
         Container cp = getContentPane();
         cp.add(canvas);
-        
+
         setTitle("Combat");  //JFrame sets the title of outer frame
         setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
         pack();
@@ -110,7 +110,11 @@ public class CombatWindow extends JFrame
                                 message = message + " and the monster is dead!";
                                 refreshWindow(message, play, monster);
                                 play.setCombat(false);
-                                st.getRoom(num).removeTile(monster.getX(),monster.getY());
+                                if (monster.getName().equals("Boss")) {
+                                    st.getRoom(num).addTile(monster.getX(),monster.getY(),new Idol());
+                                } else {
+                                    st.getRoom(num).removeTile(monster.getX(),monster.getY());
+                                }
                                 gW.displayWindow(play, st, num);
                                 dispose();
                             }
@@ -127,7 +131,7 @@ public class CombatWindow extends JFrame
                             play.setHealth(play.getHealth() - monster.getAttack());
                             String message = "The monster attacks and deals you "+monster.getAttack()+" damage!";
                             refreshWindow(message, play, monster);
-                            
+
                             if (play.getHealth() <= 0) {
                                 gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
                                 dispose();
