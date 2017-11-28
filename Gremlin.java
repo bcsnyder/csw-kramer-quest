@@ -9,7 +9,7 @@ public class Gremlin extends Monster implements Tileable
     private int y;
     private boolean moved;
     String category;
-
+    int exp = 2;
     public Gremlin() {
         symbol = 'G';
         name = "Gremlin";
@@ -125,5 +125,9 @@ public class Gremlin extends Monster implements Tileable
 
     public int getAttack() {
         return atk;
+    }
+    
+    public int getExp() {
+        return exp;
     }
 }
