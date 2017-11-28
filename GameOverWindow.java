@@ -8,7 +8,7 @@ import javax.swing.*;
  */
 public class GameOverWindow extends JFrame
 {
-    public static final int CANVAS_WIDTH  = 800;//Sets size of window
+    public static final int CANVAS_WIDTH  = 1200;//Sets size of window
     public static final int CANVAS_HEIGHT = 500;
 
     private String[] debrief;
@@ -56,7 +56,7 @@ public class GameOverWindow extends JFrame
             debrief[0] = "You, " + name + ", disappear in a flash of light.";
             debrief[1] = "You reappear in the outside world, holding the golden idol.";
             debrief[2] = "You hop on a conveniently placed horse and ride into the sunset.";
-            debrief[2] = "Congrats, you win! Return to the menu if you want to play again!";
+            debrief[3] = "Congrats, you win! Return to the menu if you want to play again!";
         } else {
             debrief = new String[3];
             debrief[0] = "RIP " + name;

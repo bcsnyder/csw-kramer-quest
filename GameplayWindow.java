@@ -145,8 +145,11 @@ public class GameplayWindow extends JFrame
                                 space.setRoom(board, levelNum);
                                 play.setRoom(board);
                             }
-
+                            
                             turnPhase = 0;
+                            if (countedMonsters.size() == 0) {
+                                refreshWindow("", play, space, levelNum);
+                            }
                         } else if (turnPhase == 2) {
                             if (menuSelection == 0) {
                                 turnPhase = 0;
