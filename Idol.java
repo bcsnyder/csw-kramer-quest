@@ -11,6 +11,7 @@ public class Idol extends Item implements Tileable
 
     public Idol() {
         type = "Idol";
+        name = "Idol";
         symbol = '*';
         category = "Item";
     }
@@ -28,8 +29,8 @@ public class Idol extends Item implements Tileable
     {
         return name;
     }
-
-    public String useItem() {
-        return "win";   
+    
+    public char getSymbol() {
+        return symbol;
     }
 }

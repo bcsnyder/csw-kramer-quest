@@ -177,7 +177,10 @@ public class Room
             xCoor = 0; 
         }
 
-        map [yCoor][xCoor] = new DoorForward(); 
+        if (roomNumber != 19) {
+            map [yCoor][xCoor] = new DoorForward(); 
+        }
+        
         //Makes position for the forwards door when you go back. 
         if (rand1 == 1) {
             yCoor = 1; 

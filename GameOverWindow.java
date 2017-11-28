@@ -10,17 +10,17 @@ public class GameOverWindow extends JFrame
 {
     public static final int CANVAS_WIDTH  = 800;//Sets size of window
     public static final int CANVAS_HEIGHT = 500;
-    
+
     private String[] debrief;
     private DebriefText canvas;
-    
+
     private MenuWindow mW = new MenuWindow();
     public JButton menuButton;
 
     public void displayWindow(String playerName, String deathMessage) {
         canvas = new DebriefText();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
-        
+
         setDebrief(playerName, deathMessage);
         JPanel buttonPane = new JPanel(new FlowLayout());
         menuButton = new JButton("Return to Menu ");
@@ -31,7 +31,7 @@ public class GameOverWindow extends JFrame
                     dispose();
                 }
             });
-            
+
         // Set the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
@@ -44,17 +44,25 @@ public class GameOverWindow extends JFrame
         setVisible(true);    //Displays window
         setLocationRelativeTo(null);     //Puts the JFrame in the middle of the screen @Francis
     }
-    
+
     /**
      * creates debrief message with name and
      * cause of death. Each element in the 
      * array is another line of text.
      */
     private void setDebrief(String name, String message) {
-        debrief = new String[3];
-        debrief[0] = "RIP " + name;
-        debrief[1] = message;
-        debrief[2] = "Return to the menu to try again.";
+        if (message.equals("win")) {
+            debrief = new String[4];
+            debrief[0] = "You, " + name + ", disappear in a flash of light.";
+            debrief[1] = "You reappear in the outside world, holding the golden idol.";
+            debrief[2] = "You hop on a conveniently placed horse and ride into the sunset.";
+            debrief[2] = "Congrats, you win! Return to the menu if you want to play again!";
+        } else {
+            debrief = new String[3];
+            debrief[0] = "RIP " + name;
+            debrief[1] = message;
+            debrief[2] = "Return to the menu to try again.";
+        }
     }
 
     /*

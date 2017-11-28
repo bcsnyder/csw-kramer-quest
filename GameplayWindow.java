@@ -115,7 +115,7 @@ public class GameplayWindow extends JFrame
                                 for(int yCounter = 1; yCounter < board.getHeight() - 1; yCounter++) {
                                     char c = board.getTile(xCounter, yCounter);
 
-                                    if (c != '.' && c != '$' && c!= '@') {
+                                    if (c != '.' && c != '$' && c!= '@' && c!= '*') {
                                         Monster m = (Monster)board.returnTileObject(xCounter, yCounter);
 
                                         if (!m.getMoved()) {

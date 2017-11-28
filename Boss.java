@@ -47,8 +47,11 @@ public class Boss extends Monster implements Tileable
     public Room chooseMove(Room tiles) {
         int newX;
         int newY;
-        Room getPlayer = tiles;
-        Player currentPlayer = getPlayer.removePlayer();
+        
+        Player currentPlayer = tiles.removePlayer();
+        int pX = currentPlayer.getX();
+        int pY = currentPlayer.getY();
+        
         boolean outOfMoves = false;
         ArrayList directions = new ArrayList();
 
@@ -59,15 +62,17 @@ public class Boss extends Monster implements Tileable
         int directionChooser = 0;
         int chosenDirection = 0;
         
-        if (x < currentPlayer.getX()) {
+        if (x < pX) {
             chosenDirection = 4;
-        } else if (y < currentPlayer.getY()) {
+        } else if (y < pY) {
             chosenDirection = 2;
-        } else if (x > currentPlayer.getX()) {
+        } else if (x > pX) {
             chosenDirection = 3;
         } else {
             chosenDirection = 1;
         }
+        
+        tiles.addTile(pX, pY, currentPlayer);
         
         do {
             newX = x;

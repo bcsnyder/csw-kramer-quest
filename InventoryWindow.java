@@ -144,7 +144,7 @@ public class InventoryWindow extends JFrame
 
                             }
                             else 
-                              if (inventory.get(select).getType().equals("HealingItem")) {
+                            if (inventory.get(select).getType().equals("HealingItem")) {
                                 if (play.getHealth() >= 25) {
                                     actionMessage = "You're at full health!";
                                 } else {
@@ -170,6 +170,10 @@ public class InventoryWindow extends JFrame
                                         }
                                     }
                                 }
+                            } else if (inventory.get(select).getType().equals("Idol")) {
+                                GameOverWindow gOW = new GameOverWindow();
+                                gOW.displayWindow(play.getName(), "win");
+                                dispose();
                             }
                         } 
 
@@ -177,38 +181,38 @@ public class InventoryWindow extends JFrame
                         break;
                         case KeyEvent.VK_UP:
                         if (currInput < 10) {
-                         inputCode [currInput] = 1;
-                         currInput++;
+                            inputCode [currInput] = 1;
+                            currInput++;
                         } 
                         break;
                         case KeyEvent.VK_DOWN:
                         if (currInput < 10) {
-                         inputCode [currInput] = 2;
-                         currInput++;
+                            inputCode [currInput] = 2;
+                            currInput++;
                         } 
                         break;
                         case KeyEvent.VK_LEFT:
                         if (currInput < 10) {
-                         inputCode [currInput] = 3;
-                         currInput++;
+                            inputCode [currInput] = 3;
+                            currInput++;
                         } 
                         break;
                         case KeyEvent.VK_RIGHT:
                         if (currInput < 10) {
-                         inputCode [currInput] = 4;
-                         currInput++;
+                            inputCode [currInput] = 4;
+                            currInput++;
                         } 
                         break;
                         case KeyEvent.VK_B:
                         if (currInput < 10) {
-                         inputCode [currInput] = 5;
-                         currInput++;
+                            inputCode [currInput] = 5;
+                            currInput++;
                         } 
                         break;
                         case KeyEvent.VK_A:
                         if (currInput < 10) {
-                         inputCode [currInput] = 6;
-                         currInput++;
+                            inputCode [currInput] = 6;
+                            currInput++;
                         } 
                         break;
                         case KeyEvent.VK_SHIFT:
@@ -222,28 +226,28 @@ public class InventoryWindow extends JFrame
                         }
                         repaint();
                         break;
-                          case KeyEvent.VK_NUMPAD1:
+                        case KeyEvent.VK_NUMPAD1:
                         if (play.cheatCheck() == true) {
                             play.addItem(new Excalibur());
                             actionMessage = "Spawned item id: Excalibur.";
                         }
                         repaint();
                         break;
-                         case KeyEvent.VK_NUMPAD2:
-                         if (play.cheatCheck() == true) {
+                        case KeyEvent.VK_NUMPAD2:
+                        if (play.cheatCheck() == true) {
                             play.addItem(new Ambrosia());
                             actionMessage = "Spawned item id: Ambrosia.";
                         }
                         repaint();
                         break;
-                         case KeyEvent.VK_NUMPAD3:
-                         if (play.cheatCheck() == true) {
+                        case KeyEvent.VK_NUMPAD3:
+                        if (play.cheatCheck() == true) {
                             play.addItem(new HeartCanister());
                             actionMessage = "Spawned item id: HeartCanister.";
                         }
                         repaint();
                         break;
-                          case KeyEvent.VK_BACK_SPACE:
+                        case KeyEvent.VK_BACK_SPACE:
                         actionMessage = "Threw out " +inventory.get(select).getName() +".";
                         inventory.remove(select);
                         repaint();

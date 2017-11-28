@@ -57,13 +57,15 @@ public class TutorialWindow extends JFrame
      * Sets the text line by line for the tutorial as an array
      */
     private void setTutorial() {
-        tutorial = new String[6];
+        tutorial = new String[8];
         tutorial[0] = "Hello adventurer, welcome to the fantastic world of wefwef.";
         tutorial[1] = "You are stranded in a dark dungeon and must find the idol of ___ on the lowest floor";
         tutorial[2] = "Along the way you will find treasure ($) and fight monsters (text characters).";
         tutorial[3] = "Use the WASD keys to move around or select different options on the menu.";
         tutorial[4] = "Use enter to confirm your selection. # is a door forward, ^ is a door backward.";
-        tutorial[5] = "# is a door forward, ^ is a door backward. Press i to open your inventory.";
+        tutorial[5] = "Press i to open your inventory. As you travel your stamina will deplete.";
+        tutorial[6] = "Food will replenish your stamina, but if it gets too low you could starve.";
+        tutorial[7] = "Fighting monsters will increase your maximum health and potions will heal you.";
     }
 
     /*
