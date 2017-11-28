@@ -7,7 +7,7 @@ public class Skeleton extends Monster implements Tileable
     int atk;
     private boolean moved;
     String category;
-
+    int exp = 4;
     public Skeleton() {
         symbol = 'S';
         name = "Skeleton";
@@ -110,5 +110,9 @@ public class Skeleton extends Monster implements Tileable
 
     public int getAttack() {
         return atk;
+    }
+    
+    public int getExp() {
+        return exp;
     }
 }
