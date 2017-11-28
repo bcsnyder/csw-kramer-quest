@@ -145,14 +145,14 @@ public class InventoryWindow extends JFrame
                             }
                             else 
                               if (inventory.get(select).getType().equals("HealingItem")) {
-                                if (play.getHealth() >= 25) {
+                                if (play.getHealth() >= play.getMaxHealth()) {
                                     actionMessage = "You're at full health!";
                                 } else {
                                     play.setHealth(play.getHealth() + ((HealingItem)inventory.get(select)).use());
                                     actionMessage = "You regained some health.";
                                     inventory.remove(select);
-                                    if (play.getHealth() > 25) {
-                                        play.setHealth(25);
+                                    if (play.getHealth() > play.getMaxHealth()) {
+                                        play.setHealth(play.getMaxHealth);
                                     } 
                                     health = play.getHealth();
                                     if (p.getCombat() == true) {
