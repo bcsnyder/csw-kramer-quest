@@ -5,12 +5,14 @@ public class Potion extends HealingItem
     private String name;
     private String category;
     private int healthIncrease;
+    private char symbol;
     
     public Potion() {
         type = "HealingItem";
         name = "Potion";
         category = "Item";
         healthIncrease = 10;
+        symbol = '$';
     }
     
     public String getCategory() {
