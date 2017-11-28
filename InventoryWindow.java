@@ -145,34 +145,30 @@ public class InventoryWindow extends JFrame
                             }
                             else 
                             if (inventory.get(select).getType().equals("HealingItem")) {
-                                if (play.getHealth() >= 25) {
-                                    if (inventory.get(select).getType().equals("HealingItem")) {
-                                        if (play.getHealth() >= play.getMaxHealth()) {
-                                            actionMessage = "You're at full health!";
-                                        } else {
-                                            play.setHealth(play.getHealth() + ((HealingItem)inventory.get(select)).use());
-                                            actionMessage = "You regained some health.";
-                                            inventory.remove(select);
-                                            if (play.getHealth() > play.getMaxHealth()) {
-                                                play.setHealth(play.getMaxHealth());
-                                            } 
-                                            health = play.getHealth();
-                                            if (p.getCombat() == true) {
-
-                                                p.setHealth(play.getHealth() - savedMonster.getAttack());
-                                                if (play.getHealth() <= 0) {
-                                                    GameOverWindow gOW = new GameOverWindow();
-                                                    gOW.displayWindow(play.getName(), "Killed by " + savedMonster.getName());
-                                                    dispose();
-                                                } else {
-                                                    dispose();
-                                                    CombatWindow cW = new CombatWindow();
-                                                    cW.setMessage(actionMessage);
-                                                    cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
-                                                }
-                                            }
-                                        }
+                                if (play.getHealth() >= play.getMaxHealth()) {
+                                    actionMessage = "You're at full health!";
+                                } else {
+                                    play.setHealth(play.getHealth() + ((HealingItem)inventory.get(select)).use());
+                                    actionMessage = "You regained some health.";
+                                    inventory.remove(select);
+                                    if (play.getHealth() > play.getMaxHealth()) {
+                                        play.setHealth(play.getMaxHealth());
                                     } 
+                                    health = play.getHealth();
+                                    if (p.getCombat() == true) {
+
+                                        p.setHealth(play.getHealth() - savedMonster.getAttack());
+                                        if (play.getHealth() <= 0) {
+                                            GameOverWindow gOW = new GameOverWindow();
+                                            gOW.displayWindow(play.getName(), "Killed by " + savedMonster.getName());
+                                            dispose();
+                                        } else {
+                                            dispose();
+                                            CombatWindow cW = new CombatWindow();
+                                            cW.setMessage(actionMessage);
+                                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
+                                        }
+                                    }
                                 }
                             } else if (inventory.get(select).getType().equals("Idol")) {
                                 GameOverWindow gOW = new GameOverWindow();
