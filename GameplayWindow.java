@@ -124,7 +124,7 @@ public class GameplayWindow extends JFrame
                                             if (newBoard == null) {
                                                 refreshWindow("You enter combat!", play, space, levelNum);
                                                 CombatWindow cW = new CombatWindow();
-                                                cW.displayWindow(play, m, space, levelNum);
+                                                cW.displayWindow(play, m, space, levelNum, true);
                                                 dispose();
                                             } else {
                                                 space.setRoom(newBoard, levelNum);
@@ -242,7 +242,7 @@ public class GameplayWindow extends JFrame
                 Monster enemy = (Monster)action;//Selects the monster based on what tile the user hit
                 refreshWindow("You enter combat!", play, space, levelNum);
                 CombatWindow cW = new CombatWindow();
-                cW.displayWindow(play, enemy, space, levelNum);
+                cW.displayWindow(play, enemy, space, levelNum, false);
                 dispose();
             }
         } while (action.getCategory().equals("Wall"));
