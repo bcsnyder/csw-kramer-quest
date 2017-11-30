@@ -122,14 +122,14 @@ public class GameplayWindow extends JFrame
                                             countedMonsters.add(m);
                                             Room newBoard = m.chooseMove(board);
                                             if (newBoard == null) {
-                                                refreshWindow("You enter combat!", play, space, levelNum);
+                                                refreshWindow("The enemy attacks!", play, space, levelNum);
                                                 CombatWindow cW = new CombatWindow();
                                                 cW.displayWindow(play, m, space, levelNum, true);
                                                 dispose();
                                             } else {
                                                 space.setRoom(newBoard, levelNum);
                                                 play.setRoom(newBoard);
-                                                refreshWindow("The monsters moved", play, space, levelNum);
+                                                refreshWindow("The monsters moved.", play, space, levelNum);
                                             }
                                         }
                                     }
@@ -191,7 +191,7 @@ public class GameplayWindow extends JFrame
                 board = play.getRoom();
                 space.setRoom(board, levelNum);
                 if (play.getStamina() < 10){
-                    refreshWindow ("You moved "+direction+"! Stamina low", play, space, levelNum);   
+                    refreshWindow ("You moved "+direction+"! You can hear your stomache growl.", play, space, levelNum);   
                 }else {
                     refreshWindow("You moved "+direction+".", play, space, levelNum);
                 }
@@ -209,19 +209,19 @@ public class GameplayWindow extends JFrame
                 play.setRoom(board);
                 play.setPos(x,y);
                 if (play.getStamina() < 10){
-                    refreshWindow ("You moved to a new room! Stamina low", play, space, levelNum);   
+                    refreshWindow ("You entered a new room! Your stomache feels rather empty.", play, space, levelNum);   
                 }else {
-                    refreshWindow("You moved to a new room!", play, space, levelNum);
+                    refreshWindow("You entered a new room!", play, space, levelNum);
                 }
             } else if(action.getCategory().equals("Item")) {
                 board = play.getRoom();
                 space.setRoom(board, levelNum);                
                 play.addItem((Item)action);
-                refreshWindow("You got " +inventory.get(inventory.size() - 1).getName() +".", play, space, levelNum);
+                refreshWindow("Obtained the " +inventory.get(inventory.size() - 1).getName() +".", play, space, levelNum);
 
                 turnPhase = 1;
             } else if(action.getCategory().equals("Wall")) {
-                refreshWindow("You can't move there!", play, space, levelNum);
+                refreshWindow("You bumped into a wall!", play, space, levelNum);
             } else if(action.getCategory().equals("Door Back")) {
                 board.removePlayer();
                 space.setRoom(board, levelNum);    
@@ -234,13 +234,13 @@ public class GameplayWindow extends JFrame
                 play.setRoom(board);
                 play.setPos(x,y);
                 if (play.getStamina() < 10){
-                    refreshWindow ("You moved back a room! Stamina low", play, space, levelNum);   
+                    refreshWindow ("You moved back a room! You should probably find something to eat.", play, space, levelNum);   
                 }else {
                     refreshWindow("You moved back a room!", play, space, levelNum);
                 }
             } else {
                 Monster enemy = (Monster)action;//Selects the monster based on what tile the user hit
-                refreshWindow("You enter combat!", play, space, levelNum);
+                refreshWindow("You engaged the enemy!", play, space, levelNum);
                 CombatWindow cW = new CombatWindow();
                 cW.displayWindow(play, enemy, space, levelNum, false);
                 dispose();
@@ -249,42 +249,6 @@ public class GameplayWindow extends JFrame
         repaint();
     }
 
-    public Item randomItem() {
-        int value = (int) (Math.random() * 100 + 1);
-        if (value <= 40 && value >= 1) {
-            return new Bread();
-        } else if (value <= 70 && value >= 41) {
-            return new Potion();
-        } else if (value <= 100 && value >= 71) {
-            int weaponType = 0;
-            if (levelNum < 2) {
-                weaponType = 0;
-            } else if (levelNum >= 2 && levelNum < 8){
-                weaponType = (int)(Math.random() * 2);
-            } else if (levelNum  >= 8 && levelNum < 12) {
-                weaponType = (int)(Math.random() * 2) + 1;
-            } else if (levelNum >= 12 && levelNum < 17) {
-                weaponType = (int)(Math.random() * 2)+ 2;
-            } else if (levelNum  >= 17 && levelNum < 20) {
-                weaponType = 3;
-            }
-            if (weaponType == 0) {
-                return new Spear();
-            } else if (weaponType == 1) {
-                return new Axe();
-            } else if (weaponType == 2) {
-                return new Sword();
-            } else if (weaponType == 3) {
-                play.addItem(new Musket());
-                play.addItem(new Musket());
-                return new Musket();
-            } else {
-                return new Axe();
-            }
-        } else {
-            return new Bread();    
-        }
-    }
     /**
      * Simply updates variables with what's passed in and
      * repaints the window. VOILA!
