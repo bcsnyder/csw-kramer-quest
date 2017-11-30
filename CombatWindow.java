@@ -48,7 +48,7 @@ public class CombatWindow extends JFrame
      *                  contains helpful variables the program gets from it
      *                  like health
      */
-    public void displayWindow(Player player, Monster monster, Stage st, int num) {
+    public void displayWindow(Player player, Monster monster, Stage st, int num, boolean flee) {
         play = player;
         pName = player.getName();
         mName = monster.getName();
@@ -128,7 +128,7 @@ public class CombatWindow extends JFrame
                             dispose();
                             InventoryWindow iW = new InventoryWindow();
                             iW.displayWindow(play.getInventory(), play, st, num);
-                            iW.storeCombat(play, monster, st, num);
+                            iW.storeCombat(play, monster, st, num, flee);
                         } else if (menuSelect == -1) {
                             play.setHealth(play.getHealth() - monster.getAttack());
                             String message = "The monster attacks and deals you "+monster.getAttack()+" damage!";
