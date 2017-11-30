@@ -30,14 +30,16 @@ public class InventoryWindow extends JFrame
     private Stage savedStage;
     private int savedRoomPosition;
     private String wName;
+    private boolean savedFlee;
     int baseCode[] = new int [] {1,1,2,2,3,4,3,4,5,6};
     int inputCode [] = new int [] {0,0,0,0,0,0,0,0,0,0};
     int currInput = 0;
-    public void storeCombat (Player playCombat, Monster monsterCombat, Stage stCombat, int numCombat) {
+    public void storeCombat (Player playCombat, Monster monsterCombat, Stage stCombat, int numCombat, boolean fleeCombat) {
         savedPlayer = playCombat;
         savedStage = stCombat;
         savedMonster = monsterCombat;
         savedRoomPosition = numCombat;
+        savedFlee = fleeCombat;
     }
 
     public void displayWindow(ArrayList<Item> inv, Player p, Stage s, int n) {
@@ -85,7 +87,7 @@ public class InventoryWindow extends JFrame
                         if (p.getCombat() == true) {
                             dispose();
                             CombatWindow cW = new CombatWindow();
-                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
+                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
                         } else {
                             dispose();
                             GameplayWindow gW = new GameplayWindow();
@@ -116,7 +118,7 @@ public class InventoryWindow extends JFrame
                                             dispose();
                                             CombatWindow cW = new CombatWindow();
                                             cW.setMessage(actionMessage);
-                                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
+                                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
                                         }
                                     }
                                 }
@@ -138,7 +140,7 @@ public class InventoryWindow extends JFrame
                                         dispose();
                                         CombatWindow cW = new CombatWindow();
                                         cW.setMessage(actionMessage);
-                                        cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
+                                        cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
                                     }
                                 }
 
@@ -166,7 +168,7 @@ public class InventoryWindow extends JFrame
                                             dispose();
                                             CombatWindow cW = new CombatWindow();
                                             cW.setMessage(actionMessage);
-                                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition);
+                                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
                                         }
                                     }
                                 }
