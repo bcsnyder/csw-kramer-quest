@@ -34,6 +34,7 @@ public class CombatWindow extends JFrame
     private char mSym;
     private GameplayWindow gW = new GameplayWindow();
     private GameOverWindow gOW = new GameOverWindow();
+    boolean fleeCondition;
 
     public void setMessage (String m) {
         combatMessage = m;
@@ -61,6 +62,7 @@ public class CombatWindow extends JFrame
         mSym = monster.getSymbol();
         play.setCombat(true);
         CombatWindow thisWindow = this;
+        fleeCondition = flee;
 
         canvas = new CombatDisplay();    // Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
@@ -120,10 +122,22 @@ public class CombatWindow extends JFrame
                                 gW.displayWindow(play, st, num);
                                 dispose();
                             }
-                        } else if (menuSelect == 3) {                            
-                            dispose();
-                            play.setCombat(false);
-                            gW.displayWindow(play, st, num);
+                        } else if (menuSelect == 3) { 
+                            if (fleeCondition = true) {
+                              int rng = (int)(Math.random()) * 100;
+                              if (rng < 41) {
+                                 dispose();
+                                 play.setCombat(false);
+                                 gW.displayWindow(play, st, num);   
+                                  
+                                }
+                              String message = "You tried to run but the monster blocked your path!";
+                              refreshWindow(message, play, monster);
+                            } else {
+                               String message = "You cannot run from a fight you started!";
+                               refreshWindow(message, play, monster);
+                            }
+                           
                         } else if (menuSelect == 1) {
                             dispose();
                             InventoryWindow iW = new InventoryWindow();
