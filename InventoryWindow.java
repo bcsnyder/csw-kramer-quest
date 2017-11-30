@@ -106,7 +106,7 @@ public class InventoryWindow extends JFrame
                         }
                         break;
                         case KeyEvent.VK_ENTER:
-                        if (inventory.get(select)!=null) {
+                        if (inventory.size() > 0) {
                             if (inventory.get(select).getType().equals("Food")) {
                                 if (play.getStamina() >= 100) {
                                     actionMessage = "You're already full!";
