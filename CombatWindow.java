@@ -123,8 +123,8 @@ public class CombatWindow extends JFrame
                                 dispose();
                             }
                         } else if (menuSelect == 3) { 
-                            if (fleeCondition = true) {
-                              int rng = (int)(Math.random()) * 100;
+                            if (fleeCondition == true) {
+                              int rng = (int)(Math.random() * 100);
                               if (rng < 41) {
                                  dispose();
                                  play.setCombat(false);
