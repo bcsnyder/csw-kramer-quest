@@ -94,6 +94,17 @@ public class InventoryWindow extends JFrame
                             gW.displayWindow(p, s, n);
                         }
                         break;
+                         case KeyEvent.VK_I:
+                        if (p.getCombat() == true) {
+                            dispose();
+                            CombatWindow cW = new CombatWindow();
+                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
+                        } else {
+                            dispose();
+                            GameplayWindow gW = new GameplayWindow();
+                            gW.displayWindow(p, s, n);
+                        }
+                        break;
                         case KeyEvent.VK_ENTER:
                         if (inventory.get(select)!=null) {
                             if (inventory.get(select).getType().equals("Food")) {
@@ -174,7 +185,7 @@ public class InventoryWindow extends JFrame
                                 }
                             } else if (inventory.get(select).getType().equals("Idol")) {
                                 GameOverWindow gOW = new GameOverWindow();
-                                gOW.displayWindow(play.getName(), "win");
+                                gOW.displayWindow(play.getName(), "Congratulations young hero, you won!");
                                 dispose();
                             }
                         }
@@ -275,7 +286,7 @@ public class InventoryWindow extends JFrame
 
         //Gets info about items to show user including the type and name
         if (inventory.size() == 0){
-            inventoryText.add("No Items...");
+            inventoryText.add("There's nothing here...");
         } else {
             for (int i = 0; i < inventory.size(); i++) {
                 String type = inventory.get(i).getType();
