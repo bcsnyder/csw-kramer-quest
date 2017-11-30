@@ -104,12 +104,12 @@ public class CombatWindow extends JFrame
                             boolean survive = monster.ouchie(damage);//damages monster
 
                             //Sets feedback for user
-                            String message = "You attack, dealing " + (damage)+ " damage";
+                            String message = "You swing your " +play.weaponName() +", dealing " + (damage)+ " damage";
                             if (survive == true) {
                                 message = message + "!";
                                 refreshWindow(message, play, monster);
                             } else {
-                                message = message + " and the monster is dead!";
+                                message = message + " and the " +monster.getName() +" has been slain!";
                                 play.maxHealthAdd(monster.getExp());
                                 play.setHealth(play.getHealth() + monster.getExp());
                                 refreshWindow(message, play, monster);
@@ -145,7 +145,7 @@ public class CombatWindow extends JFrame
                             iW.storeCombat(play, monster, st, num, flee);
                         } else if (menuSelect == -1) {
                             play.setHealth(play.getHealth() - monster.getAttack());
-                            String message = "The monster attacks and deals you "+monster.getAttack()+" damage!";
+                            String message = "The " +monster.getName() +" attacks and deals "+monster.getAttack()+" damage to you!";
                             refreshWindow(message, play, monster);
 
                             if (play.getHealth() <= 0) {
