@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Room 
 {
     private int roomNumber;
@@ -86,20 +87,115 @@ public class Room
         {
             for (int counter2 = 0; counter2 < width; counter2++)
             {
+                int wallSpawnChance = (int)(Math.random()*100) + 1;
+
                 if (counter1 == 0 || counter1 == length - 1)
                 {  
+                    if (map[counter1][counter2].getCategory().equals("Empty"))
                     map[counter1][counter2] = new Wall(true);
                 }
                 else if (counter2 == 0 || counter2 == width - 1)
                 {
+                    if (map[counter1][counter2].getCategory().equals("Empty"))
                     map[counter1][counter2] = new Wall(false);
-                }
+                } else if ((counter1 > 1 && counter1 < length - 2 && counter2 > 1 && counter2 < width - 2)) {
+                    if (wallSpawnChance <= 80) {
+                        ArrayList<Tileable> adjacentTiles = new ArrayList<Tileable>();
+
+                        if (map[counter1-1][counter2].getCategory().equals("Wall")) 
+                            adjacentTiles.add(map[counter1-1][counter2]);
+                        else if (map[counter1-1][counter2-1].getCategory().equals("Wall"))
+                            adjacentTiles.add(map[counter1-1][counter2]);
+                        else if (map[counter1-1][counter2+1].getCategory().equals("Wall"))
+                            adjacentTiles.add(map[counter1-1][counter2]);
+                        else if (map[counter1+1][counter2].getCategory().equals("Wall"))
+                            adjacentTiles.add(map[counter1-1][counter2]);
+                        else if (map[counter1+1][counter2+1].getCategory().equals("Wall"))
+                            adjacentTiles.add(map[counter1-1][counter2]);
+                        else if (map[counter1+1][counter2-1].getCategory().equals("Wall"))
+                            adjacentTiles.add(map[counter1-1][counter2]);
+                        else if (map[counter1][counter2-1].getCategory().equals("Wall"))
+                            adjacentTiles.add(map[counter1-1][counter2]);
+                        else if (map[counter1-1][counter2+1].getCategory().equals("Wall"))
+                            adjacentTiles.add(map[counter1-1][counter2]);
+
+                        if (adjacentTiles.size() == 1) {
+                            map[counter1][counter2] = adjacentTiles.get(0);
+                        }
+                    }
+                } else if (wallSpawnChance >= 60) {
+                    if (!map[counter1][counter2-1].getCategory().equals("Wall") && !map[counter1][counter2+1].getCategory().equals("Wall")) {
+                        if (counter1 == 1 && map[0][counter2].getCategory().equals("Wall") && !map[counter1+1][counter2-1].getCategory().equals("Wall") && !map[counter1+1][counter2+1].getCategory().equals("Wall")) {
+                            map[counter1][counter2] = new Wall(false);
+                        } else if (counter1 == length - 2 && map[length-1][counter2].getCategory().equals("Wall") && !map[counter1-1][counter2-1].getCategory().equals("Wall") && !map[counter1-1][counter2+1].getCategory().equals("Wall")) {
+                            map[counter1][counter2] = new Wall(false);
+                        }
+                    }
+                    if ((!map[counter1-1][counter2].getCategory().equals("Wall") && !map[counter1+1][counter2].getCategory().equals("Wall"))) {
+                        if (counter2 == 1 && map[counter1][counter2-1].getCategory().equals("Wall") && !map[counter1+1][counter2+1].getCategory().equals("Wall") && !map[counter1-1][counter2+1].getCategory().equals("Wall")) {
+                            map[counter1][counter2] = new Wall(true);
+                        } else if (counter2 == width - 2 && map[counter1][counter2+1].getCategory().equals("Wall") && !map[counter1-1][counter2-1].getCategory().equals("Wall") && !map[counter1+1][counter2-1].getCategory().equals("Wall")) {
+                            map[counter1][counter2] = new Wall(true);
+                        }
+                    }
+                } 
             }
         }
     }
 
     public void fillSymbols()
     {
+        /* Door */
+        int xCoor = 0;      
+        int yCoor = 0;
+        int rand1 = (int) (Math.random() * 4) + 1; 
+        doorWall = rand1; 
+        if (rand1 == 1 || rand1 == 3)
+        {
+            xCoor = (int) (Math.random () * (width - 2) + 1);
+        }
+        if (rand1 == 2 || rand1 == 4) {
+            yCoor = (int) (Math.random () * (length - 2) + 1);
+        }
+        if (rand1 == 1) {
+            yCoor = 0; 
+        }
+        if (rand1 == 2) {
+            xCoor= width - 1;
+        }
+        if (rand1 == 3) {
+            yCoor = length - 1;
+        }
+        if (rand1 == 4) {
+            xCoor = 0; 
+        }
+
+        if (roomNumber != 19) {
+            map [yCoor][xCoor] = new DoorForward(); 
+        }
+
+        //Makes position for the forwards door when you go back. 
+        if (rand1 == 1) {
+            yCoor = 1; 
+            xCoor = xCoor;
+        }
+        if (rand1 == 2) {
+            xCoor= width - 2;
+            yCoor = yCoor;
+        }
+        if (rand1 == 3) {
+            yCoor = length - 2;
+            xCoor = xCoor;
+        }
+        if (rand1 == 4) {
+            xCoor = 1; 
+            yCoor = yCoor;
+        }
+        BackPosX = xCoor;
+        BackPosY = yCoor;
+        
+        fillWalls();
+        
         if (roomNumber != 19) {/* Monster */
             for (int counter = 0; counter < numMonsters; counter++)
             {
@@ -152,54 +248,7 @@ public class Room
             map[num1][num2] = newMonster;
         }
 
-        /* Door */
-        int xCoor = 0;      
-        int yCoor = 0;
-        int rand1 = (int) (Math.random() * 4) + 1; 
-        doorWall = rand1; 
-        if (rand1 == 1 || rand1 == 3)
-        {
-            xCoor = (int) (Math.random () * (width - 2) + 1);
-        }
-        if (rand1 == 2 || rand1 == 4) {
-            yCoor = (int) (Math.random () * (length - 2) + 1);
-        }
-        if (rand1 == 1) {
-            yCoor = 0; 
-        }
-        if (rand1 == 2) {
-            xCoor= width - 1;
-        }
-        if (rand1 == 3) {
-            yCoor = length - 1;
-        }
-        if (rand1 == 4) {
-            xCoor = 0; 
-        }
-
-        if (roomNumber != 19) {
-            map [yCoor][xCoor] = new DoorForward(); 
-        }
         
-        //Makes position for the forwards door when you go back. 
-        if (rand1 == 1) {
-            yCoor = 1; 
-            xCoor = xCoor;
-        }
-        if (rand1 == 2) {
-            xCoor= width - 2;
-            yCoor = yCoor;
-        }
-        if (rand1 == 3) {
-            yCoor = length - 2;
-            xCoor = xCoor;
-        }
-        if (rand1 == 4) {
-            xCoor = 1; 
-            yCoor = yCoor;
-        }
-        BackPosX = xCoor;
-        BackPosY = yCoor;
     }
 
     private Monster[] setPossibleMonsters() {
@@ -272,7 +321,7 @@ public class Room
             xCoor++; 
         }
         bXcoor = xCoor;
-        bYcoor = yCoor;//I dont know why this is backwards. But it is
+        bYcoor = yCoor;
 
     }
 

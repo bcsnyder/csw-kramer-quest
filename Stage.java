@@ -23,7 +23,6 @@ public class Stage
         {
             Room add = new Room(counter, min, max);
             add.fillDots();
-            add.fillWalls();
             add.fillSymbols();
 
             //This adds the back door so that the player can go through this 
