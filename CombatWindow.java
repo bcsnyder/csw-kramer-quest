@@ -103,7 +103,7 @@ public class CombatWindow extends JFrame
                         int bonus = (int)(Math.random()*5);
                         int crit = (int) (Math.random() * 10) + 1; 
                         int damage = play.attack() + bonus;
-                         if (crit >= 8 || crit <= 10) {
+                         if (crit >= 8 && crit <= 10) {
                             damage = (damage * 2);
                         }
                         boolean survive = monster.ouchie(damage);//damages monster
@@ -154,7 +154,7 @@ public class CombatWindow extends JFrame
                     } else if (menuSelect == -1) {
                         int crit = (int) (Math.random() * 10) + 1; 
                         int damage = monster.getAttack();
-                         if (crit >= 8 || crit <= 10) {
+                         if (crit >= 8 && crit <= 10) {
                             damage = (damage * 2);
                         }
                         play.setHealth(play.getHealth() - damage);
