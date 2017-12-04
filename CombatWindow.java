@@ -117,7 +117,7 @@ public class CombatWindow extends JFrame
                                 if (monster.getName().equals("Boss")) {
                                     st.getRoom(num).addTile(monster.getX(),monster.getY(),new Idol());
                                 } else {
-                                    st.getRoom(num).removeTile(monster.getX(),monster.getY());
+                                    st.getRoom(num).addTile(monster.getX(),monster.getY(),randomItem());
                                 }
                                 gW.displayWindow(play, st, num);
                                 dispose();
@@ -207,6 +207,42 @@ public class CombatWindow extends JFrame
         int textX = frameWidth/2 + textWidth/2;
         return textX;
     }
+     public Item randomItem() {
+            Room room = play.getRoom();
+            int roomNumber = room.getroomNumber(); 
+            int value = (int) (Math.random() * 100 + 1);
+            if (value <= 40 && value >= 1) {
+                return new Bread();
+            } else if (value <= 70 && value >= 41) {
+                return new Potion();
+            } else if (value <= 100 && value >= 71) {
+                int weaponType = 0;
+                if (roomNumber < 2) {
+                    weaponType = 0;
+                } else if (roomNumber >= 2 && roomNumber < 8){
+                    weaponType = (int)(Math.random() * 2);
+                } else if (roomNumber  >= 8 && roomNumber < 12) {
+                    weaponType = (int)(Math.random() * 2) + 1;
+                } else if (roomNumber >= 12 && roomNumber < 17) {
+                    weaponType = (int)(Math.random() * 2)+ 2;
+                } else if (roomNumber  >= 17 && roomNumber < 20) {
+                    weaponType = 3;
+                }
+                if (weaponType == 0) {
+                    return new Spear();
+                } else if (weaponType == 1) {
+                    return new Axe();
+                } else if (weaponType == 2) {
+                    return new Sword();
+                } else if (weaponType == 3) {
+                    return new Musket();
+                } else {
+                    return new Axe();
+                }
+            } else {
+                return new Bread();    
+            }
+        }
 
     /*
      * Panel inside frame that holds drawn graphics
