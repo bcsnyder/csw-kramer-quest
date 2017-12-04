@@ -34,4 +34,8 @@ public class SmallKey extends Item
         use = true;
         return use;
     }
+    
+     public char getSymbol() {
+        return symbol;
+    }
 }
