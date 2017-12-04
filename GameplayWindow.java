@@ -186,7 +186,6 @@ public class GameplayWindow extends JFrame
             gOW.displayWindow(play.getName(), "Died of starvation");
         }
 
-        do {
             if (action.getCategory().equals("Empty")) {
                 board = play.getRoom();
                 space.setRoom(board, levelNum);
@@ -245,7 +244,6 @@ public class GameplayWindow extends JFrame
                 cW.displayWindow(play, enemy, space, levelNum, false);
                 dispose();
             }
-        } while (action.getCategory().equals("Wall"));
         repaint();
     }
 
