@@ -8,7 +8,8 @@ import javax.swing.*;
  */
 public class GameOverWindow extends JFrame
 {
-    public static final int CANVAS_WIDTH  = 1200;//Sets size of window
+    //Sets size of window
+    public static final int CANVAS_WIDTH  = 1200;
     public static final int CANVAS_HEIGHT = 500;
 
     private String[] debrief;
@@ -18,7 +19,7 @@ public class GameOverWindow extends JFrame
     public JButton menuButton;
 
     public void displayWindow(String playerName, String deathMessage) {
-        canvas = new DebriefText();    // Construct the drawing canvas
+        canvas = new DebriefText(); //Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
 
         setDebrief(playerName, deathMessage);
@@ -26,23 +27,23 @@ public class GameOverWindow extends JFrame
         menuButton = new JButton("Return to Menu ");
         buttonPane.add(menuButton);
         menuButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    mW.displayWindow();
-                    dispose();
-                }
-            });
+            public void actionPerformed(ActionEvent evt) {
+                mW.displayWindow();
+                dispose();
+            }
+        });
 
-        // Set the Drawing JPanel as the JFrame's content-pane
+        //Set the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
         cp.add(buttonPane, BorderLayout.SOUTH);
         cp.add(canvas, BorderLayout.CENTER);
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
-        pack();              // Either pack() the components; or setSize()
-        setTitle("Game Over");  //JFrame sets the title of outer frame
-        setVisible(true);    //Displays window
-        setLocationRelativeTo(null);     //Puts the JFrame in the middle of the screen @Francis
+        setDefaultCloseOperation(EXIT_ON_CLOSE); //Handle the CLOSE button
+        pack(); //Either pack() the components; or setSize()
+        setTitle("Game Over"); //JFrame sets the title of outer frame
+        setVisible(true); //Displays window
+        setLocationRelativeTo(null); //Puts the JFrame in the middle of the screen @Francis
     }
 
     /**
@@ -65,7 +66,7 @@ public class GameOverWindow extends JFrame
         }
     }
 
-    /*
+    /**
      * centerStringX finds the x coordinate needed to center a String in the window.
      */
     private int centerStringX(String text, int frameWidth, Graphics g) {
@@ -75,20 +76,21 @@ public class GameOverWindow extends JFrame
         return textX;
     }
 
-    /*
+    /**
      * Panel inside frame that holds drawn graphics
      */
     private class DebriefText extends JPanel {
         // Override paintComponent to perform your own painting
         @Override
         public void paintComponent(Graphics g) {
-            super.paintComponent(g);     // paint base background
-            setBackground(Color.BLACK);  // set background color for this JPanel
-
+            //Paint base background
+            super.paintComponent(g); 
+            setBackground(Color.BLACK); 
             g.setColor(Color.WHITE);
             g.setFont(new Font("Monospaced", Font.PLAIN, 28));
             String txt;
             int x;
+            
             //Splits debrief message into separate lines of text and displays
             for (int i = 0; i < debrief.length; i++) {
                 txt = debrief[i];

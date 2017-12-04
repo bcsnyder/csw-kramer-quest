@@ -32,7 +32,10 @@ public class Room
         numMonsters = (int) Math.floor(Math.random() * (max - min)) + min;
         map = new Tileable[length][width];
     }
-
+    public int getroomNumber ()
+    {
+        return roomNum; 
+    }
     public void fill() {
         fillDots();
         fillWalls();
@@ -247,8 +250,6 @@ public class Room
             newMonster.setPos(num2, num1);
             map[num1][num2] = newMonster;
         }
-
-        
     }
 
     private Monster[] setPossibleMonsters() {
@@ -342,7 +343,7 @@ public class Room
     }
 
     public Item randomItem() {
-        int value = (int) (Math.random() * 100 + 1);
+        int value = (int) (Math.random() * 150 + 1);
         if (value <= 40 && value >= 1) {
             return new Bread();
         } else if (value <= 70 && value >= 41) {
@@ -371,9 +372,12 @@ public class Room
             } else {
                 return new Axe();
             }
+        } else if (value <= 130 && value >= 101) {
+            return new SmallLock();
+        } else if (value <= 150 && value >= 131) {
+            return new BigLock();
         } else {
             return new Bread();    
         }
     }
 }
-
