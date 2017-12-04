@@ -269,7 +269,24 @@ public class InventoryWindow extends JFrame
                         actionMessage = "Spawned item id: HeartCanister.";
                     }
                     repaint();
+                    break; 
+                      
+                    case KeyEvent.VK_NUMPAD4:
+                    if (play.cheatCheck() == true) {
+                        play.addItem(new SmallKey());
+                        actionMessage = "Spawned item id: SmallKey.";
+                    }
+                    repaint();
                     break;
+                    
+                    case KeyEvent.VK_NUMPAD5:
+                    if (play.cheatCheck() == true) {
+                        play.addItem(new BigKey());
+                        actionMessage = "Spawned item id: BigKey.";
+                    }
+                    repaint();
+                    break;
+                    
                     
                     case KeyEvent.VK_BACK_SPACE:
                     actionMessage = "Threw out " +inventory.get(select).getName() +".";
