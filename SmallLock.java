@@ -32,4 +32,8 @@ public class SmallLock extends Item
     public boolean unlock() {
         return true;
     }
+    
+     public char getSymbol() {
+        return symbol;
+    }
 }
