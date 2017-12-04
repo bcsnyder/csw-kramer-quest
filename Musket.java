@@ -13,7 +13,7 @@ public class Musket extends Weapon
         name = "Musket";
         category = "Item";
         damage = 25;
-        durability = 1;
+        durability = 3;
         symbol = '$';
     }
     
