@@ -13,6 +13,7 @@ public class SmallLock extends Item
         type = "Lock";
         category = "Item";
         symbol = '$';
+        name = "Small Locked Chest";
     }
 
     public String getCategory() {
