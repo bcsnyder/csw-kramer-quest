@@ -101,11 +101,19 @@ public class CombatWindow extends JFrame
                     if (menuSelect == 0) {
                         //Makes combat more exciting by adding random damage modifier
                         int bonus = (int)(Math.random()*5);
+                        int crit = (int) (Math.random() * 10) + 1; 
                         int damage = play.attack() + bonus;
+                         if (crit >= 8 || crit <= 10) {
+                            damage = (damage * 2);
+                        }
                         boolean survive = monster.ouchie(damage);//damages monster
-
+                        String message;
                         //Sets feedback for user
-                        String message = "You swing your " +play.weaponName() +", dealing " + (damage)+ " damage";
+                        if (crit < 8) {
+                          message = "You swing your " +play.weaponName() +", dealing " + (damage)+ " damage";
+                          } else {
+                          message = "Your " +play.weaponName() +" lands a critical strike, dealing " +damage +" damage";
+                            }
                         if (survive == true) {
                             message = message + "!";
                             refreshWindow(message, play, monster);
@@ -144,8 +152,19 @@ public class CombatWindow extends JFrame
                         iW.displayWindow(play.getInventory(), play, st, num);
                         iW.storeCombat(play, monster, st, num, flee);
                     } else if (menuSelect == -1) {
-                        play.setHealth(play.getHealth() - monster.getAttack());
-                        String message = "The " +monster.getName() +" attacks and deals "+monster.getAttack()+" damage to you!";
+                        int crit = (int) (Math.random() * 10) + 1; 
+                        int damage = monster.getAttack();
+                         if (crit >= 8 || crit <= 10) {
+                            damage = (damage * 2);
+                        }
+                        play.setHealth(play.getHealth() - damage);
+                        String message;
+                        if (crit < 8) {
+                          message = "The " +monster.getName() +" attacks and deals "+monster.getAttack()+" damage to you!";
+                          } else {
+                          message = "The " +monster.getName() +" lands a critical strike and deals "+monster.getAttack()+" damage to you!";
+                            }
+                        message = "The " +monster.getName() +" attacks and deals "+monster.getAttack()+" damage to you!";
                         refreshWindow(message, play, monster);
 
                         if (play.getHealth() <= 0) {
