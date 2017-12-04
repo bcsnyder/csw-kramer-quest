@@ -14,6 +14,7 @@ public class SmallKey extends Item
         type = "Key";
         category = "Item";
         symbol = '$';
+        name = "Small Key";
     }
 
     public String getCategory() {
