@@ -68,7 +68,7 @@ public class CombatWindow extends JFrame
         canvas = new CombatDisplay(); //Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
         //Creates menu system
-        String menuString = ">Attack          Items          Magic          Flee";
+        String menuString = ">Attack          Items          Pass          Flee";
 
         Container cp = getContentPane();
         cp.add(canvas);
@@ -305,13 +305,13 @@ public class CombatWindow extends JFrame
             g.setColor(Color.WHITE);
             g.setFont(new Font("Monospaced", Font.PLAIN, 20));
             if (menuSelect == 0) {
-                menuString = ">Attack          Items          Magic          Flee";
+                menuString = ">Attack          Items          Pass          Flee";
             } else if (menuSelect == 1) {
-                menuString = " Attack         >Items          Magic          Flee";
+                menuString = " Attack         >Items          Pass          Flee";
             } else if (menuSelect == 2){
-                menuString = " Attack          Items         >Magic          Flee";
+                menuString = " Attack          Items         >Pass          Flee";
             } else if (menuSelect == 3) {
-                menuString = " Attack          Items          Magic         >Flee";
+                menuString = " Attack          Items          Pass         >Flee";
             } else if (menuSelect == -1) {
                 menuString = ">Next Turn";
             }
