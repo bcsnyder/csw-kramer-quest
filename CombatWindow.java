@@ -15,10 +15,11 @@ import javax.swing.*;
  */
 public class CombatWindow extends JFrame
 {
-    public static final int CANVAS_WIDTH  = 700;//Sets size of window
+    //Sets size of window
+    public static final int CANVAS_WIDTH  = 700;
     public static final int CANVAS_HEIGHT = 600;
 
-    private CombatDisplay canvas;//Subcomponent where graphics displayed
+    private CombatDisplay canvas; //Subcomponent where graphics displayed
 
     private Player play;
     private String pName;
@@ -64,7 +65,7 @@ public class CombatWindow extends JFrame
         CombatWindow thisWindow = this;
         fleeCondition = flee;
 
-        canvas = new CombatDisplay();    // Construct the drawing canvas
+        canvas = new CombatDisplay(); //Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
         //Creates menu system
         String menuString = ">Attack          Items          Magic          Flee";
@@ -72,98 +73,97 @@ public class CombatWindow extends JFrame
         Container cp = getContentPane();
         cp.add(canvas);
 
-        setTitle("Combat");  //JFrame sets the title of outer frame
-        setDefaultCloseOperation(EXIT_ON_CLOSE);   // Handle the CLOSE button
+        setTitle("Combat"); //JFrame sets the title of outer frame
+        setDefaultCloseOperation(EXIT_ON_CLOSE); //Handle the CLOSE button
         pack();
-        setVisible(true);    //Displays window
+        setVisible(true); //Displays window
         setFocusable(true);
-        setLocationRelativeTo(null);     //Puts the JFrame in the middle of the screen @Francis
+        setLocationRelativeTo(null); //Puts the JFrame in the middle of the screen @Francis
 
         addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent evt) {
-                    switch(evt.getKeyCode()) {
-                        case KeyEvent.VK_A:
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                switch(evt.getKeyCode()) {
+                    case KeyEvent.VK_A:
 
-                        if (menuSelect > 0) {
-                            menuSelect = menuSelect - 1;
-                        } 
-                        repaint();
-                        break;
-                        case KeyEvent.VK_D:
-                        if (menuSelect < 3 && menuSelect != -1) {
-                            menuSelect = menuSelect + 1;
-                        }
-                        repaint();
-                        break;
-                        case KeyEvent.VK_ENTER:
-                        if (menuSelect == 0) {
-                            //Makes combat more exciting by adding random damage modifier
-                            int bonus = (int)(Math.random()*5);
-                            int damage = play.attack() + bonus;
-                            boolean survive = monster.ouchie(damage);//damages monster
-
-                            //Sets feedback for user
-                            String message = "You swing your " +play.weaponName() +", dealing " + (damage)+ " damage";
-                            if (survive == true) {
-                                message = message + "!";
-                                refreshWindow(message, play, monster);
-                            } else {
-                                message = message + " and the " +monster.getName() +" has been slain!";
-                                play.maxHealthAdd(monster.getExp());
-                                play.setHealth(play.getHealth() + monster.getExp());
-                                refreshWindow(message, play, monster);
-                                play.setCombat(false);
-                                if (monster.getName().equals("Boss")) {
-                                    st.getRoom(num).addTile(monster.getX(),monster.getY(),new Idol());
-                                } else {
-                                    st.getRoom(num).addTile(monster.getX(),monster.getY(),randomItem());
-                                }
-                                gW.displayWindow(play, st, num);
-                                dispose();
-                            }
-                        } else if (menuSelect == 3) { 
-                            if (fleeCondition == true) {
-                              int rng = (int)(Math.random() * 100);
-                              if (rng < 41) {
-                                 dispose();
-                                 play.setCombat(false);
-                                 gW.displayWindow(play, st, num);   
-                                  
-                                }
-                              String message = "You tried to run but the monster blocked your path!";
-                              refreshWindow(message, play, monster);
-                            } else {
-                               String message = "You cannot run from a fight you started!";
-                               refreshWindow(message, play, monster);
-                            }
-                           
-                        } else if (menuSelect == 1) {
-                            dispose();
-                            InventoryWindow iW = new InventoryWindow();
-                            iW.displayWindow(play.getInventory(), play, st, num);
-                            iW.storeCombat(play, monster, st, num, flee);
-                        } else if (menuSelect == -1) {
-                            play.setHealth(play.getHealth() - monster.getAttack());
-                            String message = "The " +monster.getName() +" attacks and deals "+monster.getAttack()+" damage to you!";
-                            refreshWindow(message, play, monster);
-
-                            if (play.getHealth() <= 0) {
-                                gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
-                                dispose();
-                            } 
-                            refreshWindow(message, play, monster);
-                        }
-                        if (menuSelect == -1) {
-                            menuSelect = 0;
-                        } else {
-                            menuSelect = -1;
-                        }
-                        repaint();
-                        break;
+                    if (menuSelect > 0) {
+                        menuSelect = menuSelect - 1;
                     } 
-                }
-            });
+                    repaint();
+                    break;
+                    case KeyEvent.VK_D:
+                    if (menuSelect < 3 && menuSelect != -1) {
+                        menuSelect = menuSelect + 1;
+                    }
+                    repaint();
+                    break;
+                    case KeyEvent.VK_ENTER:
+                    if (menuSelect == 0) {
+                        //Makes combat more exciting by adding random damage modifier
+                        int bonus = (int)(Math.random()*5);
+                        int damage = play.attack() + bonus;
+                        boolean survive = monster.ouchie(damage);//damages monster
+
+                        //Sets feedback for user
+                        String message = "You swing your " +play.weaponName() +", dealing " + (damage)+ " damage";
+                        if (survive == true) {
+                            message = message + "!";
+                            refreshWindow(message, play, monster);
+                        } else {
+                            message = message + " and the " +monster.getName() +" has been slain!";
+                            play.maxHealthAdd(monster.getExp());
+                            play.setHealth(play.getHealth() + monster.getExp());
+                            refreshWindow(message, play, monster);
+                            play.setCombat(false);
+                            if (monster.getName().equals("Boss")) {
+                                st.getRoom(num).addTile(monster.getX(),monster.getY(),new Idol());
+                            } else {
+                                st.getRoom(num).addTile(monster.getX(),monster.getY(),randomItem());
+                            }
+                            gW.displayWindow(play, st, num);
+                            dispose();
+                        }
+                    } else if (menuSelect == 3) { 
+                        if (fleeCondition == true) {
+                            int rng = (int)(Math.random() * 100);
+                            if (rng < 41) {
+                                dispose();
+                                play.setCombat(false);
+                                gW.displayWindow(play, st, num);   
+
+                            }
+                            String message = "You tried to run but the monster blocked your path!";
+                            refreshWindow(message, play, monster);
+                        } else {
+                            String message = "You cannot run from a fight you started!";
+                            refreshWindow(message, play, monster);
+                        }
+                    } else if (menuSelect == 1) {
+                        dispose();
+                        InventoryWindow iW = new InventoryWindow();
+                        iW.displayWindow(play.getInventory(), play, st, num);
+                        iW.storeCombat(play, monster, st, num, flee);
+                    } else if (menuSelect == -1) {
+                        play.setHealth(play.getHealth() - monster.getAttack());
+                        String message = "The " +monster.getName() +" attacks and deals "+monster.getAttack()+" damage to you!";
+                        refreshWindow(message, play, monster);
+
+                        if (play.getHealth() <= 0) {
+                            gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
+                            dispose();
+                        } 
+                        refreshWindow(message, play, monster);
+                    }
+                    if (menuSelect == -1) {
+                        menuSelect = 0;
+                    } else {
+                        menuSelect = -1;
+                    }
+                    repaint();
+                    break;
+                } 
+            }
+        });
     }
 
     /**
@@ -185,7 +185,7 @@ public class CombatWindow extends JFrame
         canvas.repaint();
     }
 
-    /*
+    /**
      * centerStringX finds the x coordinate needed to center a String in the window.
      */
     private int centerStringStartX(String text, int frameWidth, Graphics g) {
@@ -207,56 +207,59 @@ public class CombatWindow extends JFrame
         int textX = frameWidth/2 + textWidth/2;
         return textX;
     }
-     public Item randomItem() {
-            Room room = play.getRoom();
-            int roomNumber = room.getroomNumber(); 
-            int value = (int) (Math.random() * 100 + 1);
-            if (value <= 40 && value >= 1) {
-                return new Bread();
-            } else if (value <= 70 && value >= 41) {
-                return new Potion();
-            } else if (value <= 100 && value >= 71) {
-                int weaponType = 0;
-                if (roomNumber < 2) {
-                    weaponType = 0;
-                } else if (roomNumber >= 2 && roomNumber < 8){
-                    weaponType = (int)(Math.random() * 2);
-                } else if (roomNumber  >= 8 && roomNumber < 12) {
-                    weaponType = (int)(Math.random() * 2) + 1;
-                } else if (roomNumber >= 12 && roomNumber < 17) {
-                    weaponType = (int)(Math.random() * 2)+ 2;
-                } else if (roomNumber  >= 17 && roomNumber < 20) {
-                    weaponType = 3;
-                }
-                if (weaponType == 0) {
-                    return new Spear();
-                } else if (weaponType == 1) {
-                    return new Axe();
-                } else if (weaponType == 2) {
-                    return new Sword();
-                } else if (weaponType == 3) {
-                    return new Musket();
-                } else {
-                    return new Axe();
-                }
-            } else {
-                return new Bread();    
-            }
-        }
 
-    /*
+    public Item randomItem() {
+        Room room = play.getRoom();
+        int roomNumber = room.getroomNumber(); 
+        int value = (int) (Math.random() * 100 + 1);
+
+        if (value <= 40 && value >= 1) {
+            return new Bread();
+        } else if (value <= 70 && value >= 41) {
+            return new Potion();
+        } else if (value <= 100 && value >= 71) {
+            int weaponType = 0;
+            if (roomNumber < 2) {
+                weaponType = 0;
+            } else if (roomNumber >= 2 && roomNumber < 8){
+                weaponType = (int)(Math.random() * 2);
+            } else if (roomNumber  >= 8 && roomNumber < 12) {
+                weaponType = (int)(Math.random() * 2) + 1;
+            } else if (roomNumber >= 12 && roomNumber < 17) {
+                weaponType = (int)(Math.random() * 2)+ 2;
+            } else if (roomNumber  >= 17 && roomNumber < 20) {
+                weaponType = 3;
+            }
+            
+            if (weaponType == 0) {
+                return new Spear();
+            } else if (weaponType == 1) {
+                return new Axe();
+            } else if (weaponType == 2) {
+                return new Sword();
+            } else if (weaponType == 3) {
+                return new Musket();
+            } else {
+                return new Axe();
+            }
+        } else {
+            return new Bread();    
+        }
+    }
+
+    /**
      * Panel inside frame that holds drawn graphics
      */
     private class CombatDisplay extends JPanel {
-        // Override paintComponent to perform your own painting
+        //Override paintComponent to perform your own painting
         @Override
         public void paintComponent(Graphics g) {
-            super.paintComponent(g);     // paint base background
-            setBackground(Color.BLACK);  // set background color for this JPanel
+            super.paintComponent(g); //Paint base background
+            setBackground(Color.BLACK); //Set background color for this JPanel
 
-            g.setColor(Color.WHITE);//Displays user name and symbol
+            g.setColor(Color.WHITE); //Displays user name and symbol
             g.setFont(new Font("Monospaced", Font.PLAIN, 24));
-            int x = centerStringStartX(pName, CANVAS_WIDTH/3, g);//centers in the first
+            int x = centerStringStartX(pName, CANVAS_WIDTH/3, g); //Centers in the first
             //third of the window
             g.drawString(pName, x, 30);
             x = CANVAS_WIDTH - centerStringEndX(mName, CANVAS_WIDTH/3, g);
@@ -294,7 +297,7 @@ public class CombatWindow extends JFrame
             x = centerStringStartX(combatMessage, CANVAS_WIDTH, g);
             g.drawString(combatMessage, x, CANVAS_HEIGHT/2);
 
-            //draws list of actions
+            //Draws list of actions
             g.setColor(Color.WHITE);
             g.setFont(new Font("Monospaced", Font.PLAIN, 20));
             if (menuSelect == 0) {
