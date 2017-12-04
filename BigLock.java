@@ -13,6 +13,7 @@ public class BigLock extends Item
         type = "Lock";
         category = "Item";
         symbol = '$';
+        name = "Big Locked Chest";
     }
 
     public String getCategory() {
@@ -31,5 +32,9 @@ public class BigLock extends Item
 
     public boolean unlock() {
         return true;
+    }
+    
+     public char getSymbol() {
+        return symbol;
     }
 }
