@@ -32,10 +32,12 @@ public class Room
         numMonsters = (int) Math.floor(Math.random() * (max - min)) + min;
         map = new Tileable[length][width];
     }
+
     public int getroomNumber ()
     {
         return roomNum; 
     }
+
     public void fill() {
         fillDots();
         fillWalls();
@@ -90,58 +92,67 @@ public class Room
         {
             for (int counter2 = 0; counter2 < width; counter2++)
             {
-                int wallSpawnChance = (int)(Math.random()*100) + 1;
-
                 if (counter1 == 0 || counter1 == length - 1)
                 {  
                     if (map[counter1][counter2].getCategory().equals("Empty"))
-                    map[counter1][counter2] = new Wall(true);
+                        map[counter1][counter2] = new Wall(true);
                 }
                 else if (counter2 == 0 || counter2 == width - 1)
                 {
                     if (map[counter1][counter2].getCategory().equals("Empty"))
-                    map[counter1][counter2] = new Wall(false);
-                } else if ((counter1 > 1 && counter1 < length - 2 && counter2 > 1 && counter2 < width - 2)) {
-                    if (wallSpawnChance <= 80) {
-                        ArrayList<Tileable> adjacentTiles = new ArrayList<Tileable>();
+                        map[counter1][counter2] = new Wall(false);
+                }
+            }
+        }
 
-                        if (map[counter1-1][counter2].getCategory().equals("Wall")) 
-                            adjacentTiles.add(map[counter1-1][counter2]);
-                        else if (map[counter1-1][counter2-1].getCategory().equals("Wall"))
-                            adjacentTiles.add(map[counter1-1][counter2]);
-                        else if (map[counter1-1][counter2+1].getCategory().equals("Wall"))
-                            adjacentTiles.add(map[counter1-1][counter2]);
-                        else if (map[counter1+1][counter2].getCategory().equals("Wall"))
-                            adjacentTiles.add(map[counter1-1][counter2]);
-                        else if (map[counter1+1][counter2+1].getCategory().equals("Wall"))
-                            adjacentTiles.add(map[counter1-1][counter2]);
-                        else if (map[counter1+1][counter2-1].getCategory().equals("Wall"))
-                            adjacentTiles.add(map[counter1-1][counter2]);
-                        else if (map[counter1][counter2-1].getCategory().equals("Wall"))
-                            adjacentTiles.add(map[counter1-1][counter2]);
-                        else if (map[counter1-1][counter2+1].getCategory().equals("Wall"))
-                            adjacentTiles.add(map[counter1-1][counter2]);
+        for (int counter1 = 1; counter1 < length - 1; counter1++)
+        {
+            for (int counter2 = 1; counter2 < width - 1; counter2++)
+            {
+                int wallSpawnChance = (int)(Math.random()*100) + 1;
+                
+                ArrayList<Tileable> adjacentTiles = new ArrayList<Tileable>();
+
+                if (map[counter1-1][counter2].getCategory().equals("Wall")) 
+                    adjacentTiles.add(map[counter1-1][counter2]);
+                if (map[counter1-1][counter2-1].getCategory().equals("Wall"))
+                    adjacentTiles.add(map[counter1-1][counter2]);
+                if (map[counter1-1][counter2+1].getCategory().equals("Wall"))
+                    adjacentTiles.add(map[counter1-1][counter2]);
+                if (map[counter1+1][counter2].getCategory().equals("Wall"))
+                    adjacentTiles.add(map[counter1-1][counter2]);
+                if (map[counter1+1][counter2+1].getCategory().equals("Wall"))
+                    adjacentTiles.add(map[counter1-1][counter2]);
+                if (map[counter1+1][counter2-1].getCategory().equals("Wall"))
+                    adjacentTiles.add(map[counter1-1][counter2]);
+                if (map[counter1][counter2-1].getCategory().equals("Wall"))
+                    adjacentTiles.add(map[counter1-1][counter2]);
+                if (map[counter1-1][counter2+1].getCategory().equals("Wall"))
+                    adjacentTiles.add(map[counter1-1][counter2]);
+
+                if ((counter1 > 1 && counter1 < length - 2 && counter2 > 1 && counter2 < width - 2)) {
+                    if (wallSpawnChance <= 80) {
 
                         if (adjacentTiles.size() == 1) {
                             map[counter1][counter2] = adjacentTiles.get(0);
                         }
                     }
                 } else if (wallSpawnChance >= 60) {
-                    if (!map[counter1][counter2-1].getCategory().equals("Wall") && !map[counter1][counter2+1].getCategory().equals("Wall")) {
-                        if (counter1 == 1 && map[0][counter2].getCategory().equals("Wall") && !map[counter1+1][counter2-1].getCategory().equals("Wall") && !map[counter1+1][counter2+1].getCategory().equals("Wall")) {
+
+                    if (adjacentTiles.size() <= 3) {
+                        if (counter1 == 1 && map[0][counter2].getCategory().equals("Wall")) {
                             map[counter1][counter2] = new Wall(false);
-                        } else if (counter1 == length - 2 && map[length-1][counter2].getCategory().equals("Wall") && !map[counter1-1][counter2-1].getCategory().equals("Wall") && !map[counter1-1][counter2+1].getCategory().equals("Wall")) {
+                        } else if (counter1 == length - 2 && map[length-1][counter2].getCategory().equals("Wall")) {
                             map[counter1][counter2] = new Wall(false);
                         }
-                    }
-                    if ((!map[counter1-1][counter2].getCategory().equals("Wall") && !map[counter1+1][counter2].getCategory().equals("Wall"))) {
-                        if (counter2 == 1 && map[counter1][counter2-1].getCategory().equals("Wall") && !map[counter1+1][counter2+1].getCategory().equals("Wall") && !map[counter1-1][counter2+1].getCategory().equals("Wall")) {
+                        if (counter2 == 1 && map[counter1][counter2-1].getCategory().equals("Wall")) {
                             map[counter1][counter2] = new Wall(true);
-                        } else if (counter2 == width - 2 && map[counter1][counter2+1].getCategory().equals("Wall") && !map[counter1-1][counter2-1].getCategory().equals("Wall") && !map[counter1+1][counter2-1].getCategory().equals("Wall")) {
+                        } else if (counter2 == width - 2 && map[counter1][width-1].getCategory().equals("Wall")) {
                             map[counter1][counter2] = new Wall(true);
                         }
                     }
                 } 
+
             }
         }
     }
@@ -196,9 +207,9 @@ public class Room
         }
         BackPosX = xCoor;
         BackPosY = yCoor;
-        
+
         fillWalls();
-        
+
         if (roomNumber != 19) {/* Monster */
             for (int counter = 0; counter < numMonsters; counter++)
             {
