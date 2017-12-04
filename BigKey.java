@@ -14,6 +14,7 @@ public class BigKey extends Item
         type = "Key";
         category = "Item";
         symbol = '$';
+        name = "Big Key";
     }
 
     public String getCategory() {
