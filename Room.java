@@ -31,7 +31,10 @@ public class Room
         numMonsters = (int) Math.floor(Math.random() * (max - min)) + min;
         map = new Tileable[length][width];
     }
-
+    public int getroomNumber ()
+    {
+        return roomNum; 
+    }
     public void fill() {
         fillDots();
         fillWalls();
