@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=playCombat\ monsterCombat\ stCombat\ numCombat
-comment0.target=void\ storeCombat(Player,\ Monster,\ Stage,\ int)
+comment0.params=playCombat\ monsterCombat\ stCombat\ numCombat\ fleeCombat
+comment0.target=void\ storeCombat(Player,\ Monster,\ Stage,\ int,\ boolean)
 comment1.params=inv\ p\ s\ n
 comment1.target=void\ displayWindow(java.util.ArrayList,\ Player,\ Stage,\ int)
 comment2.params=evt

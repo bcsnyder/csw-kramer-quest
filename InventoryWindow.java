@@ -186,7 +186,7 @@ public class InventoryWindow extends JFrame
                             }
                         } else if (inventory.get(select).getType().equals("Idol")) {
                             GameOverWindow gOW = new GameOverWindow();
-                            gOW.displayWindow(play.getName(), "Congratulations young hero, you won!");
+                            gOW.displayWindow(play.getName(), "win");
                             dispose();
                         }
                     }
