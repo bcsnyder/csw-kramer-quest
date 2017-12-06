@@ -147,20 +147,20 @@ public class GameplayWindow extends JFrame
                                 }
                             }
 
-                            for (int monsterCount = 0; monsterCount < countedMonsters.size(); monsterCount++) {
-                                Monster m = countedMonsters.get(monsterCount);
-                                int xLocation = m.getX();
-                                int yLocation = m.getY();
-                                m.setMoved(false);
-                                board.addTile(xLocation,yLocation,m);
-                                space.setRoom(board, levelNum);
-                                play.setRoom(board);
-                            }
-
                             if (!inCombat) {
+                                for (int monsterCount = 0; monsterCount < countedMonsters.size(); monsterCount++) {
+                                    Monster m = countedMonsters.get(monsterCount);
+                                    int xLocation = m.getX();
+                                    int yLocation = m.getY();
+                                    m.setMoved(false);
+                                    board.addTile(xLocation,yLocation,m);
+                                    space.setRoom(board, levelNum);
+                                    play.setRoom(board);
+                                }
+
                                 turnPhase = 0;
                             }
-                            
+
                             if (countedMonsters.size() == 0) {
                                 refreshWindow("", play, space, levelNum);
                             }
