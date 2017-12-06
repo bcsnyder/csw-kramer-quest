@@ -121,6 +121,7 @@ public class CombatWindow extends JFrame
                             message = message + " and the " +monster.getName() +" has been slain!";
                             play.maxHealthAdd(monster.getExp());
                             play.setHealth(play.getHealth() + monster.getExp());
+                            play.addExp(monster.getExp());
                             refreshWindow(message, play, monster);
                             play.setCombat(false);
                             if (monster.getName().equals("Boss")) {
