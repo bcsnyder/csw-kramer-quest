@@ -16,7 +16,7 @@ import javax.swing.*;
 public class CombatWindow extends JFrame
 {
     //Sets size of window
-    public static final int CANVAS_WIDTH  = 700;
+    public static final int CANVAS_WIDTH  = 1000;
     public static final int CANVAS_HEIGHT = 600;
 
     private CombatDisplay canvas; //Subcomponent where graphics displayed
@@ -317,9 +317,9 @@ public class CombatWindow extends JFrame
             g.drawString(var, x, 110);
 
             //Shows info message to user about what just happened
-            g.setFont(new Font("Monospaced", Font.PLAIN, 14));
+            g.setFont(new Font("Monospaced", Font.PLAIN, 28));
             x = centerStringStartX(combatMessage, CANVAS_WIDTH, g);
-            g.drawString(combatMessage, x, CANVAS_HEIGHT/2);
+            g.drawString(combatMessage, x, CANVAS_HEIGHT/2 + 50);
 
             //Draws list of actions
             g.setColor(Color.WHITE);
