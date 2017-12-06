@@ -105,6 +105,7 @@ public class MenuWindow extends JFrame {
         newPlayer.usedItem(false);
         newPlayer.setWeapon(new Fists());
         newPlayer.setMaxHealth(25);
+        newPlayer.setExp(0);
 
         int xPos = 1;
         int yPos = 1;
