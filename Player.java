@@ -21,6 +21,7 @@ public class Player implements Tileable
     private boolean usedItem;
     boolean cheatMode = false;
     private int maxHealth;
+    private int exp;
     
     public Player() {
         inventory = new ArrayList<Item>();
@@ -108,7 +109,7 @@ public class Player implements Tileable
     }
 
     public int attack() {
-        int damage = attack + currentWeapon.attack();
+        int damage = attack + currentWeapon.attack() + (exp/4);
         if (currentWeapon.getDurability() <= 0) {
             inventory.remove(inventory.indexOf(currentWeapon));
             currentWeapon = new Fists();
@@ -118,7 +119,7 @@ public class Player implements Tileable
     }
 
     public int getAttack() {
-        return (attack + currentWeapon.getDamage());
+        return (attack + currentWeapon.getDamage()+ (exp/4));
     }
 
     public void addItem(Item newItem) {
@@ -208,5 +209,13 @@ public class Player implements Tileable
 
     public int getMaxHealth() {
         return maxHealth;
+    }
+    
+    public void setExp (int x) {
+        exp = x;
+    }
+    
+    public void addExp (int x) {
+        exp = exp + x;
     }
 }
