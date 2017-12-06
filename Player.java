@@ -119,7 +119,7 @@ public class Player implements Tileable
     }
 
     public int getAttack() {
-        return (attack + currentWeapon.getDamage()+ (exp/4));
+        return (attack + currentWeapon.getDamage() + (exp/4));
     }
 
     public void addItem(Item newItem) {

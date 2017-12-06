@@ -81,48 +81,92 @@ public class CombatWindow extends JFrame
         setLocationRelativeTo(null); //Puts the JFrame in the middle of the screen @Francis
 
         addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent evt) {
-                switch(evt.getKeyCode()) {
-                    case KeyEvent.VK_A:
+                @Override
+                public void keyPressed(KeyEvent evt) {
+                    switch(evt.getKeyCode()) {
+                        case KeyEvent.VK_A:
 
-                    if (menuSelect > 0) {
-                        menuSelect = menuSelect - 1;
-                    } 
-                    repaint();
-                    break;
-                    case KeyEvent.VK_D:
-                    if (menuSelect < 3 && menuSelect != -1) {
-                        menuSelect = menuSelect + 1;
-                    }
-                    repaint();
-                    break;
-                    case KeyEvent.VK_ENTER:
-                    if (menuSelect == 0) {
-                        //Makes combat more exciting by adding random damage modifier
-                        int bonus = (int)(Math.random()*5);
-                        int crit = (int) (Math.random() * 10) + 1; 
-                        int damage = play.attack() + bonus;
-                         if (crit >= 8 && crit <= 10) {
-                            damage = (damage * 2);
+                        if (menuSelect > 0) {
+                            menuSelect = menuSelect - 1;
+                        } 
+                        repaint();
+                        break;
+                        case KeyEvent.VK_D:
+                        if (menuSelect < 3 && menuSelect != -1) {
+                            menuSelect = menuSelect + 1;
                         }
-                        boolean survive = monster.ouchie(damage);//damages monster
-                        String message;
-                        //Sets feedback for user
-                        if (crit < 8) {
-                          message = "You swing your " +play.weaponName() +", dealing " + (damage)+ " damage";
-                          } else {
-                          message = "Your " +play.weaponName() +" lands a critical strike, dealing " +damage +" damage";
+                        repaint();
+                        break;
+                        case KeyEvent.VK_ENTER:
+                        if (menuSelect == 0) {
+                            //Makes combat more exciting by adding random damage modifier
+                            int bonus = (int)(Math.random()*5);
+                            int crit = (int) (Math.random() * 10) + 1; 
+                            int damage = play.attack() + bonus;
+                            if (crit >= 8 && crit <= 10) {
+                                damage = (damage * 2);
                             }
-                        if (survive == true) {
-                            message = message + "!";
+                            boolean survive = monster.ouchie(damage);//damages monster
+                            String message;
+                            //Sets feedback for user
+                            if (crit < 8) {
+                                message = "You swing your " +play.weaponName() +", dealing " + (damage)+ " damage";
+                            } else {
+                                message = "Your " +play.weaponName() +" lands a critical strike, dealing " +damage +" damage";
+                            }
+                            if (survive == true) {
+                                message = message + "!";
+                                refreshWindow(message, play, monster);
+                            } else {
+                                message = message + " and the " +monster.getName() +" has been slain!";
+                                refreshWindow(message, play, monster);
+                                menuSelect = -2;
+                            }
+                        } else if (menuSelect == 3) { 
+                            if (fleeCondition == true) {
+                                int rng = (int)(Math.random() * 100);
+                                if (rng < 41) {
+                                    dispose();
+                                    play.setCombat(false);
+                                    gW.displayWindow(play, st, num);   
+
+                                }
+                                String message = "You tried to run but the monster blocked your path!";
+                                refreshWindow(message, play, monster);
+                            } else {
+                                String message = "You cannot run from a fight you started!";
+                                refreshWindow(message, play, monster);
+                            }
+                        } else if (menuSelect == 1) {
+                            dispose();
+                            InventoryWindow iW = new InventoryWindow();
+                            iW.displayWindow(play.getInventory(), play, st, num);
+                            iW.storeCombat(play, monster, st, num, flee);
+                        } else if (menuSelect == -1) {
+                            int crit = (int) (Math.random() * 10) + 1; 
+                            int damage = monster.getAttack();
+                            if (crit >= 8 && crit <= 10) {
+                                damage = (damage * 2);
+                            }
+                            play.setHealth(play.getHealth() - damage);
+                            String message;
+                            if (crit < 8) {
+                                message = "The " +monster.getName() +" attacks and deals "+monster.getAttack()+" damage to you!";
+                            } else {
+                                message = "The " +monster.getName() +" lands a critical strike and deals "+monster.getAttack()+" damage to you!";
+                            }
+                            message = "The " +monster.getName() +" attacks and deals "+monster.getAttack()+" damage to you!";
                             refreshWindow(message, play, monster);
-                        } else {
-                            message = message + " and the " +monster.getName() +" has been slain!";
+
+                            if (play.getHealth() <= 0) {
+                                gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
+                                dispose();
+                            } 
+                            refreshWindow(message, play, monster);
+                        } else if (menuSelect == -2) {
                             play.maxHealthAdd(monster.getExp());
                             play.setHealth(play.getHealth() + monster.getExp());
                             play.addExp(monster.getExp());
-                            refreshWindow(message, play, monster);
                             play.setCombat(false);
                             if (monster.getName().equals("Boss")) {
                                 st.getRoom(num).addTile(monster.getX(),monster.getY(),new Idol());
@@ -132,58 +176,16 @@ public class CombatWindow extends JFrame
                             gW.displayWindow(play, st, num);
                             dispose();
                         }
-                    } else if (menuSelect == 3) { 
-                        if (fleeCondition == true) {
-                            int rng = (int)(Math.random() * 100);
-                            if (rng < 41) {
-                                dispose();
-                                play.setCombat(false);
-                                gW.displayWindow(play, st, num);   
-
-                            }
-                            String message = "You tried to run but the monster blocked your path!";
-                            refreshWindow(message, play, monster);
-                        } else {
-                            String message = "You cannot run from a fight you started!";
-                            refreshWindow(message, play, monster);
+                        if (menuSelect == -1) {
+                            menuSelect = 0;
+                        } else if (menuSelect != -2) {
+                            menuSelect = -1;
                         }
-                    } else if (menuSelect == 1) {
-                        dispose();
-                        InventoryWindow iW = new InventoryWindow();
-                        iW.displayWindow(play.getInventory(), play, st, num);
-                        iW.storeCombat(play, monster, st, num, flee);
-                    } else if (menuSelect == -1) {
-                        int crit = (int) (Math.random() * 10) + 1; 
-                        int damage = monster.getAttack();
-                         if (crit >= 8 && crit <= 10) {
-                            damage = (damage * 2);
-                        }
-                        play.setHealth(play.getHealth() - damage);
-                        String message;
-                        if (crit < 8) {
-                          message = "The " +monster.getName() +" attacks and deals "+monster.getAttack()+" damage to you!";
-                          } else {
-                          message = "The " +monster.getName() +" lands a critical strike and deals "+monster.getAttack()+" damage to you!";
-                            }
-                        message = "The " +monster.getName() +" attacks and deals "+monster.getAttack()+" damage to you!";
-                        refreshWindow(message, play, monster);
-
-                        if (play.getHealth() <= 0) {
-                            gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
-                            dispose();
-                        } 
-                        refreshWindow(message, play, monster);
-                    }
-                    if (menuSelect == -1) {
-                        menuSelect = 0;
-                    } else {
-                        menuSelect = -1;
-                    }
-                    repaint();
-                    break;
-                } 
-            }
-        });
+                        repaint();
+                        break;
+                    } 
+                }
+            });
     }
 
     /**
@@ -250,7 +252,7 @@ public class CombatWindow extends JFrame
             } else if (roomNumber  >= 17 && roomNumber < 20) {
                 weaponType = 3;
             }
-            
+
             if (weaponType == 0) {
                 return new Spear();
             } else if (weaponType == 1) {
@@ -301,7 +303,7 @@ public class CombatWindow extends JFrame
             String var = "HP:" + pHP;
             x = 30;
             g.drawString(var, x, 90);
-            var = "Attack:" + pAttack;
+            var = "Base Attack:" + pAttack;
             g.drawString(var, x, 110);
             var = "Weapon: " + play.weaponName();
             g.drawString(var, x, 130);
@@ -332,7 +334,7 @@ public class CombatWindow extends JFrame
                 menuString = " Attack          Items         >Pass          Flee";
             } else if (menuSelect == 3) {
                 menuString = " Attack          Items          Pass         >Flee";
-            } else if (menuSelect == -1) {
+            } else if (menuSelect == -1 || menuSelect == -2) {
                 menuString = ">Next Turn";
             }
             x = centerStringStartX(menuString, CANVAS_WIDTH, g);
