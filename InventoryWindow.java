@@ -35,6 +35,8 @@ public class InventoryWindow extends JFrame
     int baseCode[] = new int [] {1,1,2,2,3,4,3,4,5,6};
     int inputCode [] = new int [] {0,0,0,0,0,0,0,0,0,0};
     int currInput = 0;
+    public Item selectedItem;
+    public Player play;
     
     public void storeCombat (Player playCombat, Monster monsterCombat, Stage stCombat, int numCombat, boolean fleeCombat) {
         savedPlayer = playCombat;
@@ -60,7 +62,7 @@ public class InventoryWindow extends JFrame
         setVisible(true); //Displays window
         setLocationRelativeTo(null); //Puts the JFrame in the middle of the screen @Francis
         setFocusable(true);
-        Player play = p;
+        play = p;
         health = play.getHealth();
         stamina = play.getStamina();
         attack = play.getAttack();
@@ -188,6 +190,24 @@ public class InventoryWindow extends JFrame
                             GameOverWindow gOW = new GameOverWindow();
                             gOW.displayWindow(play.getName(), "win");
                             dispose();
+                        } else if (inventory.get(select).getType().equals("Lock") && selectedItem != null) {
+                            if (inventory.get(select).getName().equals("Big Locked Chest")) {
+                                if (selectedItem.getName().equals("Big Key")) {
+                                    inventory.remove(select);
+                                    inventory.remove(inventory.indexOf(selectedItem));
+                                    inventory.add(randomItem());
+                                    select = inventory.size() - 1;
+                                    }
+                            } else if (inventory.get(select).getName().equals("Small Locked Chest")) {
+                                if (selectedItem.getName().equals("Small Key")) {
+                                    inventory.remove(select);
+                                    inventory.remove(inventory.indexOf(selectedItem));
+                                    inventory.add(randomItem());
+                                    select = inventory.size() - 1;
+                                }
+                            }
+                        } else {
+                            selectedItem = inventory.get(select);
                         }
                     }
                     repaint();
@@ -303,6 +323,49 @@ public class InventoryWindow extends JFrame
                 }
             } 
         });
+    }
+    
+    public Item randomItem() {
+        Room room = play.getRoom();
+        int roomNumber = room.getroomNumber(); 
+        int value = (int) (Math.random() * 150 + 1);
+
+        if (value <= 40 && value >= 1) {
+            return new Bread();
+        } else if (value <= 70 && value >= 41) {
+            return new Potion();
+        } else if (value <= 100 && value >= 71) {
+            int weaponType = 0;
+            if (roomNumber < 2) {
+                weaponType = 0;
+            } else if (roomNumber >= 2 && roomNumber < 8){
+                weaponType = (int)(Math.random() * 2);
+            } else if (roomNumber  >= 8 && roomNumber < 12) {
+                weaponType = (int)(Math.random() * 2) + 1;
+            } else if (roomNumber >= 12 && roomNumber < 17) {
+                weaponType = (int)(Math.random() * 2)+ 2;
+            } else if (roomNumber  >= 17 && roomNumber < 20) {
+                weaponType = 3;
+            }
+            
+            if (weaponType == 0) {
+                return new Spear();
+            } else if (weaponType == 1) {
+                return new Axe();
+            } else if (weaponType == 2) {
+                return new Sword();
+            } else if (weaponType == 3) {
+                return new Musket();
+            } else {
+                return new Axe();
+            }
+        } else if (value <= 130 && value >= 101) {
+            return new SmallKey();
+        } else if (value <= 150 && value >= 131) {
+            return new BigKey();
+        } else {
+            return new Bread();
+        }
     }
 
     /**
