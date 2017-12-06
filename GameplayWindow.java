@@ -29,6 +29,8 @@ public class GameplayWindow extends JFrame
     private int turnPhase = 0;
     private String menuString;
     private int menuSelection;
+    private boolean inCombat;
+    Tileable currentTile;
 
     private String actionMessage = "";
 
@@ -44,6 +46,9 @@ public class GameplayWindow extends JFrame
         room = board.toString();
         roomHeight = board.getHeight();
         inventory = play.getInventory();
+
+        inCombat = false;
+        currentTile = new Bread();
 
         String menuString = "";
         if (player.getName().equals("Unnamed")) {
@@ -70,19 +75,19 @@ public class GameplayWindow extends JFrame
                     switch(evt.getKeyCode()) {
                         case KeyEvent.VK_W:
                         if (turnPhase == 0) {
-                            move("up");
+                            currentTile = move("up");
                         }
                         break;
                         case KeyEvent.VK_S:
                         if (turnPhase == 0) {
-                            move("down");
+                            currentTile = move("down");
                         }
                         break;
                         case KeyEvent.VK_Q:
                         break;
                         case KeyEvent.VK_A:
                         if (turnPhase == 0) {
-                            move("left");
+                            currentTile = move("left");
                         } else if (turnPhase == 2) {
                             if (menuSelection > 0) {
                                 menuSelection--;
@@ -92,7 +97,7 @@ public class GameplayWindow extends JFrame
                         break;
                         case KeyEvent.VK_D:
                         if (turnPhase == 0) {
-                            move("right");
+                            currentTile = move("right");
                         } else if (turnPhase == 2) {
                             if (menuSelection < 1) {
                                 menuSelection++;
@@ -108,6 +113,13 @@ public class GameplayWindow extends JFrame
                         }
                         break;
                         case KeyEvent.VK_ENTER:
+                        if (inCombat == true) {
+                            Monster enemy = (Monster)currentTile;//Selects the monster based on what tile the user hit
+                            CombatWindow cW = new CombatWindow();
+                            cW.displayWindow(play, enemy, space, levelNum, false);
+                            dispose();
+                        }
+
                         if (turnPhase == 1) {
                             ArrayList<Monster> countedMonsters = new ArrayList<Monster>();
                             //Monster move
@@ -123,9 +135,8 @@ public class GameplayWindow extends JFrame
                                             Room newBoard = m.chooseMove(board);
                                             if (newBoard == null) {
                                                 refreshWindow("The enemy attacks!", play, space, levelNum);
-                                                CombatWindow cW = new CombatWindow();
-                                                cW.displayWindow(play, m, space, levelNum, true);
-                                                dispose();
+                                                currentTile = m;
+                                                inCombat = true;
                                             } else {
                                                 space.setRoom(newBoard, levelNum);
                                                 play.setRoom(newBoard);
@@ -145,8 +156,11 @@ public class GameplayWindow extends JFrame
                                 space.setRoom(board, levelNum);
                                 play.setRoom(board);
                             }
+
+                            if (!inCombat) {
+                                turnPhase = 0;
+                            }
                             
-                            turnPhase = 0;
                             if (countedMonsters.size() == 0) {
                                 refreshWindow("", play, space, levelNum);
                             }
@@ -167,7 +181,7 @@ public class GameplayWindow extends JFrame
             });
     }
 
-    private void move(String direction) {
+    private Tileable move(String direction) {
         Tileable action = new Empty();
 
         if (direction.equals("up")) {
@@ -186,65 +200,64 @@ public class GameplayWindow extends JFrame
             gOW.displayWindow(play.getName(), "Died of starvation");
         }
 
-            if (action.getCategory().equals("Empty")) {
-                board = play.getRoom();
-                space.setRoom(board, levelNum);
-                if (play.getStamina() < 10){
-                    refreshWindow ("You moved "+direction+"! You can hear your stomache growl.", play, space, levelNum);   
-                }else {
-                    refreshWindow("You moved "+direction+".", play, space, levelNum);
-                }
-
-                turnPhase = 1;
-            } else if(action.getCategory().equals("Door Forward")) {
-                board.removePlayer();
-                space.setRoom(board, levelNum);
-                levelNum++;
-                board = space.getRoom(levelNum);
-                int x = board.returnPositionX();
-                int y = board.returnPositionY();
-                board.addTile(x,y, play);
-                space.setRoom(board, levelNum);
-                play.setRoom(board);
-                play.setPos(x,y);
-                if (play.getStamina() < 10){
-                    refreshWindow ("You entered a new room! Your stomache feels rather empty.", play, space, levelNum);   
-                }else {
-                    refreshWindow("You entered a new room!", play, space, levelNum);
-                }
-            } else if(action.getCategory().equals("Item")) {
-                board = play.getRoom();
-                space.setRoom(board, levelNum);                
-                play.addItem((Item)action);
-                refreshWindow("Obtained the " +inventory.get(inventory.size() - 1).getName() +".", play, space, levelNum);
-
-                turnPhase = 1;
-            } else if(action.getCategory().equals("Wall")) {
-                refreshWindow("You bumped into a wall!", play, space, levelNum);
-            } else if(action.getCategory().equals("Door Back")) {
-                board.removePlayer();
-                space.setRoom(board, levelNum);    
-                levelNum--;
-                board = space.getRoom(levelNum);
-                int x = board.returnPositionX2();
-                int y = board.returnPositionY2();
-                board.addTile(x,y, play);
-                space.setRoom(board, levelNum);
-                play.setRoom(board);
-                play.setPos(x,y);
-                if (play.getStamina() < 10){
-                    refreshWindow ("You moved back a room! You should probably find something to eat.", play, space, levelNum);   
-                }else {
-                    refreshWindow("You moved back a room!", play, space, levelNum);
-                }
-            } else {
-                Monster enemy = (Monster)action;//Selects the monster based on what tile the user hit
-                refreshWindow("You engaged the enemy!", play, space, levelNum);
-                CombatWindow cW = new CombatWindow();
-                cW.displayWindow(play, enemy, space, levelNum, false);
-                dispose();
+        if (action.getCategory().equals("Empty")) {
+            board = play.getRoom();
+            space.setRoom(board, levelNum);
+            if (play.getStamina() < 10){
+                refreshWindow ("You moved "+direction+"! You can hear your stomache growl.", play, space, levelNum);   
+            }else {
+                refreshWindow("You moved "+direction+".", play, space, levelNum);
             }
+
+            turnPhase = 1;
+        } else if(action.getCategory().equals("Door Forward")) {
+            board.removePlayer();
+            space.setRoom(board, levelNum);
+            levelNum++;
+            board = space.getRoom(levelNum);
+            int x = board.returnPositionX();
+            int y = board.returnPositionY();
+            board.addTile(x,y, play);
+            space.setRoom(board, levelNum);
+            play.setRoom(board);
+            play.setPos(x,y);
+            if (play.getStamina() < 10){
+                refreshWindow ("You entered a new room! Your stomache feels rather empty.", play, space, levelNum);   
+            }else {
+                refreshWindow("You entered a new room!", play, space, levelNum);
+            }
+        } else if(action.getCategory().equals("Item")) {
+            board = play.getRoom();
+            space.setRoom(board, levelNum);                
+            play.addItem((Item)action);
+            refreshWindow("Obtained the " +inventory.get(inventory.size() - 1).getName() +".", play, space, levelNum);
+
+            turnPhase = 1;
+        } else if(action.getCategory().equals("Wall")) {
+            refreshWindow("You bumped into a wall!", play, space, levelNum);
+        } else if(action.getCategory().equals("Door Back")) {
+            board.removePlayer();
+            space.setRoom(board, levelNum);    
+            levelNum--;
+            board = space.getRoom(levelNum);
+            int x = board.returnPositionX2();
+            int y = board.returnPositionY2();
+            board.addTile(x,y, play);
+            space.setRoom(board, levelNum);
+            play.setRoom(board);
+            play.setPos(x,y);
+            if (play.getStamina() < 10){
+                refreshWindow ("You moved back a room! You should probably find something to eat.", play, space, levelNum);   
+            }else {
+                refreshWindow("You moved back a room!", play, space, levelNum);
+            }
+        } else {
+            inCombat = true;
+            turnPhase = 1;
+            refreshWindow("You engaged the enemy!", play, space, levelNum);
+        }
         repaint();
+        return action;
     }
 
     /**
