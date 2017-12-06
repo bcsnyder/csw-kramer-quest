@@ -208,7 +208,7 @@ public class InventoryWindow extends JFrame
                             selectedItem = inventory.get(select);
                         }
                     }
-                    if (select >= inventory.size() {
+                    if (select >= inventory.size()) {
                         select = inventory.size() - 1;
                     }
                     repaint();

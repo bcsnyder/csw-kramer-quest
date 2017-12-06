@@ -314,7 +314,7 @@ public class GameplayWindow extends JFrame
 
             //Shows desired action message to notify user about
             //whatever just happened
-            g.setFont(new Font("Monospaced", Font.PLAIN, 14));
+            g.setFont(new Font("Monospaced", Font.PLAIN, 24));
             x = centerStringX(actionMessage, CANVAS_WIDTH, g);
             g.drawString(actionMessage, x, CANVAS_HEIGHT - 60);
 
