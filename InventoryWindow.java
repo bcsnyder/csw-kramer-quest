@@ -196,19 +196,20 @@ public class InventoryWindow extends JFrame
                                     inventory.remove(select);
                                     inventory.remove(inventory.indexOf(selectedItem));
                                     inventory.add(randomItem());
-                                    select = inventory.size() - 1;
                                     }
                             } else if (inventory.get(select).getName().equals("Small Locked Chest")) {
                                 if (selectedItem.getName().equals("Small Key")) {
                                     inventory.remove(select);
                                     inventory.remove(inventory.indexOf(selectedItem));
                                     inventory.add(randomItem());
-                                    select = inventory.size() - 1;
                                 }
                             }
                         } else {
                             selectedItem = inventory.get(select);
                         }
+                    }
+                    if (select >= inventory.size() {
+                        select = inventory.size() - 1;
                     }
                     repaint();
                     break;
