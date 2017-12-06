@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.params=m
 comment0.target=void\ setMessage(java.lang.String)
-comment1.params=player\ monster\ st\ num
-comment1.target=void\ displayWindow(Player,\ Monster,\ Stage,\ int)
+comment1.params=player\ monster\ st\ num\ flee
+comment1.target=void\ displayWindow(Player,\ Monster,\ Stage,\ int,\ boolean)
 comment1.text=\r\n\ Sets\ all\ the\ variables\ needed\ to\ display\ combat\ and\r\n\ sets\ up\ the\ window\ with\ its\ display\ components\ including\r\n\ two\ buttons.\r\n\ \r\n\ @param\ monster\ \ \ the\ monster\ instance\ the\ player\ is\ fighting\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ contains\ helpful\ variables\ the\ program\ gets\ from\ it\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ like\ health\r\n
 comment2.params=evt
 comment2.target=void\ keyPressed(java.awt.event.KeyEvent)
@@ -15,4 +15,6 @@ comment4.text=\r\n\ centerStringX\ finds\ the\ x\ coordinate\ needed\ to\ center
 comment5.params=text\ frameWidth\ g
 comment5.target=int\ centerStringEndX(java.lang.String,\ int,\ java.awt.Graphics)
 comment5.text=\r\n\ Rather\ than\ centering\ the\ start\ of\ the\ string,\ centers\ the\ end\r\n\ of\ it.\ Kind\ of.\ Basically\ it\ allows\ me\ to\ make\ a\ symmetrical\r\n\ window.\ Poorly\ named\ but\ you\ don't\ really\ need\ to\ understand\ this\ one\r\n\ so\ just\ talk\ to\ me\ later\ to\ get\ the\ full\ story.\r\n
-numComments=6
+comment6.params=
+comment6.target=Item\ randomItem()
+numComments=7
