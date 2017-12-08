@@ -265,8 +265,10 @@ public class CombatWindow extends JFrame
                 return new Axe();
             }
         } else if (value <= 130 && value >= 101) {
+            return new Steak();
+        } else if (value <= 140 && value >= 131) {
             return new SmallKey();
-        } else if (value <= 150 && value >= 131) {
+        } else if (value <= 150 && value >= 141) {
             return new BigKey();
         } else {
             return new Bread();
