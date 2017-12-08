@@ -234,7 +234,7 @@ public class Room
                 } while (map[num1][num2].getSymbol() != '.');
 
                 int monsterType = 0;
-                int spawnMimic = (int) (Math.random()) * 100 + 1;
+                int spawnMimic = (int) (Math.random() * 100) + 1;
                 if (roomNumber < 2) {
                     monsterType = 0;
                 } else if (spawnMimic < 6){
