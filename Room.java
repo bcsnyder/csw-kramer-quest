@@ -234,8 +234,11 @@ public class Room
                 } while (map[num1][num2].getSymbol() != '.');
 
                 int monsterType = 0;
+                int spawnMimic = (int) (Math.random()) * 100 + 1;
                 if (roomNumber < 2) {
                     monsterType = 0;
+                } else if (spawnMimic < 6){
+                    monsterType = 4;
                 } else if ( roomNumber >= 2 && roomNumber < 8){
                     monsterType = (int)(Math.random() * 2);
                 } else if ( roomNumber >= 8 && roomNumber < 12) {
@@ -282,7 +285,7 @@ public class Room
         possibleMonsters[1] = new Skeleton();
         possibleMonsters[2] = new Troll();
         possibleMonsters[3] = new Dragon();
-        possibleMonsters[4] = new Changeling();
+        possibleMonsters[4] = new Mimic();
 
         return possibleMonsters;
     }
