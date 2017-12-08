@@ -234,8 +234,12 @@ public class Room
                 } while (map[num1][num2].getSymbol() != '.');
 
                 int monsterType = 0;
+                int spawnMimic = (int) (Math.random() * 100) + 1;
                 if (roomNumber < 2) {
                     monsterType = 0;
+                } else if (spawnMimic < 6){
+                    monsterType = 4;
+                    spawnMimic = 50;
                 } else if ( roomNumber >= 2 && roomNumber < 8){
                     monsterType = (int)(Math.random() * 2);
                 } else if ( roomNumber >= 8 && roomNumber < 12) {
@@ -255,16 +259,21 @@ public class Room
             /* Treasure */
             int num1;
             int num2;
+            int moreTreasure;
+            int treasureRNG = 60;
             do {
-                num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
-                num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
-            } while (map[num1][num2].getSymbol() != '.');
+               moreTreasure = (int) (Math.random() * 100) + 1;
+               treasureRNG = treasureRNG + 10;
+               do {
+                   num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
+                   num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
+               } while (map[num1][num2].getSymbol() != '.');
 
-            map[num1][num2] = randomItem(); 
+               map[num1][num2] = randomItem(); 
+               } while (moreTreasure > treasureRNG) ;
         } else {
             int num1;
             int num2;
-
             do {
                 num1 = (int) Math.floor(Math.random() * (length - 2)) + 1;
                 num2 = (int) Math.floor(Math.random() * (width - 2)) + 1;
@@ -282,7 +291,7 @@ public class Room
         possibleMonsters[1] = new Skeleton();
         possibleMonsters[2] = new Troll();
         possibleMonsters[3] = new Dragon();
-        possibleMonsters[4] = new Changeling();
+        possibleMonsters[4] = new Mimic();
 
         return possibleMonsters;
     }
@@ -397,11 +406,13 @@ public class Room
                 return new Axe();
             }
         } else if (value <= 130 && value >= 101) {
+            return new Steak();
+        } else if (value <= 140 && value >= 131) {
             return new SmallLock();
-        } else if (value <= 150 && value >= 131) {
+        } else if (value <= 150 && value >= 141) {
             return new BigLock();
         } else {
-            return new Bread();    
+            return new Bread();
         }
     }
 }

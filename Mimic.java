@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class Changeling extends Monster implements Tileable
+public class Mimic extends Monster implements Tileable
 {
     String name;
     char symbol;
@@ -8,9 +8,9 @@ public class Changeling extends Monster implements Tileable
     private boolean moved;
     String category;
 
-    public Changeling() {
+    public Mimic() {
         symbol = '$';
-        name = "Changeling";
+        name = "Mimic";
         category = "Monster";
         health = (int)(Math.random()*101)+1;
         atk = (int)(Math.random()*31)+1;

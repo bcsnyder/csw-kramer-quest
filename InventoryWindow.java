@@ -329,7 +329,7 @@ public class InventoryWindow extends JFrame
     public Item randomItem() {
         Room room = play.getRoom();
         int roomNumber = room.getroomNumber(); 
-        int value = (int) (Math.random() * 150 + 1);
+        int value = (int) (Math.random() * 100 + 1);
 
         if (value <= 40 && value >= 1) {
             return new Bread();
@@ -360,10 +360,6 @@ public class InventoryWindow extends JFrame
             } else {
                 return new Axe();
             }
-        } else if (value <= 130 && value >= 101) {
-            return new SmallKey();
-        } else if (value <= 150 && value >= 131) {
-            return new BigKey();
         } else {
             return new Bread();
         }
