@@ -18,11 +18,15 @@ public class GameOverWindow extends JFrame
     private MenuWindow mW = new MenuWindow();
     public JButton menuButton;
 
-    public void displayWindow(String playerName, String deathMessage) {
+    public void displayWindow(Player player, String deathMessage) {
         canvas = new DebriefText(); //Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
-
-        setDebrief(playerName, deathMessage);
+        
+        try {
+            player.getSoundtrack().stopThread();
+        } catch (InterruptedException e) {}
+        
+        setDebrief(player.getName(), deathMessage);
         JPanel buttonPane = new JPanel(new FlowLayout());
         menuButton = new JButton("Return to Menu ");
         buttonPane.add(menuButton);

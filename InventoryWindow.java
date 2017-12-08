@@ -129,7 +129,7 @@ public class InventoryWindow extends JFrame
                                     p.setHealth(play.getHealth() - savedMonster.getAttack());
                                     if (play.getHealth() <= 0) {
                                         GameOverWindow gOW = new GameOverWindow();
-                                        gOW.displayWindow(play.getName(), "Killed by " + savedMonster.getName());
+                                        gOW.displayWindow(play, "Killed by " + savedMonster.getName());
                                         dispose();
                                     } else {
                                         dispose();
@@ -150,7 +150,7 @@ public class InventoryWindow extends JFrame
                                 p.setHealth(play.getHealth() - savedMonster.getAttack());
                                 if (play.getHealth() <= 0) {
                                     GameOverWindow gOW = new GameOverWindow();
-                                    gOW.displayWindow(play.getName(), "Killed by " + savedMonster.getName());
+                                    gOW.displayWindow(play, "Killed by " + savedMonster.getName());
                                     dispose();
                                 } else {
                                     dispose();
@@ -176,7 +176,7 @@ public class InventoryWindow extends JFrame
                                     p.setHealth(play.getHealth() - savedMonster.getAttack());
                                     if (play.getHealth() <= 0) {
                                         GameOverWindow gOW = new GameOverWindow();
-                                        gOW.displayWindow(play.getName(), "Killed by " + savedMonster.getName());
+                                        gOW.displayWindow(play, "Killed by " + savedMonster.getName());
                                         dispose();
                                     } else {
                                         dispose();
@@ -188,7 +188,7 @@ public class InventoryWindow extends JFrame
                             }
                         } else if (inventory.get(select).getType().equals("Idol")) {
                             GameOverWindow gOW = new GameOverWindow();
-                            gOW.displayWindow(play.getName(), "win");
+                            gOW.displayWindow(play, "win");
                             dispose();
                         } else if (inventory.get(select).getType().equals("Lock") && selectedItem != null) {
                             if (inventory.get(select).getName().equals("Big Locked Chest")) {

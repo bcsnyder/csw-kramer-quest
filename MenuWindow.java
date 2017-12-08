@@ -38,28 +38,39 @@ public class MenuWindow extends JFrame {
         logo = new ImageFrame();//Creates subcomponent panel for image
         logo.setPreferredSize(new Dimension(LOGO_WIDTH, LOGO_HEIGHT));//Sets logo's size
 
+        SoundSystem soundtrack = new SoundSystem();
+        String audioFilePath = "Sound/Menu_Theme.wav";
+        soundtrack.setPath(audioFilePath);
+        soundtrack.playLoop1();
+
         //Creates two buttons and decides their functionality
         JPanel buttonPane = new JPanel(new FlowLayout());
         JButton tutorialButton = new JButton("Tutorial ");
         buttonPane.add(tutorialButton);
         tutorialButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                tutorialWind = new TutorialWindow();
-                dispose();
-                tutorialWind.displayWindow();
-            }
-        });
+                public void actionPerformed(ActionEvent evt) {
+                    tutorialWind = new TutorialWindow();
+                    dispose();
+                    tutorialWind.displayWindow();
+                }
+            });
 
         JButton playButton = new JButton("Play Game ");
         buttonPane.add(playButton);
         playButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                startUp();
-                gameWind = new GameplayWindow();
-                dispose();
-                gameWind.displayWindow(newPlayer, newStage, 0);
-            }
-        });
+                public void actionPerformed(ActionEvent evt) {
+                    soundtrack.stop();
+                    String audioFilePath1 = "Sound/Blue_Orchid_Pt1.wav";
+                    soundtrack.setPath(audioFilePath1);
+                    String audioFilePath2 = "Sound/Blue_Orchid_Pt2.wav";
+                    soundtrack.setPath2(audioFilePath2);
+                    soundtrack.playLoop2();
+                    startUp(soundtrack);
+                    gameWind = new GameplayWindow();
+                    dispose();
+                    gameWind.displayWindow(newPlayer, newStage, 0);
+                }
+            });
 
         //Loads image
         try {
@@ -80,18 +91,7 @@ public class MenuWindow extends JFrame {
         setLocationRelativeTo(null); //Puts the JFrame in the middle of the screen @Francis
     }
 
-    /**
-     * Sets up the music player and begins playing the menu
-     * theme.
-     */
-    private void playMusic() {
-        SoundSystem player = new SoundSystem();
-        String audioFilePath = "Sound/Menu_Theme.wav";
-        player.setPath(audioFilePath);
-        player.play();
-    }
-
-    private void startUp() {
+    private void startUp(SoundSystem backgroundMusic) {
         newStage = new Stage(20);
         Room currRoom = newStage.getRoom(0);
 
@@ -106,6 +106,7 @@ public class MenuWindow extends JFrame {
         newPlayer.setWeapon(new Fists());
         newPlayer.setMaxHealth(25);
         newPlayer.setExp(0);
+        newPlayer.setSoundtrack(backgroundMusic);
 
         int xPos = 1;
         int yPos = 1;
@@ -118,11 +119,6 @@ public class MenuWindow extends JFrame {
         newPlayer.setPos(xPos, yPos);
         currRoom.addTile(xPos, yPos, newPlayer);
         newPlayer.setRoom(currRoom);
-    }
-
-    //What is this method for?
-    private void chooseClass() {
-
     }
 
     /**

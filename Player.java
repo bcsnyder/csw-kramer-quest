@@ -22,6 +22,7 @@ public class Player implements Tileable
     boolean cheatMode = false;
     private int maxHealth;
     private int exp;
+    private SoundSystem soundtrack;
     
     public Player() {
         inventory = new ArrayList<Item>();
@@ -91,7 +92,15 @@ public class Player implements Tileable
             }
         }
     }
-
+    
+    public void setSoundtrack(SoundSystem s) {
+        soundtrack = s;
+    }
+    
+    public SoundSystem getSoundtrack() {
+        return soundtrack;
+    }
+    
     public int getHealth() {
         return health;
     }

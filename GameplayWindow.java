@@ -197,7 +197,7 @@ public class GameplayWindow extends JFrame
         if (play.getHealth() == 0){
             GameOverWindow gOW  = new GameOverWindow();        
             dispose();
-            gOW.displayWindow(play.getName(), "Died of starvation");
+            gOW.displayWindow(play, "Died of starvation");
         }
 
         if (action.getCategory().equals("Empty")) {

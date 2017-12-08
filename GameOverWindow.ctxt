@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=playerName\ deathMessage
-comment0.target=void\ displayWindow(java.lang.String,\ java.lang.String)
+comment0.params=player\ deathMessage
+comment0.target=void\ displayWindow(Player,\ java.lang.String)
 comment1.params=evt
 comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)
 comment2.params=name\ message

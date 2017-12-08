@@ -1,12 +1,18 @@
 #BlueJ class context
 comment0.params=
-comment0.target=void\ play()
+comment0.target=void\ playLoop1()
 comment0.text=\r\n\ Play\ a\ given\ audio\ file.\r\n\ @param\ audioFilePath\ Path\ of\ the\ file\ to\ be\ played.\r\n
 comment1.params=
-comment1.target=void\ stop()
-comment2.params=event
-comment2.target=void\ update(javax.sound.sampled.LineEvent)
-comment2.text=\r\n\ \ Marks\ the\ beginning\ and\ ending\ of\ the\ audio\ clip.\r\n
-comment3.params=filePath
-comment3.target=void\ setPath(java.lang.String)
-numComments=4
+comment1.target=void\ playLoop2()
+comment2.params=
+comment2.target=void\ stop()
+comment3.params=
+comment3.target=void\ stopThread()
+comment4.params=event
+comment4.target=void\ update(javax.sound.sampled.LineEvent)
+comment4.text=\r\n\ \ Marks\ the\ beginning\ and\ ending\ of\ the\ audio\ clip.\r\n
+comment5.params=filePath
+comment5.target=void\ setPath(java.lang.String)
+comment6.params=filePath
+comment6.target=void\ setPath2(java.lang.String)
+numComments=7

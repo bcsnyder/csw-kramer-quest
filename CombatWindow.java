@@ -159,7 +159,7 @@ public class CombatWindow extends JFrame
                             refreshWindow(message, play, monster);
 
                             if (play.getHealth() <= 0) {
-                                gOW.displayWindow(play.getName(), "Killed by " + monster.getName());
+                                gOW.displayWindow(play, "Killed by " + monster.getName());
                                 dispose();
                             } 
                             refreshWindow(message, play, monster);
