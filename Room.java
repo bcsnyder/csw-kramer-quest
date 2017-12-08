@@ -406,11 +406,13 @@ public class Room
                 return new Axe();
             }
         } else if (value <= 130 && value >= 101) {
+            return new Steak();
+        } else if (value <= 140 && value >= 131) {
             return new SmallLock();
-        } else if (value <= 150 && value >= 131) {
+        } else if (value <= 150 && value >= 141) {
             return new BigLock();
         } else {
-            return new Bread();    
+            return new Bread();
         }
     }
 }
