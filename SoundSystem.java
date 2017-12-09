@@ -123,7 +123,12 @@ public class SoundSystem implements LineListener {
                         audioClip.open(audioStream);
                         audioClip.start();
 
-                        while(audioClip.getMicrosecondLength() != audioClip.getMicrosecondPosition()) {}
+                        while(audioClip.getMicrosecondLength() != audioClip.getMicrosecondPosition()) {
+                            if (Thread.currentThread().isInterrupted()) {
+                                audioClip.stop();
+                            }
+                        }
+                        audioClip.stop();
                         if (currentSong == 1) {
                             currentSong++;
                             currentPath = audioPath2;
