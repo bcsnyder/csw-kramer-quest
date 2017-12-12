@@ -322,40 +322,21 @@ public class Room
 
     public void addBackDoor (int w, int x, int y){
         //This allows there to be a door back but i still have to add the ability to go back
-        int yCoor = y;
-        int xCoor = x;
+        map [y][x] = new DoorBackward();
         if (w == 1) {
-            yCoor = 0; 
+            y++;
         }
         if (w == 2) {
-            xCoor = width - 1;
+            x--;
         }
         if (w == 3) {
-            yCoor = length - 1;
+            y--;
         }
         if (w == 4) {
-            xCoor = 0; 
+            x++; 
         }
-
-        map [yCoor][xCoor] = new DoorBackward();
-        if (w == 1) {
-            xCoor = x;
-            yCoor++;
-        }
-        if (w == 2) {
-            yCoor = y;
-            xCoor--;
-        }
-        if (w == 3) {
-            xCoor = x;
-            yCoor--;
-        }
-        if (w == 4) {
-            yCoor = y; 
-            xCoor++; 
-        }
-        bXcoor = xCoor;
-        bYcoor = yCoor;
+        bXcoor = x;
+        bYcoor = y;
 
     }
 
