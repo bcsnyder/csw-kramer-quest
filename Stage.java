@@ -22,24 +22,13 @@ public class Stage
         for (int counter = 0; counter < numRooms; counter++)
         {
             Room add = new Room(counter, min, max);
+            int height = add.getHeight();
+            int width = add.getWidth();
+
             add.fillDots();
             add.fillSymbols();
 
-            //This adds the back door so that the player can go through this 
-            int height = add.getHeight();
-            int width = add.getWidth();
             if (counter != 0){
-
-                do {
-                    xCoor = 0;      
-                    yCoor = 0;
-                    
-                    if (doorWallLast == 1 || doorWallLast == 3){
-                        xCoor = (int) (Math.random() * (width - 2)) + 1;
-                    } else if (doorWallLast == 2 || doorWallLast == 4){
-                        yCoor = (int) (Math.random() * (height - 2)) + 1;
-                    }
-                } while (add.getTile(xCoor,yCoor) == '#');
 
                 if (doorWallLast == 1){
                     doorWallLast = 3;
@@ -51,12 +40,37 @@ public class Stage
                     doorWallLast = 2;
                 }
 
-                add.addBackDoor(doorWallLast, xCoor, yCoor);
-            }
+                int xCoord = 0;
+                int yCoord = 0;
 
+                if (doorWallLast == 1) {
+                    yCoord = 0; 
+                }
+                if (doorWallLast == 2) {
+                    xCoord = width - 1;
+                }
+                if (doorWallLast == 3) {
+                    yCoord = height - 1;
+                }
+                if (doorWallLast == 4) {
+                    xCoord = 0; 
+                }
+
+                do {
+                    if (doorWallLast == 1 || doorWallLast == 3){
+                        xCoord = (int) (Math.random() * (width - 2)) + 1;
+                    } else if (doorWallLast == 2 || doorWallLast == 4){
+                        yCoord = (int) (Math.random() * (height - 2)) + 1;
+                    }
+                } while (add.getTile(xCoord,yCoord) == '#');
+
+                add.addBackDoor(doorWallLast, xCoord, yCoord);
+            }
             doorWallLast = add.returnDoorWall();
             floor[counter] = add;
         }
+
+        //This adds the back door so that the player can go through this 
 
     }
 
@@ -87,3 +101,4 @@ public class Stage
     //floor [2] = three;
     //floor [3] = four;
 }
+
