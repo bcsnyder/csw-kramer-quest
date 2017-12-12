@@ -31,6 +31,7 @@ public class GameplayWindow extends JFrame
     private int menuSelection;
     private boolean inCombat;
     Tileable currentTile;
+    boolean attacked = false;
 
     private String actionMessage = "";
 
@@ -116,7 +117,7 @@ public class GameplayWindow extends JFrame
                         if (inCombat == true) {
                             Monster enemy = (Monster)currentTile;//Selects the monster based on what tile the user hit
                             CombatWindow cW = new CombatWindow();
-                            cW.displayWindow(play, enemy, space, levelNum, false);
+                            cW.displayWindow(play, enemy, space, levelNum, attacked);
                             dispose();
                         }
 
@@ -137,6 +138,7 @@ public class GameplayWindow extends JFrame
                                                 refreshWindow("The enemy attacks!", play, space, levelNum);
                                                 currentTile = m;
                                                 inCombat = true;
+                                                attacked = true;
                                             } else {
                                                 space.setRoom(newBoard, levelNum);
                                                 play.setRoom(newBoard);
