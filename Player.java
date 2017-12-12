@@ -118,7 +118,7 @@ public class Player implements Tileable
     }
 
     public int attack() {
-        int damage = attack + currentWeapon.attack() + (exp/4);
+        int damage = attack + currentWeapon.attack() + (exp/8);
         if (currentWeapon.getDurability() <= 0) {
             inventory.remove(inventory.indexOf(currentWeapon));
             currentWeapon = new Fists();
@@ -128,7 +128,7 @@ public class Player implements Tileable
     }
 
     public int getAttack() {
-        return (attack + currentWeapon.getDamage() + (exp/4));
+        return (attack + currentWeapon.getDamage() + (exp/8));
     }
 
     public void addItem(Item newItem) {
