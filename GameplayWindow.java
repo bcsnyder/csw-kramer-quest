@@ -120,7 +120,7 @@ public class GameplayWindow extends JFrame
                             dispose();
                         }
 
-                        if (turnPhase == 1) {
+                        if (turnPhase == 1 && !inCombat) {
                             ArrayList<Monster> countedMonsters = new ArrayList<Monster>();
                             //Monster move
                             for(int xCounter = 1; xCounter < board.getWidth() - 1; xCounter++) {
@@ -134,34 +134,31 @@ public class GameplayWindow extends JFrame
                                             countedMonsters.add(m);
                                             Room newBoard = m.chooseMove(board);
                                             if (newBoard == null) {
+                                                refreshWindow("The enemy attacks!", play, space, levelNum);
                                                 currentTile = m;
                                                 inCombat = true;
                                             } else {
                                                 space.setRoom(newBoard, levelNum);
                                                 play.setRoom(newBoard);
+                                                refreshWindow("The monsters moved.", play, space, levelNum);
                                             }
                                         }
                                     }
                                 }
                             }
-
-                            if (!inCombat) {
-                                refreshWindow("The monsters moved.", play, space, levelNum);
-                                
-                                for (int monsterCount = 0; monsterCount < countedMonsters.size(); monsterCount++) {
-                                    Monster m = countedMonsters.get(monsterCount);
-                                    int xLocation = m.getX();
-                                    int yLocation = m.getY();
-                                    m.setMoved(false);
-                                    board.addTile(xLocation,yLocation,m);
-                                    space.setRoom(board, levelNum);
-                                    play.setRoom(board);
-                                }
-
+                 
+                            
+                            for (int monsterCount = 0; monsterCount < countedMonsters.size(); monsterCount++) {
+                                 Monster m = countedMonsters.get(monsterCount);
+                                 int xLocation = m.getX();
+                                 int yLocation = m.getY();
+                                 board.addTile(xLocation,yLocation,m);
+                                 space.setRoom(board, levelNum);
+                                 play.setRoom(board);
+                                 m.setMoved(false);
+                             }
                                 turnPhase = 0;
-                            } else {
-                                refreshWindow("The enemy attacks!", play, space, levelNum);
-                            }
+                            
 
                             if (countedMonsters.size() == 0) {
                                 refreshWindow("", play, space, levelNum);
