@@ -38,7 +38,7 @@ public class TutorialWindow extends JFrame
             public void actionPerformed(ActionEvent evt) {
                 menuWind = new MenuWindow();
                 dispose();
-                menuWind.displayWindow(new SoundSystem());
+                menuWind.displayWindow(musicPlayer);
             }
         });
 
