@@ -2,6 +2,10 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 /**
  * This window is actually important and tricky to understand
  * so listen up!! It shows the combat screen btw.
@@ -18,9 +22,17 @@ public class CombatWindow extends JFrame
     //Sets size of window
     public static final int CANVAS_WIDTH  = 1000;
     public static final int CANVAS_HEIGHT = 600;
+   
+    public static final int IMAGE_WIDTH = 120;
+    public static final int IMAGE_HEIGHT = 122;
 
     private CombatDisplay canvas; //Subcomponent where graphics displayed
 
+    private String imgPlayerFileName = "images/Player_ex.png";
+    private BufferedImage imgPlayer;
+    private String imgMonsterFileName = "images/Dragon_ex.png";
+    private BufferedImage imgMonster; 
+    
     private Player play;
     private String pName;
     private String mName;
@@ -341,6 +353,23 @@ public class CombatWindow extends JFrame
             }
             x = centerStringStartX(menuString, CANVAS_WIDTH, g);
             g.drawString(menuString, x, 250);
+            
+             x = CANVAS_WIDTH - CANVAS_WIDTH/4 * 4 + 80;           
+            g.drawImage(imgPlayer, x, 400, null);
+            x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
+            g.drawImage(imgMonster, x, 400, null);
+            
+            
+            //Loads image
+            try {
+                imgPlayer = ImageIO.read(new File(imgPlayerFileName));
+            } catch (IOException e) {}
+            //Loads image
+            try {
+                imgMonster = ImageIO.read(new File(imgMonsterFileName));
+            } catch (IOException e) {}
+           
+           
         }
     }
 }
