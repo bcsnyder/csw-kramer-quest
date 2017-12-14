@@ -93,6 +93,9 @@ public class GameplayWindow extends JFrame
                             if (menuSelection > 0) {
                                 menuSelection--;
                                 refreshWindow("", play, space, levelNum);
+                            } else {
+                                menuSelection++;
+                                refreshWindow("", play, space, levelNum);
                             }
                         }
                         break;
@@ -102,6 +105,9 @@ public class GameplayWindow extends JFrame
                         } else if (turnPhase == 2) {
                             if (menuSelection < 1) {
                                 menuSelection++;
+                                refreshWindow("", play, space, levelNum);
+                            } else {
+                                menuSelection--;
                                 refreshWindow("", play, space, levelNum);
                             }
                         }
