@@ -100,12 +100,16 @@ public class CombatWindow extends JFrame
 
                         if (menuSelect > 0) {
                             menuSelect = menuSelect - 1;
-                        } 
+                        } else if (menuSelect == 0) {
+                            menuSelect = 3;
+                        }
                         repaint();
                         break;
                         case KeyEvent.VK_D:
                         if (menuSelect < 3 && menuSelect != -1) {
                             menuSelect = menuSelect + 1;
+                        } else if (menuSelect == 3) {
+                            menuSelect = 0;
                         }
                         repaint();
                         break;
