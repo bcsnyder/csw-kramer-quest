@@ -37,6 +37,7 @@ public class InventoryWindow extends JFrame
     int currInput = 0;
     public Item selectedItem;
     public Player play;
+    private int page = 0;
     
     public void storeCombat (Player playCombat, Monster monsterCombat, Stage stCombat, int numCombat, boolean fleeCombat) {
         savedPlayer = playCombat;
@@ -403,6 +404,7 @@ public class InventoryWindow extends JFrame
         @Override
         public void paintComponent(Graphics g) {
             //Paint base background
+            page = (int) select/15;
             super.paintComponent(g);
             setBackground(Color.BLACK); 
             g.setColor(Color.WHITE);
@@ -413,15 +415,18 @@ public class InventoryWindow extends JFrame
             
             //Basically splits up each element of String arraylist into a
             //different line on the window
-            for (int i = 0; i < inventoryText.size(); i++) {
+            for (int i = 0 + (15 * page); i < inventoryText.size()&& i < (15 * (page + 1)); i++) {
                 if (i == select) {
                     txt = "> " + inventoryText.get(i);
                 } else {
                     txt = inventoryText.get(i);
                 }
                 x = centerStringX(txt, CANVAS_WIDTH, g);
-                g.drawString(txt, x, (30 + 25*i));
+                g.drawString(txt, x, (30 + 25*(i - (15*page))));
             }
+             txt = "Inventory Page:" + (page + 1);
+            x = centerStringX(txt, CANVAS_WIDTH, g);
+            g.drawString(txt, x, (30 + 25*15));
             x = centerStringX(actionMessage, CANVAS_WIDTH, g);
             g.drawString(actionMessage, x, CANVAS_HEIGHT - 60);
 
