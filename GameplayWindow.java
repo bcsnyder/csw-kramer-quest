@@ -14,8 +14,9 @@ import java.util.ArrayList;
  */
 public class GameplayWindow extends JFrame
 {
-    public static final int CANVAS_WIDTH  = 1280;//Sets size of window
-    public static final int CANVAS_HEIGHT = 700;
+    GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+    public final int CANVAS_WIDTH  = gd.getDisplayMode().getWidth();//Sets size of window
+    public final int CANVAS_HEIGHT = (int)(gd.getDisplayMode().getHeight()*0.9);
 
     private GameDisplay canvas;
     public String room;
