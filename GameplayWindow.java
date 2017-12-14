@@ -126,9 +126,9 @@ public class GameplayWindow extends JFrame
                             //Monster move
                             for(int xCounter = 1; xCounter < board.getWidth() - 1; xCounter++) {
                                 for(int yCounter = 1; yCounter < board.getHeight() - 1; yCounter++) {
-                                    char c = board.getTile(xCounter, yCounter);
+                                    Tileable c = board.returnTileObject(xCounter, yCounter);
 
-                                    if (c != '.' && c != '$' && c!= '@' && c!= '*' && c!= '|' && c!= '_') {
+                                    if (c.getCategory().equals("Monster")) {
                                         Monster m = (Monster)board.returnTileObject(xCounter, yCounter);
 
                                         if (!m.getMoved()) {
@@ -159,7 +159,9 @@ public class GameplayWindow extends JFrame
                                  play.setRoom(board);
                                  m.setMoved(false);
                              }
+                            if (!inCombat) {
                                 turnPhase = 0;
+                            }
                             
 
                             if (countedMonsters.size() == 0) {
