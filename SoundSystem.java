@@ -22,6 +22,7 @@ public class SoundSystem implements LineListener {
     String audioFilePath2;
     private Clip audioClip;
     Thread musicLooper;
+    private boolean isPlayingMenuMusic;
 
     /**
      * Play a given audio file.
@@ -40,7 +41,8 @@ public class SoundSystem implements LineListener {
             audioClip = (Clip) AudioSystem.getLine(info);
 
             audioClip.addLineListener(this);
-
+            
+            isPlayingMenuMusic = true;
             audioClip.open(audioStream);
             audioClip.loop(Clip.LOOP_CONTINUOUSLY);
 
@@ -65,6 +67,11 @@ public class SoundSystem implements LineListener {
 
     void stop() {
         audioClip.stop();
+        isPlayingMenuMusic = false;
+    }
+    
+    boolean isPlayingMenuMusic() {
+        return isPlayingMenuMusic;
     }
 
     void stopThread() throws InterruptedException {

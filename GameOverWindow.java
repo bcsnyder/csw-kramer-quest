@@ -32,7 +32,7 @@ public class GameOverWindow extends JFrame
         buttonPane.add(menuButton);
         menuButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                mW.displayWindow();
+                mW.displayWindow(new SoundSystem());
                 dispose();
             }
         });

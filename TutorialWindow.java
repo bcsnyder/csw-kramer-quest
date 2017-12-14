@@ -26,7 +26,7 @@ public class TutorialWindow extends JFrame
     /**
      * Sets up tutorial window's components and shows them.
      */
-    public void displayWindow() {
+    public void displayWindow(SoundSystem musicPlayer) {
         //Constructs the drawing canvas
         canvas = new TutorialText();    
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
@@ -38,7 +38,7 @@ public class TutorialWindow extends JFrame
             public void actionPerformed(ActionEvent evt) {
                 menuWind = new MenuWindow();
                 dispose();
-                menuWind.displayWindow();
+                menuWind.displayWindow(new SoundSystem());
             }
         });
 

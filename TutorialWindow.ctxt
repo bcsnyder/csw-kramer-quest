@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=
-comment0.target=void\ displayWindow()
+comment0.params=musicPlayer
+comment0.target=void\ displayWindow(SoundSystem)
 comment0.text=\r\n\ Sets\ up\ tutorial\ window's\ components\ and\ shows\ them.\r\n
 comment1.params=evt
 comment1.target=void\ actionPerformed(java.awt.event.ActionEvent)

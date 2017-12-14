@@ -34,14 +34,16 @@ public class MenuWindow extends JFrame {
      * of the window including two buttons at the bottom and the logo
      * panel.
      */
-    public void displayWindow() {
+    public void displayWindow(SoundSystem backgroundMusic) {
         logo = new ImageFrame();//Creates subcomponent panel for image
         logo.setPreferredSize(new Dimension(LOGO_WIDTH, LOGO_HEIGHT));//Sets logo's size
 
-        SoundSystem soundtrack = new SoundSystem();
-        String audioFilePath = "Sound/Menu_Theme.wav";
-        soundtrack.setPath(audioFilePath);
-        soundtrack.playLoop1();
+        SoundSystem soundtrack = backgroundMusic;
+        if (!soundtrack.isPlayingMenuMusic()) {
+            String audioFilePath = "Sound/Menu_Theme.wav";
+            soundtrack.setPath(audioFilePath);
+            soundtrack.playLoop1();
+        }
 
         //Creates two buttons and decides their functionality
         JPanel buttonPane = new JPanel(new FlowLayout());
@@ -51,7 +53,7 @@ public class MenuWindow extends JFrame {
                 public void actionPerformed(ActionEvent evt) {
                     tutorialWind = new TutorialWindow();
                     dispose();
-                    tutorialWind.displayWindow();
+                    tutorialWind.displayWindow(soundtrack);
                 }
             });
 
