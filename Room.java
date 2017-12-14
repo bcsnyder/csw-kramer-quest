@@ -6,7 +6,6 @@ public class Room
     private int width;
     private int numMonsters;
     private Tileable [][] map;
-    private int roomNum;
     private int doorWall;
     private int level; 
     private int bYcoor = 0; //holds the variables for the back doors y coor
@@ -35,7 +34,7 @@ public class Room
 
     public int getroomNumber ()
     {
-        return roomNum; 
+        return roomNumber; 
     }
 
     public void fill() {
