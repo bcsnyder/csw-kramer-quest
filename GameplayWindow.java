@@ -309,7 +309,7 @@ public class GameplayWindow extends JFrame
 
             g.setColor(Color.WHITE);//Displays username and score at top of screen
             g.setFont(new Font("Monospaced", Font.PLAIN, 24));
-            String playerInfo = play.getName() + " - Level " + (levelNum + 1);
+            String playerInfo = "Name: " + play.getName() + " - Room " + (levelNum + 1);
             int x = centerStringX(playerInfo, CANVAS_WIDTH, g);
             g.drawString(playerInfo, x, 30);
 
@@ -343,9 +343,9 @@ public class GameplayWindow extends JFrame
                 menuString = ">Next Turn";
             } else if (turnPhase == 2) {
                 if (menuSelection == 0) {
-                    menuString = ">Use default name       Create custom name";
+                    menuString = ">Use default name Wefwef       Create custom name";
                 } else if (menuSelection == 1) {
-                    menuString = " Use default name      >Create custom name";
+                    menuString = " Use default name Wefwef      >Create custom name";
                 }
             }
             x = centerStringX(menuString, CANVAS_WIDTH, g);
