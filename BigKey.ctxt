@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=BigKey()
+comment1.params=
+comment1.target=java.lang.String\ getCategory()
+comment2.params=
+comment2.target=java.lang.String\ getType()
+comment3.params=
+comment3.target=java.lang.String\ getName()
+comment4.params=
+comment4.target=boolean\ unlock()
+comment5.params=
+comment5.target=char\ getSymbol()
+numComments=6

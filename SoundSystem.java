@@ -64,7 +64,7 @@ public class SoundSystem implements LineListener {
     }
 
     void stop() {
-        audioClip.stop();       
+        audioClip.stop();
     }
 
     void stopThread() throws InterruptedException {
@@ -122,13 +122,7 @@ public class SoundSystem implements LineListener {
 
                         audioClip.open(audioStream);
                         audioClip.start();
-
-                        while(audioClip.getMicrosecondLength() != audioClip.getMicrosecondPosition()) {
-                            if (Thread.currentThread().isInterrupted()) {
-                                audioClip.stop();
-                            }
-                        }
-                        audioClip.stop();
+                        
                         if (currentSong == 1) {
                             currentSong++;
                             currentPath = audioPath2;
@@ -136,6 +130,13 @@ public class SoundSystem implements LineListener {
                             currentSong--;
                             currentPath = audioPath;
                         }
+                        
+                        while(audioClip.getMicrosecondLength() != audioClip.getMicrosecondPosition()) {
+                            if (Thread.currentThread().isInterrupted()) {
+                                audioClip.stop();
+                            }
+                        }
+                        audioClip.stop();
                     } catch (UnsupportedAudioFileException ex) {
                         System.out.println("The specified audio file is not supported.");
                         ex.printStackTrace();
