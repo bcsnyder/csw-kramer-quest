@@ -424,6 +424,9 @@ public class InventoryWindow extends JFrame
                 x = centerStringX(txt, CANVAS_WIDTH, g);
                 g.drawString(txt, x, (30 + 25*(i - (15*page))));
             }
+             txt = "Inventory Page:" + (page + 1);
+            x = centerStringX(txt, CANVAS_WIDTH, g);
+            g.drawString(txt, x, (30 + 25*15));
             x = centerStringX(actionMessage, CANVAS_WIDTH, g);
             g.drawString(actionMessage, x, CANVAS_HEIGHT - 60);
 
