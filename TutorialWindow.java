@@ -38,26 +38,26 @@ public class TutorialWindow extends JFrame
         JButton menuButton = new JButton("Return to Menu ");
         buttonPane.add(menuButton);
         menuButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    menuWind = new MenuWindow();
-                    dispose();
-                    menuWind.displayWindow(musicPlayer);
-                }
-            });
+            public void actionPerformed(ActionEvent evt) {
+                menuWind = new MenuWindow();
+                dispose();
+                menuWind.displayWindow(musicPlayer);
+            }
+        });
 
         addKeyListener(new KeyAdapter() {
-                @Override
-                public void keyPressed(KeyEvent evt) {
-                    switch(evt.getKeyCode()) {
-                        case KeyEvent.VK_ENTER:
-                        if (pageNumber < 5) {
-                            pageNumber++;
-                            repaint();
-                        }
-                        break;
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                switch(evt.getKeyCode()) {
+                    case KeyEvent.VK_ENTER:
+                    if (pageNumber < 4) {
+                        pageNumber++;
+                        repaint();
                     }
+                    break;
                 }
-            });
+            }
+        });
 
         //Sets the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();
@@ -88,14 +88,20 @@ public class TutorialWindow extends JFrame
             tutorial[6] = "There are lit torches in the walls and you see an eerie humanoid shadow.";
             tutorial[7] = "You have a strange feeling that the idol you're searching for is nearby...";
         } else if (page == 2) {
-            tutorial = new String[7];
-            tutorial[0] = "Hello adventurer, welcome to the fantastic world of wefwef.";
-            tutorial[1] = "It is a world full of evil monsters and items of great magical power.";
-            tutorial[2] = "You have been searching around the ruins of a keep for an ancient idol.";
-            tutorial[3] = "Suddenly the floor collapses and you fall into some buried chamber, dazed.";
-            tutorial[4] = "When you regain your senses, you don't see the hole you fell into.";
-            tutorial[5] = "Looking around, you see the room you are in is crumbling but well kept.";
-            tutorial[6] = "There are lit torches in the walls and you see an eerie humanoid shadow.";
+            tutorial = new String[5];
+            tutorial[0] = "The world of Wefwef is full of monsters and seemingly endless rooms.";
+            tutorial[1] = "The W key moves up, D moves right, A moves left, and S moves down.";
+            tutorial[2] = "Wefwef can sense your uncertainty and wants to keep you safe from monsters.";
+            tutorial[3] = "After every move, press enter to lock in and run your desired advancement.";
+            tutorial[4] = "Be careful though, after every move of yours, the monsters move as well.";
+        } else if (page == 3) {
+            tutorial = new String[1];
+            tutorial[0] = "Something about what different postions, food, weapons, monsters, etc do";
+        } else if (page == 4) {
+            tutorial = new String[3];
+            tutorial[0] = "Talk about ways the user can die, make sure they know about things like";
+            tutorial[1] = "Running out of health, not being able to run away from fights you started,";
+            tutorial[2] = "How monsters get harder as the levels progress, etc.";
         }
     }
 
@@ -119,41 +125,38 @@ public class TutorialWindow extends JFrame
             super.paintComponent(g); //Paints base background
             setBackground(Color.BLACK); //Sets background color for this JPanel
             int x;
-            String txt;
-
+            String txt = "";
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Monospaced", Font.PLAIN, 24));
+            
             if (pageNumber == 1) {
-                g.setColor(Color.WHITE);
-                g.setFont(new Font("Monospaced", Font.PLAIN, 24));
                 txt = "The world of Wefwef:";
-                x = centerStringX(txt, CANVAS_WIDTH, g);
-                g.drawString(txt, x, 20);
-
-                setTutorialBody(1);
-                g.setFont(new Font("Monospaced", Font.PLAIN, 18));
-                for (int i = 0; i < tutorial.length; i++) {
-                    txt = tutorial[i];
-                    x = centerStringX(txt, CANVAS_WIDTH, g);
-                    g.drawString(txt, x, (50 + 30*i));
-                }
             } else if (pageNumber == 2) {
-                g.setColor(Color.WHITE);
-                g.setFont(new Font("Monospaced", Font.PLAIN, 24));
                 txt = "Moving through the dungeon:";
+            } else if (pageNumber == 3) {
+                txt = "Potions, Weapons, Health, and More:";
+            } else if (pageNumber == 4) {
+                txt = "Beware...";
+            }
+            x = centerStringX(txt, CANVAS_WIDTH, g);
+            g.drawString(txt, x, 20);
+            
+            setTutorialBody(pageNumber);
+            g.setFont(new Font("Monospaced", Font.PLAIN, 18));
+            for (int i = 0; i < tutorial.length; i++) {
+                txt = tutorial[i];
                 x = centerStringX(txt, CANVAS_WIDTH, g);
-                g.drawString(txt, x, 20);
-
-                setTutorialBody(2);
-                g.setFont(new Font("Monospaced", Font.PLAIN, 18));
-                for (int i = 0; i < tutorial.length; i++) {
-                    txt = tutorial[i];
-                    x = centerStringX(txt, CANVAS_WIDTH, g);
-                    g.drawString(txt, x, (50 + 30*i));
-                }
+                g.drawString(txt, x, (50 + 30*i));
             }
 
             g.setColor(Color.WHITE);
             g.setFont(new Font("Monospaced", Font.PLAIN, 14));
-            txt = "Page "+pageNumber+" out of 4. Press enter to continue.";
+            txt = "Page "+pageNumber+" out of 4.";
+            if (pageNumber != 4) {
+                txt += " Press enter to continue.";
+            } else {
+                txt += " Click 'Return to Menu'.";
+            }
             x = centerStringX(txt, CANVAS_WIDTH, g);
             g.drawString(txt, x, CANVAS_HEIGHT-30);
         }
