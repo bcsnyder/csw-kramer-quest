@@ -95,13 +95,20 @@ public class TutorialWindow extends JFrame
             tutorial[3] = "After every move, press enter to lock in and run your desired advancement.";
             tutorial[4] = "Be careful though, after every move of yours, the monsters move as well.";
         } else if (page == 3) {
-            tutorial = new String[1];
-            tutorial[0] = "Something about what different postions, food, weapons, monsters, etc do";
+            tutorial = new String[6];
+            tutorial[0] = "The old chamber contains 21 rooms of varying construction.";
+            tutorial[1] = "As you descend to the lower floors, you will be faced with increasingly dangerous enemies.";
+            tutorial[2] = "Luckily, the ruins also contains equipment that can be repurposed for your survival.";
+            tutorial[3] = "Food and medicine are aplenty, left behind by the late explorers that came before.";
+            tutorial[4] = "Weapons left over from the old civilization are ready for you to pluck from the Earth.";
+            tutorial[5] = "Take up arms and slay the creatures of the dark to continue your descent safely.";
         } else if (page == 4) {
-            tutorial = new String[3];
-            tutorial[0] = "Talk about ways the user can die, make sure they know about things like";
-            tutorial[1] = "Running out of health, not being able to run away from fights you started,";
-            tutorial[2] = "How monsters get harder as the levels progress, etc.";
+            tutorial = new String[5];
+            tutorial[0] = "However, the monsters will not let you cut them down without a fight. If you encounter";
+            tutorial[1] = "an enemy too strong for you to handle, you may want to run, lest you risk your demise.";
+            tutorial[2] = "Keep in mind however that fleeing from a duel you requested is the mark of a coward";
+            tutorial[3] = "and will not be permitted. You must train for the final showdown with the beast that guards";
+            tutorial[4] = "the idol in order to claim it as your own.";
         }
     }
 
