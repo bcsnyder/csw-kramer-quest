@@ -31,6 +31,9 @@ public abstract class Monster implements Tileable
 	public boolean ouchie(int y)
     {
         health = health - y;
+	if (health < 0) {
+            health = 0;
+        }
         if (health <= 0){
             return false;
         }else{
