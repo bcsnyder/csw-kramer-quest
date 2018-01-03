@@ -11,7 +11,7 @@ public class Steak extends Food
         type = "Food";
         category = "Item";
         name = "Steak";
-        staminaIncrease = 20;
+        staminaIncrease = 25;
         symbol = '$';
     }
     
