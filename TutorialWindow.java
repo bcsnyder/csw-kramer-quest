@@ -88,27 +88,33 @@ public class TutorialWindow extends JFrame
             tutorial[6] = "There are lit torches in the walls and you see an eerie humanoid shadow.";
             tutorial[7] = "You have a strange feeling that the idol you're searching for is nearby...";
         } else if (page == 2) {
-            tutorial = new String[5];
+            tutorial = new String[9];
             tutorial[0] = "The world of Wefwef is full of monsters and seemingly endless rooms.";
             tutorial[1] = "The W key moves up, D moves right, A moves left, and S moves down.";
             tutorial[2] = "Wefwef can sense your uncertainty and wants to keep you safe from monsters.";
             tutorial[3] = "After every move, press enter to lock in and run your desired advancement.";
             tutorial[4] = "Be careful though, after every move of yours, the monsters move as well.";
+            tutorial[5] = "Alphabetical characters denote monsters. You are represented by the @ symbol.";
+            tutorial[6] = "'#' is a door forward and '^' is a door backward. '|' and '_' represent walls.";
+            tutorial[7] = "You will be presented with several choices in the form of a menu. Change your";
+            tutorial[8] = "selection with the WASD keys and confirm with the enter key.";
         } else if (page == 3) {
-            tutorial = new String[6];
+            tutorial = new String[8];
             tutorial[0] = "The old chamber contains 21 rooms of varying construction.";
             tutorial[1] = "As you descend to the lower floors, you will be faced with increasingly dangerous enemies.";
             tutorial[2] = "Luckily, the ruins also contains equipment that can be repurposed for your survival.";
             tutorial[3] = "Food and medicine are aplenty, left behind by the late explorers that came before.";
             tutorial[4] = "Weapons left over from the old civilization are ready for you to pluck from the Earth.";
             tutorial[5] = "Take up arms and slay the creatures of the dark to continue your descent safely.";
+            tutorial[6] = "Treasure like weapons and other items is shown on the map by the '$' character.";
+            tutorial[7] = "You can access and close your inventory by pressing I and equip/use items like a menu.";
         } else if (page == 4) {
             tutorial = new String[5];
-            tutorial[0] = "However, the monsters will not let you cut them down without a fight. If you encounter";
+            tutorial[0] = "The monsters will not let you cut them down without a fight. If you encounter";
             tutorial[1] = "an enemy too strong for you to handle, you may want to run, lest you risk your demise.";
             tutorial[2] = "Keep in mind however that fleeing from a duel you requested is the mark of a coward";
-            tutorial[3] = "and will not be permitted. You must train for the final showdown with the beast that guards";
-            tutorial[4] = "the idol in order to claim it as your own.";
+            tutorial[3] = "and will not be permitted. You must train for the final showdown with the beast that";
+            tutorial[4] = "guards the idol in order to claim it as your own.";
         }
     }
 

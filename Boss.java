@@ -73,6 +73,9 @@ public class Boss extends Monster implements Tileable
         }
         
         tiles.addTile(pX, pY, currentPlayer);
+        if (Math.random() < .3) { 
+            chosenDirection = (int)(Math.random()*directions.size());
+        }
         
         do {
             newX = x;
