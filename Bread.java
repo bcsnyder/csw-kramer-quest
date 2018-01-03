@@ -11,7 +11,7 @@ public class Bread extends Food
         type = "Food";
         category = "Item";
         name = "Bread";
-        staminaIncrease = 10;
+        staminaIncrease = 15;
         symbol = '$';
     }
     
