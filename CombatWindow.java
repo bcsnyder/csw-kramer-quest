@@ -30,8 +30,16 @@ public class CombatWindow extends JFrame
 
     private String imgPlayerFileName = "images/Player_ex.png";
     private BufferedImage imgPlayer;
-    private String imgMonsterFileName = "images/Dragon_ex.png";
-    private BufferedImage imgMonster; 
+    private String imgDragonFileName = "images/Dragon_ex.png";
+    private BufferedImage imgDragon;
+    private String imgTrollFileName = "images/Troll.png";
+    private BufferedImage imgTroll;
+    private String imgSkeletonFileName = "images/Skeleton.png";
+    private BufferedImage imgSkeleton;
+    private String imgBossFileName = "images/Boss.png";
+    private BufferedImage imgBoss;
+    private String imgGremlinFileName = "images/Gremlin.png";
+    private BufferedImage imgGremlin;
     
     private Player play;
     private String pName;
@@ -358,20 +366,51 @@ public class CombatWindow extends JFrame
             x = centerStringStartX(menuString, CANVAS_WIDTH, g);
             g.drawString(menuString, x, 250);
             
+            //Gets and loads player
              x = CANVAS_WIDTH - CANVAS_WIDTH/4 * 4 + 80;           
             g.drawImage(imgPlayer, x, 400, null);
-            x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
-            g.drawImage(imgMonster, x, 400, null);
-            
-            
             //Loads image
             try {
                 imgPlayer = ImageIO.read(new File(imgPlayerFileName));
             } catch (IOException e) {}
-            //Loads image
-            try {
-                imgMonster = ImageIO.read(new File(imgMonsterFileName));
-            } catch (IOException e) {}
+            //Gets and loads Monster
+            if (mName == "Gremlin"){
+                x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
+                g.drawImage(imgGremlin, x, 400, null);
+                //Loads image
+                try {
+                    imgGremlin = ImageIO.read(new File(imgGremlinFileName));
+                } catch (IOException e) {}
+            }else if (mName == "Skeleton"){
+                    x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
+                g.drawImage(imgSkeleton, x, 400, null);
+                //Loads image
+                try {
+                    imgSkeleton = ImageIO.read(new File(imgSkeletonFileName));
+                } catch (IOException e) {}
+            }else if (mName == "Dragon"){  
+                x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
+                g.drawImage(imgDragon, x, 400, null);
+                //Loads image
+                try {
+                    imgDragon = ImageIO.read(new File(imgDragonFileName));
+                } catch (IOException e) {}
+            }else if (mName == "Troll"){
+                    x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
+                g.drawImage(imgTroll, x, 400, null);
+                //Loads image
+                try {
+                    imgTroll = ImageIO.read(new File(imgTrollFileName));
+                } catch (IOException e) {}
+            }else if (mName == "Boss"){
+                    x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
+                g.drawImage(imgBoss, x, 400, null);
+                //Loads image
+                try {
+                    imgBoss = ImageIO.read(new File(imgBossFileName));
+                } catch (IOException e) {}
+            }
+            
            
            
         }
