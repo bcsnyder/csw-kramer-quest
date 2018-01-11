@@ -70,7 +70,7 @@ public class MenuWindow extends JFrame {
                     startUp(soundtrack);
                     gameWind = new GameplayWindow();
                     dispose();
-                    gameWind.displayWindow(newPlayer, newStage, 19);
+                    gameWind.displayWindow(newPlayer, newStage, 0);
                 }
             });
 
@@ -95,7 +95,7 @@ public class MenuWindow extends JFrame {
 
     private void startUp(SoundSystem backgroundMusic) {
         newStage = new Stage(20);
-        Room currRoom = newStage.getRoom(19);
+        Room currRoom = newStage.getRoom(0);
 
         newPlayer = new Player();
         newPlayer.setName("Unnamed");
