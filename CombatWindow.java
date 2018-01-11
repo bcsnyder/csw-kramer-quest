@@ -56,6 +56,9 @@ public class CombatWindow extends JFrame
     private GameplayWindow gW = new GameplayWindow();
     private GameOverWindow gOW = new GameOverWindow();
     boolean fleeCondition;
+    
+    Thread monsterAnimator;
+    Thread playerAnimator;
 
     public void setMessage (String m) {
         combatMessage = m;
@@ -181,7 +184,10 @@ public class CombatWindow extends JFrame
                             }
                             message = "The " +monster.getName() +" attacks and deals "+monster.getAttack()+" damage to you!";
                             refreshWindow(message, play, monster);
-
+                            
+                            //playerAnimator = new Thread(new PlayerAnimation());
+                            //playerAnimator.start();
+                            
                             if (play.getHealth() <= 0) {
                                 gOW.displayWindow(play, "Killed by " + monster.getName());
                                 dispose();
@@ -410,9 +416,49 @@ public class CombatWindow extends JFrame
                     imgBoss = ImageIO.read(new File(imgBossFileName));
                 } catch (IOException e) {}
             }
+
+        }
+    }
+    
+    private class MonsterAnimation implements Runnable {
+        public void run(){
+            BufferedImage monsterImage;
             
-           
-           
+            if (mName == "Gremlin"){
+                try {
+                    imgGremlin = ImageIO.read(new File(imgGremlinFileName));
+                } catch (IOException e) {}
+            }else if (mName == "Skeleton"){
+                try {
+                    imgSkeleton = ImageIO.read(new File(imgSkeletonFileName));
+                } catch (IOException e) {}
+            }else if (mName == "Dragon"){  
+                try {
+                    imgDragon = ImageIO.read(new File(imgDragonFileName));
+                } catch (IOException e) {}
+            }else if (mName == "Troll"){
+                try {
+                    imgTroll = ImageIO.read(new File(imgTrollFileName));
+                } catch (IOException e) {}
+            }else if (mName == "Boss"){
+                try {
+                    imgBoss = ImageIO.read(new File(imgBossFileName));
+                } catch (IOException e) {}
+            }
+            
+            
+        }
+    }
+    
+    private class PlayerAnimation implements Runnable {
+        public void run(){
+            BufferedImage playerImage;
+            
+            try {
+                playerImage = ImageIO.read(new File(imgPlayerFileName));
+                } catch (IOException e) {}
+            
+            
         }
     }
 }
