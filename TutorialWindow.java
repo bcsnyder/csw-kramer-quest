@@ -99,7 +99,7 @@ public class TutorialWindow extends JFrame
             tutorial[7] = "You will be presented with several choices in the form of a menu. Change your";
             tutorial[8] = "selection with the WASD keys and confirm with the enter key.";
         } else if (page == 3) {
-            tutorial = new String[8];
+            tutorial = new String[9];
             tutorial[0] = "The old chamber contains 21 rooms of varying construction.";
             tutorial[1] = "As you descend to the lower floors, you will be faced with increasingly dangerous enemies.";
             tutorial[2] = "Luckily, the ruins also contains equipment that can be repurposed for your survival.";
@@ -108,6 +108,7 @@ public class TutorialWindow extends JFrame
             tutorial[5] = "Take up arms and slay the creatures of the dark to continue your descent safely.";
             tutorial[6] = "Treasure like weapons and other items is shown on the map by the '$' character.";
             tutorial[7] = "You can access and close your inventory by pressing I and equip/use items like a menu.";
+            tutorial[8] = "The backspace key allows you to destroy items. Be careful you don't throw away valuables!";
         } else if (page == 4) {
             tutorial = new String[5];
             tutorial[0] = "The monsters will not let you cut them down without a fight. If you encounter";
