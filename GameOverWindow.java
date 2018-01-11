@@ -72,7 +72,7 @@ public class GameOverWindow extends JFrame
         }
         credits = new String[5];
         credits[0] = "Game created by P^3 Studios.";
-        credits[1] = "Code by Christopher Chen, Ben Snyder, Emily Oldham, Arushi Tayal";
+        credits[1] = "Code by Ben Snyder, Christopher Chen, Emily Oldham, Arushi Tayal";
         credits[2] = "and Dylan Flogaus. Art by Emily Oldham and Arushi Tayal.";
         credits[3] = "Music by Grady McPeak and Christopher Chen.";
         credits[4] = "Thanks for playing!";
