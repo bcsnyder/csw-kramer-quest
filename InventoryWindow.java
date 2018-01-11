@@ -38,7 +38,7 @@ public class InventoryWindow extends JFrame
     public Item selectedItem;
     public Player play;
     private int page = 0;
-    
+
     public void storeCombat (Player playCombat, Monster monsterCombat, Stage stCombat, int numCombat, boolean fleeCombat) {
         savedPlayer = playCombat;
         savedStage = stCombat;
@@ -70,263 +70,267 @@ public class InventoryWindow extends JFrame
         weaponDur = play.getDur();
         wName = play.weaponName();
         addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent evt) {
-                switch(evt.getKeyCode()) {
-                    case KeyEvent.VK_W:
-                    if (select > 0) {
-                        select = select - 1;
-                    } 
-                    repaint();
-                    break;
-                    
-                    case KeyEvent.VK_S:
-                    if (select < inventoryText.size() - 1) {
-                        select = select + 1;
-                    }
-                    repaint();
-                    break;
-                    
-                    case KeyEvent.VK_ESCAPE:
-                    if (p.getCombat() == true) {
-                        dispose();
-                        CombatWindow cW = new CombatWindow();
-                        cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
-                    } else {
-                        dispose();
-                        GameplayWindow gW = new GameplayWindow();
-                        gW.displayWindow(p, s, n);
-                    }
-                    break;
-                    
-                    case KeyEvent.VK_I:
-                    if (p.getCombat() == true) {
-                        dispose();
-                        CombatWindow cW = new CombatWindow();
-                        cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
-                    } else {
-                        dispose();
-                        GameplayWindow gW = new GameplayWindow();
-                        gW.displayWindow(p, s, n);
-                    }
-                    break;
-                    
-                    case KeyEvent.VK_ENTER:
-                    if (inventory.size() > 0) {
-                        if (inventory.get(select).getType().equals("Food")) {
-                            if (play.getStamina() >= 100) {
-                                actionMessage = "You're already full!";
-                            } else {
-                                play.setStamina(play.getStamina() + ((Food)inventory.get(select)).eat());
-                                actionMessage = "You regained some stamina.";
-                                inventory.remove(select);
-                                
-                                if (play.getStamina() > 100) {
-                                    play.setStamina(100);
-                                } 
-                                stamina = play.getStamina();
-                                
-                                if (p.getCombat() == true) {
-                                    p.setHealth(play.getHealth() - savedMonster.getAttack());
-                                    if (play.getHealth() <= 0) {
-                                        GameOverWindow gOW = new GameOverWindow();
-                                        gOW.displayWindow(play, "Killed by " + savedMonster.getName());
-                                        dispose();
-                                    } else {
-                                        dispose();
-                                        CombatWindow cW = new CombatWindow();
-                                        cW.setMessage(actionMessage);
-                                        cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
-                                    }
-                                }
-                            }
-                        } else
-                        if (inventory.get(select).getType().equals("Weapon")) {
-                            play.setWeapon((Weapon)inventory.get(select));
-                            actionMessage = "You equipped the " +inventory.get(select).getName() +".";
-                            attack = play.getAttack();
-                            weaponDur = play.getDur();
-                            wName = play.weaponName();
-                            if (p.getCombat() == true) {
-                                p.setHealth(play.getHealth() - savedMonster.getAttack());
-                                if (play.getHealth() <= 0) {
-                                    GameOverWindow gOW = new GameOverWindow();
-                                    gOW.displayWindow(play, "Killed by " + savedMonster.getName());
-                                    dispose();
-                                } else {
-                                    dispose();
-                                    CombatWindow cW = new CombatWindow();
-                                    cW.setMessage(actionMessage);
-                                    cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
-                                }
-                            }
+                @Override
+                public void keyPressed(KeyEvent evt) {
+                    switch(evt.getKeyCode()) {
+                        case KeyEvent.VK_W:
+                        if (select > 0) {
+                            select = select - 1;
+                        } 
+                        repaint();
+                        break;
+
+                        case KeyEvent.VK_S:
+                        if (select < inventoryText.size() - 1) {
+                            select = select + 1;
                         }
-                        else 
-                        if (inventory.get(select).getType().equals("HealingItem")) {
-                            if (play.getHealth() >= play.getMaxHealth()) {
-                                actionMessage = "You're at full health!";
-                            } else {
-                                play.setHealth(play.getHealth() + ((HealingItem)inventory.get(select)).use());
-                                actionMessage = "You regained some health.";
-                                inventory.remove(select);
-                                if (play.getHealth() > play.getMaxHealth()) {
-                                    play.setHealth(play.getMaxHealth());
-                                } 
-                                health = play.getHealth();
-                                if (p.getCombat() == true) {
-                                    p.setHealth(play.getHealth() - savedMonster.getAttack());
-                                    if (play.getHealth() <= 0) {
-                                        GameOverWindow gOW = new GameOverWindow();
-                                        gOW.displayWindow(play, "Killed by " + savedMonster.getName());
-                                        dispose();
-                                    } else {
-                                        dispose();
-                                        CombatWindow cW = new CombatWindow();
-                                        cW.setMessage(actionMessage);
-                                        cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
-                                    }
-                                }
-                            }
-                        } else if (inventory.get(select).getType().equals("Idol")) {
-                            GameOverWindow gOW = new GameOverWindow();
-                            gOW.displayWindow(play, "win");
+                        repaint();
+                        break;
+
+                        case KeyEvent.VK_ESCAPE:
+                        if (p.getCombat() == true) {
                             dispose();
-                        } else if (inventory.get(select).getType().equals("Lock") && selectedItem != null) {
-                            if (inventory.get(select).getName().equals("Big Locked Chest")) {
-                                if (selectedItem.getName().equals("Big Key")) {
+                            CombatWindow cW = new CombatWindow();
+                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
+                        } else {
+                            dispose();
+                            GameplayWindow gW = new GameplayWindow();
+                            gW.displayWindow(p, s, n);
+                        }
+                        break;
+
+                        case KeyEvent.VK_I:
+                        if (p.getCombat() == true) {
+                            dispose();
+                            CombatWindow cW = new CombatWindow();
+                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
+                        } else {
+                            dispose();
+                            GameplayWindow gW = new GameplayWindow();
+                            gW.displayWindow(p, s, n);
+                        }
+                        break;
+
+                        case KeyEvent.VK_ENTER:
+                        if (inventory.size() > 0) {
+                            if (inventory.get(select).getType().equals("Food")) {
+                                if (play.getStamina() >= 100) {
+                                    actionMessage = "You're already full!";
+                                } else {
+                                    play.setStamina(play.getStamina() + ((Food)inventory.get(select)).eat());
+                                    actionMessage = "You regained some stamina.";
                                     inventory.remove(select);
-                                    inventory.remove(inventory.indexOf(selectedItem));
-                                    inventory.add(randomItem());
+
+                                    if (play.getStamina() > 100) {
+                                        play.setStamina(100);
+                                    } 
+                                    stamina = play.getStamina();
+
+                                    if (p.getCombat() == true) {
+                                        p.setHealth(play.getHealth() - savedMonster.getAttack());
+                                        if (play.getHealth() <= 0) {
+                                            GameOverWindow gOW = new GameOverWindow();
+                                            gOW.displayWindow(play, "Killed by " + savedMonster.getName());
+                                            dispose();
+                                        } else {
+                                            dispose();
+                                            CombatWindow cW = new CombatWindow();
+                                            cW.setMessage(actionMessage);
+                                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
+                                        }
                                     }
-                            } else if (inventory.get(select).getName().equals("Small Locked Chest")) {
-                                if (selectedItem.getName().equals("Small Key")) {
-                                    inventory.remove(select);
-                                    inventory.remove(inventory.indexOf(selectedItem));
-                                    inventory.add(randomItem());
+                                }
+                            } else
+                            if (inventory.get(select).getType().equals("Weapon")) {
+                                play.setWeapon((Weapon)inventory.get(select));
+                                actionMessage = "You equipped the " +inventory.get(select).getName() +".";
+                                attack = play.getAttack();
+                                weaponDur = play.getDur();
+                                wName = play.weaponName();
+                                if (p.getCombat() == true) {
+                                    p.setHealth(play.getHealth() - savedMonster.getAttack());
+                                    if (play.getHealth() <= 0) {
+                                        GameOverWindow gOW = new GameOverWindow();
+                                        gOW.displayWindow(play, "Killed by " + savedMonster.getName());
+                                        dispose();
+                                    } else {
+                                        dispose();
+                                        CombatWindow cW = new CombatWindow();
+                                        cW.setMessage(actionMessage);
+                                        cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
+                                    }
                                 }
                             }
-                        } else {
-                            selectedItem = inventory.get(select);
+                            else 
+                            if (inventory.get(select).getType().equals("HealingItem")) {
+                                if (play.getHealth() >= play.getMaxHealth()) {
+                                    actionMessage = "You're at full health!";
+                                } else {
+                                    play.setHealth(play.getHealth() + ((HealingItem)inventory.get(select)).use());
+                                    actionMessage = "You regained some health.";
+                                    inventory.remove(select);
+                                    if (play.getHealth() > play.getMaxHealth()) {
+                                        play.setHealth(play.getMaxHealth());
+                                    } 
+                                    health = play.getHealth();
+                                    if (p.getCombat() == true) {
+                                        p.setHealth(play.getHealth() - savedMonster.getAttack());
+                                        if (play.getHealth() <= 0) {
+                                            GameOverWindow gOW = new GameOverWindow();
+                                            gOW.displayWindow(play, "Killed by " + savedMonster.getName());
+                                            dispose();
+                                        } else {
+                                            dispose();
+                                            CombatWindow cW = new CombatWindow();
+                                            cW.setMessage(actionMessage);
+                                            cW.displayWindow(savedPlayer, savedMonster, savedStage, savedRoomPosition, savedFlee);
+                                        }
+                                    }
+                                }
+                            } else if (inventory.get(select).getType().equals("Idol")) {
+                                GameOverWindow gOW = new GameOverWindow();
+                                gOW.displayWindow(play, "win");
+                                dispose();
+                            } else if (inventory.get(select).getType().equals("Lock") && selectedItem != null) {
+                                if (inventory.get(select).getName().equals("Big Locked Chest")) {
+                                    if (selectedItem.getName().equals("Big Key")) {
+                                        inventory.remove(select);
+                                        inventory.remove(inventory.indexOf(selectedItem));
+                                        inventory.add(randomItem());
+                                    }
+                                } else if (inventory.get(select).getName().equals("Small Locked Chest")) {
+                                    if (selectedItem.getName().equals("Small Key")) {
+                                        inventory.remove(select);
+                                        inventory.remove(inventory.indexOf(selectedItem));
+                                        inventory.add(randomItem());
+                                    }
+                                }
+                            } else {
+                                selectedItem = inventory.get(select);
+                            }
                         }
-                    }
-                    if (select >= inventory.size()) {
-                        select = inventory.size() - 1;
-                    }
-                    repaint();
-                    break;
-                    
-                    case KeyEvent.VK_UP:
-                    if (currInput < 10) {
-                        inputCode [currInput] = 1;
-                        currInput++;
-                    } 
-                    break;
-                    
-                    case KeyEvent.VK_DOWN:
-                    if (currInput < 10) {
-                        inputCode [currInput] = 2;
-                        currInput++;
-                    } 
-                    break;
-                    
-                    case KeyEvent.VK_LEFT:
-                    if (currInput < 10) {
-                        inputCode [currInput] = 3;
-                        currInput++;
-                    } 
-                    break;
-                    
-                    case KeyEvent.VK_RIGHT:
-                    if (currInput < 10) {
-                        inputCode [currInput] = 4;
-                        currInput++;
-                    } 
-                    break;
-                    
-                    case KeyEvent.VK_B:
-                    if (currInput < 10) {
-                        inputCode [currInput] = 5;
-                        currInput++;
-                    } 
-                    break;
-                    
-                    case KeyEvent.VK_A:
-                    if (currInput < 10) {
-                        inputCode [currInput] = 6;
-                        currInput++;
-                    } 
-                    break;
-                    
-                    case KeyEvent.VK_SHIFT:
-                    for (int i = 0; i < 10; i++) {
-                        if (inputCode [i] != baseCode [i]) {
-                            break;
-                        } else if (i == 9) {
-                            play.enableCheats();
-                            actionMessage = "Cheats enabled.";
+                        if (select >= inventory.size()) {
+                            select = inventory.size() - 1;
                         }
+                        repaint();
+                        break;
+
+                        case KeyEvent.VK_UP:
+                        if (currInput < 10) {
+                            inputCode [currInput] = 1;
+                            currInput++;
+                        } 
+                        break;
+
+                        case KeyEvent.VK_DOWN:
+                        if (currInput < 10) {
+                            inputCode [currInput] = 2;
+                            currInput++;
+                        } 
+                        break;
+
+                        case KeyEvent.VK_LEFT:
+                        if (currInput < 10) {
+                            inputCode [currInput] = 3;
+                            currInput++;
+                        } 
+                        break;
+
+                        case KeyEvent.VK_RIGHT:
+                        if (currInput < 10) {
+                            inputCode [currInput] = 4;
+                            currInput++;
+                        } 
+                        break;
+
+                        case KeyEvent.VK_B:
+                        if (currInput < 10) {
+                            inputCode [currInput] = 5;
+                            currInput++;
+                        } 
+                        break;
+
+                        case KeyEvent.VK_A:
+                        if (currInput < 10) {
+                            inputCode [currInput] = 6;
+                            currInput++;
+                        } 
+                        break;
+
+                        case KeyEvent.VK_SHIFT:
+                        for (int i = 0; i < 10; i++) {
+                            if (inputCode [i] != baseCode [i]) {
+                                break;
+                            } else if (i == 9) {
+                                play.enableCheats();
+                                actionMessage = "Cheats enabled.";
+                            }
+                        }
+                        repaint();
+                        break;
+
+                        case KeyEvent.VK_NUMPAD1:
+                        if (play.cheatCheck() == true) {
+                            play.addItem(new Excalibur());
+                            actionMessage = "Spawned item id: Excalibur.";
+                        }
+                        repaint();
+                        break;
+
+                        case KeyEvent.VK_NUMPAD2:
+                        if (play.cheatCheck() == true) {
+                            play.addItem(new Ambrosia());
+                            actionMessage = "Spawned item id: Ambrosia.";
+                        }
+                        repaint();
+                        break;
+
+                        case KeyEvent.VK_NUMPAD3:
+                        if (play.cheatCheck() == true) {
+                            play.addItem(new HeartCanister());
+                            actionMessage = "Spawned item id: HeartCanister.";
+                        }
+                        repaint();
+                        break; 
+
+                        case KeyEvent.VK_NUMPAD4:
+                        if (play.cheatCheck() == true) {
+                            play.addItem(new SmallKey());
+                            actionMessage = "Spawned item id: SmallKey.";
+                        }
+                        repaint();
+                        break;
+
+                        case KeyEvent.VK_NUMPAD5:
+                        if (play.cheatCheck() == true) {
+                            play.addItem(new BigKey());
+                            actionMessage = "Spawned item id: BigKey.";
+                        }
+                        repaint();
+                        break;
+
+                        case KeyEvent.VK_BACK_SPACE:
+                        actionMessage = "Threw out " +inventory.get(select).getName() +".";
+                        if (inventory.get(select).getName().equals("Idol")) {
+                            GameOverWindow gOW = new GameOverWindow();
+                            gOW.displayWindow(play, "Killed by your own stupidity. Wow, you are dumb.");
+                            dispose();
+                        }
+                        inventory.remove(select);
+                        repaint();
+                        break;
+
+                        default: 
+                        for (int i = 0; i < 10; i++) {
+                            inputCode [i] = 0;
+                        }
+                        repaint();
+                        break;
                     }
-                    repaint();
-                    break;
-                    
-                    case KeyEvent.VK_NUMPAD1:
-                    if (play.cheatCheck() == true) {
-                        play.addItem(new Excalibur());
-                        actionMessage = "Spawned item id: Excalibur.";
-                    }
-                    repaint();
-                    break;
-                    
-                    case KeyEvent.VK_NUMPAD2:
-                    if (play.cheatCheck() == true) {
-                        play.addItem(new Ambrosia());
-                        actionMessage = "Spawned item id: Ambrosia.";
-                    }
-                    repaint();
-                    break;
-                    
-                    case KeyEvent.VK_NUMPAD3:
-                    if (play.cheatCheck() == true) {
-                        play.addItem(new HeartCanister());
-                        actionMessage = "Spawned item id: HeartCanister.";
-                    }
-                    repaint();
-                    break; 
-                      
-                    case KeyEvent.VK_NUMPAD4:
-                    if (play.cheatCheck() == true) {
-                        play.addItem(new SmallKey());
-                        actionMessage = "Spawned item id: SmallKey.";
-                    }
-                    repaint();
-                    break;
-                    
-                    case KeyEvent.VK_NUMPAD5:
-                    if (play.cheatCheck() == true) {
-                        play.addItem(new BigKey());
-                        actionMessage = "Spawned item id: BigKey.";
-                    }
-                    repaint();
-                    break;
-                    
-                    
-                    case KeyEvent.VK_BACK_SPACE:
-                    actionMessage = "Threw out " +inventory.get(select).getName() +".";
-                    inventory.remove(select);
-                    repaint();
-                    break;
-                    
-                    default: 
-                    for (int i = 0; i < 10; i++) {
-                        inputCode [i] = 0;
-                    }
-                    repaint();
-                    break;
-                }
-            } 
-        });
+                } 
+            });
     }
-    
+
     public Item randomItem() {
         Room room = play.getRoom();
         int roomNumber = room.getroomNumber(); 
@@ -349,7 +353,7 @@ public class InventoryWindow extends JFrame
             } else if (roomNumber  >= 17 && roomNumber < 20) {
                 weaponType = 3;
             }
-            
+
             if (weaponType == 0) {
                 return new Spear();
             } else if (weaponType == 1) {
@@ -412,7 +416,7 @@ public class InventoryWindow extends JFrame
             setInvTxt();
             String txt;
             int x;
-            
+
             //Basically splits up each element of String arraylist into a
             //different line on the window
             for (int i = 0 + (15 * page); i < inventoryText.size()&& i < (15 * (page + 1)); i++) {
@@ -424,7 +428,7 @@ public class InventoryWindow extends JFrame
                 x = centerStringX(txt, CANVAS_WIDTH, g);
                 g.drawString(txt, x, (30 + 25*(i - (15*page))));
             }
-             txt = "Inventory Page:" + (page + 1);
+            txt = "Inventory Page:" + (page + 1);
             x = centerStringX(txt, CANVAS_WIDTH, g);
             g.drawString(txt, x, (30 + 25*15));
             x = centerStringX(actionMessage, CANVAS_WIDTH, g);
