@@ -13,6 +13,7 @@ public class GameOverWindow extends JFrame
     public static final int CANVAS_HEIGHT = 500;
 
     private String[] debrief;
+    private String[] credits;
     private DebriefText canvas;
 
     private MenuWindow mW = new MenuWindow();
@@ -63,11 +64,18 @@ public class GameOverWindow extends JFrame
             debrief[2] = "You hop on a conveniently placed horse and ride into the sunset.";
             debrief[3] = "Congrats, you win! Return to the menu if you want to play again!";
         } else {
-            debrief = new String[3];
+            debrief = new String[4];
             debrief[0] = "RIP " + name;
             debrief[1] = message;
             debrief[2] = "Return to the menu to try again.";
+            debrief[3] = "\"Never, ever give up\" -Every motivational speech ever.";
         }
+        credits = new String[5];
+        credits[0] = "Game created by P^3 Studios.";
+        credits[1] = "Code by Christopher Chen, Ben Snyder, Emily Oldham, Arushi Tayal";
+        credits[2] = "and Dylan Flogaus. Art by Emily Oldham and Arushi Tayal.";
+        credits[3] = "Music by Grady McPeak and Christopher Chen.";
+        credits[4] = "Thanks for playing!";
     }
 
     /**
@@ -94,12 +102,26 @@ public class GameOverWindow extends JFrame
             g.setFont(new Font("Monospaced", Font.PLAIN, 28));
             String txt;
             int x;
+            int messageEndY = 0;
             
             //Splits debrief message into separate lines of text and displays
             for (int i = 0; i < debrief.length; i++) {
                 txt = debrief[i];
                 x = centerStringX(txt, CANVAS_WIDTH, g);
-                g.drawString(txt, x, (30 + 25*i));
+                g.drawString(txt, x, (30 + 30*i));
+                messageEndY = 30 + 30*i;
+            }
+            
+            txt = "Credits:";
+            x = centerStringX(txt, CANVAS_WIDTH, g);
+            int textY = messageEndY + 80;
+            g.drawString(txt, x, textY);
+            textY += 30;
+            
+            for (int i = 0; i < 5; i++) {
+                 txt = credits[i];
+                 x = centerStringX(txt, CANVAS_WIDTH, g);
+                 g.drawString(txt, x, textY + 30*i);
             }
         }
     }
