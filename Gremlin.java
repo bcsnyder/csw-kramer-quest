@@ -12,7 +12,14 @@ public class Gremlin extends Monster implements Tileable
     int exp = 2;
     public Gremlin() {
         symbol = 'G';
-        name = "Gremlin";
+       int rng = (int) (Math.random() * 100);
+        if (rng < 98 ) {
+          name = "Gremlin";
+       } else if (rng > 98) {
+          name = "Gizmo";
+        } else {
+          name = "AMC";
+        }
         category = "Monster";
         health = (int)(Math.random()*5 + 10);
         atk = (int)(Math.random()*2 + 1);
