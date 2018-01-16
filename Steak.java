@@ -10,7 +10,12 @@ public class Steak extends Food
     public Steak() {
         type = "Food";
         category = "Item";
-        name = "Steak";
+        int rng = (int) (Math.random() * 100);
+        if (rng <= 94) {
+          name = "Steak";
+         } else {
+          name = "FSteak"   ;
+         }
         staminaIncrease = 25;
         symbol = '$';
     }
