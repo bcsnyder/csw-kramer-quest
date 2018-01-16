@@ -1,6 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  * Displays game over window with debrief message and button
@@ -10,7 +14,7 @@ public class GameOverWindow extends JFrame
 {
     //Sets size of window
     public static final int CANVAS_WIDTH  = 1200;
-    public static final int CANVAS_HEIGHT = 500;
+    public static final int CANVAS_HEIGHT = 600;
 
     private String[] debrief;
     private String[] credits;
@@ -19,24 +23,27 @@ public class GameOverWindow extends JFrame
     private MenuWindow mW = new MenuWindow();
     public JButton menuButton;
 
+    private String imgRIPFilename = "images/Dead_player.png";
+    private BufferedImage imgRIP;
+
     public void displayWindow(Player player, String deathMessage) {
         canvas = new DebriefText(); //Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
-        
+
         try {
             player.getSoundtrack().stopThread();
         } catch (InterruptedException e) {}
-        
+
         setDebrief(player.getName(), deathMessage);
         JPanel buttonPane = new JPanel(new FlowLayout());
         menuButton = new JButton("Return to Menu ");
         buttonPane.add(menuButton);
         menuButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                mW.displayWindow(new SoundSystem());
-                dispose();
-            }
-        });
+                public void actionPerformed(ActionEvent evt) {
+                    mW.displayWindow(new SoundSystem());
+                    dispose();
+                }
+            });
 
         //Set the Drawing JPanel as the JFrame's content-pane
         Container cp = getContentPane();
@@ -103,7 +110,7 @@ public class GameOverWindow extends JFrame
             String txt;
             int x;
             int messageEndY = 0;
-            
+
             //Splits debrief message into separate lines of text and displays
             for (int i = 0; i < debrief.length; i++) {
                 txt = debrief[i];
@@ -111,18 +118,24 @@ public class GameOverWindow extends JFrame
                 g.drawString(txt, x, (30 + 30*i));
                 messageEndY = 30 + 30*i;
             }
-            
+
             txt = "Credits:";
             x = centerStringX(txt, CANVAS_WIDTH, g);
             int textY = messageEndY + 80;
             g.drawString(txt, x, textY);
             textY += 30;
-            
+
             for (int i = 0; i < 5; i++) {
-                 txt = credits[i];
-                 x = centerStringX(txt, CANVAS_WIDTH, g);
-                 g.drawString(txt, x, textY + 30*i);
+                txt = credits[i];
+                x = centerStringX(txt, CANVAS_WIDTH, g);
+                g.drawString(txt, x, textY + 30*i);
             }
+
+            try {
+                imgRIP = ImageIO.read(new File(imgRIPFilename));
+            } catch (IOException e) {}
+            
+            g.drawImage(imgRIP, 600, textY + 200, null);
         }
     }
 }
