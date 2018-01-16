@@ -22,7 +22,7 @@ public class CombatWindow extends JFrame
     //Sets size of window
     public static final int CANVAS_WIDTH  = 1000;
     public static final int CANVAS_HEIGHT = 600;
-   
+
     public static final int IMAGE_WIDTH = 120;
     public static final int IMAGE_HEIGHT = 122;
 
@@ -40,7 +40,7 @@ public class CombatWindow extends JFrame
     private BufferedImage imgBoss;
     private String imgGremlinFileName = "images/Gremlin.png";
     private BufferedImage imgGremlin;
-    
+
     private Player play;
     private String pName;
     private String mName;
@@ -56,7 +56,9 @@ public class CombatWindow extends JFrame
     private GameplayWindow gW = new GameplayWindow();
     private GameOverWindow gOW = new GameOverWindow();
     boolean fleeCondition;
-    
+    private int monsterGraphicLocation;
+    private int playerGraphicLocation;
+
     Thread monsterAnimator;
     Thread playerAnimator;
 
@@ -87,6 +89,8 @@ public class CombatWindow extends JFrame
         play.setCombat(true);
         CombatWindow thisWindow = this;
         fleeCondition = flee;
+        monsterGraphicLocation = 400;
+        playerGraphicLocation = 400;
 
         canvas = new CombatDisplay(); //Construct the drawing canvas
         canvas.setPreferredSize(new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT));
@@ -134,6 +138,9 @@ public class CombatWindow extends JFrame
                                 damage = (damage * 2);
                             }
                             boolean survive = monster.ouchie(damage);//damages monster
+
+                            startAnimation(true);
+
                             String message;
                             //Sets feedback for user
                             if (crit < 8) {
@@ -184,10 +191,9 @@ public class CombatWindow extends JFrame
                             }
                             message = "The " +monster.getName() +" attacks and deals "+monster.getAttack()+" damage to you!";
                             refreshWindow(message, play, monster);
-                            
-                            //playerAnimator = new Thread(new PlayerAnimation());
-                            //playerAnimator.start();
-                            
+
+                            startAnimation(false);
+
                             if (play.getHealth() <= 0) {
                                 gOW.displayWindow(play, "Killed by " + monster.getName());
                                 dispose();
@@ -216,6 +222,17 @@ public class CombatWindow extends JFrame
                     } 
                 }
             });
+    }
+
+    public void startAnimation(boolean isMonster) {
+        if (isMonster) {
+            monsterAnimator = new Thread(new MonsterAnimation());
+            monsterAnimator.start();
+        } else {
+            playerAnimator = new Thread(new PlayerAnimation());
+            playerAnimator.start();
+        }
+        return;
     }
 
     /**
@@ -371,10 +388,10 @@ public class CombatWindow extends JFrame
             }
             x = centerStringStartX(menuString, CANVAS_WIDTH, g);
             g.drawString(menuString, x, 250);
-            
+
             //Gets and loads player
-             x = CANVAS_WIDTH - CANVAS_WIDTH/4 * 4 + 80;           
-            g.drawImage(imgPlayer, x, 400, null);
+            x = CANVAS_WIDTH - CANVAS_WIDTH/4 * 4 + 80;           
+            g.drawImage(imgPlayer, x, playerGraphicLocation, null);
             //Loads image
             try {
                 imgPlayer = ImageIO.read(new File(imgPlayerFileName));
@@ -382,35 +399,35 @@ public class CombatWindow extends JFrame
             //Gets and loads Monster
             if (mName == "Gremlin"){
                 x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
-                g.drawImage(imgGremlin, x, 400, null);
+                g.drawImage(imgGremlin, x, monsterGraphicLocation, null);
                 //Loads image
                 try {
                     imgGremlin = ImageIO.read(new File(imgGremlinFileName));
                 } catch (IOException e) {}
             }else if (mName == "Skeleton"){
-                    x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
-                g.drawImage(imgSkeleton, x, 400, null);
+                x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
+                g.drawImage(imgSkeleton, x, monsterGraphicLocation, null);
                 //Loads image
                 try {
                     imgSkeleton = ImageIO.read(new File(imgSkeletonFileName));
                 } catch (IOException e) {}
             }else if (mName == "Dragon"){  
                 x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
-                g.drawImage(imgDragon, x, 400, null);
+                g.drawImage(imgDragon, x, monsterGraphicLocation, null);
                 //Loads image
                 try {
                     imgDragon = ImageIO.read(new File(imgDragonFileName));
                 } catch (IOException e) {}
             }else if (mName == "Troll"){
-                    x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
-                g.drawImage(imgTroll, x, 400, null);
+                x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
+                g.drawImage(imgTroll, x, monsterGraphicLocation, null);
                 //Loads image
                 try {
                     imgTroll = ImageIO.read(new File(imgTrollFileName));
                 } catch (IOException e) {}
             }else if (mName == "Boss"){
-                    x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
-                g.drawImage(imgBoss, x, 400, null);
+                x = CANVAS_WIDTH - CANVAS_WIDTH/4 - 40;
+                g.drawImage(imgBoss, x, monsterGraphicLocation, null);
                 //Loads image
                 try {
                     imgBoss = ImageIO.read(new File(imgBossFileName));
@@ -419,46 +436,58 @@ public class CombatWindow extends JFrame
 
         }
     }
-    
+
     private class MonsterAnimation implements Runnable {
         public void run(){
-            BufferedImage monsterImage;
-            
-            if (mName == "Gremlin"){
+            boolean up = true;
+
+            for (int i = 0; i < 60; i++) {
+                if (up) {
+                    monsterGraphicLocation += 2;
+                } else {
+                    monsterGraphicLocation -= 2;
+                }
+
+                if (i == 10 || i == 50) {
+                    up = false;
+                } else if (i == 30) {
+                    up = true;
+                }
+                repaint();
                 try {
-                    imgGremlin = ImageIO.read(new File(imgGremlinFileName));
-                } catch (IOException e) {}
-            }else if (mName == "Skeleton"){
-                try {
-                    imgSkeleton = ImageIO.read(new File(imgSkeletonFileName));
-                } catch (IOException e) {}
-            }else if (mName == "Dragon"){  
-                try {
-                    imgDragon = ImageIO.read(new File(imgDragonFileName));
-                } catch (IOException e) {}
-            }else if (mName == "Troll"){
-                try {
-                    imgTroll = ImageIO.read(new File(imgTrollFileName));
-                } catch (IOException e) {}
-            }else if (mName == "Boss"){
-                try {
-                    imgBoss = ImageIO.read(new File(imgBossFileName));
-                } catch (IOException e) {}
+                    Thread.sleep(5);
+                } catch (Exception e) {}
             }
-            
-            
+
+            monsterGraphicLocation = 400;
+            repaint();
         }
     }
-    
+
     private class PlayerAnimation implements Runnable {
         public void run(){
-            BufferedImage playerImage;
-            
-            try {
-                playerImage = ImageIO.read(new File(imgPlayerFileName));
-                } catch (IOException e) {}
-            
-            
+            boolean up = true;
+
+            for (int i = 0; i < 60; i++) {
+                if (up) {
+                    playerGraphicLocation += 2;
+                } else {
+                    playerGraphicLocation -= 2;
+                }
+
+                if (i == 10 || i == 50) {
+                    up = false;
+                } else if (i == 30) {
+                    up = true;
+                }
+                repaint();
+                try {
+                    Thread.sleep(5);
+                } catch (Exception e) {}
+            }
+
+            playerGraphicLocation = 400;
+            repaint();
         }
     }
 }
