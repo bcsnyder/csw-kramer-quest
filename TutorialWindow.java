@@ -100,13 +100,13 @@ public class TutorialWindow extends JFrame
             tutorial[8] = "selection with the WASD keys and confirm with the enter key.";
         } else if (page == 3) {
             tutorial = new String[9];
-            tutorial[0] = "The old chamber contains 21 rooms of varying construction.";
+            tutorial[0] = "The old dungeon contains 20 rooms of varying construction.";
             tutorial[1] = "As you descend to the lower floors, you will be faced with increasingly dangerous enemies.";
             tutorial[2] = "Luckily, the ruins also contains equipment that can be repurposed for your survival.";
             tutorial[3] = "Food and medicine are aplenty, left behind by the late explorers that came before.";
-            tutorial[4] = "Weapons left over from the old civilization are ready for you to pluck from the Earth.";
+            tutorial[4] = "Weapons left over from the old civilization are ready for you to use to defend yourself.";
             tutorial[5] = "Take up arms and slay the creatures of the dark to continue your descent safely.";
-            tutorial[6] = "Treasure like weapons and other items is shown on the map by the '$' character.";
+            tutorial[6] = "Treasure--like weapons and other item--is shown on the map by the '$' character.";
             tutorial[7] = "You can access and close your inventory by pressing I and equip/use items like a menu.";
             tutorial[8] = "The backspace key allows you to destroy items. Be careful you don't throw away valuables!";
         } else if (page == 4) {
