@@ -1,6 +1,6 @@
 -------------------------------------------------------------------
 This is the Kramer Quest README file. In this game you have to 
-navigate through a rogue-like maze, colelcting bread and defeating 
+navigate through a rogue-like maze, collecting bread and defeating 
 monsters as you go. 
 -------------------------------------------------------------------
 
