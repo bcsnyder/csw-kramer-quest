@@ -24,7 +24,8 @@ public class GameOverWindow extends JFrame
     public JButton menuButton;
 
     private String imgRIPFilename = "images/Dead_player.png";
-    private BufferedImage imgRIP;
+    private String imgWinFilename = "images/Victorious_player.png";
+    private BufferedImage gameOverImg;
 
     public void displayWindow(Player player, String deathMessage) {
         canvas = new DebriefText(); //Construct the drawing canvas
@@ -70,12 +71,20 @@ public class GameOverWindow extends JFrame
             debrief[1] = "You reappear in the outside world, holding the golden idol.";
             debrief[2] = "You hop on a conveniently placed horse and ride into the sunset.";
             debrief[3] = "Congrats, you win! Return to the menu if you want to play again!";
+            
+            try {
+                gameOverImg = ImageIO.read(new File(imgWinFilename));
+            } catch (IOException e) {}
         } else {
             debrief = new String[4];
             debrief[0] = "RIP " + name;
             debrief[1] = message;
             debrief[2] = "Return to the menu to try again.";
             debrief[3] = "\"Never, ever give up\" -Every motivational speech ever.";
+            
+            try {
+                gameOverImg = ImageIO.read(new File(imgRIPFilename));
+            } catch (IOException e) {}
         }
         credits = new String[5];
         credits[0] = "Game created by P^3 Studios.";
@@ -121,7 +130,7 @@ public class GameOverWindow extends JFrame
 
             txt = "Credits:";
             x = centerStringX(txt, CANVAS_WIDTH, g);
-            int textY = messageEndY + 80;
+            int textY = messageEndY + 180;
             g.drawString(txt, x, textY);
             textY += 30;
 
@@ -130,12 +139,8 @@ public class GameOverWindow extends JFrame
                 x = centerStringX(txt, CANVAS_WIDTH, g);
                 g.drawString(txt, x, textY + 30*i);
             }
-
-            try {
-                imgRIP = ImageIO.read(new File(imgRIPFilename));
-            } catch (IOException e) {}
             
-            g.drawImage(imgRIP, 600, textY + 200, null);
+            g.drawImage(gameOverImg, 550, messageEndY + 40, null);
         }
     }
 }
