@@ -15,5 +15,6 @@ USER INSTRUCTIONS:
   s- move down, move cursor down
   d- move right, move cursor right
   i- open/close inventory
-  enter- select
+  enter- select, equip item
   escape- close inventory
+  backspace- destroy item
