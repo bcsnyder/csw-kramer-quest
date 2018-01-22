@@ -10,9 +10,10 @@ VERSION or DATE:
 HOW TO START THIS PROJECT:
 AUTHORS: Christopher Chen, Dylan Flogaus, Emily Oldham, Ben Snyder, and Arushi Tayal
 USER INSTRUCTIONS:
-  w- move up
-  a- move left
-  s- move down
-  d- move right
-  i- inventory
+  w- move up, move cursor up
+  a- move left, move cursor left
+  s- move down, move cursor down
+  d- move right, move cursor right
+  i- open/close inventory
   enter- select
+  escape- close inventory
